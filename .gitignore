@@ -1,0 +1,6 @@
+vendor/
+/testSession.php
+/testFileManager.php
+/test6.php
+/getSessionData.php
+/closeSession.php
