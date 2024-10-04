@@ -10,22 +10,12 @@ class bd{
 
     
     public function __construct() {
-
-        /*
-        $this->servidor = getenv('mysql_host'); 
-        $this->usuario = getenv('mysql_user');
-        $this->password = getenv('mysql_password');
-        $this->database = getenv('mysql_database');
-        $this->port = getenv('mysql_port');
-        */
-        
         $this->servidor = 'srv994.hstgr.io';
-        $this->usuario = 'u136839350_Eadm';
+        $this->usuario = 'u136839350_EnixAdm';
         $this->password = 'Enix2024.';
         // $this->password = 'Intec2023.';
-        $this->database = 'u136839350_Enix';
+        $this->database = 'u136839350_EnixProd';
         $this->port ='3306';
-        
     }
 
 

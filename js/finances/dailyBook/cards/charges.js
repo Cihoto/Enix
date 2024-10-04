@@ -55,7 +55,7 @@ function setChargesCards(){
                 <div class="card orange" onClick="renderChargesTable(cardFilterPendingChargesDocuments())">
                     <div class="content">
                         <div class="titles">
-                            <p>Pendientes de pago</p>
+                            <p>Pendientes de cobro</p>
                             <div class="sub-txt">
                                 <p id="totalPendingCharges" class="sub-amount">${charges.upToDateDocuments.amount}</p>
                                 <p id="pendingCharges">${getChileanCurrency(charges.upToDateDocuments.total)}</p>

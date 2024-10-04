@@ -28,6 +28,10 @@ const busData = {
 
 window.addEventListener("load", async (event) => {
 
+
+    getBankAndTributarieDataFromExcel()
+    // getBankAndTributarieDataFromExcel();
+    return 
     // FACTUARAS Y MOVIMIENTOS
     readAllDocumentsFromExcel();
     // filterDocumentsFromAPI();

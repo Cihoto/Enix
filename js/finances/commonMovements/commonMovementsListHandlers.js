@@ -12,7 +12,6 @@ commonMovementsListTable.addEventListener('click', (e) => {
     
 });
 
-
 commonMovementsListTable.addEventListener('focusout', (e) => {
     const target = e.target;
     const classListTarget = target.classList;
@@ -31,8 +30,6 @@ commonMovementsListTable.addEventListener('focusout', (e) => {
             return;
         }
 
-
-
         const value = objToChange === 'total' ? getChileanCurrency(parseInt(currentValue)) : currentValue;
         target.innerText = value;
 
@@ -47,10 +44,9 @@ commonMovementsListTable.addEventListener('focusout', (e) => {
         console.log('index',index);
 
         const movement = COMMON_MOVEMENTS.find((movement) => movement.id === id);
-        console.log('movement',movement);
 
         movement.movements[index][objToChange] = currentValue;
-        console.log('COMMON_MOVEMENTS',COMMON_MOVEMENTS);
+        
 
         // call Fetch function to update movement
 
@@ -63,7 +59,7 @@ commonMovementsListTable.addEventListener('focusout', (e) => {
                 id: id,
                 index: index,
                 objToChange: objToChange,
-                value: currentValue
+                value: objToChange === 'total' ? parseInt(currentValue) : currentValue
             })
         })
         .then(response => response.json())

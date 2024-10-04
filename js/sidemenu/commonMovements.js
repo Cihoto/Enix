@@ -73,13 +73,23 @@ commonEventsForm.addEventListener('submit', async (e) => {
         }
         console.log('COMMON MOVEMENTS', commonMovements);
 
-        if (entries.type == 1) {
-            console.log('Unico');
-        }
+
     }
 
     if(entries.movementType == 1){
-        const printDate = moment(`${entries.dayNumber}-${moment(entries.dateFrom, 'YYYY-MM').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
+        console.log('ENTRIES',entries);
+        const printDate = moment(entries.dateFrom, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
+        console.log('printDate',printDate);
         const uniqueId = btoa(`${new Date().getMilliseconds()}${printDate}${entries.movementTotal}${entries.name}`);
         // commonMovements.push({
         //     id: uniqueId,
@@ -98,7 +108,7 @@ commonEventsForm.addEventListener('submit', async (e) => {
             income: income,
             movements:[
                 {
-                    index: 1,
+                    index: 0,
                     printDate: printDate,
                     printDateTimestamp: moment(printDate, 'DD-MM-YYYY').format('X'),
                     total: entries.movementTotal == '' ? 0 : parseInt(entries.movementTotal),
@@ -116,9 +126,9 @@ commonEventsForm.addEventListener('submit', async (e) => {
         method: 'POST',
         body: JSON.stringify({
             commonMovements: commonMovements,
-            businessName: 'INTEC',
-            businessId: 77604901,
-            businessAccount: 63741369
+            // businessName: 'INTEC',
+            // businessId: 77604901,
+            // businessAccount: 63741369
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -141,13 +151,42 @@ typeSelector.addEventListener('change', (e) => {
 
     if (e.target.value == 1) {
         limitselectableDays();
+
+        daySelector.closest('.form-group').style.display = 'none';
+        daySelector.required = false;
+
+        dateFrom.value = '';
+        dateFrom.type = 'date';
+        dateFrom.value = moment().format('DD-MM-YYYY');
+        dateFrom.closest('.form-group').querySelector('label').innerText = 'Fecha del movimiento';
+
         dateTo.disabled = true;
         dateTo.required = false;
         dateTo.value = '';
+        dateTo.closest('.form-group').style.display = 'none';
+        // dateTo.style.display = 'none';
         return;
     }
     if (e.target.value == 2) {
+        daySelector.closest('.form-group').style.display = 'flex';
+        daySelector.required = true;
+
+        dateFrom.value = '';
+        dateFrom.type = 'month';
+        dateFrom.value = moment().format('YYYY-MM');
+        dateFrom.closest('.form-group').querySelector('label').innerText = 'Desde';
+
+        dateTo.disabled.disabled = false;
         dateTo.required = true;
+        dateTo.value = '';
+        dateTo.closest('.form-group').style.display = 'flex';
+
+        // dateTo.style.display = 'flex';
+
+
+
+        
+       
         limitselectableDays(true);
     }
 

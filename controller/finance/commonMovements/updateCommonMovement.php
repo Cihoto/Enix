@@ -59,7 +59,7 @@ if (isset($data['id']) && isset($data['index'])) {
 
     // echo json_encode(['status' => 'success', 'message' => 'Update successful']);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Invalid input']);
+    echo ['status' => 'error', 'message' => 'Invalid input'];
 }
 
 

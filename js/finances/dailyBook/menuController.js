@@ -185,7 +185,7 @@ months.forEach((month) => {
 
         if(monthNumber === currentMonthNumber) {
             monthName.innerText = 'Mes en curso';
-            return;
+            // return;
         }
         selectedMonth = monthNumber;
         monthName.innerText = month.innerText;

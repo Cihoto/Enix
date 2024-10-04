@@ -3,8 +3,10 @@ require_once '../database/bd.php';
 require_once '../person/Person.php';
 require_once '../session/sessionManager.php';
 require_once '../Bank/BankAccount.php';
+require_once '../User/User.php';
+require_once '../Business/Bussiness.php';
 
-class LoginManager extends Person{
+class LoginManager{
     private $email;
     private $password;
 
@@ -14,39 +16,49 @@ class LoginManager extends Person{
     }
 
     public function login() {
-        
-        $conn = new bd();
-        $conn->conectar();
-        $query = mysqli_prepare($conn->mysqli, "SELECT * FROM user WHERE LOWER(email) = ? AND `password` = ?");
-        $email = strtolower($this->email);
-        mysqli_stmt_bind_param($query, 'ss', $email, $this->password);
-        mysqli_stmt_execute($query);
-        $result = mysqli_stmt_get_result($query);
-        $row = mysqli_fetch_assoc($result);
 
-        // return json_encode("SELECT * FROM user WHERE LOWER(email) = $email AND `password` = $this->password");
-        // return $row;
-        if ($row) {
-            // get userData from user table
+        $user = new User($this->password, $this->email);
+       
+        if ( $user->checkUser()) {
+
+            $person = new Person(null, null,$user->getBusinessId(), $user->getId(), null, null);
+            $personData = $person->setPerson();
+            // return $user->getBusinessId();
+            // return $personData;
+            if(!$personData){
+                return ['false' => 'no person found'];
+            }
+            // return "ASdasd";
+            $business = new Business($user->getBusinessId(), null, null, null, null);
+            $businessData = $business->setBusiness();
+            if(!$businessData){
+                return false;
+            }
+
+            $businessId = $business->getBusinessId();
+            $bankAccount = new BankAccount($businessId);
+
+            $bankAccountData = $bankAccount->getBankAccountData();
+            if(!$bankAccountData){
+                return false;
+            }
+            // return $bankAccountData;
+
+            if(!$bankAccountData){
+                return false;
+            }
+
+            $sessionManager = new sessionManager();
+            $sessionManager->setUserId($user->getId());
+            $sessionManager->setBusinessId($business->getBusinessRut());
+            $sessionManager->setBusinessName($business->getBusinessName());
+            $sessionManager->setBusinessBankAccount($bankAccount->getBankAccountNumber());
+            $sessionManager->setSuperAdmin($user->isSuperAdmin());
+
+            $sessionManager->setSession(); 
+            $sessionManager->setLoginSession();
             
-            $this->setBusinessId($row['business_id']);
-            $this->setUserId($row['id']);
-            $personData = $this->setPerson();
-            if($personData){
-                return false;
-            }
-            // return $this->setBusiness();
-            $businessData = $this->setBusiness();
-            if($businessData){
-                return false;
-            }
-            // $bankAccount = new BankAccount();
-            // $bankAccountData = $this->setBankAccount();
-
-
-            return ["success" => "business", "businessId" => $this->getBusinessId()];
-                
-            return true;
+            return ["success"=>true, 'message' => 'Login successful!'];
         } else {
             return "no user found";
         }

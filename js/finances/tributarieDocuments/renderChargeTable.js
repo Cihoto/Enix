@@ -17,11 +17,12 @@ function renderChargesTable(sortFunction, hidePaid = true) {
             <th>N° Factura</th>
             <th>Glosa/Detalle</th>
             <th>Proveedor</th>
-            <th>Total Neto</th>
+            <th>Neto</th>
             <th>IVA</th>
             <th>Total</th>
             <th>Saldo</th>
             <th>Estado</th>
+            <th></th>
         </tr>`
     tr.innerHTML = theadTr;
     tr.classList.add('headerRow');
@@ -44,6 +45,7 @@ function renderChargesTable(sortFunction, hidePaid = true) {
         let tr = document.createElement('tr');
         // add custom properties rowId  = futurePayment.id
         tr.setAttribute('rowId',futurePayment.id);
+        tr.setAttribute('folio',futurePayment.folio);
         tr.classList.add('tributarierRow');
         if(hidePaid && futurePayment.paid){
             return;
@@ -107,6 +109,14 @@ function renderChargesTable(sortFunction, hidePaid = true) {
             <td>${getChileanCurrency(parseInt(total))}</td>
             <td>${getChileanCurrency(saldo)}</td>
             <td><div class="paidPercentage" ${percentageBarStyle}></div></td>
+            <td class="markAsPaid">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square">
+                    <polyline points="9 11 12 14 22 4"></polyline>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+            </td>
         </tr>`
         
         tr.innerHTML = rowHTML;
@@ -125,6 +135,7 @@ function renderChargesTable(sortFunction, hidePaid = true) {
             <td>${getChileanCurrency(totales.iva)}</td>
             <td>${getChileanCurrency(totales.total)}</td>
             <td>${getChileanCurrency(totales.saldo)}</td>
+            <td></td>
             <td></td>
         </tr>`
     trFoot.innerHTML = tfootTr;

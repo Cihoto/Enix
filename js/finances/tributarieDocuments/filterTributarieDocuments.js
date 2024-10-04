@@ -65,7 +65,7 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
   let update = [];
   let boletasTotal = [];
   let totalDocumentos = [];
-
+  
   trDocuments.forEach((document) => {
 
     sortDocumentOnDate(document);
@@ -170,12 +170,12 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
       if (!hasCreditNote) {
         return
       }
-      console.log('hasCreditNote', "hasCreditNote");
-      console.log('nota de credito', nota);
-      console.log('factura', hasCreditNote);
-      console.log('------------------------');
-      console.log(' ');
-      console.log(' ');
+      // console.log('hasCreditNote', "hasCreditNote");
+      // console.log('nota de credito', nota);
+      // console.log('factura', hasCreditNote);
+      // console.log('------------------------');
+      // console.log(' ');
+      // console.log(' ');
     });
     console.log('totalNotasRecibidas', totalNotasRecibidas);
     tributarieDocuments.notaDebito.forEach((nota) => {
@@ -279,10 +279,6 @@ function sortDocumentOnDate(document) {
 function discountDocument(document) {
 
   console.log('document', document);
-  console.log('document', document);
-  console.log('document', document);
-  console.log('document', document);
-  console.log('document', document);
 
 
   const { folio: folioDocumentDiscount, rut: rutDocumentDiscount, total: totalDocumentDiscount } = document;
@@ -312,9 +308,9 @@ function discountDocument(document) {
   const document1 = tributarieDocuments[document.emitida ? 'charges' : 'payments'][indexOfDocument];
 
   if (!document.emitida) {
-    console.log("+++++");
-    console.log("DOCUMENTO", document);
-    console.log("+++++");
+    // console.log("+++++");
+    // console.log("DOCUMENTO", document);
+    // console.log("+++++");
     tributarieCardsData.payments.totalDocuments.amount--;
     tributarieCardsData.payments.totalDocuments.total -= document.total;
     if (document.tipo_documento === 'bhe' && document.paid) {

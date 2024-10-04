@@ -89,8 +89,19 @@ class Business {
         //     "businessBankAccountId" => $this->getBusinessBankAccountId()
         // ];
     }
-
-
+    
+    public function getAllBusinesses(){
+        $conn = new bd();
+        $conn->conectar();
+        $query = mysqli_prepare($conn->mysqli, "SELECT * FROM business");
+        mysqli_stmt_execute($query);
+        $result = mysqli_stmt_get_result($query);
+        $rows = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 }
 
 ?>

@@ -157,10 +157,10 @@
         </div>
         <div class="loginBox">
             <form id="loginForm">
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="userName">Nombre</label>
                     <input type="text" name="userName" id="userName" required placeholder="Tú nombre completo">
-                </div>  
+                </div>   -->
                 <div class="form-group">
                     <label for="userEmail">Correo</label>
                     <input type="email" name="userEmail" id="userEmail" required placeholder="Tu correo eléctrico">
@@ -170,7 +170,7 @@
                     <input type="password" name="password" id="password" required placeholder="*******" autocomplete="on">
                 </div>
 
-                <button class="submitBtn" type="submit"><p>Crear cuenta</p></button>
+                <button class="submitBtn" type="submit"><p>Iniciar Sesión</p></button>
             </form>
                 
         </div>

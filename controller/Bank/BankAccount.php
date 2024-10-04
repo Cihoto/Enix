@@ -4,12 +4,19 @@
     class BankAccount extends Business{
         private $bankAccountId;
         private $bankAccountNumber;
+        private $bankAccountbusinessId;
         private $bankId;
 
-        public function __construct($bankAccountId, $bankAccountNumber, $bankId) {
-            $this->bankAccountId = $bankAccountId;
-            $this->bankAccountNumber = $bankAccountNumber;
-            $this->bankId = $bankId;
+        public function __construct($bankAccountbusinessId) {
+            $this->bankAccountbusinessId = $bankAccountbusinessId;
+        }
+
+        public function getbankAccountBusinessId() {
+            return $this->bankAccountbusinessId;
+        }
+        
+        public function setbankAccountBusinessId($bankAccountbusinessId) {
+            $this->bankAccountbusinessId = $bankAccountbusinessId;
         }
 
         public function getBankAccountId() {
@@ -37,12 +44,28 @@
         }
 
 
-        public function getBankAccountData($bankAccountId) {
+        public function getBankAccountData() {
             $conn = new bd();
             $conn->conectar();
-            $sql = "SELECT * FROM bank_account WHERE bank_account_id = $bankAccountId";
-            $result = mysqli_query($conn->mysqli, $sql);
-            $row = mysqli_fetch_array($result);
+            $query = mysqli_prepare($conn->mysqli, "SELECT * FROM bank_account WHERE business_id = ?");
+            $businessId = $this->getbankAccountBusinessId();
+            mysqli_stmt_bind_param($query, 'i', $businessId);
+            mysqli_stmt_execute($query);
+            $result = mysqli_stmt_get_result($query);
+            $row = mysqli_fetch_assoc($result);
+            if($row){
+                $this->setBankAccountId($row['id']);
+                $this->setBankAccountNumber($row['account_number']);
+                $this->setBankId($row['bank_id']);
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function setBankAccount($bankData) {
+            $conn = new bd();
+            $conn->conectar();
         }
     }
 ?>

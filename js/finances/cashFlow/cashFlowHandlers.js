@@ -35,7 +35,6 @@ cashFlowTable.addEventListener('click', (e) => {
     console.log('selectedRowData',selectedRowData);
 
     const accCode = selectedRowData.getAttribute('lvlcode');
-    console.log('accCode',accCode);
 
     const data = getMovementsByCode(accCode, clickedDate);
     console.log('RETURNED MOVEMENTS TO PRINT ON TABLE',data);
@@ -169,6 +168,7 @@ infoContent.addEventListener('click', (e) => {
 
 function getMovementsByCode(accCode, clickedDate){
     const outdatedAccount = accCode === 'projectedOutdatedIncomeRow' ? 'projectedIncome' : 'projectedOutcome';
+
     if(accCode === 'projectedOutdatedIncomeRow' || accCode === 'projectedOutdatedOutcomeRow'){
         console.log('bankMovementsData[outdatedAccount][clickedDate]',bankMovementsData[outdatedAccount][clickedDate]);
         const dataOnDay = bankMovementsData[outdatedAccount][clickedDate];
@@ -182,13 +182,14 @@ function getMovementsByCode(accCode, clickedDate){
         return {lvlCodes: outdatedMovements};
     }else if(accCode === 'projectedIncome' || accCode === 'projectedOutcome'){
         console.log('bankMovementsData[outdatedAccount][clickedDate]',bankMovementsData[outdatedAccount][clickedDate]);
-        const dataOnDay = bankMovementsData[outdatedAccount][clickedDate];
-        const outdatedMovements = dataOnDay.lvlCodes.filter((movement) => {
+        const dataOnDay = bankMovementsData[accCode][clickedDate];
+        const projectedMovement = dataOnDay.lvlCodes.filter((movement) => {
             console.log('movement____________',movement);
             const {vencida_por} = movement;
             return vencida_por <= 0;
         });
-        return {lvlCodes: outdatedMovements};
+
+        return {lvlCodes: projectedMovement};
     }else if(accCode === 'ingresos' || accCode === 'egresos'){
 
         console.log('bankMovementsData[accCode][clickedDate]',bankMovementsData[accCode][clickedDate]);

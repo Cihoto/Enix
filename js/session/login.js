@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const data = Object.fromEntries(new FormData(loginForm).entries());
         console.log('Data:', data);
 
-        
-
         fetch('./controller/login/logUser.php', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -21,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 // Handle successful login
                 console.log('Login successful');
+                // window.location.href = 'index.php';
             } else {
                 // Handle login failure
                 console.log('Login failed');

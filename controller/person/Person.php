@@ -4,15 +4,15 @@
     class Person extends Business{
         private $name;
         private $lastName;
-        private $bussinessId;
+        private $businessId;
         private $userId;
         private $rut;
         private $dv;
 
-        public function __construct($name, $lastName, $bussinessId, $userId, $rut, $dv) {
+        public function __construct($name, $lastName, $businessId, $userId, $rut, $dv) {
             $this->name = $name;
             $this->lastName = $lastName;
-            $this->bussinessId = $bussinessId;
+            $this->businessId = $businessId;
             $this->userId = $userId;
             $this->rut = $rut;
             $this->dv = $dv;
@@ -35,12 +35,12 @@
             $this->lastName = $lastName;
         }
 
-        public function getBussinessId() {
-            return $this->bussinessId;
+        public function getbusinessId() {
+            return $this->businessId;
         }
 
-        public function setBussinessId($bussinessId) {
-            $this->bussinessId = $bussinessId;
+        public function setbusinessId($businessId) {
+            $this->businessId = $businessId;
         }
 
         public function getUserId() {
@@ -66,27 +66,32 @@
         public function setDv($dv) {
             $this->dv = $dv;
         }
+
+        // Get the person data
         
 
         public function setPerson(){
             $conn = new bd();
             $conn->conectar();
-            $query = mysqli_prepare($conn->mysqli, "SELECT * FROM person WHERE business_id = ? AND user_id = ?");
-            mysqli_stmt_bind_param($query, 'ii', $this->bussinessId, $this->userId);
+            $query = mysqli_prepare($conn->mysqli, "SELECT p.*, u.superAdmin from person p 
+            INNER JOIN user u on u.id = p.user_id 
+            WHERE p.business_id = ? AND p.user_id = ?;");
+
+            // legacy QUERY
+                // $query = mysqli_prepare($conn->mysqli, "SELECT * from person WHERE business_id = ? AND user_id = ?");
+            // legacy QUERY
+
+            mysqli_stmt_bind_param($query, 'ii', $this->businessId, $this->userId);
             mysqli_stmt_execute($query);
             $result = mysqli_stmt_get_result($query);
             $row = mysqli_fetch_assoc($result);
             $conn->desconectar();
+            // return [$busId,$this->userId];
             if($row){
-
                 $this->setName($row['name']);
                 $this->setLastName($row['last_name']);
                 $this->setRut($row['rut']);
                 $this->setDv($row['dv']);
-                $this->setBussinessId($row['business_id']);
-                $this->setUserId($row['user_id']);
-
-
                 return true;
             }else{
                 return false;

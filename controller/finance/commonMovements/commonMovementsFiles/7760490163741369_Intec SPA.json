@@ -1,586 +1,194 @@
 [
     {
-        "id": "NzkzMTItMDktMjAyNDEyNTAwMFRlc3QgbmFtZTA=",
-        "dateFrom": "2024-09-01T04:00:00.000Z",
-        "dateTo": "2028-12-01T03:00:00.000Z",
-        "name": "Test name",
-        "income": true,
+        "id": "Njg0MDUtMTAtMjAyNDEwMDAwMFBydWViYSBkZSBNb3ZpbWllbnRvIFVuaWNv",
+        "dateFrom": [],
+        "dateTo": [],
+        "name": "Prueba de Movimiento Unico",
+        "income": false,
         "movements": [
             {
-                "index": 0,
-                "printDate": "12-09-2024",
-                "printDateTimestamp": "1726110000",
-                "total": 12322,
-                "name": "Test name",
-                "desc": "laslkdjlakds"
-            },
-            {
                 "index": 1,
-                "printDate": "12-10-2024",
-                "printDateTimestamp": "1728702000",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 2,
-                "printDate": "12-11-2024",
-                "printDateTimestamp": "1731380400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": "test2"
-            },
-            {
-                "index": 3,
-                "printDate": "12-12-2024",
-                "printDateTimestamp": "1733972400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 4,
-                "printDate": "12-01-2025",
-                "printDateTimestamp": "1736650800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 5,
-                "printDate": "12-02-2025",
-                "printDateTimestamp": "1739329200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 6,
-                "printDate": "12-03-2025",
-                "printDateTimestamp": "1741748400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 7,
-                "printDate": "12-04-2025",
-                "printDateTimestamp": "1744430400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 8,
-                "printDate": "12-05-2025",
-                "printDateTimestamp": "1747022400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 9,
-                "printDate": "12-06-2025",
-                "printDateTimestamp": "1749700800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 10,
-                "printDate": "12-07-2025",
-                "printDateTimestamp": "1752292800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 11,
-                "printDate": "12-08-2025",
-                "printDateTimestamp": "1754971200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 12,
-                "printDate": "12-09-2025",
-                "printDateTimestamp": "1757646000",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 13,
-                "printDate": "12-10-2025",
-                "printDateTimestamp": "1760238000",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 14,
-                "printDate": "12-11-2025",
-                "printDateTimestamp": "1762916400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 15,
-                "printDate": "12-12-2025",
-                "printDateTimestamp": "1765508400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 16,
-                "printDate": "12-01-2026",
-                "printDateTimestamp": "1768186800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 17,
-                "printDate": "12-02-2026",
-                "printDateTimestamp": "1770865200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 18,
-                "printDate": "12-03-2026",
-                "printDateTimestamp": "1773284400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 19,
-                "printDate": "12-04-2026",
-                "printDateTimestamp": "1775966400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 20,
-                "printDate": "12-05-2026",
-                "printDateTimestamp": "1778558400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 21,
-                "printDate": "12-06-2026",
-                "printDateTimestamp": "1781236800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 22,
-                "printDate": "12-07-2026",
-                "printDateTimestamp": "1783828800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 23,
-                "printDate": "12-08-2026",
-                "printDateTimestamp": "1786507200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 24,
-                "printDate": "12-09-2026",
-                "printDateTimestamp": "1789182000",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 25,
-                "printDate": "12-10-2026",
-                "printDateTimestamp": "1791774000",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 26,
-                "printDate": "12-11-2026",
-                "printDateTimestamp": "1794452400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 27,
-                "printDate": "12-12-2026",
-                "printDateTimestamp": "1797044400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 28,
-                "printDate": "12-01-2027",
-                "printDateTimestamp": "1799722800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 29,
-                "printDate": "12-02-2027",
-                "printDateTimestamp": "1802401200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 30,
-                "printDate": "12-03-2027",
-                "printDateTimestamp": "1804820400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 31,
-                "printDate": "12-04-2027",
-                "printDateTimestamp": "1807502400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 32,
-                "printDate": "12-05-2027",
-                "printDateTimestamp": "1810094400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 33,
-                "printDate": "12-06-2027",
-                "printDateTimestamp": "1812772800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 34,
-                "printDate": "12-07-2027",
-                "printDateTimestamp": "1815364800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 35,
-                "printDate": "12-08-2027",
-                "printDateTimestamp": "1818043200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 36,
-                "printDate": "12-09-2027",
-                "printDateTimestamp": "1820718000",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 37,
-                "printDate": "12-10-2027",
-                "printDateTimestamp": "1823310000",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 38,
-                "printDate": "12-11-2027",
-                "printDateTimestamp": "1825988400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 39,
-                "printDate": "12-12-2027",
-                "printDateTimestamp": "1828580400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 40,
-                "printDate": "12-01-2028",
-                "printDateTimestamp": "1831258800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 41,
-                "printDate": "12-02-2028",
-                "printDateTimestamp": "1833937200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 42,
-                "printDate": "12-03-2028",
-                "printDateTimestamp": "1836442800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 43,
-                "printDate": "12-04-2028",
-                "printDateTimestamp": "1839124800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 44,
-                "printDate": "12-05-2028",
-                "printDateTimestamp": "1841716800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 45,
-                "printDate": "12-06-2028",
-                "printDateTimestamp": "1844395200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 46,
-                "printDate": "12-07-2028",
-                "printDateTimestamp": "1846987200",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 47,
-                "printDate": "12-08-2028",
-                "printDateTimestamp": "1849665600",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 48,
-                "printDate": "12-09-2028",
-                "printDateTimestamp": "1852340400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 49,
-                "printDate": "12-10-2028",
-                "printDateTimestamp": "1854932400",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 50,
-                "printDate": "12-11-2028",
-                "printDateTimestamp": "1857610800",
-                "total": 125000,
-                "name": "Test name",
-                "desc": ""
-            },
-            {
-                "index": 51,
-                "printDate": "12-12-2028",
-                "printDateTimestamp": "1860202800",
-                "total": 125000,
-                "name": "Test name",
+                "printDate": "05-10-2024",
+                "printDateTimestamp": "1728097200",
+                "total": 100000,
+                "name": "Prueba de Movimiento Unico",
                 "desc": ""
             }
         ]
     },
     {
-        "id": "NTQ1MDEtMTEtMjAyNDc4OTkwU2Vjb25kIGluY29tZTA=",
-        "dateFrom": "2024-11-01T03:00:00.000Z",
-        "dateTo": "2026-05-01T04:00:00.000Z",
-        "name": "Second income",
-        "income": true,
+        "id": "NTAwNS0xMC0yMDI0MjUwMDAwUHJ1ZWJhIDIw",
+        "dateFrom": "2024-10-01T03:00:00.000Z",
+        "dateTo": "2026-06-01T04:00:00.000Z",
+        "name": "Prueba 2",
+        "income": false,
         "movements": [
             {
                 "index": 0,
-                "printDate": "01-11-2024",
-                "printDateTimestamp": "1730430000",
-                "total": "300",
-                "name": "Second income",
-                "desc": "este esta cambiado"
+                "printDate": "05-10-2024",
+                "printDateTimestamp": "1728097200",
+                "total": 123123,
+                "name": "Prueba 2",
+                "desc": ""
             },
             {
                 "index": 1,
-                "printDate": "01-12-2024",
-                "printDateTimestamp": "1733022000",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-11-2024",
+                "printDateTimestamp": "1730775600",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 2,
-                "printDate": "01-01-2025",
-                "printDateTimestamp": "1735700400",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-12-2024",
+                "printDateTimestamp": "1733367600",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 3,
-                "printDate": "01-02-2025",
-                "printDateTimestamp": "1738378800",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-01-2025",
+                "printDateTimestamp": "1736046000",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 4,
-                "printDate": "01-03-2025",
-                "printDateTimestamp": "1740798000",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-02-2025",
+                "printDateTimestamp": "1738724400",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 5,
-                "printDate": "01-04-2025",
-                "printDateTimestamp": "1743476400",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-03-2025",
+                "printDateTimestamp": "1741143600",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 6,
-                "printDate": "01-05-2025",
-                "printDateTimestamp": "1746072000",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-04-2025",
+                "printDateTimestamp": "1743822000",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 7,
-                "printDate": "01-06-2025",
-                "printDateTimestamp": "1748750400",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-05-2025",
+                "printDateTimestamp": "1746417600",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 8,
-                "printDate": "01-07-2025",
-                "printDateTimestamp": "1751342400",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-06-2025",
+                "printDateTimestamp": "1749096000",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 9,
-                "printDate": "01-08-2025",
-                "printDateTimestamp": "1754020800",
-                "total": 78990,
-                "name": "Second income",
-                "desc": "askldjlakjsd"
+                "printDate": "05-07-2025",
+                "printDateTimestamp": "1751688000",
+                "total": 250000,
+                "name": "Prueba 2",
+                "desc": ""
             },
             {
                 "index": 10,
-                "printDate": "01-09-2025",
-                "printDateTimestamp": "1756699200",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-08-2025",
+                "printDateTimestamp": "1754366400",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 11,
-                "printDate": "01-10-2025",
-                "printDateTimestamp": "1759287600",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-09-2025",
+                "printDateTimestamp": "1757044800",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 12,
-                "printDate": "01-11-2025",
-                "printDateTimestamp": "1761966000",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-10-2025",
+                "printDateTimestamp": "1759633200",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 13,
-                "printDate": "01-12-2025",
-                "printDateTimestamp": "1764558000",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-11-2025",
+                "printDateTimestamp": "1762311600",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 14,
-                "printDate": "01-01-2026",
-                "printDateTimestamp": "1767236400",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-12-2025",
+                "printDateTimestamp": "1764903600",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 15,
-                "printDate": "01-02-2026",
-                "printDateTimestamp": "1769914800",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-01-2026",
+                "printDateTimestamp": "1767582000",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 16,
-                "printDate": "01-03-2026",
-                "printDateTimestamp": "1772334000",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-02-2026",
+                "printDateTimestamp": "1770260400",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 17,
-                "printDate": "01-04-2026",
-                "printDateTimestamp": "1775012400",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-03-2026",
+                "printDateTimestamp": "1772679600",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             },
             {
                 "index": 18,
-                "printDate": "01-05-2026",
-                "printDateTimestamp": "1777608000",
-                "total": 78990,
-                "name": "Second income",
+                "printDate": "05-04-2026",
+                "printDateTimestamp": "1775361600",
+                "total": 250000,
+                "name": "Prueba 2",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "05-05-2026",
+                "printDateTimestamp": "1777953600",
+                "total": 250000,
+                "name": "Prueba 2",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "05-06-2026",
+                "printDateTimestamp": "1780632000",
+                "total": 250000,
+                "name": "Prueba 2",
                 "desc": ""
             }
         ]

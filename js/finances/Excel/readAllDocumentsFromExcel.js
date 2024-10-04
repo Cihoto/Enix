@@ -77,11 +77,46 @@ const DOCUMENT_TYPES = [
 ];
 
 let businessDocuments = [];
+let modifiedDocuments = [];
+
+let tributarieExcelData = [];
+
+async function readTributarieDocumentsFromExcel(){
+    const excelResponse = await fetch('./controller/ExcelManager/readExcelFile.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            fileType: 'tributarie',
+        }),
+    });
+    const excelData = await excelResponse.json(); 
+
+    tributarieExcelData = excelData;
+    console.log('tributarieExcelData',tributarieExcelData);
+
+
+    // getModifiedDocuments
+    const modifiedDocumentsR = await fetch('./controller/finance/commonMovements/readModifiedDocuments.php');
+    const modifiedDocumentsData = await modifiedDocumentsR.json();
+    if(modifiedDocumentsData.data){
+        const {data} = modifiedDocumentsData;
+        modifiedDocuments = data;
+
+        // quitar elementos duplicados de modifiedDocuments
+        modifiedDocuments = modifiedDocuments.filter((document, index, self) =>
+            index === self.findIndex((t) => (
+                t.id === document.id
+            ))
+        )
+        console.log('modifiedDocuments',modifiedDocuments);
+    }
+
+    await readAllDocumentsFromExcel();
+    return true;
+}
 
 async function readAllDocumentsFromExcel() {
-    const excelResponse = await fetch('/test6.php');
-    const excelData = await excelResponse.json(); 
-    const allMyDocuments = excelData.bodyRows.map((movements) => {
+    
+    let allMyDocuments = tributarieExcelData.bodyRows.map((movements) => {
         const {
             FOLIO,
             TOTAL,
@@ -97,7 +132,6 @@ async function readAllDocumentsFromExcel() {
             MONTO_EXENTO,
             MONTO_AFECTO,
             MONTO_NETO
-
         } = movements;
 
         if(TIPO === "Guía de Despacho" || TIPO === "Guía de Despacho Electrónica"){
@@ -153,6 +187,15 @@ async function readAllDocumentsFromExcel() {
             vencida_por: diffOnDaysFromEmission,
         }
     }).filter((doc) => doc !== false);
+
+    // mark as paid === true modified documents from allMyDocuments match by id
+    allMyDocuments.forEach((document) => {
+        const modifiedDocument = modifiedDocuments.find((modDoc) => modDoc.id === document.id);
+        if(modifiedDocument){
+            document.paid = true;
+        }
+    });
+
     businessDocuments = allMyDocuments;
 
     console.log('allMyDocuments',allMyDocuments);

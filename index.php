@@ -1,3 +1,14 @@
+<?php 
+    require_once('./controller/session/sessionManager.php');
+    $sessionManager = new sessionManager();
+    if(!isset($_SESSION['loggedin'])){
+        $sessionManager->destroy();
+        header('Location: ./login.php');
+        exit();
+    }
+    $isSuperAdmin = $_SESSION['superAdmin'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +38,7 @@
 
 <body>
     <head>
-        <p>Hola</p>
+        
     </head>
     <div id="infoMenu" style="display: none; 
     position: absolute; 
@@ -54,9 +65,17 @@
         <nav id="sidebar">
             <div class="navHead">
                 <h3>Finanzas</h3>
+                <?php
+                    if($isSuperAdmin){
+                        echo '<select id="busSelector">Administrar</select>';
+                        echo '<button id="bussinessManager">Crear empresa</button>';
+                    }else{
+                        echo 'Usuario Normal';
+                    }
+                ?>
             </div>
-            <button id="login">Iniciar sesión</button>
-            <button id="logout">Cerrar sesión</button>
+            <!-- <button id="login">Iniciar sesión</button>-->
+            <button id="logout">Cerrar sesión</button> 
         </nav>
         <div id="main">
             <div class="main-header">
@@ -118,7 +137,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <img src="./assets/svg/financessvg/cardInfo.svg" alt="">
+                            <!-- <img src="./assets/svg/financessvg/cardInfo.svg" alt=""> -->
                         </div>
                     </div>
                 </div>
@@ -132,7 +151,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <img src="./assets/svg/financessvg/cardInfo.svg" alt="">
+                            <!-- <img src="./assets/svg/financessvg/cardInfo.svg" alt=""> -->
                         </div>
                     </div>
                 </div>
@@ -146,7 +165,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <img src="./assets/svg/financessvg/cardInfo.svg" alt="">
+                            <!-- <img src="./assets/svg/financessvg/cardInfo.svg" alt=""> -->
                         </div>
                     </div>
                 </div>
@@ -159,7 +178,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <img src="./assets/svg/financessvg/cardInfo.svg" alt="">
+                            <!-- <img src="./assets/svg/financessvg/cardInfo.svg" alt=""> -->
                         </div>
                     </div>
                 </div>
@@ -226,9 +245,13 @@
                                     <p class="mnth" monthNumber="12">Diciembre</p>
                                 </div>
                             </div>
-                            <button id="showIssued">Mostrar Emitidas</button>
-                            <button id="showReceived">Mostrar Recibidas</button>
-                            <button id="showAll">Mostrar Todas</button>
+
+                            <input type="text" id="filterByFolio" placeholder="Busca por folio">
+                            <div class="paidDocsFilters">
+                                <button id="showIssued">Mostrar Emitidas</button>
+                                <button id="showReceived">Mostrar Recibidas</button>
+                                <button id="showAll">Mostrar Todas</button>
+                            </div>
                             <!-- <button onClick="cardFilterAllPaymentsDocuments()">asdasd</button> -->
                             <button id="hidePaidDocuments">
                                 Mostrar documentos pagados
@@ -313,49 +336,91 @@
     <script src="./js/finances/API/commonMovements/getAllCommonMovements.js"></script>
 
     <script>
+
+        const createBusinessButton = document.getElementById('bussinessManager');
+
+        createBusinessButton.addEventListener('click', () => {
+            window.location.href = './business.php';
+        });
+
+
+
+
+
+
+
         const cardsContainer = document.getElementById('cardsContainer');
+        
+        const businessSelector = document.getElementById('busSelector');
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log("SUPER ADMIN", <?php echo $isSuperAdmin;?>);
+            const superAdmin = <?php echo $isSuperAdmin ?>;
+            if(!superAdmin){
+                return;
+            }
+            const response = await fetch('./controller/Business/getAllBusinesses.php',{
+                method: 'POST'
+            });
+            const data = await response.json();
+            console.log("ALL BUSINESS DATA");
+            console.log("ALL BUSINESS DATA");
+            console.log("ALL BUSINESS DATA", data);
+            console.log("ALL BUSINESS DATA");
+            console.log("ALL BUSINESS DATA");
+            data.forEach(business => {
+                const option = new Option(business.name, business.id);
+                businessSelector.appendChild(option);
+            });
+        });
 
-        document.getElementById('login').addEventListener('click', async () => {
-            const login = await fetch('./testSession.php');
-
-            const data = await login.json();
-
+        businessSelector.addEventListener('change', async () => {
+            const businessId = businessSelector.value;
+            const response = await fetch(`./controller/business/getBusinessData.php?businessId=${businessId}`);
+            const data = await response.json();
             console.log(data);
         });
+
+        // document.getElementById('login').addEventListener('click', async () => {
+        //     const login = await fetch('./testSession.php');
+
+        //     const data = await login.json();
+
+        //     console.log(data);
+        // });
         // console.log(getData())
 
-        const loginButton = document.getElementById('login');
-        loginButton.addEventListener('click', async () => {
-            await getData();
-        });
+        // const loginButton = document.getElementById('login');
+        // loginButton.addEventListener('click', async () => {
+        //     await getData();
+        // });
 
 
 
-        async function getData(){
-            // fetch('./getSessionData.php')
-            // .then(response => response.json())
-            // .then(data => console.log(data));
-            const dataSession = await fetch('./getSessionData.php');
+        // async function getData(){
+        //     // fetch('./getSessionData.php')
+        //     // .then(response => response.json())
+        //     // .then(data => console.log(data));
+        //     const dataSession = await fetch('./getSessionData.php');
 
-            const data = await dataSession.json();
+        //     const data = await dataSession.json();
             
-            console.log(data);
-        }
+        //     console.log(data);
+        // }
 
-        const button = document.getElementById('logout');
-        button.addEventListener('click', async () => {
-            await closeSession();
-        });
+        // const button = document.getElementById('logout');
+        // button.addEventListener('click', async () => {
+        //     await closeSession();
+        // });
 
-        async function closeSession(){
-            const dataSession = await fetch('./closeSession.php');
+        // async function closeSession(){
+        //     const dataSession = await fetch('./closeSession.php');
 
-            const data = await dataSession.json();
+        //     const data = await dataSession.json();
             
-            console.log(data);
-            console.log(data);
-            console.log(data);
-        }
+        //     console.log(data);
+        //     console.log(data);
+        //     console.log(data);
+        // }
 
     </script>
 

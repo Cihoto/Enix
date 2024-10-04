@@ -382,7 +382,7 @@ head {
         }
         td:nth-child(4),
         th:nth-child(4){
-            width: 17%;
+            width: 15%;
         }
         td:nth-child(4){
             white-space:nowrap;
@@ -423,6 +423,20 @@ head {
                 height: 6px;
                 border-radius: 16px;
             }
+        }
+        td:nth-child(11),
+        th:nth-child(11){
+            width: 1%;
+            svg{
+                transition: all 0.3s ease;
+            }
+            svg:hover{
+                stroke: green;
+                stroke-width: 3;
+            }
+        }
+        .markAsPaid{
+            cursor: pointer;
         }
     }
 }
@@ -993,6 +1007,19 @@ head {
 
 
 .form-group input[type="month"]{
+    display: flex;
+    height: 32px;
+    padding: 8px 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    border-radius: 4px;
+    border: 1px solid var(--gray-200, #E2E8F0);
+    background: var(--white, #FFF);
+}
+.form-group input[type="date"]{
     display: flex;
     height: 32px;
     padding: 8px 12px;

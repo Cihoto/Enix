@@ -1,8 +1,20 @@
+// CABO DE HORNOS
+
+// RUT 76275907
+// CUENTA 4449398
 let cashFlowTotals = {
-    initialBankAccount: 18895572,
+    initialBankAccount: 3049480,
     currentBankBalance: 0,
     totals: []
 }
+// INTEC
+// RUT 77604901
+// CUENTA 63741369
+// let cashFlowTotals = {
+//     initialBankAccount: 18895572,
+//     currentBankBalance: 0,
+//     totals: []
+// }
 
 let bankMovementsCatergories = ['ingresos', 'egresos', 'projectedIncome', 'projectedOutcome', 'commonIncomeMovements', 'commonOutcomeMovements'];
 
@@ -178,7 +190,7 @@ function renderMyChasFlowTable(pickedMonth) {
             }
         }
 
-        console.log(bankMovementsData.projectedIncome[index - 1].lvlCodes)
+        // console.log(bankMovementsData.projectedIncome)
         // get outdated income
         bankMovementsData.projectedIncome[index - 1].lvlCodes.forEach((lvlCode) => {
             const { vencida_por, saldo } = lvlCode;

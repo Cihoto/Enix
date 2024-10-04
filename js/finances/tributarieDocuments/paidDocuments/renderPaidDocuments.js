@@ -10,6 +10,7 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
     const futurePayments = sortFunction;
 
     let tr = document.createElement('tr');
+    
     let theadTr = `
         <tr>
             <th class="dateColumn">Fecha emisión</th>
@@ -17,11 +18,12 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
             <th>N° Factura</th>
             <th>Glosa/Detalle</th>
             <th>Proveedor</th>
-            <th>Total Neto</th>
+            <th>Neto</th>
             <th>IVA</th>
             <th>Total</th>
             <th>Saldo</th>
             <th>Estado</th>
+            <th></th>
         </tr>`
     tr.innerHTML = theadTr;
     tr.classList.add('headerRow');
@@ -41,6 +43,9 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
         let tr = document.createElement('tr');
         // add custom properties rowId  = futurePayment.id
         tr.setAttribute('rowId',futurePayment.id);
+        tr.setAttribute('folio',futurePayment.folio);
+
+        const isModified = modifiedDocuments.filter((modDoc) => modDoc.id === futurePayment.id).length > 0;
         tr.classList.add('tributarierRow');
         if(hidePaid && futurePayment.paid){
             return;
@@ -92,6 +97,21 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
         }else{
             percentageBarStyle = `style="background: linear-gradient(to right, ${color} ${paidPercentage}%, #BCBCC8 ${paidPercentage}%);"`;
         }
+
+        let reverseMarkAsPaidTd =  '<td></td>';
+        
+        
+        if(isModified){
+            reverseMarkAsPaidTd = `<td class="markAsPaid">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left">
+                    <polyline points="9 14 4 9 9 4"></polyline>
+                    <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                </svg>
+            </td>`;
+
+        }
         let rowHTML = `
         <tr>
             <td>${fecha_emision}</td>
@@ -104,6 +124,8 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
             <td>${getChileanCurrency(parseInt(total))}</td>
             <td>${getChileanCurrency(saldo)}</td>
             <td><div class="paidPercentage" ${percentageBarStyle}></div></td>
+            ${reverseMarkAsPaidTd}
+
         </tr>`
         
         tr.innerHTML = rowHTML;
@@ -122,6 +144,7 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
             <td>${getChileanCurrency(totales.iva)}</td>
             <td>${getChileanCurrency(totales.total)}</td>
             <td>${getChileanCurrency(totales.saldo)}</td>
+            <td></td>
             <td></td>
         </tr>`
     trFoot.innerHTML = tfootTr;

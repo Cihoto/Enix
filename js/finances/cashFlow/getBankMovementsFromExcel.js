@@ -1,16 +1,37 @@
 // Objetive: get bank movements from excel file and return it as an array of objects
 let bankMovementsData = [];
 let tributarieDocumentsCategories = ['charges','payments'];
+
+// BANKMOVEMENTS EXCEL FILE
+let bankExcelData = [];2
+
+// getAllMyDocuments
+async function readExcelFile(){
+    const file = await fetch('./controller/ExcelManager/readExcelFile.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            fileType: 'bankMovements',
+        }),
+    });
+    const data = await file.json();
+    bankExcelData = data;
+    return true;
+}
+
+async function getBankAndTributarieDataFromExcel(){
+    await Promise.all([readExcelFile(),readTributarieDocumentsFromExcel()]);
+    getBankMovementsFromExcel();
+}
+
 async function getBankMovementsFromExcel(){
-    const bankMovements = await readExcelFile(); 
-    console.log('bankMovements',bankMovements);
-    
+    // const bankMovements = await readExcelFile(); 
+
     // search all days in year
     getAllDaysOnMonth([1,2,3,4,5,6,7,8,9,10,11,12]);
     bankMovementsData = setAllDaysOnYear();
     console.log('bankMovementsData',bankMovementsData);
 
-    const bankData = bankMovements.bodyRows.map((movement) => {
+    const bankData = bankExcelData.bodyRows.map((movement) => {
         if(movement.cuenta.trim() == ""){
             return ;
         }   
@@ -30,6 +51,7 @@ async function getBankMovementsFromExcel(){
     
     // loop through all bank movements and add them to the corresponding day
     console.log(bankMovementsData['egresos']);
+
     bankData.forEach((movement) => {
         const { fechaTimeStamp, monto, abono } = movement;
         const egresoIngreso = abono ? 'ingresos' : 'egresos';
@@ -46,6 +68,9 @@ async function getBankMovementsFromExcel(){
     console.log('tributarieDocumentsCategories',tributarieDocumentsCategories); 
 
     // Get and Set all tributarie documents on future movements
+
+    console.log('tributarieDocuments',tributarieDocuments);
+
     setFutureDocumentsOnBankMovements();
 
     // data for INTEC business
@@ -58,8 +83,11 @@ async function getBankMovementsFromExcel(){
     const commonMovsResponse = await getAllCommonMovements(data);
 
     COMMON_MOVEMENTS = commonMovsResponse.data;
+    // const commonMovements = [];
     const commonMovements = commonMovsResponse.data;
     console.log('commonMovements',commonMovements);
+
+
     commonMovements.forEach((movements) => {
         const {movements : commonMovements, income: income, id:id } = movements;
         commonMovements.forEach((movement) => {
@@ -85,13 +113,9 @@ async function getBankMovementsFromExcel(){
         });
     });
 
-    console.log('bankMovementsData',bankMovementsData);
+
 }
-async function readExcelFile(){
-    const file = await fetch('controller/Clay/readClayDataFromExcel/bankMovements.php');
-    const data = await file.json();
-    return data;
-}
+
 function setAllDaysOnYear (){
     const bankMovementsData = setAllDaysOnCurrentYearTemplate();
     return bankMovementsData;
@@ -131,6 +155,7 @@ function setAllDaysOnCurrentYearTemplate(){
 
 
 function setFutureDocumentsOnBankMovements(){
+
     tributarieDocumentsCategories.forEach((category) => {
         const documents = tributarieDocuments[category].filter(({contable,paid}) => contable && !paid);
         documents.forEach((document) => {
@@ -157,28 +182,9 @@ function setFutureDocumentsOnBankMovements(){
                 return
             }
             dayOnArray.lvlCodes.push(document);
-            // console.log('saldo',saldo);
-
-
-            // if(saldo === 0){
-            //     console.log('document',document);
-            // }
-
-            // if(dayOnArray && moment(printDate,'X').format('YYYY-MM-DD') == '2024-09-29'){
-            //     console.log('emitida',emitida);
-            //     console.log('dayOnArray_!@+_!@+_',dayOnArray);
-            //     console.log('dayOnArray.total',dayOnArray.total);
-            //     console.log('saldo',saldo);
-            //     console.log("dayOnArray",dayOnArray);
-            //     console.log('______________________________________________________')
-            //     console.log('______________________________________________________')
-            //     console.log('______________________________________________________')
-            // }
-
             dayOnArray.total += saldo;
         });
     });
 }
 
-// RENDER FUNCTIONS
 

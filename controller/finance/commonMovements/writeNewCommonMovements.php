@@ -4,17 +4,19 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
         $sessionManager = new SessionManager();
-        $businessData = $sessionManager->getAllSessionData();
+        
+        $businessName = $sessionManager->get('businessName');
+        $businessId = $sessionManager->get('businessId');
+        $businessAccount = $sessionManager->get('businessBankAccount');
+        
+
         if (empty($businessName) || empty($businessId) || empty($businessAccount)) {
             echo json_encode(['status' => 'error', 'message' => 'Invalid business data']);
             exit;
         }
-        $businessName = $businessData['businessName'];
-        $businessId = $businessData['businessId'];
-        $businessAccount = $businessData['businessBankAccount'];
-        $commonMovements = $data['commonMovements'];
 
         // check if data is null
+        $commonMovements = $data['commonMovements'];
 
 
         if (json_last_error() === JSON_ERROR_NONE) {
