@@ -9,18 +9,17 @@
 
         if(isset($data['bankAccountNumber'])){
             $bankAccountNumber = $data['bankAccountNumber'];
-            $excelManager = new ExcelManager($fileType,$bankAccountNumber);   
-                    echo json_encode($excelManager->readExcel());
-        exit;
-            echo json_encode(["2"]);
-            exit;         
+            $excelManager = new ExcelManager($fileType,$bankAccountNumber);
+            echo json_encode(["1"]);
+            exit;
+            
         }else{
-            $excelManager = new ExcelManager($fileType);
+            // $excelManager = new ExcelManager($fileType);
         }
-        // echo json_encode(["2"]);
-        // exit;
-        // echo json_encode($excelManager->readExcel());
-        // exit;
+        echo json_encode(["2"]);
+        exit;
+        echo json_encode($excelManager->readExcel());
+        exit;
         
         if(isset($excelManager->readExcel()['status'])){
             echo $excelManager->readExcel()['message'];

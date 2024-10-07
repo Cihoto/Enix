@@ -10,7 +10,7 @@ class SessionManager  {
     // public $businessBankAccount;
     // public $userId;
 
-    public $businessName,$businessId,$businessBankAccount,$userId,$superAdmin;
+    public $businessName,$businessId,$businessBankAccounts,$userId,$superAdmin;
 
 
     // constructor
@@ -57,12 +57,12 @@ class SessionManager  {
         return $this->businessId;
     }
 
-    public function setBusinessBankAccount($businessBankAccount) {
-        $this->businessBankAccount = $businessBankAccount;
+    public function setBusinessBankAccounts($businessBankAccounts) {
+        $this->businessBankAccounts = $businessBankAccounts;
     }
 
-    public function getBusinessBankAccount() {
-        return $this->businessBankAccount;
+    public function getBusinessBankAccounts() {
+        return $this->businessBankAccounts;
     }
 
     public function setUserId($userId) {
@@ -90,7 +90,7 @@ class SessionManager  {
 
         $this->set('businessName', $this->getBusinessName());
         $this->set('businessId', $this->getBusinessId());
-        $this->set('businessBankAccount', $this->getBusinessBankAccount());
+        $this->set('businessBankAccounts', $this->getBusinessBankAccounts());
         $this->set('userId', $this->getUserId());
         $this->set('superAdmin', $this->getSuperAdmin());
         

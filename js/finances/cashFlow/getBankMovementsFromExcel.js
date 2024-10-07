@@ -7,15 +7,52 @@ let bankExcelData = [];2
 
 // getAllMyDocuments
 async function readExcelFile(){
+    const bankAccountNumber = await getBankAccountNumber();
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
+    console.log('bankAccountNumber',bankAccountNumber);
     const file = await fetch('./controller/ExcelManager/readExcelFile.php', {
         method: 'POST',
         body: JSON.stringify({
             fileType: 'bankMovements',
+            bankAccountNumber : bankAccountNumber
         }),
     });
     const data = await file.json();
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
+    console.log('data',data);
     bankExcelData = data;
     return true;
+}
+
+async function getBankAccountNumber(){
+    const bankData = await fetch('./controller/Bank/getBankAccountNumber.php', {
+        method: 'POST'
+    });
+
+    const data = await bankData.json();
+    return data;
 }
 
 async function getBankAndTributarieDataFromExcel(){

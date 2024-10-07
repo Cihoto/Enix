@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $businessData = $sessionManager->getAllSessionData();
     $businessName = $businessData['businessName'];
     $businessId = $businessData['businessId'];
-    $businessAccount = $businessData['businessBankAccount'];
+    $businessAccount = $sessionManager->get('businessBankAccounts')[0]['account_number'];
 
 
 

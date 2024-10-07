@@ -5,9 +5,23 @@
 
     class ExcelManager extends sessionManager {
         private $fileType;
+        private $accountNumber;
 
-        public function __construct($fileType) {
+        public function __construct($fileType = null, $accountNumber = null) {
             $this->fileType = $fileType;
+            $this->accountNumber = $accountNumber;
+        }
+
+        public function setAccountNumber($accountNumber) {
+            if (!in_array($accountNumber, $this->businessBankAccounts)) {
+                throw new Exception("Account number not found in business bank accounts.");
+            }
+
+            $this->accountNumber = $accountNumber;
+        }
+
+        public function getAccountNumber() {
+            return $this->accountNumber;
         }
 
         public function readExcel() {
@@ -36,8 +50,6 @@
             } catch (\Exception $e) {
                 return $data;
             }
-           
-
             
             # read each cell of each row of each sheet
             foreach ($reader->getSheetIterator() as $sheetIndex=>$sheet) {
@@ -83,12 +95,11 @@
             }
         }
 
-
         public function getBankMovementFileName() {
             $businessId = $this->get('businessId');
-            $businessBankAccount = $this->get('businessBankAccount');
             $businessName = $this->get('businessName');
-            return "/$businessId$businessBankAccount"."_"."$businessName.xlsx";
+            $businessBankAccountNumber = $this->getAccountNumber();
+            return "/$businessId$businessBankAccountNumber"."_"."$businessName.xlsx";
         }
 
         public function getTributarieDocumentsFileName() {

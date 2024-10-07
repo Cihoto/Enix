@@ -20,42 +20,39 @@ class LoginManager{
         $user = new User($this->password, $this->email);
        
         if ( $user->checkUser()) {
-
-            $person = new Person(null, null,$user->getBusinessId(), $user->getId(), null, null);
+            $person = new Person(null, null,$user->getBusinessId(), $user->getId());
             $personData = $person->setPerson();
             // return $user->getBusinessId();
             // return $personData;
             if(!$personData){
                 return ['false' => 'no person found'];
             }
+
             // return "ASdasd";
-            $business = new Business($user->getBusinessId(), null, null, null, null);
+            $business = new Business($user->getBusinessId());
             $businessData = $business->setBusiness();
             if(!$businessData){
                 return false;
             }
 
-            $businessId = $business->getBusinessId();
-            $bankAccount = new BankAccount($businessId);
-
-            $bankAccountData = $bankAccount->getBankAccountData();
+            $bankAccountData = $business->getBankByBusinessId();
             if(!$bankAccountData){
                 return false;
             }
             // return $bankAccountData;
 
-            if(!$bankAccountData){
-                return false;
-            }
-
             $sessionManager = new sessionManager();
             $sessionManager->setUserId($user->getId());
             $sessionManager->setBusinessId($business->getBusinessRut());
             $sessionManager->setBusinessName($business->getBusinessName());
-            $sessionManager->setBusinessBankAccount($bankAccount->getBankAccountNumber());
+            $sessionManager->setBusinessBankAccounts($business->getBusinessBankAccounts());
             $sessionManager->setSuperAdmin($user->isSuperAdmin());
 
+
+
             $sessionManager->setSession(); 
+
+            // return $_SESSION ;
             $sessionManager->setLoginSession();
             
             return ["success"=>true, 'message' => 'Login successful!'];

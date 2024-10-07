@@ -14,7 +14,7 @@ class FileManager {
         $sessionData = $sessionManager->getAllSessionData();
         $businessId = $sessionData['businessId'];
         $businessName = $sessionData['businessName'];
-        $businessAccount = $sessionData['businessBankAccount'];
+        $businessAccount = $sessionData['businessBankAccounts'][0]['account_number'];
         
         $rootFolder = $this->filePath ;
         $filePath = $rootFolder. "/$businessId$businessAccount"."_"."$businessName.json";

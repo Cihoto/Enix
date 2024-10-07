@@ -45,5 +45,7 @@
         public function setBankName($bankName) {
             $this->bankName = $bankName;
         }
+
+
     }
 ?>

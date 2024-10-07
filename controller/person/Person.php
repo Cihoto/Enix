@@ -9,7 +9,12 @@
         private $rut;
         private $dv;
 
-        public function __construct($name, $lastName, $businessId, $userId, $rut, $dv) {
+        public function __construct($name = null,
+         $lastName = null,
+         $businessId = null,
+         $userId = null,
+         $rut = null,
+         $dv = null){
             $this->name = $name;
             $this->lastName = $lastName;
             $this->businessId = $businessId;

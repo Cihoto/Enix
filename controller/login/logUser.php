@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     // echo json_encode(["CODE"=>"code",$loginManager->login()]);
     // exit;
+    
     if ($loginManager->login()['success']) {
         echo json_encode(["success"=>true, 'message' => 'Login successful!']);
     } else {

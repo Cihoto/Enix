@@ -27,7 +27,7 @@
             $this->bankAccountId = $bankAccountId;
         }
 
-        public function getBankAccountNumber() {
+        public function getBankaccounts() {
             return $this->bankAccountNumber;
         }
 
@@ -67,5 +67,7 @@
             $conn = new bd();
             $conn->conectar();
         }
+
+
     }
 ?>
