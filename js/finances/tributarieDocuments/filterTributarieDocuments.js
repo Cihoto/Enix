@@ -352,7 +352,7 @@ function discountDocument(document) {
   }
   // tributarieDocuments[documentType].push(document);
 
-  tributarieDocumentsCategories.forEach((category) => {
+  tributarieDocumentsCategories.forEach((category) => { 
     console.log('category', category);
     console.log(folioDocumentDiscount);
     const documents = tributarieDocuments[category].filter(({ contable, paid }) => contable);

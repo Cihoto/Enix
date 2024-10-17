@@ -674,8 +674,15 @@ head {
                 flex-shrink: 0;
                 background: var(--Fondo, #E0DDE8);
 
+                .dateSelector{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 2px;
+                }
+
                 .monthPicker {
                     display: flex;
+                    justify-content: space-between;
                     cursor: pointer;
                     width: 125px;
                     height: 40px;
@@ -723,12 +730,83 @@ head {
                         }
 
                         p:hover {
-                            background: var(--Highlight-soft, rgba(222, 216, 241, 0.80));
+                            background: rgb(222 216 241);
+                        }
+                    }
+                }
+                .yearPicker {
+                    display: flex;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    width: 125px;
+                    height: 40px;
+                    align-items: center;
+                    padding: 4px 19.57px 4px 12px;
+                    gap: 16px;
+                    background: var(--white, #FFF);
+
+                    p {
+                        color: var(--Primary-text, var(--Gris-900, #373743));
+                        font-family: Nunito;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 16px;
+                        letter-spacing: 0.28px;
+                    }
+
+                    .years.active {
+                        display: flex;
+                        z-index: 1000000;
+                    }
+
+                    .years {
+                        display: none;
+                        position: absolute;
+                        flex-direction: column;
+                        /* margin-left: 0px;
+                        margin-top: 424px; */
+
+                        p {
+                            color: var(--Primary-text, var(--Gris-900, #373743));
+                            font-family: Nunito;
+                            font-size: 14px;
+                            font-style: normal;
+                            font-weight: 700;
+                            line-height: 16px;
+                            letter-spacing: 0.28px;
+                            padding: 8px 16px;
+                            width: 113px;
+                            background: var(--white, #FFF);
+                            transition: all .3s ease;
+
+                        }
+
+                        p:hover {
+                            background: rgb(222 216 241);
                         }
                     }
                 }
             }
         }
+    }
+}
+
+.paidDocsFilters{
+    display: flex;
+    gap: 3px;
+    padding: 16px;
+    button{
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 16px;
+    }
+    button:hover{
+        background-color: var(--Highlight-soft, rgb(206, 195, 243));
+    }
+    button.active{
+        background-color: var(--Highlight-soft, rgb(206, 195, 243));
     }
 }
 
@@ -1143,6 +1221,20 @@ head {
         border-bottom: 1px solid #E6E9EE;
     }
 }
+
+.tooltip{
+    background-color: red!important;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    width: 200px;
+    height: 20px;
+    padding: 4px;
+    color: white;
+    font-weight: 700;
+}
 .commTitleName{
     font-weight: 800;
 }
@@ -1150,6 +1242,103 @@ head {
     max-height: 520px;
     overflow-y: scroll;
 }
+
+.noContableTotal{
+    background-color: #E2E8F0!important;
+}
+
+.closeContainer{
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    
+
+    
+    #infoContent{
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0px 16px;
+        height: 20px;
+        background-color: none;
+        border : none;
+        cursor: pointer;
+        margin: 4px;
+    }
+}
+
+#infoCashFlowMessage{
+    font-size: 11px;
+    color: rgb(99, 99, 99);
+    font-weight: 800;
+}
+
+#resumeCashFlowTable{
+    border-collapse: collapse;
+
+    .thrCols{
+        tr{
+            td:nth-child(1),
+            th:nth-child(1){
+                width: 60%;
+                     
+            }
+            td:nth-child(2),
+            th:nth-child(2){
+                width: 20%;
+                
+            }
+            td:nth-child(3),
+            th:nth-child(3){
+                width: 20%;
+                
+            }
+        }
+    }
+
+    .twCols{
+        tr{
+            td:nth-child(1),
+            th:nth-child(1){
+                width: 75%;
+                     
+            }
+            td:nth-child(2),
+            th:nth-child(2){
+                width: 25%;
+                
+            }
+        }
+    }
+    
+    thead{
+        th{
+            padding: 8px 16px;
+            text-align: start;
+            background: var(--Gris-50, #E6E9EE);
+            position: sticky;
+            top: 32px;
+        }
+    
+    };
+
+    tbody{
+        td{
+            padding: 8px 16px;
+            text-align: start;
+            border-bottom: 1px solid #E6E9EE;
+        }
+    }
+}
+
+
 
 
 
@@ -1164,3 +1353,4 @@ head {
         line-height: normal;
     }
 }
+

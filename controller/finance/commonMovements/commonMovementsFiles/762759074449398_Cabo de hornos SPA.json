@@ -1,0 +1,19 @@
+[
+    {
+        "id": "OTQ0MTAtMTAtMjAyNDEwMDAwMDAwcGFnbyBjculkaXRv",
+        "dateFrom": [],
+        "dateTo": [],
+        "name": "pago cr\u00e9dito",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "10-10-2024",
+                "printDateTimestamp": "1728529200",
+                "total": 10000000,
+                "name": "pago cr\u00e9dito",
+                "desc": ""
+            }
+        ]
+    }
+]

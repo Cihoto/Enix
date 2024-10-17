@@ -38,6 +38,7 @@
             ];
 
             $filePath = $rootPath.$fileType;
+            // return $filePath;
             // $path = 'C:\Users\CoteL\Desktop\masivas finanzas Enix\INTEC.xlsx';
             
             # open the file
@@ -98,14 +99,15 @@
         public function getBankMovementFileName() {
             $businessId = $this->get('businessId');
             $businessName = $this->get('businessName');
-            $businessBankAccountNumber = $this->getAccountNumber();
-            return "/$businessId$businessBankAccountNumber"."_"."$businessName.xlsx";
+            $businessBankAccountNumberr = $this->getAccountNumber();
+            $businessBankAccountNumber = $this->get('businessBankAccounts')[0]['account_number'];
+            return "$businessId$businessBankAccountNumber"."_"."$businessName.xlsx";
         }
 
         public function getTributarieDocumentsFileName() {
             $businessId = $this->get('businessId');
             $businessName = $this->get('businessName');
-            return "/$businessId"."_"."$businessName.xlsx";
+            return "$businessId"."_"."$businessName.xlsx";
         }
         public function getModifiedMovementFileName(){
             $businessId = $this->get('businessId');

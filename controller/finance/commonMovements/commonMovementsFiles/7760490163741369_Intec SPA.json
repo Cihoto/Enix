@@ -1,194 +1,477 @@
 [
     {
-        "id": "Njg0MDUtMTAtMjAyNDEwMDAwMFBydWViYSBkZSBNb3ZpbWllbnRvIFVuaWNv",
-        "dateFrom": [],
-        "dateTo": [],
-        "name": "Prueba de Movimiento Unico",
-        "income": false,
+        "id": "OTAyMjMtMTAtMjAyNDEyMDAwMFRlc3QgUmVjdXJyZW50ZXMw",
+        "dateFrom": "2024-10-23",
+        "dateTo": "2025-12-23",
+        "name": "Test Recurrentes",
+        "income": true,
         "movements": [
             {
+                "index": 0,
+                "printDate": "23-10-2024",
+                "printDateTimestamp": "1729652400",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
                 "index": 1,
-                "printDate": "05-10-2024",
-                "printDateTimestamp": "1728097200",
-                "total": 100000,
-                "name": "Prueba de Movimiento Unico",
+                "printDate": "23-11-2024",
+                "printDateTimestamp": "1732330800",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "23-12-2024",
+                "printDateTimestamp": "1734922800",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "23-01-2025",
+                "printDateTimestamp": "1737601200",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "23-02-2025",
+                "printDateTimestamp": "1740279600",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "23-03-2025",
+                "printDateTimestamp": "1742698800",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "23-04-2025",
+                "printDateTimestamp": "1745380800",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "23-05-2025",
+                "printDateTimestamp": "1747972800",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "23-06-2025",
+                "printDateTimestamp": "1750651200",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "23-07-2025",
+                "printDateTimestamp": "1753243200",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "23-08-2025",
+                "printDateTimestamp": "1755921600",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "23-09-2025",
+                "printDateTimestamp": "1758596400",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "23-10-2025",
+                "printDateTimestamp": "1761188400",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "23-11-2025",
+                "printDateTimestamp": "1763866800",
+                "total": 120000,
+                "name": "Test Recurrentes",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "23-12-2025",
+                "printDateTimestamp": "1766458800",
+                "total": 120000,
+                "name": "Test Recurrentes",
                 "desc": ""
             }
         ]
     },
     {
-        "id": "NTAwNS0xMC0yMDI0MjUwMDAwUHJ1ZWJhIDIw",
-        "dateFrom": "2024-10-01T03:00:00.000Z",
-        "dateTo": "2026-06-01T04:00:00.000Z",
-        "name": "Prueba 2",
-        "income": false,
+        "id": "MTI5MDEtMTAtMjAyNDE5MDAwMHRlc3QgMiBjb21tb29uTW92ZW1lbnRzMA==",
+        "dateFrom": "01-10-2024",
+        "dateTo": "01-01-2027",
+        "name": "test 2 commoonMovements",
+        "income": true,
         "movements": [
             {
                 "index": 0,
-                "printDate": "05-10-2024",
-                "printDateTimestamp": "1728097200",
-                "total": 123123,
-                "name": "Prueba 2",
+                "printDate": "01-10-2024",
+                "printDateTimestamp": "1727751600",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 1,
-                "printDate": "05-11-2024",
-                "printDateTimestamp": "1730775600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-11-2024",
+                "printDateTimestamp": "1730430000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 2,
-                "printDate": "05-12-2024",
-                "printDateTimestamp": "1733367600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-12-2024",
+                "printDateTimestamp": "1733022000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 3,
-                "printDate": "05-01-2025",
-                "printDateTimestamp": "1736046000",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-01-2025",
+                "printDateTimestamp": "1735700400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 4,
-                "printDate": "05-02-2025",
-                "printDateTimestamp": "1738724400",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-02-2025",
+                "printDateTimestamp": "1738378800",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 5,
-                "printDate": "05-03-2025",
-                "printDateTimestamp": "1741143600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-03-2025",
+                "printDateTimestamp": "1740798000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 6,
-                "printDate": "05-04-2025",
-                "printDateTimestamp": "1743822000",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-04-2025",
+                "printDateTimestamp": "1743476400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 7,
-                "printDate": "05-05-2025",
-                "printDateTimestamp": "1746417600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-05-2025",
+                "printDateTimestamp": "1746072000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 8,
-                "printDate": "05-06-2025",
-                "printDateTimestamp": "1749096000",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-06-2025",
+                "printDateTimestamp": "1748750400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 9,
-                "printDate": "05-07-2025",
-                "printDateTimestamp": "1751688000",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-07-2025",
+                "printDateTimestamp": "1751342400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 10,
-                "printDate": "05-08-2025",
-                "printDateTimestamp": "1754366400",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-08-2025",
+                "printDateTimestamp": "1754020800",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 11,
-                "printDate": "05-09-2025",
-                "printDateTimestamp": "1757044800",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-09-2025",
+                "printDateTimestamp": "1756699200",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 12,
-                "printDate": "05-10-2025",
-                "printDateTimestamp": "1759633200",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-10-2025",
+                "printDateTimestamp": "1759287600",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 13,
-                "printDate": "05-11-2025",
-                "printDateTimestamp": "1762311600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-11-2025",
+                "printDateTimestamp": "1761966000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 14,
-                "printDate": "05-12-2025",
-                "printDateTimestamp": "1764903600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-12-2025",
+                "printDateTimestamp": "1764558000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 15,
-                "printDate": "05-01-2026",
-                "printDateTimestamp": "1767582000",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-01-2026",
+                "printDateTimestamp": "1767236400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 16,
-                "printDate": "05-02-2026",
-                "printDateTimestamp": "1770260400",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-02-2026",
+                "printDateTimestamp": "1769914800",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 17,
-                "printDate": "05-03-2026",
-                "printDateTimestamp": "1772679600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-03-2026",
+                "printDateTimestamp": "1772334000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 18,
-                "printDate": "05-04-2026",
-                "printDateTimestamp": "1775361600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-04-2026",
+                "printDateTimestamp": "1775012400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 19,
-                "printDate": "05-05-2026",
-                "printDateTimestamp": "1777953600",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-05-2026",
+                "printDateTimestamp": "1777608000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
                 "desc": ""
             },
             {
                 "index": 20,
-                "printDate": "05-06-2026",
-                "printDateTimestamp": "1780632000",
-                "total": 250000,
-                "name": "Prueba 2",
+                "printDate": "01-06-2026",
+                "printDateTimestamp": "1780286400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "01-07-2026",
+                "printDateTimestamp": "1782878400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "01-08-2026",
+                "printDateTimestamp": "1785556800",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "01-09-2026",
+                "printDateTimestamp": "1788235200",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "01-10-2026",
+                "printDateTimestamp": "1790823600",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "01-11-2026",
+                "printDateTimestamp": "1793502000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "01-12-2026",
+                "printDateTimestamp": "1796094000",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "01-01-2027",
+                "printDateTimestamp": "1798772400",
+                "total": 190000,
+                "name": "test 2 commoonMovements",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "ODQ4MDEtMTAtMjAyNDEyMzEyMzEzMmNzczA=",
+        "dateFrom": "01-10-2024",
+        "dateTo": "01-06-2025",
+        "name": "css",
+        "income": true,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "01-10-2024",
+                "printDateTimestamp": "1727751600",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "01-11-2024",
+                "printDateTimestamp": "1730430000",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "01-12-2024",
+                "printDateTimestamp": "1733022000",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "01-01-2025",
+                "printDateTimestamp": "1735700400",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "01-02-2025",
+                "printDateTimestamp": "1738378800",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "01-03-2025",
+                "printDateTimestamp": "1740798000",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "01-04-2025",
+                "printDateTimestamp": "1743476400",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "01-05-2025",
+                "printDateTimestamp": "1746072000",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "01-06-2025",
+                "printDateTimestamp": "1748750400",
+                "total": 123123132,
+                "name": "css",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "NTgzMjAtMTAtMjAyNDE5OTExYXNzZXRz",
+        "dateFrom": [],
+        "dateTo": [],
+        "name": "assets",
+        "income": true,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "20-10-2024",
+                "printDateTimestamp": "1729393200",
+                "total": 19911,
+                "name": "assets",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "OTExMi0xMS0yMDI0MTIxMjIySm9zZSBNaWd1ZWwgTG95b2xhIFZhcmdhcw==",
+        "dateFrom": "12-11-2024",
+        "dateTo": "12-11-2024",
+        "name": "Jose Miguel Loyola Vargas",
+        "income": true,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "12-11-2024",
+                "printDateTimestamp": "1731380400",
+                "total": 121222,
+                "name": "Jose Miguel Loyola Vargas",
                 "desc": ""
             }
         ]

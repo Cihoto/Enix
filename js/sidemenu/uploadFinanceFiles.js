@@ -1,5 +1,3 @@
-
-
 const uploadFinanceFilesSideMenu = document.getElementById('sidemenuenueun');
 
 function openUploadFinanceFiles() {

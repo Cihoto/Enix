@@ -6,12 +6,14 @@ const tfoot = table.getElementsByTagName("tfoot")[0];
 const allMyDatesTr = document.querySelectorAll('.allDates');
 let allReceptors = [];
 
+let allDaysInMonth = [];
 
-function renderMyHorizontalView(monthsToSearch){
 
+function renderMyHorizontalView(monthsToSearch,selectedYear){
     // set all dates on month in thead using moment.js
-    let allDaysOnCurrentMonth = getAllDaysOnMonth(monthsToSearch);
+    let allDaysOnCurrentMonth = getDaysOnSelectedMonth(monthsToSearch,selectedYear);
     console.log('allDaysOnCurrentMonth',allDaysOnCurrentMonth);
+    allDaysInMonth = allDaysOnCurrentMonth;
     createHorizontalTableHead(table,allDaysOnCurrentMonth);
 }
 
@@ -31,8 +33,10 @@ function createHorizontalTableHead(table,allDaysOnCurrentMonth){
         th.classList.add('dateHeader');
         // doty = DAY OF THE YEAR
         const dayOfYear = moment(date).dayOfYear();
+        const year = moment(date).year();
         th.dataset.date = dayOfYear
         th.setAttribute('doty',dayOfYear)
+        th.setAttribute('yr',year)
         // th.dataset.date = moment(date).format('X');
         th.innerHTML = moment(date).format('DD-MM-YYYY');
         tr.appendChild(th);

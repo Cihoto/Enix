@@ -6,6 +6,8 @@ const infoContent = document.getElementById('infoContent');
 const infoMenuTable = document.getElementById('resumeCashFlowTable');
 const infoMenuTableThead = document.getElementsByTagName('thead')[0];
 const infoMenuTableTbody = document.getElementsByTagName('tbody')[0]; 
+const infoMessage = document.getElementById('infoCashFlowMessage');
+const noContableTotals = document.querySelectorAll('.noContableTotal');
 // capture clicks on cashFlowtable
 
 cashFlowTable.addEventListener('click', (e) => {
@@ -27,54 +29,46 @@ cashFlowTable.addEventListener('click', (e) => {
     const isIncomeRow = target.closest('tr').classList.contains('--incomeRow');
     console.log('isIncomeRow',isIncomeRow);
     // find cellIndex On allDatesTr
-    const clickedDate = parseInt(allDatesTr[0].children[cellIndex].getAttribute('doty')) - 1;
-    console.log(clickedDate);
-
+    const clickedDate = parseInt(allDatesTr[0].children[cellIndex].getAttribute('doty'));
+    const clickedYear = parseInt(allDatesTr[0].children[cellIndex].getAttribute('yr'));
+    console.log('clickedDate',clickedDate);
     // get selectedRowData
     const selectedRowData = target.closest('tr');
-    console.log('selectedRowData',selectedRowData);
-
     const accCode = selectedRowData.getAttribute('lvlcode');
-
-    const data = getMovementsByCode(accCode, clickedDate);
-    console.log('RETURNED MOVEMENTS TO PRINT ON TABLE',data);
-
+    const data = getMovementsByCode(accCode, clickedDate,clickedYear);
     // remove all rows from table
     console.log('infoMenuTable',infoMenuTable.getElementsByTagName('tr'));
 
-    const tableTr = infoMenuTable.getElementsByTagName('tr');
-    // tableTr.forEach((tr) => {   
-    //     tr.remove(); 
-    // });
-        // get cursor position
-        const cursorPosition = {
-            x: e.clientX,
-            y: e.clientY
-        }
-        console.log(cursorPosition);
-    
 
-    // const theadTr = infoMenuTableThead.getElementsByTagName('tr');
-    // theadTr.forEach((tr) => {
-    //     tr.remove();
-    // });
-    // const tbodyTr = infoMenuTableTbody.getElementsByTagName('tr');
-    // tbodyTr.forEach((tr) => {
-    //     tr.remove();
-    // });
+    // get cursor position
+    const cursorPosition = {
+        x: e.clientX,
+        y: e.clientY
+    }
+    console.log(cursorPosition);
 
 
 
     // thead and tbody and remove all rows from table
     infoMenuTableThead.innerHTML = '';
     infoMenuTableTbody.innerHTML = '';
-    // infoMenuTableThead.remove();
-    // infoMenuTableTbody.remove();
 
+    infoMessage.style.display = 'none';
+
+
+
+    infoMenuTable.classList.remove('thrCols');
+    infoMenuTable.classList.remove('twCols');
 
     // return;
     if(accCode === 'projectedIncome' || accCode === 'projectedOutcome' || accCode === 'projectedOutdatedIncomeRow' || accCode === 'projectedOutdatedOutcomeRow'){
+
+        if(accCode === 'projectedIncome' || accCode === 'projectedOutcome'){
+            infoMessage.style.display = 'block';
+        }
         console.log('data.lvlCodes',data.lvlCodes);
+
+        infoMenuTable.classList.add('thrCols');
 
         // create thead with titles
         const theadTr = document.createElement('tr');
@@ -87,12 +81,14 @@ cashFlowTable.addEventListener('click', (e) => {
             const tr = document.createElement('tr');
             const {folio, proveedor, total} = movement;
             tr.innerHTML = `<td>${folio}</td>
-                            <td>${proveedor}<td>
+                            <td>${proveedor}</td>
                             <td>${getChileanCurrency(total)}</td>`;
             infoMenuTableTbody.append(tr);
         })
     }
     if(accCode === 'ingresos' || accCode === 'egresos' ){
+
+        infoMenuTable.classList.add('twCols');
 
         console.log(data.lvlCodes)
         // create thead with titles
@@ -114,17 +110,18 @@ cashFlowTable.addEventListener('click', (e) => {
         });
     }
     if(accCode === 'commonIncomeMovements' || accCode === 'commonOutcomeMovements'){
+        infoMenuTable.classList.add('twCols');
         // create thead with titles
         const theadTr = document.createElement('tr');
         theadTr.innerHTML = `
             <th>Nombre</th>
             <th>Total</th>`;
-
+            
         infoMenuTableThead.append(theadTr);
 
         data.lvlCodes.forEach((movement) => {
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${movement.nombre}</td>
+            tr.innerHTML = `<td>${movement.name}</td>
                             <td>${getChileanCurrency(movement.total)}</td>`;
             infoMenuTableTbody.appendChild(tr);
         })
@@ -161,30 +158,39 @@ function cashFlowDocumentsDisplay(event){
 }
 
 infoContent.addEventListener('click', (e) => {
-    console.log('click');
+    // console.log('click');
     infoMenu.style.display = 'none';
-})
+});
 
 
-function getMovementsByCode(accCode, clickedDate){
+
+
+
+function getMovementsByCode(accCode, clickedDate,clickedYear){
+    const dateToSearch = moment(`${clickedYear}-${clickedDate}`,'YYYY-DDD').format('YYYY-MM-DD');
+    const indexToFind = allMyDates.findIndex((date) => {
+       return moment(dateToSearch).isSame(date);
+    });
+
     const outdatedAccount = accCode === 'projectedOutdatedIncomeRow' ? 'projectedIncome' : 'projectedOutcome';
+   
 
     if(accCode === 'projectedOutdatedIncomeRow' || accCode === 'projectedOutdatedOutcomeRow'){
-        console.log('bankMovementsData[outdatedAccount][clickedDate]',bankMovementsData[outdatedAccount][clickedDate]);
-        const dataOnDay = bankMovementsData[outdatedAccount][clickedDate];
+        // console.log('bankMovementsData[outdatedAccount][clickedDate]',bankMovementsData[outdatedAccount][clickedDate]);
+        const dataOnDay = bankMovementsData[outdatedAccount][indexToFind];
         const outdatedMovements = dataOnDay.lvlCodes.filter((movement) => {
             const {vencida_por} = movement;
             return vencida_por > 0;
         });
-        console.log('dataOnDay',dataOnDay);
-        console.log('outdatedMovements',outdatedMovements);
+        // console.log('dataOnDay',dataOnDay);
+        // console.log('outdatedMovements',outdatedMovements);
 
         return {lvlCodes: outdatedMovements};
     }else if(accCode === 'projectedIncome' || accCode === 'projectedOutcome'){
-        console.log('bankMovementsData[outdatedAccount][clickedDate]',bankMovementsData[outdatedAccount][clickedDate]);
-        const dataOnDay = bankMovementsData[accCode][clickedDate];
+        // console.log('bankMovementsData[outdatedAccount][clickedDate]',bankMovementsData[outdatedAccount][clickedDate]);
+        const dataOnDay = bankMovementsData[accCode][indexToFind];
         const projectedMovement = dataOnDay.lvlCodes.filter((movement) => {
-            console.log('movement____________',movement);
+            // console.log('movement____________',movement);
             const {vencida_por} = movement;
             return vencida_por <= 0;
         });
@@ -192,15 +198,79 @@ function getMovementsByCode(accCode, clickedDate){
         return {lvlCodes: projectedMovement};
     }else if(accCode === 'ingresos' || accCode === 'egresos'){
 
-        console.log('bankMovementsData[accCode][clickedDate]',bankMovementsData[accCode][clickedDate]);
+        // console.log('bankMovementsData[accCode][clickedDate]',bankMovementsData[accCode][clickedDate]);
 
-        return bankMovementsData[accCode][clickedDate];
+        return bankMovementsData[accCode][indexToFind];
     }
 
     if(accCode === 'commonIncomeMovements' || accCode === 'commonOutcomeMovements'){
-        const commonMovementsData = bankMovementsData[accCode][clickedDate];
-        console.log('commonMovementsData',commonMovementsData);
+        const commonMovementsData = bankMovementsData[accCode][indexToFind];
+        // console.log('commonMovementsData',commonMovementsData);
 
         return commonMovementsData;
     }
 }
+
+
+
+
+document.addEventListener('mouseover', (e) => {
+    if (e.target.classList.contains('noContableTotal')) {
+        // create a tooltip
+        const tooltip = document.createElement('div');
+        tooltip.classList.add('tooltip');
+        tooltip.textContent = 'Total no contable';
+        tooltip.style.opacity = 0;
+        document.body.appendChild(tooltip);
+
+        // get the position of target element
+        const rect = e.target.getBoundingClientRect();
+        tooltip.style.top = `${rect.bottom + window.scrollY - 60}px`;
+        tooltip.style.left = `${rect.left + window.scrollX - 43}px`;
+
+        // detect if menu is out of screen
+        if (tooltip.getBoundingClientRect().bottom > window.innerHeight) {
+            tooltip.style.top = `${rect.top - tooltip.getBoundingClientRect().height + window.scrollY}px`;
+        }
+        if (tooltip.getBoundingClientRect().right > window.innerWidth) {
+            tooltip.style.left = `${rect.right - tooltip.getBoundingClientRect().width + window.scrollX}px`;
+        }
+        if (tooltip.getBoundingClientRect().left < 0) {
+            tooltip.style.left = `${rect.left + window.scrollX}px`;
+        }
+        if (tooltip.getBoundingClientRect().top < 0) {
+            tooltip.style.top = `${rect.bottom + window.scrollY}px`;
+        }
+
+        // animate tooltip
+        
+        tooltip.style.transition = 'opacity 0.3s ease-in-out';
+        requestAnimationFrame(() => {
+            tooltip.style.opacity = 1;
+        });
+
+        
+
+    }
+});
+
+document.addEventListener('mouseout', (e) => {
+    if (e.target.classList.contains('noContableTotal')) {
+        // remove the tooltip
+        const tooltip = document.querySelectorAll('.tooltip');
+        if (tooltip) {
+            tooltip.forEach((tip) => {
+                tip.style.transition = 'opacity 0.3s ease-in-out';
+                tip.style.opacity = 0;
+                setTimeout(() => {
+                    tip.remove();
+                }, 300);
+            });
+            // tooltip.style.transition = 'opacity 0.3s ease-in-out';
+            // tooltip.style.opacity = 0;
+            // setTimeout(() => {
+            //     tooltip.remove();
+            // }, 300);
+        }
+    }
+});

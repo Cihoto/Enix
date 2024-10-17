@@ -40,15 +40,18 @@
         
     </head>
     <div id="infoMenu" style="display: none; 
-    position: absolute; 
-    background: 
-    white; border: 1px solid #ccc;
-    padding: 10px;
-     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-     overflow-y: scroll;
-     max-width:800px;
-     height:200px;">
-        <button id="infoContent">Cerrar</button>
+        position: absolute; 
+        background: 
+        white; border: 1px solid #ccc;
+        padding: 0px 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        overflow-y: scroll;
+        max-width:550px;
+        height:350px;">
+        <div class="closeContainer">
+            <p id="infoCashFlowMessage">*Estos movimientos no se han generado en tu cartola, son proyectados en base a las facturas emitidas y recibidas</p>
+            <button id="infoContent">Cerrar</button>
+        </div>
         <table id="resumeCashFlowTable">
             <thead>
             </thead>
@@ -64,13 +67,10 @@
         <nav id="sidebar">
             <div class="navHead">
                 <h3>Finanzas</h3>
-                <?php print_r($_SESSION);?>
                 <?php
                     if($isSuperAdmin){
-                        echo '<select id="busSelector">Administrar</select>';
-                        echo '<button id="bussinessManager">Crear empresa</button>';
-                    }else{
-                        echo 'Usuario Normal';
+                        echo '<select id="busSelector"></select>';
+                        echo '<button style="display:none;" id="bussinessManager">Crear empresa</button>';
                     }
                 ?>
             </div>
@@ -212,7 +212,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="body-header">
+                    <!-- <div class="body-header">
                         <button class="btnRangeSelector active">
                             <p>Diario</p>
                         </button>
@@ -222,38 +222,60 @@
                         <button class="btnRangeSelector">
                             <p>Mensual</p>
                         </button>
-                    </div>
+                    </div> -->
                     <div class="body-content">
                         <div class="monthSelector">
-                            <div class="monthPicker">
-                                <p id="monthName">Mes en curso</p>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1"/>
-                                </svg>
-                                <div class="months">
-                                    <p class="mnth" monthNumber="1">Enero</p>
-                                    <p class="mnth" monthNumber="2">Febrero</p>
-                                    <p class="mnth" monthNumber="3">Marzo</p>
-                                    <p class="mnth" monthNumber="4">Abril</p>
-                                    <p class="mnth" monthNumber="5">Mayo</p>
-                                    <p class="mnth" monthNumber="6">Junio</p>
-                                    <p class="mnth" monthNumber="7">Julio</p>
-                                    <p class="mnth" monthNumber="8">Agosto</p>
-                                    <p class="mnth" monthNumber="9">Septiembre</p>
-                                    <p class="mnth" monthNumber="10">Octubre</p>
-                                    <p class="mnth" monthNumber="11">Noviembre</p>
-                                    <p class="mnth" monthNumber="12">Diciembre</p>
+
+                            <div id="datePicker" class="dateSelector">
+                                <div class="yearPicker">
+                                    <p id="yearName"><?php  echo date("Y")?></p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1"/>
+                                    </svg>
+                                    <div class="years">
+                                        <?php
+                                            $currentYear = date("Y");
+                                            $endYear = $currentYear + 6;
+                                            for ($year = $currentYear - 1 ; $year <= $endYear; $year++) {
+                                                echo '<p class="yr" yearNumber="' . $year . '">' . $year . '</p>';
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="monthPicker">
+                                    <p id="monthName">Mes en curso</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1"/>
+                                    </svg>
+                                    <div class="months">
+                                        <p class="mnth" monthNumber="1">Enero</p>
+                                        <p class="mnth" monthNumber="2">Febrero</p>
+                                        <p class="mnth" monthNumber="3">Marzo</p>
+                                        <p class="mnth" monthNumber="4">Abril</p>
+                                        <p class="mnth" monthNumber="5">Mayo</p>
+                                        <p class="mnth" monthNumber="6">Junio</p>
+                                        <p class="mnth" monthNumber="7">Julio</p>
+                                        <p class="mnth" monthNumber="8">Agosto</p>
+                                        <p class="mnth" monthNumber="9">Septiembre</p>
+                                        <p class="mnth" monthNumber="10">Octubre</p>
+                                        <p class="mnth" monthNumber="11">Noviembre</p>
+                                        <p class="mnth" monthNumber="12">Diciembre</p>
+                                    </div>
                                 </div>
                             </div>
 
-                            <input type="text" id="filterByFolio" placeholder="Busca por folio">
-                            <div class="paidDocsFilters">
-                                <button id="showIssued">Mostrar Emitidas</button>
-                                <button id="showReceived">Mostrar Recibidas</button>
-                                <button id="showAll">Mostrar Todas</button>
+                            <!-- <div clas="modified">
+
+                            </div> -->
+
+                            <input type="text" id="filterByFolio" placeholder="Buscar por folio">
+                            <div id="utilityBtns" class="paidDocsFilters">
+                                <button class="utilityButtons" id="showIssued">Mostrar Emitidas</button>
+                                <button class="utilityButtons" id="showReceived">Mostrar Recibidas</button>
+                                <button class="utilityButtons" id="showAll">Mostrar Todas</button>
                             </div>
                             <!-- <button onClick="cardFilterAllPaymentsDocuments()">asdasd</button> -->
-                            <button id="hidePaidDocuments">
+                            <button id="hidePaidDocuments" style="display: none;">
                                 Mostrar documentos pagados
                             </button>
                         </div>
@@ -302,6 +324,9 @@
     <!-- UTILS -->
     <script src="./js/finances/utils/sortDocumentsByDate.js"></script>
     <script src="./js/finances/utils/calculatePaidPercentage.js"></script>
+    <!-- EXCEL -->
+    <script src="./js/finances/Excel/getDocumentsFromExcel.js"></script>
+
     <!-- CASHFLOW -->
     <script src="./js/finances/cashFlow/getBankMovementsFromExcel.js"></script>
     <script src="./js/finances/cashFlow/renderChashFlowTable.js"></script>
@@ -315,7 +340,7 @@
     <script src="./js/finances/tributarieDocuments/paidDocuments/paidDocumentHandlers.js"> </script>
     <!-- COMMON MOVEMENTS -->
     <script src="./js/finances/commonMovements/renderCommonMovementsTable.js"></script>
-    
+    <script src="./js/finances/commonMovements/getCommonMovements.js"></script>
     <script src="./js/finances/commonMovements/commonMovementsHandlers.js"></script>
     <script src="./js/finances/commonMovements/commonMovementsListHandlers.js"></script>
 
@@ -343,40 +368,64 @@
             window.location.href = './business.php';
         });
 
-
-
-
-
-
-
         const cardsContainer = document.getElementById('cardsContainer');
         
         const businessSelector = document.getElementById('busSelector');
         document.addEventListener('DOMContentLoaded', async () => {
             console.log("SUPER ADMIN", <?php echo $isSuperAdmin;?>);
-            const superAdmin = <?php echo $isSuperAdmin ?>;
-            if(!superAdmin){
+            const ssuperAdmin = <?php echo $isSuperAdmin ?>;
+
+            const superAdminResponse = await fetch('./controller/session/checkSuperAdmin.php', {
+                method: 'POST'
+            });
+            const superAdminData = await superAdminResponse.json();
+            console.log("SUPER ADMIN DATA", superAdminData);
+            if(!superAdminData.superAdmin){
                 return;
             }
+
+            const currentBusIdData = getCurrentBussinessId()
+            // businessSelector.value = currentBusIdData.businessId;
+
             const response = await fetch('./controller/Business/getAllBusinesses.php',{
                 method: 'POST'
             });
             const data = await response.json();
-            console.log("ALL BUSINESS DATA");
-            console.log("ALL BUSINESS DATA");
-            console.log("ALL BUSINESS DATA", data);
-            console.log("ALL BUSINESS DATA");
-            console.log("ALL BUSINESS DATA");
             data.forEach(business => {
-                const option = new Option(business.name, business.id);
+                const algo = business.id === currentBusIdData;
+                const option = new Option(business.name, business.id, false, parseInt(business.id) == parseInt(currentBusIdData.businessId));
                 businessSelector.appendChild(option);
             });
         });
 
+        async function getCurrentBussinessId(){
+            const currentBusId = await fetch('./controller/session/getCurrentBusiness.php',
+                {
+                    method: 'POST'
+                }
+            );
+            const currentBusIdData = await currentBusId.json();
+            console.log("CURRENT BUSINESS ID", currentBusIdData);
+            return currentBusIdData;
+        }
+
         businessSelector.addEventListener('change', async () => {
             const businessId = businessSelector.value;
-            const response = await fetch(`./controller/business/getBusinessData.php?businessId=${businessId}`);
+            const response = await fetch(`./controller/business/getBusinessData.php`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({businessId:businessId})
+            });
             const data = await response.json();
+            if(data.error){
+                const currentBussId = getCurrentBussinessId();
+                console.log(currentBussId);
+                businessSelector.value = currentBussId.businessId;
+                window.location.reload();
+                return;
+            }
             console.log(data);
         });
 

@@ -7,14 +7,13 @@
 // })
 
 
-async function getAllCommonMovements(data) {
+async function getAllCommonMovements() {
     const commonMovements = await fetch('controller/finance/commonMovements/getCommonMovementsData.php',
         {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            }
         }
     );
     const response = await commonMovements.json();

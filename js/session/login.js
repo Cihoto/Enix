@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 // Handle successful login
                 console.log('Login successful');
-            window.location.href = './index.php';
+                window.location.href = './index.php';
             } else {
                 // Handle login failure
                 console.log('Login failed');

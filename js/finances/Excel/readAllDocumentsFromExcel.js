@@ -78,25 +78,18 @@ const DOCUMENT_TYPES = [
 
 let businessDocuments = [];
 let modifiedDocuments = [];
-
 let tributarieExcelData = [];
 
 async function readTributarieDocumentsFromExcel(){
-    const excelResponse = await fetch('./controller/ExcelManager/readExcelFile.php', {
-        method: 'POST',
-        body: JSON.stringify({
-            fileType: 'tributarie',
-        }),
-    });
-    const excelData = await excelResponse.json(); 
 
-    tributarieExcelData = excelData;
-    console.log('tributarieExcelData',tributarieExcelData);
+    const tributarieExcelMovements = await readExcelFile_tributarieDocuments();
 
+    tributarieExcelData = tributarieExcelMovements;
 
     // getModifiedDocuments
     const modifiedDocumentsR = await fetch('./controller/finance/commonMovements/readModifiedDocuments.php');
     const modifiedDocumentsData = await modifiedDocumentsR.json();
+    console.log('modifiedDocumentsData',modifiedDocumentsData);
     if(modifiedDocumentsData.data){
         const {data} = modifiedDocumentsData;
         modifiedDocuments = data;
@@ -111,6 +104,7 @@ async function readTributarieDocumentsFromExcel(){
     }
 
     await readAllDocumentsFromExcel();
+    setFutureDocumentsOnBankMovements();
     return true;
 }
 
@@ -189,9 +183,15 @@ async function readAllDocumentsFromExcel() {
     }).filter((doc) => doc !== false);
 
     // mark as paid === true modified documents from allMyDocuments match by id
-    allMyDocuments.forEach((document) => {
-        const modifiedDocument = modifiedDocuments.find((modDoc) => modDoc.id === document.id);
-        if(modifiedDocument){
+    // allMyDocuments.forEach((document) => {
+    //     const modifiedDocument = modifiedDocuments.find((modDoc) => modDoc.id === document.id);
+    //     if(modifiedDocument){
+    //         document.paid = true;
+    //     }
+    // });
+    modifiedDocuments.forEach((modDoc) => {
+        const document = allMyDocuments.find((doc) => doc.id === modDoc.id);
+        if(document){
             document.paid = true;
         }
     });
@@ -203,5 +203,35 @@ async function readAllDocumentsFromExcel() {
     classifyTributarieDocuments(allMyDocuments,true);
 };
 
+function setFutureDocumentsOnBankMovements(){
 
+    tributarieDocumentsCategories.forEach((category) => {
+        const documents = tributarieDocuments[category].filter(({contable,paid}) => contable && !paid);
+        documents.forEach((document) => {
 
+            const {emitida,fecha_expiracion,saldo} = document;
+            const egresoIngreso = emitida ? 'projectedIncome' : 'projectedOutcome';
+            // console.log('egresoIngreso',egresoIngreso);
+            const formatDate = moment(fecha_expiracion,"DD-MM-YYYY").format('X'); 
+            // const printDateTimeStamp = moment(formatDate,'YYYY-MM-DD').format('X');
+             
+            let printDate = formatDate;
+            //get difference in days between today and expiration date
+            const diffOnDaysFromEmission = moment().diff(moment(formatDate,"X"), 'days');
+            if(diffOnDaysFromEmission > 0){
+                // get amount of weeks between today and expiration date
+                const weeks = Math.ceil(diffOnDaysFromEmission / 7);
+                // add weeks to expiration date
+                printDate = moment(formatDate,"X").add(weeks * 7, 'days').format('X');
+            }
+            const dayOnArray = bankMovementsData[egresoIngreso].find(({timestamp}) => {
+                return moment(timestamp,'X').format('YYYY-MM-DD') == moment(printDate,'X').format('YYYY-MM-DD');
+            });
+            if(!dayOnArray){
+                return
+            }
+            dayOnArray.lvlCodes.push(document);
+            dayOnArray.total += saldo;
+        });
+    });
+}

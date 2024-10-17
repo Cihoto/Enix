@@ -5,6 +5,10 @@
 
 function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
 
+    if(!activePage.payments){
+        return;
+    }
+
     // rmeove all Existing Rows
     $('#bankMovementsTableHorizontal tr').remove();
     

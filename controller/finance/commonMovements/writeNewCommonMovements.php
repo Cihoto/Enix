@@ -7,10 +7,11 @@
         
         $businessName = $sessionManager->get('businessName');
         $businessId = $sessionManager->get('businessId');
-        $businessAccount = $sessionManager->get('businessBankAccount');
+        $businessAccount = $sessionManager->get('businessBankAccounts');
+        $businessAccountNumber = $businessAccount[0]['account_number'];
         
 
-        if (empty($businessName) || empty($businessId) || empty($businessAccount)) {
+        if (empty($businessName) || empty($businessId) || empty($businessAccountNumber)) {
             echo json_encode(['status' => 'error', 'message' => 'Invalid business data']);
             exit;
         }
@@ -24,7 +25,7 @@
             if (!is_dir($directory)) {
                 mkdir($directory, 0777, true);
             }
-            $filePath = $directory . "/$businessId$businessAccount"."_"."$businessName.json";
+            $filePath = $directory . "/$businessId$businessAccountNumber"."_"."$businessName.json";
             if (!file_exists($filePath)) {
                 file_put_contents($filePath, '');
             }

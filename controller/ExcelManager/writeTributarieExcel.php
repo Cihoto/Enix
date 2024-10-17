@@ -1,6 +1,9 @@
 <?php
+
+    // echo json_encode(["method"=>isset($_FILES['file'])]);
+    // exit;
     
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
         require_once '../ExcelManager/ExcelManager.php';
 
         $file = $_FILES['file'];
@@ -20,7 +23,7 @@
                 $excelManager = new ExcelManager('tributarie');
                 $fileName = $excelManager->getTributarieDocumentsFileName();
                 // $fileNameNew = uniqid('', true).".".$fileActualExt;
-                $fileDestination = $_SERVER['DOCUMENT_ROOT'].'/BS_FILES/tributarie_documents'.$fileName;
+                $fileDestination = $_SERVER['DOCUMENT_ROOT'].'/BS_FILES/tributarie_documents/'.$fileName;
                 move_uploaded_file($fileTmpName, $fileDestination);
                 echo json_encode(["success"=>true, 'message' => 'File uploaded successfully!']); ;
 

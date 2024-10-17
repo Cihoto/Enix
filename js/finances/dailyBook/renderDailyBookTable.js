@@ -6,31 +6,33 @@ let libroDiario;
 let allDailyMovesWithBankMovement = [];
 let bhe = [];
 
-const monthsToSearch = moment().format('M');
-console.log('monthsToSearch',monthsToSearch);
-getAllDaysOnMonth([monthsToSearch]);
-console.log('allMyDates',allMyDates);
-// const currentDates = 
-const today = moment().format('YYYY-MM-DD');
-const currentMonthNumber = moment().format('M');
-// get month by month number
-const previousMonth = moment().month(currentMonthNumber - 2).startOf('month').format('YYYY-MM-DD');
-// get first day of the month by month number
-const firstDayOfMonth = moment().month(currentMonthNumber - 1).startOf('month').format('YYYY-MM-DD');
-const currentYear = moment().format('YYYY');
-console.log('firstDayOfMonth',firstDayOfMonth);
-console.log('previousMonth',previousMonth);
+// const monthsToSearch = moment().format('M');
+// console.log('monthsToSearch',monthsToSearch);
+// getAllDaysOnMonth([monthsToSearch]);
+// console.log('allMyDates',allMyDates);
+// // const currentDates = 
+// const today = moment().format('YYYY-MM-DD');
+// const currentMonthNumber = moment().format('M');
+// // get month by month number
+// const previousMonth = moment().month(currentMonthNumber - 2).startOf('month').format('YYYY-MM-DD');
+// // get first day of the month by month number
+// const firstDayOfMonth = moment().month(currentMonthNumber - 1).startOf('month').format('YYYY-MM-DD');
+// const currentYear = moment().format('YYYY');
+// console.log('firstDayOfMonth',firstDayOfMonth);
+// console.log('previousMonth',previousMonth);
 
-const busData = {
-    'busId': 76275907,
-    'bankAcocuntId': 4449398
-}
+// const busData = {
+//     'busId': 76275907,
+//     'bankAcocuntId': 4449398
+// }
 
 window.addEventListener("load", async (event) => {
+    prepareDataForFinance();
+    // getBankMovements()
+    return 
 
 
-    getBankAndTributarieDataFromExcel()
-    // getBankAndTributarieDataFromExcel();
+    getBankAndTributarieDataFromExcel();
     return 
     // FACTUARAS Y MOVIMIENTOS
     readAllDocumentsFromExcel();
@@ -2040,7 +2042,7 @@ const setTotalIncomeResumeRow = () => {
     tr.classList.add('resumeRowIncome', '--headerRow');
     let firstTd = `<td id="resumeRowIncome">Total ingresos</td>`;
     let contentTd = ''
-    for (let i = 1; i <= allMyDates.length; i++) {
+    for (let i = 1; i <= allDaysInMonth.length; i++) {
         contentTd += '<td></td>';
     }
     tr.innerHTML = `${firstTd}${contentTd}`;
@@ -2143,7 +2145,7 @@ const setEmptyRow = () => {
     tr.classList.add('emptyRow', '--headerRow');
     let firstTd = `<td></td>`;
     let contentTd = '';
-    for (let i = 1; i <= allMyDates.length; i++) {
+    for (let i = 1; i <= allDaysInMonth.length; i++) {
         contentTd += '<td></td>';
     }
     tr.innerHTML = `${firstTd}${contentTd}`;
@@ -2178,7 +2180,7 @@ const setOutcomeResumeRow = () => {
     tr.classList.add('resumeRowOutCome', '--headerRow');
     let firstTd = `<td id="resumeRowOutcome">Total egresos</td>`;
     let contentTd = ''
-    for (let i = 1; i <= allMyDates.length; i++) {
+    for (let i = 1; i <= allDaysInMonth.length; i++) {
         contentTd += '<td></td>';
     }
     tr.innerHTML = `${firstTd}${contentTd}`;
@@ -2189,9 +2191,9 @@ const setTotalRow = () => {
     const tr = document.createElement('tr');
     tr.classList.add('resumeRowTotal', '--headerRow');
     let firstTd = `<td id="resumeTotalRow">Total</td>`;
-    console.log('allMydates', allMyDates);
+    // console.log('allMydates', allMyDates);
     let contentTd = ''
-    for (let i = 1; i <= allMyDates.length; i++) {
+    for (let i = 1; i <= allDaysInMonth.length; i++) {
         contentTd += '<td></td>';
     }
     tr.innerHTML = `${firstTd}${contentTd}`;
@@ -2356,7 +2358,7 @@ const setDailyBalanceRow = () => {
     tr.classList.add('resumeRowBalance', '--headerRow');
     let firstTd = `<td>Saldo</td>`;
     let contentTd = ''
-    for (let i = 1; i <= allMyDates.length; i++) {
+    for (let i = 1; i <= allDaysInMonth.length; i++) {
         contentTd += '<td></td>';
     }
     tr.innerHTML = `${firstTd}${contentTd}`;

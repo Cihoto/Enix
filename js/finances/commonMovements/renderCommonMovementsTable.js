@@ -2,6 +2,10 @@ const commonMovementsTable = document.getElementById('financesCardTableContainer
 
 function renderCommonMovementsTable(sortFunction, hidePaid = true) {
 
+    if(!activePage.common){
+        return;
+    }
+
     // rmeove all Existing Rows
     $('#bankMovementsTableHorizontal tr').remove();
 
@@ -38,8 +42,8 @@ function renderCommonMovementsTable(sortFunction, hidePaid = true) {
         mainTr.classList.add('globalCommonRow');
         mainTr.innerHTML=`<td>${name}</td>
                           <td>${income ? 'Ingreso' : 'Egreso'}</td>
-                          <td>${moment(dateFrom).format('DD-MM-YYYY')}</td> 
-                          <td>${moment(dateTo).format('DD-MM-YYYY')}</td>
+                          <td>${dateFrom}</td> 
+                          <td>${dateTo}</td>
                           <td>${getChileanCurrency(movements[0].total)}</td>`;
         tbody.appendChild(mainTr);
         // movements.forEach((movement) => {

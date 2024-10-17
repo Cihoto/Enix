@@ -2,6 +2,10 @@
 
 function renderChargesTable(sortFunction, hidePaid = true) {
 
+    if(!activePage.charges){
+        return;
+    }
+
     // rmeove all Existing Rows
     $('#bankMovementsTableHorizontal tr').remove();
 

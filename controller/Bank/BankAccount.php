@@ -6,6 +6,7 @@
         private $bankAccountNumber;
         private $bankAccountbusinessId;
         private $bankId;
+        private $initialBalance;
 
         public function __construct($bankAccountbusinessId) {
             $this->bankAccountbusinessId = $bankAccountbusinessId;
@@ -43,6 +44,14 @@
             $this->bankId = $bankId;
         }
 
+        public function getInitialBalance() {
+            return $this->initialBalance;
+        }
+
+        public function setInitialBalance($initialBalance) {
+            $this->initialBalance = $initialBalance;
+        }
+
 
         public function getBankAccountData() {
             $conn = new bd();
@@ -57,6 +66,7 @@
                 $this->setBankAccountId($row['id']);
                 $this->setBankAccountNumber($row['account_number']);
                 $this->setBankId($row['bank_id']);
+                $this->setInitialBalance($row['initial_balance']);
                 return true;
             }else{
                 return false;

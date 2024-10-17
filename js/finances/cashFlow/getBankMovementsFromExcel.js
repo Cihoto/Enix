@@ -1,50 +1,11 @@
 // Objetive: get bank movements from excel file and return it as an array of objects
 let bankMovementsData = [];
 let tributarieDocumentsCategories = ['charges','payments'];
-
 // BANKMOVEMENTS EXCEL FILE
-let bankExcelData = [];2
+let bankExcelData = [];
 
 // getAllMyDocuments
-async function readExcelFile(){
-    const bankAccountNumber = await getBankAccountNumber();
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    console.log('bankAccountNumber',bankAccountNumber);
-    const file = await fetch('./controller/ExcelManager/readExcelFile.php', {
-        method: 'POST',
-        body: JSON.stringify({
-            fileType: 'bankMovements',
-            bankAccountNumber : bankAccountNumber
-        }),
-    });
-    const data = await file.json();
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    console.log('data',data);
-    bankExcelData = data;
-    return true;
-}
+
 
 async function getBankAccountNumber(){
     const bankData = await fetch('./controller/Bank/getBankAccountNumber.php', {
@@ -56,18 +17,38 @@ async function getBankAccountNumber(){
 }
 
 async function getBankAndTributarieDataFromExcel(){
-    await Promise.all([readExcelFile(),readTributarieDocumentsFromExcel()]);
+    await Promise.all([readExcelFile_bankMovements(),readTributarieDocumentsFromExcel()]);
     getBankMovementsFromExcel();
 }
 
-async function getBankMovementsFromExcel(){
-    // const bankMovements = await readExcelFile(); 
 
-    // search all days in year
+async function prepareDataForFinance(){
+    console.log("1")
     getAllDaysOnMonth([1,2,3,4,5,6,7,8,9,10,11,12]);
     bankMovementsData = setAllDaysOnYear();
-    console.log('bankMovementsData',bankMovementsData);
+    console.log("2");
+    const tributarieDocuments = await readTributarieDocumentsFromExcel();
+    
+    const bankMovements = await getBankMovements();
 
+    const commonMovements = getCommonMovements();
+
+
+
+}
+
+
+async function getBankMovements(){
+    console.log("3")
+    // bankExcelData = data;
+    const bankMovementsFromExcel = await readExcelFile_bankMovements();
+    console.log('bankMovementsFromExcel',bankMovementsFromExcel);
+    bankExcelData = bankMovementsFromExcel;
+    setBankMovementsInBankMovementsData();
+}
+
+async function setBankMovementsInBankMovementsData(){
+    console.log("4")
     const bankData = bankExcelData.bodyRows.map((movement) => {
         if(movement.cuenta.trim() == ""){
             return ;
@@ -85,73 +66,72 @@ async function getBankMovementsFromExcel(){
             abono: abono,
         }
     }).filter((movement) => movement != undefined);
+
+    console.log("5")
     
     // loop through all bank movements and add them to the corresponding day
-    console.log(bankMovementsData['egresos']);
-
+    let counter = 1;
     bankData.forEach((movement) => {
+        
+
         const { fechaTimeStamp, monto, abono } = movement;
+
         const egresoIngreso = abono ? 'ingresos' : 'egresos';
-        const dayOnArray = bankMovementsData[egresoIngreso].find(({timestamp}) => {
+
+        const bankMovementDateIndex = bankMovementsData[egresoIngreso].findIndex(({ timestamp }) => {
             return timestamp == fechaTimeStamp;
         });
-        if(!dayOnArray){
-            return
+
+        if (bankMovementDateIndex == -1) {
+            console.log("No matching day found for movement");
+            return;
         }
-        dayOnArray.lvlCodes.push(movement);
-        dayOnArray.total += monto;
+
+        bankMovementsData[egresoIngreso][bankMovementDateIndex].lvlCodes.push(movement);
+        bankMovementsData[egresoIngreso][bankMovementDateIndex].total += monto;
+
+            // Merge all movements on the same day
+
+
+            // console.log("6")
+            // console.log('movement',movement);
+            // const { fechaTimeStamp, monto, abono } = movement;
+            // const egresoIngreso = abono ? 'ingresos' : 'egresos';
+            // const dayOnArray = bankMovementsData[egresoIngreso].find(({ timestamp }) => {
+            //     return timestamp == fechaTimeStamp;
+            // });
+
+            // if (!dayOnArray) {
+            //     console.log("No matching day found for movement");
+            //     return;
+            // }
+
+            // // Merge all movements on the same day
+            // dayOnArray.lvlCodes.push(movement);
+            // dayOnArray.total += monto;
+            // counter++;
     });
+    console.log('bankMovementsData_!@+_!@+_!@+_',bankMovementsData.ingresos[652]);
+    console.log('bankMovementsData_!@+_!@+_!@+_',bankMovementsData.egresos[652]);
+
+    // console.log('bankMovementsData',bankMovementsData);
 
     console.log('tributarieDocumentsCategories',tributarieDocumentsCategories); 
-
     // Get and Set all tributarie documents on future movements
-
     console.log('tributarieDocuments',tributarieDocuments);
 
-    setFutureDocumentsOnBankMovements();
+    // setFutureDocumentsOnBankMovements();
 
-    // data for INTEC business
-    const data = {
-        businessName: 'INTEC',
-        businessId: 77604901,
-        businessAccount: 63741369
-    }
-
-    const commonMovsResponse = await getAllCommonMovements(data);
-
-    COMMON_MOVEMENTS = commonMovsResponse.data;
-    // const commonMovements = [];
-    const commonMovements = commonMovsResponse.data;
-    console.log('commonMovements',commonMovements);
-
-
-    commonMovements.forEach((movements) => {
-        const {movements : commonMovements, income: income, id:id } = movements;
-        commonMovements.forEach((movement) => {
-            const { printDateTimestamp, total,index} = movement;
-            if(printDateTimestamp <= moment().format('X')){
-                return
-            }
-            const egresoIngreso = income ? 'commonIncomeMovements' : 'commonOutcomeMovements';
-            const dayOnArray = bankMovementsData[egresoIngreso].find(({timestamp}) => {
-                return timestamp == printDateTimestamp;
-            });
-    
-            if(!dayOnArray){
-                return
-            }
-            const commonMov = {
-                id: `${id}_${index}`,
-                income: income,
-                ...movement,
-            }
-            dayOnArray.lvlCodes.push(commonMov);
-            dayOnArray.total += parseInt(total);
-        });
-    });
-
+    // // data for INTEC business
+    // const data = {
+    //     businessName: 'INTEC',
+    //     businessId: 77604901,
+    //     businessAccount: 63741369
+    // }
 
 }
+
+
 
 function setAllDaysOnYear (){
     const bankMovementsData = setAllDaysOnCurrentYearTemplate();
@@ -189,39 +169,4 @@ function setAllDaysOnCurrentYearTemplate(){
     });
     return movementsByDate;
 }
-
-
-function setFutureDocumentsOnBankMovements(){
-
-    tributarieDocumentsCategories.forEach((category) => {
-        const documents = tributarieDocuments[category].filter(({contable,paid}) => contable && !paid);
-        documents.forEach((document) => {
-
-            const {emitida,fecha_expiracion,saldo} = document;
-            const egresoIngreso = emitida ? 'projectedIncome' : 'projectedOutcome';
-            // console.log('egresoIngreso',egresoIngreso);
-            const formatDate = moment(fecha_expiracion,"DD-MM-YYYY").format('X'); 
-            // const printDateTimeStamp = moment(formatDate,'YYYY-MM-DD').format('X');
-             
-            let printDate = formatDate;
-            //get difference in days between today and expiration date
-            const diffOnDaysFromEmission = moment().diff(moment(formatDate,"X"), 'days');
-            if(diffOnDaysFromEmission > 0){
-                // get amount of weeks between today and expiration date
-                const weeks = Math.ceil(diffOnDaysFromEmission / 7);
-                // add weeks to expiration date
-                printDate = moment(formatDate,"X").add(weeks * 7, 'days').format('X');
-            }
-            const dayOnArray = bankMovementsData[egresoIngreso].find(({timestamp}) => {
-                return moment(timestamp,'X').format('YYYY-MM-DD') == moment(printDate,'X').format('YYYY-MM-DD');
-            });
-            if(!dayOnArray){
-                return
-            }
-            dayOnArray.lvlCodes.push(document);
-            dayOnArray.total += saldo;
-        });
-    });
-}
-
 

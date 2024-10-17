@@ -33,9 +33,6 @@ commonEventsForm.addEventListener('submit', async (e) => {
         const dateTo = moment(entries.dateTo, 'YYYY-MM');
         const diff = dateTo.diff(dateFrom, 'months');
 
-        
-         
-        
         if (diff < 0) {
             throw new Error('La fecha de inicio no puede ser mayor a la fecha final');
         }
@@ -47,11 +44,12 @@ commonEventsForm.addEventListener('submit', async (e) => {
         }
         if (diff > 0) {
             const printDate = moment(`${entries.dayNumber}-${moment(entries.dateFrom, 'YYYY-MM').add(0, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
+            const dateToFormatted = moment(`${entries.dayNumber}-${moment(entries.dateTo, 'YYYY-MM').add(0, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
             const uniqueId = btoa(`${new Date().getMilliseconds()}${printDate}${entries.movementTotal}${entries.name}${0}`);
             const commonObject = {
                 id: uniqueId,
-                dateFrom: dateFrom,
-                dateTo: dateTo,
+                dateFrom: printDate,
+                dateTo: dateToFormatted,
                 name: entries.name,
                 income: income,
                 movements:[]
@@ -81,15 +79,6 @@ commonEventsForm.addEventListener('submit', async (e) => {
         const printDate = moment(entries.dateFrom, 'YYYY-MM-DD').format('DD-MM-YYYY');
         console.log('printDate',printDate);
         console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
         const uniqueId = btoa(`${new Date().getMilliseconds()}${printDate}${entries.movementTotal}${entries.name}`);
         // commonMovements.push({
         //     id: uniqueId,
@@ -102,8 +91,8 @@ commonEventsForm.addEventListener('submit', async (e) => {
 
         const commonObject = {
             id: uniqueId,
-            dateFrom: dateFrom,
-            dateTo: dateTo,
+            dateFrom: printDate,
+            dateTo: printDate,
             name : entries.name,
             income: income,
             movements:[
@@ -117,7 +106,6 @@ commonEventsForm.addEventListener('submit', async (e) => {
                 }
             ]
         }
-
         commonMovements.push(commonObject);
     }
 
@@ -167,6 +155,7 @@ typeSelector.addEventListener('change', (e) => {
         // dateTo.style.display = 'none';
         return;
     }
+
     if (e.target.value == 2) {
         daySelector.closest('.form-group').style.display = 'flex';
         daySelector.required = true;
@@ -182,11 +171,6 @@ typeSelector.addEventListener('change', (e) => {
         dateTo.closest('.form-group').style.display = 'flex';
 
         // dateTo.style.display = 'flex';
-
-
-
-        
-       
         limitselectableDays(true);
     }
 

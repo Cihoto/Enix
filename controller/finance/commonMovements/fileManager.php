@@ -33,7 +33,7 @@ class FileManager {
 
         // check if data is null
         if (empty($commonMovements)) {
-            return json_encode(['status' => 'error', 'message' => 'No data to save','path'=>$filePath,"rootFolder"=>$rootFolder]);
+            return ['status' => 'error', 'message' => 'No data to save','path'=>$filePath,"rootFolder"=>$rootFolder,"data"=>[]];
         }
         
         return  ['status' => 'success', 'message' => 'Data fetched successfully', "data" => $commonMovements];
@@ -45,7 +45,7 @@ class FileManager {
         $businessName = $sessionManager->get('businessName');
 
 
-        return [$businessId,$businessName];
+        // return [$businessId,$businessName];
         
         $rootFolder = $this->filePath ;
         $filePath = $rootFolder. "/MOD_$businessId"."_"."$businessName.json";

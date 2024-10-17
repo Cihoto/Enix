@@ -9,25 +9,12 @@
 
         if(isset($data['bankAccountNumber'])){
             $bankAccountNumber = $data['bankAccountNumber'];
-            $excelManager = new ExcelManager($fileType,$bankAccountNumber);   
-                    echo json_encode($excelManager->readExcel());
-        exit;
-            echo json_encode(["2"]);
-            exit;         
+            $excelManager = new ExcelManager($fileType,$bankAccountNumber);         
         }else{
             $excelManager = new ExcelManager($fileType);
         }
-        // echo json_encode(["2"]);
-        // exit;
-        // echo json_encode($excelManager->readExcel());
-        // exit;
-        
-        if(isset($excelManager->readExcel()['status'])){
-            echo $excelManager->readExcel()['message'];
-        }
-        // print data
-        echo json_encode($excelManager->readExcel());
+        echo json_encode(["success"=>true,"data"=>$excelManager->readExcel()]);
     }else{
-        echo json_encode(['error' => 'Método no permitido']);
+        echo json_encode(['success' =>false,"message" => 'Método no permitido']);
     }
 ?>

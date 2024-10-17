@@ -15,7 +15,7 @@
 
         <form class="fileForm" id="uploadBankMovements" method="post" enctype="multipart/form-data" style="margin-bottom: 12px;">
             <p class="dropperText">Selecciona Excel Bancario</p>
-            <input type="file" name="fileToUpload" id="fileToUpload" accept=".xlsx">
+            <input type="file" name="bankFile" id="bankFile" accept=".xlsx">
             <input class="sbmt" type="submit" value="Subir excel Bancario" name="submit">
         </form>
 
@@ -23,7 +23,7 @@
         
         <form class="fileForm" id="uploadTributarieExcel" method="post" enctype="multipart/form-data">
             <p class="dropperText">Selecciona Excel Tributario</p>
-            <input type="file" name="fileToUpload" id="fileToUpload" accept=".xlsx">
+            <input type="file" name="tributarieFile" id="tributarieFile" accept=".xlsx">
             <input class="sbmt" type="submit" value="Subir excel tributario" name="submit">
         </form>
     </div>
@@ -101,7 +101,7 @@
         e.preventDefault();
         var formData = new FormData();
         formData.append('fileType', 'bankMovements');
-        formData.append('file', document.getElementById('fileToUpload').files[0]);
+        formData.append('file', document.getElementById('bankFile').files[0]);
         fetch('./controller/ExcelManager/writeBankExcel.php', {
             method: 'POST',
             body: formData
@@ -109,6 +109,12 @@
         .then(response => response.json())
         .then(data => {
             console.log(data);
+
+
+
+            const excelData = asd;
+
+
             window.location.reload();
         })
         .catch(error => {
@@ -119,8 +125,9 @@
     document.getElementById('uploadTributarieExcel').addEventListener('submit', function(e){
         e.preventDefault();
         var formData = new FormData();
+
         formData.append('fileType', 'tributarie');
-        formData.append('file', document.getElementById('fileToUpload').files[0]);
+        formData.append('file', document.getElementById('tributarieFile').files[0]);
         fetch('./controller/ExcelManager/writeTributarieExcel.php', {
             method: 'POST',
             body: formData

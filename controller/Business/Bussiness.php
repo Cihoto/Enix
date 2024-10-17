@@ -87,26 +87,11 @@ class Business {
             return false;
         }
         $row = mysqli_fetch_assoc($result);
-
-        // return $row;
-
-        // $businessBankAccounts = $this->getBusinessBankAccounts();
-
         $this->setBusinessId($row['id']);
         $this->setBusinessRut($row['rut']);
         $this->setBusinessDv($row['dv']);
         $this->setBusinessName($row['name']);
-        $this->setBusinessBankAccountId($row['bank_account_id']);
-
         return true;
-
-        // return [
-        //     "businessId" => $this->getBusinessId(),
-        //     "businessRut" => $this->getBusinessRut(),
-        //     "businessDv" => $this->getBusinessDv(),
-        //     "businessName" => $this->getBusinessName(),
-        //     "businessBankAccountId" => $this->getBusinessBankAccountId()
-        // ];
     }
     
     public function getAllBusinesses(){
@@ -126,7 +111,7 @@ class Business {
     public function getBankByBusinessId() {
         $conn = new bd();
         $conn->conectar();
-        $query = "SELECT ba.account_number, bat.name, i.name as bank FROM business_has_bank_account bhba 
+        $query = "SELECT ba.account_number, bat.name, i.name as bank, ba.id as bank_account_id,ba.initial_balance FROM business_has_bank_account bhba 
             INNER JOIN bank_account ba on ba.id = bhba.bank_account_id
             INNER JOIN bank_account_type bat on bat.id = ba.account_type_id 
             INNER JOIN institutions i on i.id = ba.bank_id 

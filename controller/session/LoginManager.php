@@ -43,6 +43,7 @@ class LoginManager{
 
             $sessionManager = new sessionManager();
             $sessionManager->setUserId($user->getId());
+            $sessionManager->setBdId($business->getBusinessId());
             $sessionManager->setBusinessId($business->getBusinessRut());
             $sessionManager->setBusinessName($business->getBusinessName());
             $sessionManager->setBusinessBankAccounts($business->getBusinessBankAccounts());
