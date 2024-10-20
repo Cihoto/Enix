@@ -37,6 +37,7 @@ async function renderMyChasFlowTable(pickedMonth,selectedYear) {
 
     console.log("allmydates,",allMyDates);
 
+    const hoyIndex = allMyDates.findIndex((myDate) => myDate == moment().format('YYYY-MM-DD'));
     const totalDailyBalance = allDaysOnYear.map((date, index) => {
         // console.log(bankMovementsData.ingresos[index]);
         // console.log('indewx',index);
@@ -48,7 +49,7 @@ async function renderMyChasFlowTable(pickedMonth,selectedYear) {
         const totalProjectedIncome = bankMovementsData.projectedIncome[indexOnAllMydates].total;
         const totalProjectedOutcome = bankMovementsData.projectedOutcome[indexOnAllMydates].total;
         let totalProjected = 0;
-        if(moment(date, 'YYYY-MM-DD').dayOfYear() > moment().dayOfYear()){
+        if(moment(date, 'YYYY-MM-DD').dayOfYear() >= moment().dayOfYear()){
             totalProjected = totalProjectedIncome - totalProjectedOutcome
         }
 
@@ -214,6 +215,13 @@ async function renderMyChasFlowTable(pickedMonth,selectedYear) {
 
             const totalIncome = bankMovementsData.ingresos[indexOnAllMydates].total;
             const totalOutcome = bankMovementsData.egresos[indexOnAllMydates].total;
+            let projectedIncome = 0;
+            let projectedOutcome = 0;
+            
+            if(todayIndex == index){
+                projectedIncome = bankMovementsData.projectedIncome[indexOnAllMydates].total;
+                projectedOutcome = bankMovementsData.projectedOutcome[indexOnAllMydates].total;
+            }
 
             // PUT VALUES ON TABLE
             const doty = getDateHeaderIndex(index,selectedYear);
@@ -223,10 +231,6 @@ async function renderMyChasFlowTable(pickedMonth,selectedYear) {
             }
             // INCOME
             console.log(ingresosTr.children[doty]);
-            console.log(ingresosTr.children[doty]);
-            console.log(ingresosTr.children[doty]);
-            console.log(ingresosTr.children[doty]);
-            console.log(ingresosTr.children[doty]);
             // INCOME   
             ingresosTr.children[doty].innerHTML = getChileanCurrency(totalIncome);
             incomeRow.children[doty].innerHTML = getChileanCurrency(totalIncome);
@@ -234,10 +238,10 @@ async function renderMyChasFlowTable(pickedMonth,selectedYear) {
             egresosTr.children[doty].innerHTML = getChileanCurrency(totalOutcome);
             outcomeRow.children[doty].innerHTML = getChileanCurrency(totalOutcome);
             // activate or deactivate projected income row
-            projectedIncomeRow.children[doty].innerHTML = getChileanCurrency(0);
+            projectedIncomeRow.children[doty].innerHTML = getChileanCurrency(projectedIncome);
             projectedOutdatedIncomeRow.children[doty].innerHTML = getChileanCurrency(0);
             commonIncomeMovements.children[doty].innerHTML = getChileanCurrency(0);
-            projectedOutcomeRow.children[doty].innerHTML = getChileanCurrency(0);
+            projectedOutcomeRow.children[doty].innerHTML = getChileanCurrency(projectedOutcome);
             projectedOutdatedOutcomeRow.children[doty].innerHTML = getChileanCurrency(0);
             commonOutcomeMovements.children[doty].innerHTML = getChileanCurrency(0);
 
@@ -255,7 +259,7 @@ async function renderMyChasFlowTable(pickedMonth,selectedYear) {
             // skip one loop
             continue;
         }
-        console.log('POST 3123123123',index);
+        // console.log('POST 3123123123',index); 
         const totals = {
             income:{
                 total:0,
@@ -270,15 +274,26 @@ async function renderMyChasFlowTable(pickedMonth,selectedYear) {
                 common: 0,
             }
         }
-
+        console.log(index)
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
+        console.log(`+++++++++++++++++++++++++++++++++++++++++++++++++++ ${index} +++++++++++++++++++++++++++++++++++++++++++++++++++`)
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++" ,bankMovementsData.projectedIncome[index])
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
         bankMovementsData.projectedIncome[index].lvlCodes.forEach((lvlCode) => {
             const { vencida_por, saldo } = lvlCode;
+            if(lvlCode.folio == 264 || lvlCode.folio == 277){
+                console.log('lvlCode|_|_|_|_|_|_|_|_|_|_|_|_|_|_||_|_|_|_|_|_|_|_|_|||_||_||_',lvlCode);
+                console.log('lvlCode|_|_|_|_|_|_|_|_|_|_|_|_|_|_||_|_|_|_|_|_|_|_|_|||_||_||_',lvlCode);
+                console.log('lvlCode|_|_|_|_|_|_|_|_|_|_|_|_|_|_||_|_|_|_|_|_|_|_|_|||_||_||_',lvlCode);
+                console.log('lvlCode|_|_|_|_|_|_|_|_|_|_|_|_|_|_||_|_|_|_|_|_|_|_|_|||_||_||_',lvlCode);
+            }
             if(index != todayIndex){
                 totals.income.total += saldo;
             }
             if (vencida_por <= 0) {
                 totals.income.projected += saldo;
             } else {
+
                 totals.income.outdated += saldo;
             }
         });
