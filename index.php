@@ -462,12 +462,13 @@
         });
 
         async function closeSession(){
-            const dataSession = await fetch('./closeSession.php');
-
+            const dataSession = await fetch('./controller/session/closeSession.php');
             const data = await dataSession.json();
-            
-            console.log(data);
-            console.log(data);
+
+            if(data.success){
+                window.location.reload();
+            }
+
             console.log(data);
         }
 

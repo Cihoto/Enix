@@ -109,6 +109,10 @@ class SessionManager  {
         return $this->set('loggedin', true);
     }
 
+    public function closeSession() {
+        session_destroy();
+    }   
+
 
 }
 
