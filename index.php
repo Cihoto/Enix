@@ -1,12 +1,13 @@
-<?php 
-    require_once('./controller/session/sessionManager.php');
-    $sessionManager = new sessionManager();
-    if(!isset($_SESSION['loggedin'])){
-        $sessionManager->destroy();
-        header('Location: ./login.php');
-        exit();
-    }
-    $isSuperAdmin = $_SESSION['superAdmin'];
+<?php
+require_once('./controller/session/sessionManager.php');
+require_once('./cacheBuster.php');
+$sessionManager = new sessionManager();
+if (!isset($_SESSION['loggedin'])) {
+    $sessionManager->destroy();
+    header('Location: ./login.php');
+    exit();
+}
+$isSuperAdmin = $_SESSION['superAdmin'];
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +27,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.2.6/dist/sweetalert2.all.min.js" integrity="sha256-Ry2q7Rf2s2TWPC2ddAg7eLmm7Am6S52743VTZRx9ENw=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/finance.css">
+    <link rel="stylesheet" href="./assets/css/finance.css?v=<?php echo getFileTime($_SERVER['DOCUMENT_ROOT'] . '/assets/css/finance.css');?>">
     <!-- DORPZONE -->
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
@@ -36,8 +37,9 @@
 </head>
 
 <body>
+
     <head>
-        
+
     </head>
     <div id="infoMenu" style="display: none; 
         position: absolute; 
@@ -68,14 +70,14 @@
             <div class="navHead">
                 <h3>Finanzas</h3>
                 <?php
-                    if($isSuperAdmin){
-                        echo '<select id="busSelector"></select>';
-                        echo '<button style="display:none;" id="bussinessManager">Crear empresa</button>';
-                    }
+                if ($isSuperAdmin) {
+                    echo '<select id="busSelector"></select>';
+                    echo '<button style="display:none;" id="bussinessManager">Crear empresa</button>';
+                }
                 ?>
             </div>
             <!-- <button id="login">Iniciar sesión</button>-->
-            <button id="logout">Cerrar sesión</button> 
+            <button id="logout">Cerrar sesión</button>
         </nav>
         <div id="main">
             <div class="main-header">
@@ -228,24 +230,24 @@
 
                             <div id="datePicker" class="dateSelector">
                                 <div class="yearPicker">
-                                    <p id="yearName"><?php  echo date("Y")?></p>
+                                    <p id="yearName"><?php echo date("Y") ?></p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1" />
                                     </svg>
                                     <div class="years">
                                         <?php
-                                            $currentYear = date("Y");
-                                            $endYear = $currentYear + 6;
-                                            for ($year = $currentYear - 1 ; $year <= $endYear; $year++) {
-                                                echo '<p class="yr" yearNumber="' . $year . '">' . $year . '</p>';
-                                            }
+                                        $currentYear = date("Y");
+                                        $endYear = $currentYear + 6;
+                                        for ($year = $currentYear - 1; $year <= $endYear; $year++) {
+                                            echo '<p class="yr" yearNumber="' . $year . '">' . $year . '</p>';
+                                        }
                                         ?>
                                     </div>
                                 </div>
                                 <div class="monthPicker">
                                     <p id="monthName">Mes en curso</p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1" />
                                     </svg>
                                     <div class="months">
                                         <p class="mnth" monthNumber="1">Enero</p>
@@ -279,7 +281,7 @@
                                 Mostrar documentos pagados
                             </button>
                         </div>
-                        <section id="financeTableContainer" class="horizontalTableContainer" >
+                        <section id="financeTableContainer" class="horizontalTableContainer">
                             <table id='bankMovementsTableHorizontal' class="">
                                 <thead>
                                 </thead>
@@ -299,69 +301,68 @@
 
     <p id="matches"></p>
     <!-- SIDEMENUS -->
-    <?php require_once('./includes/sidemenu/commonMovements.php')?>
-    <script src="./js/sidemenu/commonMovements.js"></script>
-    <?php require_once('./includes/sidemenu/uploadFinanceFiles.php')?>
-    <script src="./js/sidemenu/uploadFinanceFiles.js"></script>
-    <?php require_once('./includes/sidemenu/commonMovementsList.php')?>
-    <script src="./js/finances/commonMovements/renderCommonMovementsListTable.js"></script>
-    <script src="./js/sidemenu/commonMovementsList.js"></script>
+    <?php require_once('./includes/sidemenu/commonMovements.php') ?>
+    <script src="./js/sidemenu/commonMovements.js?v=<?php echo time();?>"></script>
+    <?php require_once('./includes/sidemenu/uploadFinanceFiles.php') ?>
+    <script src="./js/sidemenu/uploadFinanceFiles.js?v=<?php echo time();?>"></script>
+    <?php require_once('./includes/sidemenu/commonMovementsList.php') ?>
+    <script src="./js/finances/commonMovements/renderCommonMovementsListTable.js?v=<?php echo time();?>"></script>
+    <script src="./js/sidemenu/commonMovementsList.js?v=<?php echo time();?>"></script>
     <!-- CARDS -->
-    <script src="./js/finances/dailyBook/cards/cashFlow.js"> </script>
-    <script src="./js/finances/dailyBook/cards/payments.js"></script>
-    <script src="./js/finances/dailyBook/cards/charges.js"></script>
-    <script src="./js/finances/dailyBook/cards/cardsHandlers.js"></script>
+    <script src="./js/finances/dailyBook/cards/cashFlow.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/dailyBook/cards/payments.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/dailyBook/cards/charges.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/dailyBook/cards/cardsHandlers.js?v=<?php echo time();?>"></script>
     <!-- DAILY BOOK -->
-    <script src="./js/finances/utils/getallDaysInMonth.js"></script>
-    <script src="./js/finances/bankResume/horizontalView.js"></script>
-    <script src='./js/finances/dailyBook/renderDailyBookTable.js'></script>
-    <script src="./js/finances/dailyBook/menuController.js"> </script>
-    <script src="./js/finances/dailyBook/dailyBookTable.js"> </script>
-    <script src="./js/finances/utils/getChileanCurrency.js"> </script>
-    <script src="./js/finances/utils/dayOfTheYear.js"> </script>
-    <script src="./js/finances/dailyBook/pendingPayments.js"> </script>
-    <script src="./js/finances/dailyBook/pendingCharges.js"> </script>
+    <script src="./js/finances/utils/getallDaysInMonth.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/bankResume/horizontalView.js?v=<?php echo time();?>"></script>
+    <script src='./js/finances/dailyBook/renderDailyBookTable.js?v=<?php echo time();?>'></script>
+    <script src="./js/finances/dailyBook/menuController.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/dailyBook/dailyBookTable.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/utils/getChileanCurrency.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/utils/dayOfTheYear.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/dailyBook/pendingPayments.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/dailyBook/pendingCharges.js?v=<?php echo time();?>"> </script>
     <!-- UTILS -->
-    <script src="./js/finances/utils/sortDocumentsByDate.js"></script>
-    <script src="./js/finances/utils/calculatePaidPercentage.js"></script>
+    <script src="./js/finances/utils/sortDocumentsByDate.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/utils/calculatePaidPercentage.js?v=<?php echo time();?>"></script>
     <!-- EXCEL -->
-    <script src="./js/finances/Excel/getDocumentsFromExcel.js"></script>
+    <script src="./js/finances/Excel/getDocumentsFromExcel.js?v=<?php echo time();?>"></script>
 
     <!-- CASHFLOW -->
-    <script src="./js/finances/cashFlow/getBankMovementsFromExcel.js"></script>
-    <script src="./js/finances/cashFlow/renderChashFlowTable.js"></script>
-    <script src="./js/finances/cashFlow/cashFlowHandlers.js"></script>
+    <script src="./js/finances/cashFlow/getBankMovementsFromExcel.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/cashFlow/renderChashFlowTable.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/cashFlow/cashFlowHandlers.js?v=<?php echo time();?>"></script>
     <!-- TRIBUTARIE DOCUMENTS -->
-    <script src="./js/finances/tributarieDocuments/filterTributarieDocuments.js"></script>
-    <script src="./js/finances/tributarieDocuments/renderPaymentsTable.js"> </script>
-    <script src="./js/finances/tributarieDocuments/renderChargeTable.js"> </script>
-    <script src="./js/finances/tributarieDocuments/filterDocumentsFromAPI.js"> </script>
-    <script src="./js/finances/tributarieDocuments/paidDocuments/renderPaidDocuments.js"> </script>
-    <script src="./js/finances/tributarieDocuments/paidDocuments/paidDocumentHandlers.js"> </script>
+    <script src="./js/finances/tributarieDocuments/filterTributarieDocuments.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/tributarieDocuments/renderPaymentsTable.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/tributarieDocuments/renderChargeTable.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/tributarieDocuments/filterDocumentsFromAPI.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/tributarieDocuments/paidDocuments/renderPaidDocuments.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/tributarieDocuments/paidDocuments/paidDocumentHandlers.js?v=<?php echo time();?>"> </script>
     <!-- COMMON MOVEMENTS -->
-    <script src="./js/finances/commonMovements/renderCommonMovementsTable.js"></script>
-    <script src="./js/finances/commonMovements/getCommonMovements.js"></script>
-    <script src="./js/finances/commonMovements/commonMovementsHandlers.js"></script>
-    <script src="./js/finances/commonMovements/commonMovementsListHandlers.js"></script>
+    <script src="./js/finances/commonMovements/renderCommonMovementsTable.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/commonMovements/getCommonMovements.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/commonMovements/commonMovementsHandlers.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/commonMovements/commonMovementsListHandlers.js?v=<?php echo time();?>"></script>
 
     <!-- CARGA MANUAL -->
-    <script src="./js/finances/Excel/readAllDocumentsFromExcel.js"></script>
+    <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time();?>"></script>
     <!-- API CALLS -->
-    <script src="./js/finances/API/getBankMovements.js"></script>
-    <script src="./js/finances/API/getMatchesMovements.js"></script>
-    <script src="./js/finances/API/getDailyBookMovements.js"></script>
-    <script src="./js/finances/API/getAllTributarieDocuments.js"></script>
-    <script src="./js/finances/API/getAllMyDocuments.js"></script>
+    <script src="./js/finances/API/getBankMovements.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/API/getMatchesMovements.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/API/getDailyBookMovements.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/API/getAllTributarieDocuments.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/API/getAllMyDocuments.js?v=<?php echo time();?>"></script>
 
     <!-- handlers -->
-    <script src="./js/finances/tributarieDocuments/tributrarieTableHandlers.js"> </script>
+    <script src="./js/finances/tributarieDocuments/tributrarieTableHandlers.js?v=<?php echo time();?>"> </script>
 
     <!-- SIDEMENU HANLDERS -->
-    <!-- finances/API/getTributarieDocuments.js -->
-    <script src="./js/finances/API/commonMovements/getAllCommonMovements.js"></script>
+    <!-- finances/API/getTributarieDocuments.js?v=<?php echo time();?> -->
+    <script src="./js/finances/API/commonMovements/getAllCommonMovements.js?v=<?php echo time();?>"></script>
 
     <script>
-
         const createBusinessButton = document.getElementById('bussinessManager');
 
         createBusinessButton.addEventListener('click', () => {
@@ -369,10 +370,10 @@
         });
 
         const cardsContainer = document.getElementById('cardsContainer');
-        
+
         const businessSelector = document.getElementById('busSelector');
         document.addEventListener('DOMContentLoaded', async () => {
-            console.log("SUPER ADMIN", <?php echo $isSuperAdmin;?>);
+            console.log("SUPER ADMIN", <?php echo $isSuperAdmin; ?>);
             const ssuperAdmin = <?php echo $isSuperAdmin ?>;
 
             const superAdminResponse = await fetch('./controller/session/checkSuperAdmin.php', {
@@ -380,14 +381,14 @@
             });
             const superAdminData = await superAdminResponse.json();
             console.log("SUPER ADMIN DATA", superAdminData);
-            if(!superAdminData.superAdmin){
+            if (!superAdminData.superAdmin) {
                 return;
             }
 
             const currentBusIdData = getCurrentBussinessId()
             // businessSelector.value = currentBusIdData.businessId;
 
-            const response = await fetch('./controller/Business/getAllBusinesses.php',{
+            const response = await fetch('./controller/Business/getAllBusinesses.php', {
                 method: 'POST'
             });
             const data = await response.json();
@@ -398,12 +399,10 @@
             });
         });
 
-        async function getCurrentBussinessId(){
-            const currentBusId = await fetch('./controller/session/getCurrentBusiness.php',
-                {
-                    method: 'POST'
-                }
-            );
+        async function getCurrentBussinessId() {
+            const currentBusId = await fetch('./controller/session/getCurrentBusiness.php', {
+                method: 'POST'
+            });
             const currentBusIdData = await currentBusId.json();
             console.log("CURRENT BUSINESS ID", currentBusIdData);
             return currentBusIdData;
@@ -411,15 +410,17 @@
 
         businessSelector.addEventListener('change', async () => {
             const businessId = businessSelector.value;
-            const response = await fetch(`./controller/business/getBusinessData.php`,{
+            const response = await fetch(`./controller/business/getBusinessData.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({businessId:businessId})
+                body: JSON.stringify({
+                    businessId: businessId
+                })
             });
             const data = await response.json();
-            if(data.error){
+            if (data.error) {
                 const currentBussId = getCurrentBussinessId();
                 console.log(currentBussId);
                 businessSelector.value = currentBussId.businessId;
@@ -452,7 +453,7 @@
         //     const dataSession = await fetch('./getSessionData.php');
 
         //     const data = await dataSession.json();
-            
+
         //     console.log(data);
         // }
 
@@ -461,19 +462,142 @@
             await closeSession();
         });
 
-        async function closeSession(){
+        async function closeSession() {
             const dataSession = await fetch('./controller/session/closeSession.php', {
                 method: 'POST'
             });
             const data = await dataSession.json();
 
-            if(data.success){
+            if (data.success) {
                 window.location.reload();
             }
 
             console.log(data);
         }
 
+
+
+
+        const scrollableElement = document.getElementById('financeTableContainer');
+
+        scrollableElement.addEventListener('scroll', async () => {
+            const {
+                scrollLeft,
+                scrollWidth,
+                clientWidth
+            } = scrollableElement;
+
+            // Remove buttons if scroll is in the middle
+            const nextMonthButton = document.getElementById('nextMonthButton');
+            const prevMonthButton = document.getElementById('prevMonthButton');
+
+            if (scrollLeft > 0 ) {
+                // && scrollLeft + clientWidth < scrollWidth
+                if (nextMonthButton) nextMonthButton.remove();
+                // if (prevMonthButton) prevMonthButton.remove();
+            }
+
+            if(scrollLeft > 0) {
+                if (prevMonthButton) prevMonthButton.remove();
+            }
+
+            // Check if scroll is complete at the right
+            if (scrollLeft + clientWidth >= scrollWidth) {
+                const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                const nextMonthButton = document.createElement('button');
+                nextMonthButton.id = 'nextMonthButton';
+                const containerRect = document.getElementById('financesCardTableContainer').getBoundingClientRect();
+                nextMonthButton.style.position = 'absolute';
+                nextMonthButton.style.bottom = `${10}px`;
+                nextMonthButton.style.right = '20px';
+                let monthPicked = selectedMonth;
+                if(selectedMonth === 12) {
+                    monthPicked = 0;
+                }
+                nextMonthButton.innerText = `Mostrar ${monthNames[(monthPicked)]}`;
+                document.getElementById('financesCardTableContainer').appendChild(nextMonthButton);
+
+                
+                nextMonthButton.style.backgroundColor = '#4CAF50';
+                nextMonthButton.style.color = 'white';
+                nextMonthButton.style.border = 'none';
+                nextMonthButton.style.padding = '10px 20px';
+                nextMonthButton.style.textAlign = 'center';
+                nextMonthButton.style.textDecoration = 'none';
+                nextMonthButton.style.display = 'inline-block';
+                nextMonthButton.style.fontSize = '16px';
+                nextMonthButton.style.margin = '4px 2px';
+                nextMonthButton.style.cursor = 'pointer';
+                nextMonthButton.style.borderRadius = '12px';
+
+                nextMonthButton.addEventListener('click', async () => {
+                    console.log('NEXT MONTH');
+                    console.log(selectedMonth, selectedYear);
+                    selectedMonth++;
+                    
+                    if (selectedMonth > 12) {
+                        selectedMonth = 1;
+                        selectedYear++;
+                    }
+                    document.getElementsByClassName('monthPicker')[0].innerHTML = monthNames[(monthPicked)];
+                    document.getElementsByClassName('yearPicker')[0].innerHTML = selectedYear;
+
+                    renderMyChasFlowTable(selectedMonth, selectedYear);
+                    nextMonthButton.remove();
+                    scrollableElement.scrollLeft = 0;
+                });
+            }
+
+            if (scrollLeft === 0) {
+                const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                const prevMonthButton = document.createElement('button');
+                prevMonthButton.id = 'prevMonthButton';
+                const containerRect = document.getElementById('financesCardTableContainer').getBoundingClientRect();
+                prevMonthButton.style.position = 'absolute';
+                prevMonthButton.style.bottom = `${10}px`;
+                prevMonthButton.style.left = `${containerRect.left}px`;
+                let monthPicked = selectedMonth - 2;
+                if (monthPicked < 0) {
+                    monthPicked = 11;
+                }
+                prevMonthButton.innerText = `Mostrar ${monthNames[monthPicked]}`;
+                document.getElementById('financesCardTableContainer').appendChild(prevMonthButton);
+                
+
+                
+                prevMonthButton.style.backgroundColor = '#4CAF50';
+                prevMonthButton.style.color = 'white';
+                prevMonthButton.style.border = 'none';
+                prevMonthButton.style.padding = '10px 20px';
+                prevMonthButton.style.textAlign = 'center';
+                prevMonthButton.style.textDecoration = 'none';
+                prevMonthButton.style.display = 'inline-block';
+                prevMonthButton.style.fontSize = '16px';
+                prevMonthButton.style.margin = '4px 2px';
+                prevMonthButton.style.cursor = 'pointer';
+                prevMonthButton.style.borderRadius = '12px';
+
+                prevMonthButton.addEventListener('click', async () => {
+                    console.log('PREVIOUS MONTH');
+                    console.log(selectedMonth, selectedYear);
+                    selectedMonth--;
+                    if (selectedMonth < 1) {
+                        selectedMonth = 12;
+                        selectedYear--;
+                    }
+                    document.getElementsByClassName('monthPicker')[0].innerHTML = monthNames[monthPicked];
+                    document.getElementsByClassName('yearPicker')[0].innerHTML = selectedYear;
+                    renderMyChasFlowTable(selectedMonth, selectedYear);
+                    prevMonthButton.remove();
+                    scrollableElement.scrollLeft = scrollWidth;
+                });
+            }
+
+
+
+
+        });
+            
     </script>
 
 </html>

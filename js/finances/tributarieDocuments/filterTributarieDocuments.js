@@ -51,6 +51,9 @@ let tributarieDocuments = {
 
 function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
 
+  tributarieDocuments.charges = [];
+  tributarieDocuments.payments = [];
+
   // console.log('subtractCreditNote',subtractCreditNote)
   // console.log('trDocuments', trDocuments);
 

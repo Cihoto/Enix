@@ -8,7 +8,7 @@ function renderChargesTable(sortFunction, hidePaid = true) {
 
     // rmeove all Existing Rows
     $('#bankMovementsTableHorizontal tr').remove();
-
+    tributarieDocumentsTable.classList.add('chargesLayout');
     document.getElementById('financeTableContainer').classList.add('verticalMode');
     console.log('futureDocuments',futureDocuments);
     const futurePayments = sortFunction;

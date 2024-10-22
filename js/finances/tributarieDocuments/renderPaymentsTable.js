@@ -11,6 +11,8 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
 
     // rmeove all Existing Rows
     $('#bankMovementsTableHorizontal tr').remove();
+
+    tributarieDocumentsTable.classList.add('paymentsLayout');
     
     document.getElementById('financeTableContainer').classList.add('verticalMode');
     console.log('futureDocuments',futureDocuments);

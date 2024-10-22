@@ -102,7 +102,6 @@ async function readTributarieDocumentsFromExcel(){
         )
         console.log('modifiedDocuments',modifiedDocuments);
     }
-
     await readAllDocumentsFromExcel();
     setFutureDocumentsOnBankMovements();
     return true;
@@ -192,7 +191,9 @@ async function readAllDocumentsFromExcel() {
     modifiedDocuments.forEach((modDoc) => {
         const document = allMyDocuments.find((doc) => doc.id === modDoc.id);
         if(document){
-            document.paid = true;
+            document.paid = modDoc.paid;
+            document.fecha_expiracion = modDoc.fecha_expiracion;
+            document.fecha_expiracion_timestamp = modDoc.fecha_expiracion_timestamp;
         }
     });
 

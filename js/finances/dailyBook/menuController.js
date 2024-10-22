@@ -165,7 +165,6 @@ async function printContent(content) {
     }   
     if(content === 'flj') {
         setCashFlowControls();
-
         activePage.cashFlow = true;
         table.classList.add('horizontal');
         table.classList.add('cashFlowTable');

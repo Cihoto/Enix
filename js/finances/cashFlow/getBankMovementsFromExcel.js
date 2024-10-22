@@ -27,14 +27,10 @@ async function prepareDataForFinance(){
     getAllDaysOnMonth([1,2,3,4,5,6,7,8,9,10,11,12]);
     bankMovementsData = setAllDaysOnYear();
     console.log("2");
-    const tributarieDocuments = await readTributarieDocumentsFromExcel();
     
+    const tributarieDocuments = await readTributarieDocumentsFromExcel();
     const bankMovements = await getBankMovements();
-
-    const commonMovements = getCommonMovements();
-
-
-
+    const commonMovements = await getCommonMovements();
 }
 
 

@@ -27,6 +27,7 @@ commonEventsForm.addEventListener('submit', async (e) => {
     const entries = Object.fromEntries(formData.entries());
     let commonMovements = [];
     const income = entries.inOut == 'income' ? true : false;
+
     if (entries.movementType == 2) {
 
         const dateFrom = moment(entries.dateFrom, 'YYYY-MM');
@@ -42,9 +43,15 @@ commonEventsForm.addEventListener('submit', async (e) => {
         } else {
             periodos = diff + 1;
         }
+
+
         if (diff > 0) {
-            const printDate = moment(`${entries.dayNumber}-${moment(entries.dateFrom, 'YYYY-MM').add(0, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
-            const dateToFormatted = moment(`${entries.dayNumber}-${moment(entries.dateTo, 'YYYY-MM').add(0, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
+            const monthFrom = moment(entries.dateFrom, 'YYYY-MM').format('MM');
+            const yearFrom = moment(entries.dateFrom, 'YYYY-MM').format('YYYY');
+            let dayFrom = getFixedDate(parseInt(entries.dayNumber), monthFrom,yearFrom);
+
+            let printDate = moment(`${dayFrom}-${moment(entries.dateFrom, 'YYYY-MM').add(0, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
+            const dateToFormatted = moment(`${dayFrom}-${moment(entries.dateTo, 'YYYY-MM').add(0, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
             const uniqueId = btoa(`${new Date().getMilliseconds()}${printDate}${entries.movementTotal}${entries.name}${0}`);
             const commonObject = {
                 id: uniqueId,
@@ -55,7 +62,21 @@ commonEventsForm.addEventListener('submit', async (e) => {
                 movements:[]
             }
             for (let index = 0; index < periodos; index++) {
-                const printDate = moment(`${entries.dayNumber}-${moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
+                
+                const fixedDay = getFixedDate(parseInt(entries.dayNumber), moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('MM'),moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('YYYY'));
+                // if(moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('MM') == 2){
+                //     console.log(moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('YYYY'))
+                //     console.log('parseInt(entries.dayNumber)',parseInt(entries.dayNumber))
+                //     console.log()
+                //     console.log('fixedDay',fixedDay);
+                //     const printDate = moment(`${fixedDay}-${moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
+                //     console.log("1",moment(`${fixedDay}`))
+                //     console.log("2",moment(`${fixedDay}-${moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY'))
+                //     console.log("2",moment(`${fixedDay}-${moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY'))
+
+                //     console.log('printDate',printDate);
+                // }
+                const printDate = moment(`${fixedDay}-${moment(entries.dateFrom, 'YYYY-MM').add(index, 'months').format('MM-YYYY')}`, 'DD-MM-YYYY').format('DD-MM-YYYY');
                 // const uniqueId = btoa(`${new Date().getMilliseconds()}${printDate}${entries.movementTotal}${entries.name}${index}`);
                 const commonMovement = {
                     index: index,
@@ -197,4 +218,13 @@ function limitselectableDays(multiple = false) {
         option.innerText = index;
         daySelector.appendChild(option);
     }
+}
+
+
+function getFixedDate(day, month,year){
+    const daysOnMonth = moment(`${month}-${year}`, 'MM-YYYY').daysInMonth();
+    if (day > daysOnMonth) {
+        return daysOnMonth;
+    }
+    return day;
 }
