@@ -12,7 +12,6 @@ async function readExcelFile_bankMovements(){
 
     if(data.success){
         return data.data;
-
     }else{
         return {
             "headers":[],

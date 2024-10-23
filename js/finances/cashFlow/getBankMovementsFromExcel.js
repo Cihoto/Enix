@@ -49,9 +49,8 @@ async function setBankMovementsInBankMovementsData(){
         if(movement.cuenta.trim() == ""){
             return ;
         }   
-        let chargeOrPayment = movement.abono > 0 ? "abono" : "cargo";
+        const chargeOrPayment = movement.abono > 0 ? "abono" : "cargo";
         const abono = movement.abono > 0 ? true : false;
-
         const fecha = moment(movement.fecha.date, 'YYYY-MM-DD HH:mm:ss.SSSSSS').format('DD-MM-YYYY');
         const fechaTimeStamp = moment(fecha,'DD-MM-YYYY').format('X');
         return {

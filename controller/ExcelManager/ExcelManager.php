@@ -24,6 +24,10 @@
             return $this->accountNumber;
         }
 
+        public function getExcelRows(){
+
+        }
+
         public function readExcel() {
 
             $fileType = $this->getFileTypePath();
@@ -95,6 +99,7 @@
                     break;
             }
         }
+
 
         public function getBankMovementFileName() {
             $businessId = $this->get('businessId');

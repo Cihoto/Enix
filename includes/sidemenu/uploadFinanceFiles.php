@@ -109,12 +109,7 @@
         .then(response => response.json())
         .then(data => {
             console.log(data);
-
-
-
             const excelData = asd;
-
-
             window.location.reload();
         })
         .catch(error => {

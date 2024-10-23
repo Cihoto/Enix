@@ -16,7 +16,8 @@ $isSuperAdmin = $_SESSION['superAdmin'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Enix | Finanzas</title>
+    <link rel="icon" type="image/x-icon" href="./assets/svg/financessvg/enixLogo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -29,7 +30,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.2.6/dist/sweetalert2.all.min.js" integrity="sha256-Ry2q7Rf2s2TWPC2ddAg7eLmm7Am6S52743VTZRx9ENw=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/finance.css?v=<?php echo getFileTime($_SERVER['DOCUMENT_ROOT'] . '/assets/css/finance.css');?>">
+    <link rel="stylesheet" href="./assets/css/finance.css?v=<?php echo getFileTime($_SERVER['DOCUMENT_ROOT'] . '/assets/css/finance.css'); ?>">
     <!-- DORPZONE -->
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
@@ -72,7 +73,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                 <?php
                 if ($isSuperAdmin) {
                     echo '<select id="busSelector"></select>';
-                    echo '<button style="display:none;" id="bussinessManager">Crear empresa</button>';
+                    // echo '<button style="display:none;" id="bussinessManager">Crear empresa</button>';
                 }
                 ?>
             </div>
@@ -288,94 +289,93 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                 <tbody>
                                 </tbody>
                                 <tfoot>
-
                                 </tfoot>
                             </table>
                         </section>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
+
+    <?php require_once('./includes/modal/headerAsignerModal.php') ?>
 
     <p id="matches"></p>
     <!-- SIDEMENUS -->
     <?php require_once('./includes/sidemenu/commonMovements.php') ?>
-    <script src="./js/sidemenu/commonMovements.js?v=<?php echo time();?>"></script>
+    <script src="./js/sidemenu/commonMovements.js?v=<?php echo time(); ?>"></script>
     <?php require_once('./includes/sidemenu/uploadFinanceFiles.php') ?>
-    <script src="./js/sidemenu/uploadFinanceFiles.js?v=<?php echo time();?>"></script>
+    <script src="./js/sidemenu/uploadFinanceFiles.js?v=<?php echo time(); ?>"></script>
     <?php require_once('./includes/sidemenu/commonMovementsList.php') ?>
-    <script src="./js/finances/commonMovements/renderCommonMovementsListTable.js?v=<?php echo time();?>"></script>
-    <script src="./js/sidemenu/commonMovementsList.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/commonMovements/renderCommonMovementsListTable.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/sidemenu/commonMovementsList.js?v=<?php echo time(); ?>"></script>
     <!-- CARDS -->
-    <script src="./js/finances/dailyBook/cards/cashFlow.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/dailyBook/cards/payments.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/dailyBook/cards/charges.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/dailyBook/cards/cardsHandlers.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/dailyBook/cards/cashFlow.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/dailyBook/cards/payments.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/dailyBook/cards/charges.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/dailyBook/cards/cardsHandlers.js?v=<?php echo time(); ?>"></script>
     <!-- DAILY BOOK -->
-    <script src="./js/finances/utils/getallDaysInMonth.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/bankResume/horizontalView.js?v=<?php echo time();?>"></script>
-    <script src='./js/finances/dailyBook/renderDailyBookTable.js?v=<?php echo time();?>'></script>
-    <script src="./js/finances/dailyBook/menuController.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/dailyBook/dailyBookTable.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/utils/getChileanCurrency.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/utils/dayOfTheYear.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/dailyBook/pendingPayments.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/dailyBook/pendingCharges.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/utils/getallDaysInMonth.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/bankResume/horizontalView.js?v=<?php echo time(); ?>"></script>
+    <script src='./js/finances/dailyBook/renderDailyBookTable.js?v=<?php echo time(); ?>'></script>
+    <script src="./js/finances/dailyBook/menuController.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/dailyBook/dailyBookTable.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/utils/getChileanCurrency.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/utils/dayOfTheYear.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/dailyBook/pendingPayments.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/dailyBook/pendingCharges.js?v=<?php echo time(); ?>"> </script>
     <!-- UTILS -->
-    <script src="./js/finances/utils/sortDocumentsByDate.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/utils/calculatePaidPercentage.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/utils/sortDocumentsByDate.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/utils/calculatePaidPercentage.js?v=<?php echo time(); ?>"></script>
     <!-- EXCEL -->
-    <script src="./js/finances/Excel/getDocumentsFromExcel.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/Excel/getDocumentsFromExcel.js?v=<?php echo time(); ?>"></script>
 
     <!-- CASHFLOW -->
-    <script src="./js/finances/cashFlow/getBankMovementsFromExcel.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/cashFlow/renderChashFlowTable.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/cashFlow/cashFlowHandlers.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/cashFlow/getBankMovementsFromExcel.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/cashFlow/renderChashFlowTable.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/cashFlow/cashFlowHandlers.js?v=<?php echo time(); ?>"></script>
     <!-- TRIBUTARIE DOCUMENTS -->
-    <script src="./js/finances/tributarieDocuments/filterTributarieDocuments.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/tributarieDocuments/renderPaymentsTable.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/tributarieDocuments/renderChargeTable.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/tributarieDocuments/filterDocumentsFromAPI.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/tributarieDocuments/paidDocuments/renderPaidDocuments.js?v=<?php echo time();?>"> </script>
-    <script src="./js/finances/tributarieDocuments/paidDocuments/paidDocumentHandlers.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/tributarieDocuments/filterTributarieDocuments.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/tributarieDocuments/renderPaymentsTable.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/tributarieDocuments/renderChargeTable.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/tributarieDocuments/filterDocumentsFromAPI.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/tributarieDocuments/paidDocuments/renderPaidDocuments.js?v=<?php echo time(); ?>"> </script>
+    <script src="./js/finances/tributarieDocuments/paidDocuments/paidDocumentHandlers.js?v=<?php echo time(); ?>"> </script>
     <!-- COMMON MOVEMENTS -->
-    <script src="./js/finances/commonMovements/renderCommonMovementsTable.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/commonMovements/getCommonMovements.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/commonMovements/commonMovementsHandlers.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/commonMovements/commonMovementsListHandlers.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/commonMovements/renderCommonMovementsTable.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/commonMovements/getCommonMovements.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/commonMovements/commonMovementsHandlers.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/commonMovements/commonMovementsListHandlers.js?v=<?php echo time(); ?>"></script>
 
     <!-- CARGA MANUAL -->
-    <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time(); ?>"></script>
     <!-- API CALLS -->
-    <script src="./js/finances/API/getBankMovements.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/API/getMatchesMovements.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/API/getDailyBookMovements.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/API/getAllTributarieDocuments.js?v=<?php echo time();?>"></script>
-    <script src="./js/finances/API/getAllMyDocuments.js?v=<?php echo time();?>"></script>
+    <script src="./js/finances/API/getBankMovements.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/getMatchesMovements.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/getDailyBookMovements.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/getAllTributarieDocuments.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/getAllMyDocuments.js?v=<?php echo time(); ?>"></script>
 
     <!-- handlers -->
-    <script src="./js/finances/tributarieDocuments/tributrarieTableHandlers.js?v=<?php echo time();?>"> </script>
+    <script src="./js/finances/tributarieDocuments/tributrarieTableHandlers.js?v=<?php echo time(); ?>"> </script>
 
     <!-- SIDEMENU HANLDERS -->
-    <!-- finances/API/getTributarieDocuments.js?v=<?php echo time();?> -->
-    <script src="./js/finances/API/commonMovements/getAllCommonMovements.js?v=<?php echo time();?>"></script>
+    <!-- finances/API/getTributarieDocuments.js?v=<?php echo time(); ?> -->
+    <script src="./js/finances/API/commonMovements/getAllCommonMovements.js?v=<?php echo time(); ?>"></script>
+
+    <script src="./js/fileUploader/uploadNewFile.js?v=<?php echo time();?>"></script>
 
     <script>
-        const createBusinessButton = document.getElementById('bussinessManager');
+        // const createBusinessButton = document.getElementById('bussinessManager');
 
-        createBusinessButton.addEventListener('click', () => {
-            window.location.href = './business.php';
-        });
+        // createBusinessButton.addEventListener('click', () => {
+        //     window.location.href = './business.php';
+        // });
 
         const cardsContainer = document.getElementById('cardsContainer');
 
-        const businessSelector = document.getElementById('busSelector');
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log("SUPER ADMIN", <?php echo $isSuperAdmin; ?>);
-            const ssuperAdmin = <?php echo $isSuperAdmin ?>;
-
+        document.addEventListener('DOMContentLoaded', async (e) => {
             const superAdminResponse = await fetch('./controller/session/checkSuperAdmin.php', {
                 method: 'POST'
             });
@@ -384,10 +384,15 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             if (!superAdminData.superAdmin) {
                 return;
             }
+            const businessSelector = document.getElementById('busSelector');
+            console.log(businessSelector);
+            console.log(businessSelector);
+            console.log(businessSelector);
+            console.log(businessSelector);
+            console.log(businessSelector);
 
-            const currentBusIdData = getCurrentBussinessId()
+            const currentBusIdData = getCurrentBussinessId();
             // businessSelector.value = currentBusIdData.businessId;
-
             const response = await fetch('./controller/Business/getAllBusinesses.php', {
                 method: 'POST'
             });
@@ -397,6 +402,40 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                 const option = new Option(business.name, business.id, false, parseInt(business.id) == parseInt(currentBusIdData.businessId));
                 businessSelector.appendChild(option);
             });
+
+            const businessId = businessSelector.value;
+        });
+
+        document.addEventListener('change', async (e) => {
+
+            if (e.target.id === 'busSelector') {
+                const businessId = e.target.value;
+                console.log(businessId);
+                console.log(businessId);
+                console.log(businessId);
+                console.log(businessId);
+                console.log(businessId);
+                console.log(businessId);
+                console.log(businessId);
+                const response = await fetch(`./controller/business/getBusinessData.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        businessId: businessId
+                    })
+                });
+                const data = await response.json();
+                if (data.error) {
+                    const currentBussId = getCurrentBussinessId();
+                    console.log(currentBussId);
+                    e.target.value = currentBussId.businessId;
+                    window.location.reload();
+                    return;
+                }
+                console.log(data);
+            }
         });
 
         async function getCurrentBussinessId() {
@@ -408,57 +447,52 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             return currentBusIdData;
         }
 
-        businessSelector.addEventListener('change', async () => {
-            const businessId = businessSelector.value;
-            const response = await fetch(`./controller/business/getBusinessData.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    businessId: businessId
-                })
-            });
-            const data = await response.json();
-            if (data.error) {
-                const currentBussId = getCurrentBussinessId();
-                console.log(currentBussId);
-                businessSelector.value = currentBussId.businessId;
-                window.location.reload();
-                return;
-            }
-            console.log(data);
-        });
+        // businessSelector.addEventListener('change', async () => {
+        //     const businessId = businessSelector.value;
+        //     const response = await fetch(`./controller/business/getBusinessData.php`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({
+        //             businessId: businessId
+        //         })
+        //     });
+        //     const data = await response.json();
+        //     if (data.error) {
+        //         const currentBussId = getCurrentBussinessId();
+        //         console.log(currentBussId);
+        //         businessSelector.value = currentBussId.businessId;
+        //         window.location.reload();
+        //         return;
+        //     }
+        //     console.log(data);
+        // });
 
         // document.getElementById('login').addEventListener('click', async () => {
         //     const login = await fetch('./testSession.php');
-
         //     const data = await login.json();
-
         //     console.log(data);
         // });
-        // console.log(getData())
+        // console.log(getData());
 
         // const loginButton = document.getElementById('login');
         // loginButton.addEventListener('click', async () => {
         //     await getData();
         // });
 
-
-
         // async function getData(){
         //     // fetch('./getSessionData.php')
         //     // .then(response => response.json())
         //     // .then(data => console.log(data));
         //     const dataSession = await fetch('./getSessionData.php');
-
-        //     const data = await dataSession.json();
-
+        //     const data = await dataSession.json();=
         //     console.log(data);
         // }
 
         const closeSessionButton = document.getElementById('logout');
         closeSessionButton.addEventListener('click', async () => {
+            console.log('CLOSING SESSION');
             await closeSession();
         });
 
@@ -471,7 +505,6 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             if (data.success) {
                 window.location.reload();
             }
-
             console.log(data);
         }
 
@@ -491,13 +524,13 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             const nextMonthButton = document.getElementById('nextMonthButton');
             const prevMonthButton = document.getElementById('prevMonthButton');
 
-            if (scrollLeft > 0 ) {
+            if (scrollLeft > 0) {
                 // && scrollLeft + clientWidth < scrollWidth
                 if (nextMonthButton) nextMonthButton.remove();
                 // if (prevMonthButton) prevMonthButton.remove();
             }
 
-            if(scrollLeft > 0) {
+            if (scrollLeft > 0) {
                 if (prevMonthButton) prevMonthButton.remove();
             }
 
@@ -511,13 +544,13 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                 nextMonthButton.style.bottom = `${10}px`;
                 nextMonthButton.style.right = '20px';
                 let monthPicked = selectedMonth;
-                if(selectedMonth === 12) {
+                if (selectedMonth === 12) {
                     monthPicked = 0;
                 }
                 nextMonthButton.innerText = `Mostrar ${monthNames[(monthPicked)]}`;
                 document.getElementById('financesCardTableContainer').appendChild(nextMonthButton);
 
-                
+
                 nextMonthButton.style.backgroundColor = '#4CAF50';
                 nextMonthButton.style.color = 'white';
                 nextMonthButton.style.border = 'none';
@@ -534,7 +567,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                     console.log('NEXT MONTH');
                     console.log(selectedMonth, selectedYear);
                     selectedMonth++;
-                    
+
                     if (selectedMonth > 12) {
                         selectedMonth = 1;
                         selectedYear++;
@@ -562,9 +595,9 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                 }
                 prevMonthButton.innerText = `Mostrar ${monthNames[monthPicked]}`;
                 document.getElementById('financesCardTableContainer').appendChild(prevMonthButton);
-                
 
-                
+
+
                 prevMonthButton.style.backgroundColor = '#4CAF50';
                 prevMonthButton.style.color = 'white';
                 prevMonthButton.style.border = 'none';
@@ -597,7 +630,6 @@ $isSuperAdmin = $_SESSION['superAdmin'];
 
 
         });
-            
     </script>
 
 </html>
