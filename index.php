@@ -417,7 +417,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                 console.log(businessId);
                 console.log(businessId);
                 console.log(businessId);
-                const response = await fetch(`./controller/business/getBusinessData.php`, {
+                const response = await fetch(`./controller/Business/getBusinessData.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
