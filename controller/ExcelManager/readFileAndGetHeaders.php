@@ -10,25 +10,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     $reader->open($filePath);
 
     $headers = [];
+    $body = [];
     foreach ($reader->getSheetIterator() as $sheet) {
         foreach ($sheet->getRowIterator() as $key => $row) {
-
             $cells = $row->getCells();
-            $headers = array_map(fn($cell,$index) => 
-                [
-                    "id" => $index,
-                    "name" => $cell->getValue(),
-                    "key" => ""
-                ], $cells, array_keys($cells)
-            );
+            if($key === 1){
+                $headers = array_map(fn($cell,$index) => 
+                    [
+                        "id" => $index,
+                        "name" => $cell->getValue() ,
+                        "key" => ""
+                    ], $cells, array_keys($cells)
+                );
+            }else{
+                // echo $key;
+                // echo "<br>";    
+                // echo "<br>";    
+                // echo json_encode($cells);
+                // echo "<br>";
+                // echo "<br>";
+                // for($i = 0; $i < count($cells); $i++){
+                //     echo $cells[$i]->getValue();
+                //     echo "<br>";
+                //     echo $headers[$i]["name"];
+                //     echo "<br>";
+                // }
+                $body[] = array_map(fn($cell,) => 
+                $cell->getValue()
+                , $cells);
+                // echo "<br>";
+                // echo "<br>";
+                // // echo json_encode($cells);
+                // echo "<br>";
+                // echo "<br>";
+                // $body[] = array_map(fn($cell,$header) => [
+                //     "header" => $header["name"],
+                //     "value" => $cell->getValue()? $cell->getValue() : $header["name"]."_".$header["id"],
+                // ], $cells,$headers);
+                // break; // Only read the first row
+            }
+
             // echo json_encode($headers);
-            break; // Only read the first row
         }
         break; // Only read the first sheet
     }
 
     $reader->close();
-    echo json_encode(['headers' => $headers]);
+    echo json_encode(['headers' => $headers,"body"=>$body,"header0"=>$headers[0]]);
 } else {
     echo json_encode(['error' => 'Invalid request',"method"=>$_SERVER['REQUEST_METHOD'], "files"=>$_FILES['file']]);
 }

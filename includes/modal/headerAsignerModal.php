@@ -146,13 +146,14 @@
         const columnCell = document.createElement('td');
         columnCell.textContent = columnData.obligatory ? `${columnData.name} (*)` : columnData.name;
         const assignCell = document.createElement('td');
-        const select = createSelect(headers);
+        const select = createSelect();
         assignCell.appendChild(select);
         row.appendChild(columnCell);
         row.appendChild(assignCell);
         tableBody.appendChild(row);
     }   
-    function createSelect(headers){
+
+    function createSelect(){
         const select = document.createElement('select');
         select.classList.add('header-mod-select');
         select.append(new Option('Seleccionar...', ''));
@@ -182,8 +183,21 @@
                             option.disabled = false;
                         }
                     });
+                    
                 }
             });
+
+            // Logic to save the selected value
+            console.log('Selected value:', selectedValue);
+            const columnKey = event.target.closest('tr').getAttribute('columnValue');
+            console.log('Column key:', columnKey);
+
+            const selectedColumn = headers.headers.find(({id}) => {
+                console.log("ID: ",id);
+                return id == Number(selectedValue)  
+            });
+            console.log('Selected column:', selectedColumn);
+            selectedColumn.key = columnKey;
         }
     });
 

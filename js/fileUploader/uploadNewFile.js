@@ -1,6 +1,6 @@
 const headersAssigmentModal = document.getElementById('headersAssigmentModal');
 const headersTitles = {
-    bankMovements : [
+    "bankMovements" : [
         {
             name: 'Cargo',
             value: "cargo",
@@ -121,32 +121,25 @@ const headersTitles = {
 
 let headers = [];
 document.getElementById('bankFile').addEventListener('change', async function(){
-    return
     // get file 
     let file = document.getElementById('bankFile').files[0];
     // create form data
     let formData = new FormData();
     // append file to form data
     formData.append('file', file);
-    // fetch
-
+    // fetch file and get
     const getHeaders = await fetch ('./controller/ExcelManager/readFileAndGetHeaders.php', {
         method: 'POST',
         body: formData
     });
     headers = await getHeaders.json();
-    console.log(headers);
     document.getElementById('headersAssigmentModal').style.display = 'block';
-
-    // create headers rows in modal 
-
+    // REMOVE ALL ROWS FROM MODAL
+    const tableBody = document.getElementById('headersTable').querySelector('tbody');    // create headers rows in modal 
+    tableBody.innerHTML = '';
     headersTitles.bankMovements.forEach((header, index) => {
         addExcelRHeaderAssigment(header)
-    })
-    
-    
-
-
+    });
 });
 
 function openAssigmnetModal(){

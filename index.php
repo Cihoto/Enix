@@ -411,12 +411,6 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             if (e.target.id === 'busSelector') {
                 const businessId = e.target.value;
                 console.log(businessId);
-                console.log(businessId);
-                console.log(businessId);
-                console.log(businessId);
-                console.log(businessId);
-                console.log(businessId);
-                console.log(businessId);
                 const response = await fetch(`./controller/Business/getBusinessData.php`, {
                     method: 'POST',
                     headers: {
