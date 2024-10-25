@@ -129,6 +129,7 @@
 </div>
 
 <script>
+    const saveHeadersAssignment = document.getElementById('saveHeadersAssignment');
     document.getElementById('closeModal').addEventListener('click', function() {
         document.getElementById('headersAssigmentModal').style.display = 'none';
     });
@@ -183,7 +184,6 @@
                             option.disabled = false;
                         }
                     });
-                    
                 }
             });
 
@@ -200,6 +200,59 @@
             selectedColumn.key = columnKey;
         }
     });
+
+    saveHeadersAssignment.addEventListener('click', function() {
+        const selectedHeaders = headers.headers.map(header => {
+            const {key,id} = header;
+            if(key != null) {
+                return {
+                    key,
+                    id,
+                    name: header.name
+                }
+            }
+        }).filter((header) => header !== undefined);
+        // const noSelectedHeaders = headers.headers.filter(header => header.key === null);
+       
+        const noSelectedHeaders = headersTitles.bankMovements.filter(header => {
+            return selectedHeaders.find(({key}) => key === header.value) === undefined;
+        });
+
+        console.log('NO SELECTED HEADERS:', noSelectedHeaders);
+
+
+        console.log('SELECTED HEADERS:', selectedHeaders);
+
+        const excelData = headers.body.map(row => {
+            const newRow = {};
+            for (let i = 0; i < selectedHeaders.length; i++) {
+                newRow[selectedHeaders[i].key] = row[selectedHeaders[i].id];
+            }
+            for (let i= 0; i < noSelectedHeaders.length; i++) {
+                newRow[noSelectedHeaders[i].value] = "";
+            }
+            return newRow;
+        });
+        // WRITE excelData oin new excel using php function 
+        console.log('EXCEL DATA:', excelData);
+        console.log('HEADERS:', headers.headers);
+        console.log('BODY:', headers.body);
+        const newExcelHeaders = Object.keys(excelData[0]);
+        const newExcelBody = excelData.map(row => Object.values(row));
+        const newExcelFileName = 'newExcel.xlsx';
+        const newExcelData = {
+            newExcelHeaders,
+            newExcelBody,
+            newExcelFileName
+        };
+        console.log('DATA:', newExcelData);
+        fetch('/controller/ExcelManager/writeNewExcel.php', {
+            method: 'POST',
+            body: JSON.stringify(newExcelData)
+        })
+    });
+
+
 
 
 </script>

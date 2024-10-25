@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                     [
                         "id" => $index,
                         "name" => $cell->getValue() ,
-                        "key" => ""
+                        "key" => null
                     ], $cells, array_keys($cells)
                 );
             }else{

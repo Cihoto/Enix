@@ -133,6 +133,7 @@ document.getElementById('bankFile').addEventListener('change', async function(){
         body: formData
     });
     headers = await getHeaders.json();
+    console.log("headers",headers);
     document.getElementById('headersAssigmentModal').style.display = 'block';
     // REMOVE ALL ROWS FROM MODAL
     const tableBody = document.getElementById('headersTable').querySelector('tbody');    // create headers rows in modal 
