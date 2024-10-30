@@ -1,8 +1,8 @@
 <?php 
+    require_once $_SERVER['DOCUMENT_ROOT'].'/controller/excelHeadersSchema/excelHeadersSchema.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Business/Bussiness.php';
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        require_once $_SERVER['DOCUMENT_ROOT'].'/controller/excelHeadersSchema/excelHeadersSchema.php';
-        require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
-        require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Business/Bussiness.php';
         
         $sessionManager = new SessionManager();
         $business = new Business();
