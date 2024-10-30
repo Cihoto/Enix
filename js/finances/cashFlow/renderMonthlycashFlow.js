@@ -53,5 +53,68 @@ async function resumeCshFlowMonthly() {
     console.log('monthlyBalance', monthlyBalance);
 
 
+
+
+    
+    removeAllTableRows();
+    renderMyHorizontalView([pickedMonth], selectedYear);
+    const totalIncomeTr = setTotalIncomeResumeRow();
+    tbody.appendChild(totalIncomeTr);
+    const incomeTr = setNewincomeRow('Ingresos', 'ingresos');
+    tbody.appendChild(incomeTr);
+    const projectedDocumentsTr = setNewincomeRow('Ingresos futuros', 'projectedIncome');
+    tbody.appendChild(projectedDocumentsTr);
+    const projectedOutDatedDocumentsTr = setNewincomeRow('Ingresos atrasados', 'projectedOutdatedIncomeRow');
+    tbody.appendChild(projectedOutDatedDocumentsTr);
+    const frecuentIncomeRow = setNewincomeRow('Ingresos frecuentes', 'commonIncomeMovements');
+    tbody.appendChild(frecuentIncomeRow);
+    tbody.appendChild(setEmptyRow());
+    const totalOutComeTr = setOutcomeResumeRow();
+    tbody.appendChild(totalOutComeTr);
+    const outcomTr = setNewincomeRow('Egresos', 'egresos');
+    tbody.appendChild(outcomTr);
+    const outComeProjectedDocumentsTr = setNewincomeRow('Egresos futuros', 'projectedOutcome');
+    tbody.appendChild(outComeProjectedDocumentsTr);
+    const projectedOutDatedDocumentsTrOut = setNewincomeRow('Egresos atrasados', 'projectedOutdatedOutcomeRow');
+    tbody.appendChild(projectedOutDatedDocumentsTrOut);
+    const frecuentOutcomeRow = setNewincomeRow('Egresos recurrentes', 'commonOutcomeMovements');
+    tbody.appendChild(frecuentOutcomeRow);
+    tbody.appendChild(setEmptyRow());
+    const totalTr = setTotalRow();
+    tbody.appendChild(totalTr);
+    createDailyBalance();
+
+
+
+    console.log('totalDailyBalance', totalDailyBalance);
+
+    // render tablew with monthly balance
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+
+    const headerRow = document.createElement('tr');
+    ['Month', 'Total Income', 'Total Outcome', 'Net Total', 'Previous Account Balance'].forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+
+    Object.keys(monthlyBalance).forEach(month => {
+        const row = document.createElement('tr');
+        const data = monthlyBalance[month];
+        [month, data.totalIncome, data.totalOutCome, data.total, data.previousAccountBalance].forEach(text => {
+            const td = document.createElement('td');
+            td.textContent = text;
+            row.appendChild(td);
+        });
+        tbody.appendChild(row);
+    });
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    document.body.appendChild(table);
+
     console.log('allDaysOnYear', allDaysOnYear);
 }
