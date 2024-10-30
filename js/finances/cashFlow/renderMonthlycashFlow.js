@@ -4,6 +4,12 @@ monthlyCashFlow.addEventListener('click', async  () => {
     resumeCshFlowMonthly();
 });
 
+
+// const table = document.getElementById("bankMovementsTableHorizontal");
+// const thead = table.getElementsByTagName("thead")[0];
+// const tbody = table.getElementsByTagName("tbody")[0];
+// const tfoot = table.getElementsByTagName("tfoot")[0];
+
 async function resumeCshFlowMonthly() {
     console.log('resumeCshFlowMonthly');
     await getInitialBankAccountBalance();
@@ -47,74 +53,175 @@ async function resumeCshFlowMonthly() {
         acc[month].totalOutCome += day.totalOutCome;
         acc[month].total += day.total;
         acc[month].previousAccountBalance = day.previousAccountBalance;
+
+        // if day greater than today, add to projectedIncome and projectedOutcome
+        if (day.dayOfYear > moment().dayOfYear()) {
+            acc[month].projectedIncome = acc[month].projectedIncome ? acc[month].projectedIncome + day.totalIncome : day.totalIncome;
+            acc[month].projectedOutcome = acc[month].projectedOutcome ? acc[month].projectedOutcome + day.totalOutCome : day.totalOutCome;
+        }
         return acc;
     }, {});
 
     console.log('monthlyBalance', monthlyBalance);
 
+    // get amount of objects in monthlyBalance
+    const length = Object.keys(monthlyBalance).length;
+
+    
+
+
+    removeAllTableRows();
+    renderMyHorizontalViewMonthly(monthlyBalance);
+    const totalIncomeTr = setTotalIncomeResumeRowMonthly(length);
+    tbody.appendChild(totalIncomeTr);
+    const incomeTr = setNewincomeRowMonthly(length,'Ingresos', 'ingresos');
+    tbody.appendChild(incomeTr);
+    const projectedDocumentsTr = setNewincomeRowMonthly(length,'Ingresos futuros', 'projectedIncome');
+    tbody.appendChild(projectedDocumentsTr);
+    const projectedOutDatedDocumentsTr = setNewincomeRowMonthly(length,'Ingresos atrasados', 'projectedOutdatedIncomeRow');
+    tbody.appendChild(projectedOutDatedDocumentsTr);
+    const frecuentIncomeRow = setNewincomeRowMonthly(length,'Ingresos frecuentes', 'commonIncomeMovements');
+    tbody.appendChild(frecuentIncomeRow);
+
+    tbody.appendChild(setEmptyRowMonthly(length));
+
+    const totalOutComeTr = setOutcomeResumeRowMonthly(length);
+    tbody.appendChild(totalOutComeTr);
+    const outcomTr = setNewincomeRowMonthly(length,'Egresos', 'egresos');
+    tbody.appendChild(outcomTr);
+    const outComeProjectedDocumentsTr = setNewincomeRowMonthly(length,'Egresos futuros', 'projectedOutcome');
+    tbody.appendChild(outComeProjectedDocumentsTr);
+    const projectedOutDatedDocumentsTrOut = setNewincomeRowMonthly(length,'Egresos atrasados', 'projectedOutdatedOutcomeRow');
+    tbody.appendChild(projectedOutDatedDocumentsTrOut);
+    const frecuentOutcomeRow = setNewincomeRowMonthly(length,'Egresos recurrentes', 'commonOutcomeMovements');
+    tbody.appendChild(frecuentOutcomeRow);
+
+    tbody.appendChild(setEmptyRowMonthly(length));
+
+    const totalTr = setTotalRowMonthly(length);
+    tbody.appendChild(totalTr);
+    const balanceTr = setDailyBalanceRowMonthly(length);
+    tbody.appendChild(balanceTr);
+
+
+
+    // get .allDates row and find th[month=""] and locate totals in the same column
+    const allDatesRow = document.querySelector('.allDates');
+
+    // loop through monthlyBalance and set totals in the same column
+    Object.keys(monthlyBalance).forEach((month, index) => {
+        const th = allDatesRow.querySelector(`th[month="${month}"]`);
+        const columnIndex = th.cellIndex;
+        
+        // get totalIncomeTr and set totalIncome
+        const totalIncomeTd = totalIncomeTr.children[columnIndex];
+        totalIncomeTd.innerHTML = monthlyBalance[month].totalIncome;
+
+        // get totalOutComeTr and set totalOutCome
+        const totalOutComeTd = totalOutComeTr.children[columnIndex];
+        totalOutComeTd.innerHTML = monthlyBalance[month].totalOutCome;
+
+        // get totalTr and set total
+        const totalTd = totalTr.children[columnIndex];
+        totalTd.innerHTML = monthlyBalance[month].total;
+
+        // get balanceTr and set balance
+        const balanceTd = balanceTr.children[columnIndex];
+        balanceTd.innerHTML = monthlyBalance[month].previousAccountBalance;
+
+        // if month is greater than actual month, add projected income or outcome
+        if (moment(month, 'MMMM').month() > moment().month()) {
+            if (monthlyBalance[month].projectedIncome) {
+                totalIncomeTd.innerHTML += ` (Projected: ${monthlyBalance[month].projectedIncome})`;
+            }
+            if (monthlyBalance[month].projectedOutcome) {
+                totalOutComeTd.innerHTML += ` (Projected: ${monthlyBalance[month].projectedOutcome})`;
+            }
+        }
+    });
+    
+
 
 
 
     
-    removeAllTableRows();
-    renderMyHorizontalView([pickedMonth], selectedYear);
-    const totalIncomeTr = setTotalIncomeResumeRow();
-    tbody.appendChild(totalIncomeTr);
-    const incomeTr = setNewincomeRow('Ingresos', 'ingresos');
-    tbody.appendChild(incomeTr);
-    const projectedDocumentsTr = setNewincomeRow('Ingresos futuros', 'projectedIncome');
-    tbody.appendChild(projectedDocumentsTr);
-    const projectedOutDatedDocumentsTr = setNewincomeRow('Ingresos atrasados', 'projectedOutdatedIncomeRow');
-    tbody.appendChild(projectedOutDatedDocumentsTr);
-    const frecuentIncomeRow = setNewincomeRow('Ingresos frecuentes', 'commonIncomeMovements');
-    tbody.appendChild(frecuentIncomeRow);
-    tbody.appendChild(setEmptyRow());
-    const totalOutComeTr = setOutcomeResumeRow();
-    tbody.appendChild(totalOutComeTr);
-    const outcomTr = setNewincomeRow('Egresos', 'egresos');
-    tbody.appendChild(outcomTr);
-    const outComeProjectedDocumentsTr = setNewincomeRow('Egresos futuros', 'projectedOutcome');
-    tbody.appendChild(outComeProjectedDocumentsTr);
-    const projectedOutDatedDocumentsTrOut = setNewincomeRow('Egresos atrasados', 'projectedOutdatedOutcomeRow');
-    tbody.appendChild(projectedOutDatedDocumentsTrOut);
-    const frecuentOutcomeRow = setNewincomeRow('Egresos recurrentes', 'commonOutcomeMovements');
-    tbody.appendChild(frecuentOutcomeRow);
-    tbody.appendChild(setEmptyRow());
-    const totalTr = setTotalRow();
-    tbody.appendChild(totalTr);
-    createDailyBalance();
+}
 
 
 
-    console.log('totalDailyBalance', totalDailyBalance);
+function setNewincomeRowMonthly(length, rowName, code) {
+    const tr = document.createElement('tr');
+    tr.classList.add('codeAccountRow', '--selectableRow', '--incomeRow');
+    tr.setAttribute('lvlCode', code);
+    let firstTd = `<td lvlCode='${code}'>${rowName}</td>`;
+    let contentTd = ''
+    for (let i = 1; i <= length; i++) {
+        contentTd += '<td></td>';
+    }
+    tr.innerHTML = `${firstTd}${contentTd}`;
+    return tr;
+}
 
-    // render tablew with monthly balance
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const tbody = document.createElement('tbody');
 
-    const headerRow = document.createElement('tr');
-    ['Month', 'Total Income', 'Total Outcome', 'Net Total', 'Previous Account Balance'].forEach(text => {
-        const th = document.createElement('th');
-        th.textContent = text;
-        headerRow.appendChild(th);
-    });
-    thead.appendChild(headerRow);
 
-    Object.keys(monthlyBalance).forEach(month => {
-        const row = document.createElement('tr');
-        const data = monthlyBalance[month];
-        [month, data.totalIncome, data.totalOutCome, data.total, data.previousAccountBalance].forEach(text => {
-            const td = document.createElement('td');
-            td.textContent = text;
-            row.appendChild(td);
-        });
-        tbody.appendChild(row);
-    });
+const setTotalIncomeResumeRowMonthly = (length) => {
+    const tr = document.createElement('tr');
+    tr.classList.add('resumeRowIncome', '--headerRow');
+    let firstTd = `<td id="resumeRowIncome">Total ingresos</td>`;
+    let contentTd = ''
+    for (let i = 1; i <= length; i++) {
+        contentTd += '<td></td>';
+    }
+    tr.innerHTML = `${firstTd}${contentTd}`;
+    return tr;
+}
 
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    document.body.appendChild(table);
+const setEmptyRowMonthly = (length) => {
+    const tr = document.createElement('tr');
+    tr.classList.add('emptyRow', '--headerRow');
+    let firstTd = `<td></td>`;
+    let contentTd = '';
+    for (let i = 1; i <= length; i++) {
+        contentTd += '<td></td>';
+    }
+    tr.innerHTML = `${firstTd}${contentTd}`;
+    return tr;
+}
 
-    console.log('allDaysOnYear', allDaysOnYear);
+const setOutcomeResumeRowMonthly = (length) => {
+    const tr = document.createElement('tr');
+    tr.classList.add('resumeRowOutCome', '--headerRow');
+    let firstTd = `<td id="resumeRowOutcome">Total egresos</td>`;
+    let contentTd = ''
+    for (let i = 1; i <= length; i++) {
+        contentTd += '<td></td>';
+    }
+    tr.innerHTML = `${firstTd}${contentTd}`;
+    return tr;
+}
+
+const setTotalRowMonthly = (length) => {
+    const tr = document.createElement('tr');
+    tr.classList.add('resumeRowTotal', '--headerRow');
+    let firstTd = `<td id="resumeTotalRow">Total</td>`;
+    // console.log('allMydates', allMyDates);
+    let contentTd = ''
+    for (let i = 1; i <= length; i++) {
+        contentTd += '<td></td>';
+    }
+    tr.innerHTML = `${firstTd}${contentTd}`;
+    return tr;
+}
+
+const setDailyBalanceRowMonthly = (length) => {
+    const tr = document.createElement('tr');
+    tr.classList.add('resumeRowBalance', '--headerRow');
+    let firstTd = `<td>Saldo</td>`;
+    let contentTd = ''
+    for (let i = 1; i <= length; i++) {
+        contentTd += '<td></td>';
+    }
+    tr.innerHTML = `${firstTd}${contentTd}`;
+    return tr;
+
 }

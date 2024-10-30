@@ -17,7 +17,32 @@ function renderMyHorizontalView(monthsToSearch,selectedYear){
     createHorizontalTableHead(table,allDaysOnCurrentMonth);
 }
 
+function renderMyHorizontalViewMonthly(monthlyBalance){
+    // set all dates on month in thead using moment.js
+    createHorizontalTableHeadMonthly(table,monthlyBalance);
+}
 
+function createHorizontalTableHeadMonthly(table,allDaysOnCurrentMonth){
+    let tr = document.createElement("tr");
+    let th = document.createElement("th");
+
+    th.innerHTML = "Mes";
+    tr.appendChild(th);
+    tr.classList.add('table-primary-tr');
+    tr.classList.add('allDates');
+
+    Object.keys(allDaysOnCurrentMonth).forEach(month => {
+        let th = document.createElement("th");
+        th.classList.add('dateHeader');
+        th.setAttribute('month',month);
+        // traslate month to spanish
+        th.innerHTML = month;
+
+        tr.appendChild(th);
+    });
+
+    thead.appendChild(tr);
+}
 function createHorizontalTableHead(table,allDaysOnCurrentMonth){
     let tr = document.createElement("tr");
     let th = document.createElement("th");
