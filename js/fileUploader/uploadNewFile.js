@@ -289,7 +289,10 @@ function handleSchemaCreation(schemaName) {
 }
 
 async function printSchemas() {
-    const allSchemas = await fetch('./controller/excelHeadersSchema/getSchemas.php').then(res => res.json());
+    const allSchemas = await fetch('./controller/excelHeadersSchema/getSchemas.php',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(res => res.json());
     schemaSelect.innerHTML = '';
     schemaSelect.appendChild(createOption('', 'Seleccione un esquema'));
 

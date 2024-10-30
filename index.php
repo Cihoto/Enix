@@ -297,6 +297,8 @@ $isSuperAdmin = $_SESSION['superAdmin'];
         </div>
     </div>
 
+
+    
     <!-- TOASTIFY -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- MODALS -->
@@ -368,6 +370,15 @@ $isSuperAdmin = $_SESSION['superAdmin'];
 
     <script src="./js/fileUploader/uploadNewFile.js?v=<?php echo time();?>"></script>
 
+
+
+    <!-- test only -->
+    <script src="./js/finances/cashFlow/renderMonthlycashFlow.js"></script>
+
+
+
+
+    
     <script>
         // const createBusinessButton = document.getElementById('bussinessManager');
 
