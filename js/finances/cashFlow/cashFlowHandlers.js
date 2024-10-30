@@ -274,3 +274,134 @@ document.addEventListener('mouseout', (e) => {
         }
     }
 });
+
+
+
+
+// SCROLL TOP BUTTONS 
+
+const scrollableElement = document.getElementById('financeTableContainer');
+
+        scrollableElement.addEventListener('scroll', async () => {
+            if(!activePage.cashFlow){
+                return;
+            }
+            const {
+                scrollLeft,
+                scrollWidth,
+                clientWidth
+            } = scrollableElement;
+
+            // Remove buttons if scroll is in the middle
+            const nextMonthButton = document.getElementById('nextMonthButton');
+            const prevMonthButton = document.getElementById('prevMonthButton');
+
+            if (scrollLeft > 0) {
+                // && scrollLeft + clientWidth < scrollWidth
+                if (nextMonthButton) nextMonthButton.remove();
+                // if (prevMonthButton) prevMonthButton.remove();
+            }
+
+            if (scrollLeft > 0) {
+                if (prevMonthButton) prevMonthButton.remove();
+            }
+
+            // Check if scroll is complete at the right
+            if (scrollLeft + clientWidth >= scrollWidth) {
+                const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                const nextMonthButton = document.createElement('button');
+                nextMonthButton.id = 'nextMonthButton';
+                nextMonthButton.classList.add('dinamycFloatingButton');
+                const containerRect = document.getElementById('financesCardTableContainer').getBoundingClientRect();
+                nextMonthButton.style.position = 'absolute';
+                nextMonthButton.style.bottom = `${10}px`;
+                nextMonthButton.style.right = '20px';
+                let monthPicked = selectedMonth;
+                if (selectedMonth === 12) {
+                    monthPicked = 0;
+                }
+                nextMonthButton.innerText = `Mostrar ${monthNames[(monthPicked)]}`;
+                document.getElementById('financesCardTableContainer').appendChild(nextMonthButton);
+
+
+                nextMonthButton.style.backgroundColor = '#4CAF50';
+                nextMonthButton.style.color = 'white';
+                nextMonthButton.style.border = 'none';
+                nextMonthButton.style.padding = '10px 20px';
+                nextMonthButton.style.textAlign = 'center';
+                nextMonthButton.style.textDecoration = 'none';
+                nextMonthButton.style.display = 'inline-block';
+                nextMonthButton.style.fontSize = '16px';
+                nextMonthButton.style.margin = '4px 2px';
+                nextMonthButton.style.cursor = 'pointer';
+                nextMonthButton.style.borderRadius = '12px';
+
+                nextMonthButton.addEventListener('click', async () => {
+                    console.log('NEXT MONTH');
+                    console.log(selectedMonth, selectedYear);
+                    selectedMonth++;
+
+                    if (selectedMonth > 12) {
+                        selectedMonth = 1;
+                        selectedYear++;
+                    }
+                    // document.getElementsByClassName('monthPicker')[0].innerHTML = monthNames[(monthPicked)];
+                    document.querySelector(`#monthName`).innerText = monthNames[(monthPicked)];
+                    document.querySelector(`#yearName`).innerText = selectedYear;
+                    // document.getElementsByClassName('yearPicker')[0].innerHTML = selectedYear;
+
+                    renderMyChasFlowTable(selectedMonth, selectedYear);
+                    nextMonthButton.remove();
+                    scrollableElement.scrollLeft = 0;
+                });
+            }
+
+            if (scrollLeft === 0) {
+                const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                const prevMonthButton = document.createElement('button');
+                prevMonthButton.id = 'prevMonthButton';
+                prevMonthButton.classList.add('dinamycFloatingButton');
+
+                const containerRect = document.getElementById('financesCardTableContainer').getBoundingClientRect();
+                prevMonthButton.style.position = 'absolute';
+                prevMonthButton.style.bottom = `${10}px`;
+                prevMonthButton.style.left = `${containerRect.left}px`;
+                let monthPicked = selectedMonth - 2;
+                if (monthPicked < 0) {
+                    monthPicked = 11;
+                }
+                prevMonthButton.innerText = `Mostrar ${monthNames[monthPicked]}`;
+                document.getElementById('financesCardTableContainer').appendChild(prevMonthButton);
+
+                prevMonthButton.style.backgroundColor = '#4CAF50';
+                prevMonthButton.style.color = 'white';
+                prevMonthButton.style.border = 'none';
+                prevMonthButton.style.padding = '10px 20px';
+                prevMonthButton.style.textAlign = 'center';
+                prevMonthButton.style.textDecoration = 'none';
+                prevMonthButton.style.display = 'inline-block';
+                prevMonthButton.style.fontSize = '16px';
+                prevMonthButton.style.margin = '4px 2px';
+                prevMonthButton.style.cursor = 'pointer';
+                prevMonthButton.style.borderRadius = '12px';
+
+                prevMonthButton.addEventListener('click', async () => {
+                    console.log('PREVIOUS MONTH');
+                    console.log(selectedMonth, selectedYear);
+                    selectedMonth--;
+
+                    if (selectedMonth < 1) {
+                        selectedMonth = 12;
+                        selectedYear--;
+                    }
+
+                    document.querySelector(`#monthName`).innerText = monthNames[(monthPicked)];
+                    document.querySelector(`#yearName`).innerText = selectedYear;
+                    
+                    renderMyChasFlowTable(selectedMonth, selectedYear);
+
+                    prevMonthButton.remove();
+                    scrollableElement.scrollLeft = scrollWidth;
+                });
+            }
+        });

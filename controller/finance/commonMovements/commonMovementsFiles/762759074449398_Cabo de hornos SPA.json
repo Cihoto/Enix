@@ -15,5 +15,2777 @@
                 "desc": ""
             }
         ]
+    },
+    {
+        "id": "NTc3MjQtMTAtMjAyNDE1NTMzNDEzQ29tZXggY29uc29yY2lv",
+        "dateFrom": "24-10-2024",
+        "dateTo": "24-10-2024",
+        "name": "Comex consorcio",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "24-10-2024",
+                "printDateTimestamp": "1729738800",
+                "total": 15533413,
+                "name": "Comex consorcio",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "MjE3MjAtMTItMjAyNDIzNzA3Mjg0SVZBIHBvc3RlcmdhZG8gU2VwdC4=",
+        "dateFrom": "20-12-2024",
+        "dateTo": "20-12-2024",
+        "name": "IVA postergado Sept.",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "20-12-2024",
+                "printDateTimestamp": "1734663600",
+                "total": 23707284,
+                "name": "IVA postergado Sept.",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "MTg3MDUtMTEtMjAyNDI1MDAwMDAwQ29uc29yY2lvIEJ1bGxldA==",
+        "dateFrom": "05-11-2024",
+        "dateTo": "05-11-2024",
+        "name": "Consorcio Bullet",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "05-11-2024",
+                "printDateTimestamp": "1730775600",
+                "total": 25000000,
+                "name": "Consorcio Bullet",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "NTI4MTEtMTEtMjAyNDQ3Mjc3NzI2TO1uZWEgY29tZXggSXRh+g==",
+        "dateFrom": "11-11-2024",
+        "dateTo": "11-11-2024",
+        "name": "L\u00ednea comex Ita\u00fa",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "11-11-2024",
+                "printDateTimestamp": "1731294000",
+                "total": 47277726,
+                "name": "L\u00ednea comex Ita\u00fa",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "Mjc2MTMtMTEtMjAyNDE2MTkxNjg5QnVsbGV0IFNjb3RpYWJhbmsg",
+        "dateFrom": "13-11-2024",
+        "dateTo": "13-11-2024",
+        "name": "Bullet Scotiabank ",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "13-11-2024",
+                "printDateTimestamp": "1731466800",
+                "total": 16191689,
+                "name": "Bullet Scotiabank ",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "MjA0MDEtMTEtMjAyNDg2MzY0MENy6WRpdG8gQmFuY28gRXN0YWRvMA==",
+        "dateFrom": "01-11-2024",
+        "dateTo": "01-03-2029",
+        "name": "Cr\u00e9dito Banco Estado",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "01-11-2024",
+                "printDateTimestamp": "1730430000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "01-12-2024",
+                "printDateTimestamp": "1733022000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "01-01-2025",
+                "printDateTimestamp": "1735700400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "01-02-2025",
+                "printDateTimestamp": "1738378800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "01-03-2025",
+                "printDateTimestamp": "1740798000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "01-04-2025",
+                "printDateTimestamp": "1743476400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "01-05-2025",
+                "printDateTimestamp": "1746072000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "01-06-2025",
+                "printDateTimestamp": "1748750400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "01-07-2025",
+                "printDateTimestamp": "1751342400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "01-08-2025",
+                "printDateTimestamp": "1754020800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "01-09-2025",
+                "printDateTimestamp": "1756699200",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "01-10-2025",
+                "printDateTimestamp": "1759287600",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "01-11-2025",
+                "printDateTimestamp": "1761966000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "01-12-2025",
+                "printDateTimestamp": "1764558000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "01-01-2026",
+                "printDateTimestamp": "1767236400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 15,
+                "printDate": "01-02-2026",
+                "printDateTimestamp": "1769914800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 16,
+                "printDate": "01-03-2026",
+                "printDateTimestamp": "1772334000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 17,
+                "printDate": "01-04-2026",
+                "printDateTimestamp": "1775012400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 18,
+                "printDate": "01-05-2026",
+                "printDateTimestamp": "1777608000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "01-06-2026",
+                "printDateTimestamp": "1780286400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "01-07-2026",
+                "printDateTimestamp": "1782878400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "01-08-2026",
+                "printDateTimestamp": "1785556800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "01-09-2026",
+                "printDateTimestamp": "1788235200",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "01-10-2026",
+                "printDateTimestamp": "1790823600",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "01-11-2026",
+                "printDateTimestamp": "1793502000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "01-12-2026",
+                "printDateTimestamp": "1796094000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "01-01-2027",
+                "printDateTimestamp": "1798772400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "01-02-2027",
+                "printDateTimestamp": "1801450800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 28,
+                "printDate": "01-03-2027",
+                "printDateTimestamp": "1803870000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 29,
+                "printDate": "01-04-2027",
+                "printDateTimestamp": "1806548400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 30,
+                "printDate": "01-05-2027",
+                "printDateTimestamp": "1809144000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 31,
+                "printDate": "01-06-2027",
+                "printDateTimestamp": "1811822400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 32,
+                "printDate": "01-07-2027",
+                "printDateTimestamp": "1814414400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 33,
+                "printDate": "01-08-2027",
+                "printDateTimestamp": "1817092800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 34,
+                "printDate": "01-09-2027",
+                "printDateTimestamp": "1819771200",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 35,
+                "printDate": "01-10-2027",
+                "printDateTimestamp": "1822359600",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 36,
+                "printDate": "01-11-2027",
+                "printDateTimestamp": "1825038000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 37,
+                "printDate": "01-12-2027",
+                "printDateTimestamp": "1827630000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 38,
+                "printDate": "01-01-2028",
+                "printDateTimestamp": "1830308400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 39,
+                "printDate": "01-02-2028",
+                "printDateTimestamp": "1832986800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 40,
+                "printDate": "01-03-2028",
+                "printDateTimestamp": "1835492400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 41,
+                "printDate": "01-04-2028",
+                "printDateTimestamp": "1838170800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 42,
+                "printDate": "01-05-2028",
+                "printDateTimestamp": "1840766400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 43,
+                "printDate": "01-06-2028",
+                "printDateTimestamp": "1843444800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 44,
+                "printDate": "01-07-2028",
+                "printDateTimestamp": "1846036800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 45,
+                "printDate": "01-08-2028",
+                "printDateTimestamp": "1848715200",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 46,
+                "printDate": "01-09-2028",
+                "printDateTimestamp": "1851393600",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 47,
+                "printDate": "01-10-2028",
+                "printDateTimestamp": "1853982000",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 48,
+                "printDate": "01-11-2028",
+                "printDateTimestamp": "1856660400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 49,
+                "printDate": "01-12-2028",
+                "printDateTimestamp": "1859252400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 50,
+                "printDate": "01-01-2029",
+                "printDateTimestamp": "1861930800",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 51,
+                "printDate": "01-02-2029",
+                "printDateTimestamp": "1864609200",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 52,
+                "printDate": "01-03-2029",
+                "printDateTimestamp": "1867028400",
+                "total": 863640,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "NTgyMDUtMTEtMjAyNDk2NTQ2N0Ny6WRpdG8gQmFuY28gRXN0YWRvMA==",
+        "dateFrom": "05-11-2024",
+        "dateTo": "05-03-2029",
+        "name": "Cr\u00e9dito Banco Estado",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "05-11-2024",
+                "printDateTimestamp": "1730775600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "05-12-2024",
+                "printDateTimestamp": "1733367600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "05-01-2025",
+                "printDateTimestamp": "1736046000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "05-02-2025",
+                "printDateTimestamp": "1738724400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "05-03-2025",
+                "printDateTimestamp": "1741143600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "05-04-2025",
+                "printDateTimestamp": "1743822000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "05-05-2025",
+                "printDateTimestamp": "1746417600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "05-06-2025",
+                "printDateTimestamp": "1749096000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "05-07-2025",
+                "printDateTimestamp": "1751688000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "05-08-2025",
+                "printDateTimestamp": "1754366400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "05-09-2025",
+                "printDateTimestamp": "1757044800",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "05-10-2025",
+                "printDateTimestamp": "1759633200",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "05-11-2025",
+                "printDateTimestamp": "1762311600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "05-12-2025",
+                "printDateTimestamp": "1764903600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "05-01-2026",
+                "printDateTimestamp": "1767582000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 15,
+                "printDate": "05-02-2026",
+                "printDateTimestamp": "1770260400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 16,
+                "printDate": "05-03-2026",
+                "printDateTimestamp": "1772679600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 17,
+                "printDate": "05-04-2026",
+                "printDateTimestamp": "1775361600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 18,
+                "printDate": "05-05-2026",
+                "printDateTimestamp": "1777953600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "05-06-2026",
+                "printDateTimestamp": "1780632000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "05-07-2026",
+                "printDateTimestamp": "1783224000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "05-08-2026",
+                "printDateTimestamp": "1785902400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "05-09-2026",
+                "printDateTimestamp": "1788580800",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "05-10-2026",
+                "printDateTimestamp": "1791169200",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "05-11-2026",
+                "printDateTimestamp": "1793847600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "05-12-2026",
+                "printDateTimestamp": "1796439600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "05-01-2027",
+                "printDateTimestamp": "1799118000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "05-02-2027",
+                "printDateTimestamp": "1801796400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 28,
+                "printDate": "05-03-2027",
+                "printDateTimestamp": "1804215600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 29,
+                "printDate": "05-04-2027",
+                "printDateTimestamp": "1806897600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 30,
+                "printDate": "05-05-2027",
+                "printDateTimestamp": "1809489600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 31,
+                "printDate": "05-06-2027",
+                "printDateTimestamp": "1812168000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 32,
+                "printDate": "05-07-2027",
+                "printDateTimestamp": "1814760000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 33,
+                "printDate": "05-08-2027",
+                "printDateTimestamp": "1817438400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 34,
+                "printDate": "05-09-2027",
+                "printDateTimestamp": "1820116800",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 35,
+                "printDate": "05-10-2027",
+                "printDateTimestamp": "1822705200",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 36,
+                "printDate": "05-11-2027",
+                "printDateTimestamp": "1825383600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 37,
+                "printDate": "05-12-2027",
+                "printDateTimestamp": "1827975600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 38,
+                "printDate": "05-01-2028",
+                "printDateTimestamp": "1830654000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 39,
+                "printDate": "05-02-2028",
+                "printDateTimestamp": "1833332400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 40,
+                "printDate": "05-03-2028",
+                "printDateTimestamp": "1835838000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 41,
+                "printDate": "05-04-2028",
+                "printDateTimestamp": "1838520000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 42,
+                "printDate": "05-05-2028",
+                "printDateTimestamp": "1841112000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 43,
+                "printDate": "05-06-2028",
+                "printDateTimestamp": "1843790400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 44,
+                "printDate": "05-07-2028",
+                "printDateTimestamp": "1846382400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 45,
+                "printDate": "05-08-2028",
+                "printDateTimestamp": "1849060800",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 46,
+                "printDate": "05-09-2028",
+                "printDateTimestamp": "1851735600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 47,
+                "printDate": "05-10-2028",
+                "printDateTimestamp": "1854327600",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 48,
+                "printDate": "05-11-2028",
+                "printDateTimestamp": "1857006000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 49,
+                "printDate": "05-12-2028",
+                "printDateTimestamp": "1859598000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 50,
+                "printDate": "05-01-2029",
+                "printDateTimestamp": "1862276400",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 51,
+                "printDate": "05-02-2029",
+                "printDateTimestamp": "1864954800",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 52,
+                "printDate": "05-03-2029",
+                "printDateTimestamp": "1867374000",
+                "total": 965467,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "MjMwNS0xMS0yMDI0MzczMDY5Q3LpZGl0byBCYW5jbyBFc3RhZG8w",
+        "dateFrom": "05-11-2024",
+        "dateTo": "05-03-2029",
+        "name": "Cr\u00e9dito Banco Estado",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "05-11-2024",
+                "printDateTimestamp": "1730775600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "05-12-2024",
+                "printDateTimestamp": "1733367600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "05-01-2025",
+                "printDateTimestamp": "1736046000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "05-02-2025",
+                "printDateTimestamp": "1738724400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "05-03-2025",
+                "printDateTimestamp": "1741143600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "05-04-2025",
+                "printDateTimestamp": "1743822000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "05-05-2025",
+                "printDateTimestamp": "1746417600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "05-06-2025",
+                "printDateTimestamp": "1749096000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "05-07-2025",
+                "printDateTimestamp": "1751688000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "05-08-2025",
+                "printDateTimestamp": "1754366400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "05-09-2025",
+                "printDateTimestamp": "1757044800",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "05-10-2025",
+                "printDateTimestamp": "1759633200",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "05-11-2025",
+                "printDateTimestamp": "1762311600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "05-12-2025",
+                "printDateTimestamp": "1764903600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "05-01-2026",
+                "printDateTimestamp": "1767582000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 15,
+                "printDate": "05-02-2026",
+                "printDateTimestamp": "1770260400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 16,
+                "printDate": "05-03-2026",
+                "printDateTimestamp": "1772679600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 17,
+                "printDate": "05-04-2026",
+                "printDateTimestamp": "1775361600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 18,
+                "printDate": "05-05-2026",
+                "printDateTimestamp": "1777953600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "05-06-2026",
+                "printDateTimestamp": "1780632000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "05-07-2026",
+                "printDateTimestamp": "1783224000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "05-08-2026",
+                "printDateTimestamp": "1785902400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "05-09-2026",
+                "printDateTimestamp": "1788580800",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "05-10-2026",
+                "printDateTimestamp": "1791169200",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "05-11-2026",
+                "printDateTimestamp": "1793847600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "05-12-2026",
+                "printDateTimestamp": "1796439600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "05-01-2027",
+                "printDateTimestamp": "1799118000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "05-02-2027",
+                "printDateTimestamp": "1801796400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 28,
+                "printDate": "05-03-2027",
+                "printDateTimestamp": "1804215600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 29,
+                "printDate": "05-04-2027",
+                "printDateTimestamp": "1806897600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 30,
+                "printDate": "05-05-2027",
+                "printDateTimestamp": "1809489600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 31,
+                "printDate": "05-06-2027",
+                "printDateTimestamp": "1812168000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 32,
+                "printDate": "05-07-2027",
+                "printDateTimestamp": "1814760000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 33,
+                "printDate": "05-08-2027",
+                "printDateTimestamp": "1817438400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 34,
+                "printDate": "05-09-2027",
+                "printDateTimestamp": "1820116800",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 35,
+                "printDate": "05-10-2027",
+                "printDateTimestamp": "1822705200",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 36,
+                "printDate": "05-11-2027",
+                "printDateTimestamp": "1825383600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 37,
+                "printDate": "05-12-2027",
+                "printDateTimestamp": "1827975600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 38,
+                "printDate": "05-01-2028",
+                "printDateTimestamp": "1830654000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 39,
+                "printDate": "05-02-2028",
+                "printDateTimestamp": "1833332400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 40,
+                "printDate": "05-03-2028",
+                "printDateTimestamp": "1835838000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 41,
+                "printDate": "05-04-2028",
+                "printDateTimestamp": "1838520000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 42,
+                "printDate": "05-05-2028",
+                "printDateTimestamp": "1841112000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 43,
+                "printDate": "05-06-2028",
+                "printDateTimestamp": "1843790400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 44,
+                "printDate": "05-07-2028",
+                "printDateTimestamp": "1846382400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 45,
+                "printDate": "05-08-2028",
+                "printDateTimestamp": "1849060800",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 46,
+                "printDate": "05-09-2028",
+                "printDateTimestamp": "1851735600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 47,
+                "printDate": "05-10-2028",
+                "printDateTimestamp": "1854327600",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 48,
+                "printDate": "05-11-2028",
+                "printDateTimestamp": "1857006000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 49,
+                "printDate": "05-12-2028",
+                "printDateTimestamp": "1859598000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 50,
+                "printDate": "05-01-2029",
+                "printDateTimestamp": "1862276400",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 51,
+                "printDate": "05-02-2029",
+                "printDateTimestamp": "1864954800",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 52,
+                "printDate": "05-03-2029",
+                "printDateTimestamp": "1867374000",
+                "total": 373069,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "MTYzMDUtMTEtMjAyNDI1MDYwNENy6WRpdG8gQmFuY28gRXN0YWRvMA==",
+        "dateFrom": "05-11-2024",
+        "dateTo": "05-03-2029",
+        "name": "Cr\u00e9dito Banco Estado",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "05-11-2024",
+                "printDateTimestamp": "1730775600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "05-12-2024",
+                "printDateTimestamp": "1733367600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "05-01-2025",
+                "printDateTimestamp": "1736046000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "05-02-2025",
+                "printDateTimestamp": "1738724400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "05-03-2025",
+                "printDateTimestamp": "1741143600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "05-04-2025",
+                "printDateTimestamp": "1743822000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "05-05-2025",
+                "printDateTimestamp": "1746417600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "05-06-2025",
+                "printDateTimestamp": "1749096000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "05-07-2025",
+                "printDateTimestamp": "1751688000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "05-08-2025",
+                "printDateTimestamp": "1754366400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "05-09-2025",
+                "printDateTimestamp": "1757044800",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "05-10-2025",
+                "printDateTimestamp": "1759633200",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "05-11-2025",
+                "printDateTimestamp": "1762311600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "05-12-2025",
+                "printDateTimestamp": "1764903600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "05-01-2026",
+                "printDateTimestamp": "1767582000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 15,
+                "printDate": "05-02-2026",
+                "printDateTimestamp": "1770260400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 16,
+                "printDate": "05-03-2026",
+                "printDateTimestamp": "1772679600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 17,
+                "printDate": "05-04-2026",
+                "printDateTimestamp": "1775361600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 18,
+                "printDate": "05-05-2026",
+                "printDateTimestamp": "1777953600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "05-06-2026",
+                "printDateTimestamp": "1780632000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "05-07-2026",
+                "printDateTimestamp": "1783224000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "05-08-2026",
+                "printDateTimestamp": "1785902400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "05-09-2026",
+                "printDateTimestamp": "1788580800",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "05-10-2026",
+                "printDateTimestamp": "1791169200",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "05-11-2026",
+                "printDateTimestamp": "1793847600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "05-12-2026",
+                "printDateTimestamp": "1796439600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "05-01-2027",
+                "printDateTimestamp": "1799118000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "05-02-2027",
+                "printDateTimestamp": "1801796400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 28,
+                "printDate": "05-03-2027",
+                "printDateTimestamp": "1804215600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 29,
+                "printDate": "05-04-2027",
+                "printDateTimestamp": "1806897600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 30,
+                "printDate": "05-05-2027",
+                "printDateTimestamp": "1809489600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 31,
+                "printDate": "05-06-2027",
+                "printDateTimestamp": "1812168000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 32,
+                "printDate": "05-07-2027",
+                "printDateTimestamp": "1814760000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 33,
+                "printDate": "05-08-2027",
+                "printDateTimestamp": "1817438400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 34,
+                "printDate": "05-09-2027",
+                "printDateTimestamp": "1820116800",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 35,
+                "printDate": "05-10-2027",
+                "printDateTimestamp": "1822705200",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 36,
+                "printDate": "05-11-2027",
+                "printDateTimestamp": "1825383600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 37,
+                "printDate": "05-12-2027",
+                "printDateTimestamp": "1827975600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 38,
+                "printDate": "05-01-2028",
+                "printDateTimestamp": "1830654000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 39,
+                "printDate": "05-02-2028",
+                "printDateTimestamp": "1833332400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 40,
+                "printDate": "05-03-2028",
+                "printDateTimestamp": "1835838000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 41,
+                "printDate": "05-04-2028",
+                "printDateTimestamp": "1838520000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 42,
+                "printDate": "05-05-2028",
+                "printDateTimestamp": "1841112000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 43,
+                "printDate": "05-06-2028",
+                "printDateTimestamp": "1843790400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 44,
+                "printDate": "05-07-2028",
+                "printDateTimestamp": "1846382400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 45,
+                "printDate": "05-08-2028",
+                "printDateTimestamp": "1849060800",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 46,
+                "printDate": "05-09-2028",
+                "printDateTimestamp": "1851735600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 47,
+                "printDate": "05-10-2028",
+                "printDateTimestamp": "1854327600",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 48,
+                "printDate": "05-11-2028",
+                "printDateTimestamp": "1857006000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 49,
+                "printDate": "05-12-2028",
+                "printDateTimestamp": "1859598000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 50,
+                "printDate": "05-01-2029",
+                "printDateTimestamp": "1862276400",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 51,
+                "printDate": "05-02-2029",
+                "printDateTimestamp": "1864954800",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 52,
+                "printDate": "05-03-2029",
+                "printDateTimestamp": "1867374000",
+                "total": 250604,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "NjA1MDUtMTEtMjAyNDEyNjM5MUNy6WRpdG8gQmFuY28gRXN0YWRvMA==",
+        "dateFrom": "05-11-2024",
+        "dateTo": "05-03-2027",
+        "name": "Cr\u00e9dito Banco Estado",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "05-11-2024",
+                "printDateTimestamp": "1730775600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "05-12-2024",
+                "printDateTimestamp": "1733367600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "05-01-2025",
+                "printDateTimestamp": "1736046000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "05-02-2025",
+                "printDateTimestamp": "1738724400",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "05-03-2025",
+                "printDateTimestamp": "1741143600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "05-04-2025",
+                "printDateTimestamp": "1743822000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "05-05-2025",
+                "printDateTimestamp": "1746417600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "05-06-2025",
+                "printDateTimestamp": "1749096000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "05-07-2025",
+                "printDateTimestamp": "1751688000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "05-08-2025",
+                "printDateTimestamp": "1754366400",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "05-09-2025",
+                "printDateTimestamp": "1757044800",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "05-10-2025",
+                "printDateTimestamp": "1759633200",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "05-11-2025",
+                "printDateTimestamp": "1762311600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "05-12-2025",
+                "printDateTimestamp": "1764903600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "05-01-2026",
+                "printDateTimestamp": "1767582000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 15,
+                "printDate": "05-02-2026",
+                "printDateTimestamp": "1770260400",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 16,
+                "printDate": "05-03-2026",
+                "printDateTimestamp": "1772679600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 17,
+                "printDate": "05-04-2026",
+                "printDateTimestamp": "1775361600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 18,
+                "printDate": "05-05-2026",
+                "printDateTimestamp": "1777953600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "05-06-2026",
+                "printDateTimestamp": "1780632000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "05-07-2026",
+                "printDateTimestamp": "1783224000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "05-08-2026",
+                "printDateTimestamp": "1785902400",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "05-09-2026",
+                "printDateTimestamp": "1788580800",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "05-10-2026",
+                "printDateTimestamp": "1791169200",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "05-11-2026",
+                "printDateTimestamp": "1793847600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "05-12-2026",
+                "printDateTimestamp": "1796439600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "05-01-2027",
+                "printDateTimestamp": "1799118000",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "05-02-2027",
+                "printDateTimestamp": "1801796400",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 28,
+                "printDate": "05-03-2027",
+                "printDateTimestamp": "1804215600",
+                "total": 126391,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "MjAyMDUtMTEtMjAyNDIyMDk0OENy6WRpdG8gQmFuY28gRXN0YWRvMA==",
+        "dateFrom": "05-11-2024",
+        "dateTo": "05-03-2029",
+        "name": "Cr\u00e9dito Banco Estado",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "05-11-2024",
+                "printDateTimestamp": "1730775600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "05-12-2024",
+                "printDateTimestamp": "1733367600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "05-01-2025",
+                "printDateTimestamp": "1736046000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "05-02-2025",
+                "printDateTimestamp": "1738724400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "05-03-2025",
+                "printDateTimestamp": "1741143600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "05-04-2025",
+                "printDateTimestamp": "1743822000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "05-05-2025",
+                "printDateTimestamp": "1746417600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "05-06-2025",
+                "printDateTimestamp": "1749096000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "05-07-2025",
+                "printDateTimestamp": "1751688000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "05-08-2025",
+                "printDateTimestamp": "1754366400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "05-09-2025",
+                "printDateTimestamp": "1757044800",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "05-10-2025",
+                "printDateTimestamp": "1759633200",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "05-11-2025",
+                "printDateTimestamp": "1762311600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "05-12-2025",
+                "printDateTimestamp": "1764903600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "05-01-2026",
+                "printDateTimestamp": "1767582000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 15,
+                "printDate": "05-02-2026",
+                "printDateTimestamp": "1770260400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 16,
+                "printDate": "05-03-2026",
+                "printDateTimestamp": "1772679600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 17,
+                "printDate": "05-04-2026",
+                "printDateTimestamp": "1775361600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 18,
+                "printDate": "05-05-2026",
+                "printDateTimestamp": "1777953600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "05-06-2026",
+                "printDateTimestamp": "1780632000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "05-07-2026",
+                "printDateTimestamp": "1783224000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "05-08-2026",
+                "printDateTimestamp": "1785902400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "05-09-2026",
+                "printDateTimestamp": "1788580800",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "05-10-2026",
+                "printDateTimestamp": "1791169200",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "05-11-2026",
+                "printDateTimestamp": "1793847600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "05-12-2026",
+                "printDateTimestamp": "1796439600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "05-01-2027",
+                "printDateTimestamp": "1799118000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "05-02-2027",
+                "printDateTimestamp": "1801796400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 28,
+                "printDate": "05-03-2027",
+                "printDateTimestamp": "1804215600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 29,
+                "printDate": "05-04-2027",
+                "printDateTimestamp": "1806897600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 30,
+                "printDate": "05-05-2027",
+                "printDateTimestamp": "1809489600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 31,
+                "printDate": "05-06-2027",
+                "printDateTimestamp": "1812168000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 32,
+                "printDate": "05-07-2027",
+                "printDateTimestamp": "1814760000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 33,
+                "printDate": "05-08-2027",
+                "printDateTimestamp": "1817438400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 34,
+                "printDate": "05-09-2027",
+                "printDateTimestamp": "1820116800",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 35,
+                "printDate": "05-10-2027",
+                "printDateTimestamp": "1822705200",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 36,
+                "printDate": "05-11-2027",
+                "printDateTimestamp": "1825383600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 37,
+                "printDate": "05-12-2027",
+                "printDateTimestamp": "1827975600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 38,
+                "printDate": "05-01-2028",
+                "printDateTimestamp": "1830654000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 39,
+                "printDate": "05-02-2028",
+                "printDateTimestamp": "1833332400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 40,
+                "printDate": "05-03-2028",
+                "printDateTimestamp": "1835838000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 41,
+                "printDate": "05-04-2028",
+                "printDateTimestamp": "1838520000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 42,
+                "printDate": "05-05-2028",
+                "printDateTimestamp": "1841112000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 43,
+                "printDate": "05-06-2028",
+                "printDateTimestamp": "1843790400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 44,
+                "printDate": "05-07-2028",
+                "printDateTimestamp": "1846382400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 45,
+                "printDate": "05-08-2028",
+                "printDateTimestamp": "1849060800",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 46,
+                "printDate": "05-09-2028",
+                "printDateTimestamp": "1851735600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 47,
+                "printDate": "05-10-2028",
+                "printDateTimestamp": "1854327600",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 48,
+                "printDate": "05-11-2028",
+                "printDateTimestamp": "1857006000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 49,
+                "printDate": "05-12-2028",
+                "printDateTimestamp": "1859598000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 50,
+                "printDate": "05-01-2029",
+                "printDateTimestamp": "1862276400",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 51,
+                "printDate": "05-02-2029",
+                "printDateTimestamp": "1864954800",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            },
+            {
+                "index": 52,
+                "printDate": "05-03-2029",
+                "printDateTimestamp": "1867374000",
+                "total": 220948,
+                "name": "Cr\u00e9dito Banco Estado",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "id": "MjU0MDEtMTEtMjAyNDEwMDYxMDBMZWFzaW5nIEl0Yfow",
+        "dateFrom": "01-11-2024",
+        "dateTo": "01-08-2027",
+        "name": "Leasing Ita\u00fa",
+        "income": false,
+        "movements": [
+            {
+                "index": 0,
+                "printDate": "01-11-2024",
+                "printDateTimestamp": "1730430000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 1,
+                "printDate": "01-12-2024",
+                "printDateTimestamp": "1733022000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 2,
+                "printDate": "01-01-2025",
+                "printDateTimestamp": "1735700400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 3,
+                "printDate": "01-02-2025",
+                "printDateTimestamp": "1738378800",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 4,
+                "printDate": "01-03-2025",
+                "printDateTimestamp": "1740798000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 5,
+                "printDate": "01-04-2025",
+                "printDateTimestamp": "1743476400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 6,
+                "printDate": "01-05-2025",
+                "printDateTimestamp": "1746072000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 7,
+                "printDate": "01-06-2025",
+                "printDateTimestamp": "1748750400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 8,
+                "printDate": "01-07-2025",
+                "printDateTimestamp": "1751342400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 9,
+                "printDate": "01-08-2025",
+                "printDateTimestamp": "1754020800",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 10,
+                "printDate": "01-09-2025",
+                "printDateTimestamp": "1756699200",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 11,
+                "printDate": "01-10-2025",
+                "printDateTimestamp": "1759287600",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 12,
+                "printDate": "01-11-2025",
+                "printDateTimestamp": "1761966000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 13,
+                "printDate": "01-12-2025",
+                "printDateTimestamp": "1764558000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 14,
+                "printDate": "01-01-2026",
+                "printDateTimestamp": "1767236400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 15,
+                "printDate": "01-02-2026",
+                "printDateTimestamp": "1769914800",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 16,
+                "printDate": "01-03-2026",
+                "printDateTimestamp": "1772334000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 17,
+                "printDate": "01-04-2026",
+                "printDateTimestamp": "1775012400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 18,
+                "printDate": "01-05-2026",
+                "printDateTimestamp": "1777608000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 19,
+                "printDate": "01-06-2026",
+                "printDateTimestamp": "1780286400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 20,
+                "printDate": "01-07-2026",
+                "printDateTimestamp": "1782878400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 21,
+                "printDate": "01-08-2026",
+                "printDateTimestamp": "1785556800",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 22,
+                "printDate": "01-09-2026",
+                "printDateTimestamp": "1788235200",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 23,
+                "printDate": "01-10-2026",
+                "printDateTimestamp": "1790823600",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 24,
+                "printDate": "01-11-2026",
+                "printDateTimestamp": "1793502000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 25,
+                "printDate": "01-12-2026",
+                "printDateTimestamp": "1796094000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 26,
+                "printDate": "01-01-2027",
+                "printDateTimestamp": "1798772400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 27,
+                "printDate": "01-02-2027",
+                "printDateTimestamp": "1801450800",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 28,
+                "printDate": "01-03-2027",
+                "printDateTimestamp": "1803870000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 29,
+                "printDate": "01-04-2027",
+                "printDateTimestamp": "1806548400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 30,
+                "printDate": "01-05-2027",
+                "printDateTimestamp": "1809144000",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 31,
+                "printDate": "01-06-2027",
+                "printDateTimestamp": "1811822400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 32,
+                "printDate": "01-07-2027",
+                "printDateTimestamp": "1814414400",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            },
+            {
+                "index": 33,
+                "printDate": "01-08-2027",
+                "printDateTimestamp": "1817092800",
+                "total": 1006100,
+                "name": "Leasing Ita\u00fa",
+                "desc": ""
+            }
+        ]
     }
 ]

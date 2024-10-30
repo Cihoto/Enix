@@ -109,7 +109,7 @@
             return "$businessId$businessBankAccountNumber"."_"."$businessName.xlsx";
         }
 
-        public function getTributarieDocumentsFileName() {
+        public function getTributarieDocumentsFileName(){
             $businessId = $this->get('businessId');
             $businessName = $this->get('businessName');
             return "$businessId"."_"."$businessName.xlsx";

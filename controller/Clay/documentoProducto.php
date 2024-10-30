@@ -38,8 +38,6 @@ $responseNeedRepeat = true;
 // echo $dateFrom;
 // echo $today;
 
-
-
 // $url = "https://api.clay.cl/v1/obligaciones/documentos_tributarios/?guia_despacho=false&rut_empresa=$busId&fecha_desde=2024-01-01&initialize_until=true&limit=200&offset=0";
 $url = "https://api.clay.cl/v1/obligaciones/documentos_productos/?rut_empresa=$busId&fecha_desde=$initDate&initialize_until=true&limit=200&offset=$offset";
 

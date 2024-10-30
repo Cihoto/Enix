@@ -139,6 +139,22 @@ class Business {
 
     }
 
+    public function getBdBusinessId($rut){
+        $conn = new bd();
+        $conn->conectar();
+        $query = mysqli_prepare($conn->mysqli, "SELECT id FROM business WHERE rut = ?");
+        mysqli_stmt_bind_param($query, 'i', $rut);
+        mysqli_stmt_execute($query);
+
+        if(!$query){
+            return false;
+        }
+        
+        $result = mysqli_stmt_get_result($query);
+        $row = mysqli_fetch_assoc($result);
+        return $row['id'];
+    }
+
 }
 
 ?>

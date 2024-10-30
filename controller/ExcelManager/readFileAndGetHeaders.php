@@ -55,10 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
         break; // Only read the first sheet
     }
 
+    if(count($body) === 0 ){
+        echo json_encode(['success'=>false,'message' => 'No data found in the file']);
+        exit();
+    }
+
     $reader->close();
-    echo json_encode(['headers' => $headers,"body"=>$body,"header0"=>$headers[0]]);
+    echo json_encode(['success'=>true,'headers' => $headers,"body"=>$body,"header0"=>$headers[0]]);
 } else {
-    echo json_encode(['error' => 'Invalid request',"method"=>$_SERVER['REQUEST_METHOD'], "files"=>$_FILES['file']]);
+    echo json_encode(['success'=>false,'error' => 'Invalid request',"method"=>$_SERVER['REQUEST_METHOD'], "files"=>$_FILES['file']]);
 }
 
 

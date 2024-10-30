@@ -4,3 +4,4 @@ vendor/
 /test6.php
 /getSessionData.php
 /closeSession.php
+/webScrapper.php

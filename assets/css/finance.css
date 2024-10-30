@@ -46,6 +46,27 @@ head {
     background: var(--Blancoi, #FFF);
 }
 
+#logout{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--Cyan-primario, #00C7D4);
+    color: #FFF;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--Cyan-secundario, #00A5B3);
+    }
+}
+
 #main {
     display: flex;
     width: calc(100% - 345px);
@@ -80,6 +101,18 @@ head {
     margin-right: auto;
     max-width: 75%;
     overflow: scroll;
+}
+
+.header-options {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    overflow: scroll;
+    scrollbar-width: none; /* Firefox */
+}
+
+.header-options::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .header-options {
@@ -490,6 +523,16 @@ head {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap:12px;
+    overflow-y: scroll;
+}
+.cards-container::-webkit-scrollbar {
+    display: none;
+}
+
+.cards-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .card {
@@ -501,6 +544,7 @@ head {
     border: 1px solid var(--Gris-50, #E6E9EE);
     background: #FFF;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
+    min-width: max-content;
 
     .content {
         display: flex;
@@ -511,7 +555,7 @@ head {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            width: 90%;
+            width: 100%;
 
             p:nth-child(1) {
                 color: var(--Gris-400, #9393A1);

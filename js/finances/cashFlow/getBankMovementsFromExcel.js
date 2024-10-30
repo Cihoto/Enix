@@ -23,11 +23,9 @@ async function getBankAndTributarieDataFromExcel(){
 
 
 async function prepareDataForFinance(){
-    console.log("1")
     getAllDaysOnMonth([1,2,3,4,5,6,7,8,9,10,11,12]);
     bankMovementsData = setAllDaysOnYear();
-    console.log("2");
-    
+
     const tributarieDocuments = await readTributarieDocumentsFromExcel();
     const bankMovements = await getBankMovements();
     const commonMovements = await getCommonMovements();
@@ -35,24 +33,31 @@ async function prepareDataForFinance(){
 
 
 async function getBankMovements(){
-    console.log("3")
     // bankExcelData = data;
     const bankMovementsFromExcel = await readExcelFile_bankMovements();
-    console.log('bankMovementsFromExcel',bankMovementsFromExcel);
     bankExcelData = bankMovementsFromExcel;
     setBankMovementsInBankMovementsData();
 }
 
 async function setBankMovementsInBankMovementsData(){
-    console.log("4")
+    console.log('bankExcelData',bankExcelData.bodyRows);
     const bankData = bankExcelData.bodyRows.map((movement) => {
-        if(movement.cuenta.trim() == ""){
-            return ;
-        }   
+        const {fecha: checkDate } = movement;
+
+        let fecha; 
+        if(!(checkDate instanceof Object)){
+            if(movement.fecha.trim() == ""){
+                return ;
+            }   
+            fecha = moment(movement.fecha, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        }else{
+            fecha = moment(movement.fecha.date, 'YYYY-MM-DD HH:mm:ss.SSSSSS').format('DD-MM-YYYY');
+        }
+
         const chargeOrPayment = movement.abono > 0 ? "abono" : "cargo";
         const abono = movement.abono > 0 ? true : false;
-        const fecha = moment(movement.fecha.date, 'YYYY-MM-DD HH:mm:ss.SSSSSS').format('DD-MM-YYYY');
         const fechaTimeStamp = moment(fecha,'DD-MM-YYYY').format('X');
+
         return {
             fecha: fecha,
             fechaTimeStamp: fechaTimeStamp,
@@ -61,8 +66,6 @@ async function setBankMovementsInBankMovementsData(){
             abono: abono,
         }
     }).filter((movement) => movement != undefined);
-
-    console.log("5")
     
     // loop through all bank movements and add them to the corresponding day
     let counter = 1;
@@ -106,23 +109,10 @@ async function setBankMovementsInBankMovementsData(){
             // dayOnArray.total += monto;
             // counter++;
     });
-    console.log('bankMovementsData_!@+_!@+_!@+_',bankMovementsData.ingresos[652]);
-    console.log('bankMovementsData_!@+_!@+_!@+_',bankMovementsData.egresos[652]);
-
     // console.log('bankMovementsData',bankMovementsData);
-
     console.log('tributarieDocumentsCategories',tributarieDocumentsCategories); 
     // Get and Set all tributarie documents on future movements
     console.log('tributarieDocuments',tributarieDocuments);
-
-    // setFutureDocumentsOnBankMovements();
-
-    // // data for INTEC business
-    // const data = {
-    //     businessName: 'INTEC',
-    //     businessId: 77604901,
-    //     businessAccount: 63741369
-    // }
 
 }
 

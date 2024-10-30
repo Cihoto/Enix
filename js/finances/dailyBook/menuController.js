@@ -83,7 +83,6 @@ months.forEach((month) => {
         let month = e.target;
         console.log(month);
         const monthNumber = parseInt(month.getAttribute('monthnumber'));
-
         if(monthNumber === currentMonthNumber) {
             monthName.innerText = 'Mes en curso';
             // return;
@@ -105,20 +104,16 @@ yearButton.forEach((button) => {
 
 function openYearPicker(e) {
     document.querySelectorAll('.years').forEach((year) => {
-        console.log(e.target)
-
-
-        
         // get the position of clicked element and get his position 
         // to set the year picker on the same position
         const {top,left} = e.target.closest('.yearPicker').getBoundingClientRect();
         year.style.top = `${top + 20}px`;
         year.style.left = `${left}px`;
-
-
         year.classList.toggle('active');
     });
 }
+
+
 
 let selectedYear = parseInt(moment().format('YYYY'));
 years.forEach((yr) => {
@@ -137,11 +132,15 @@ years.forEach((yr) => {
     })
 });
 
-
-
-
-
 async function printContent(content) {
+
+    // get dinamycFloatingButton and remove it 
+    const floatingButton = document.getElementsByClassName('dinamycFloatingButton');
+    if(floatingButton.length > 0) {
+        floatingButton.forEach((button) => {
+            button.remove();
+        })
+    }
 
     // remove all active pages
     removeActivePages();
