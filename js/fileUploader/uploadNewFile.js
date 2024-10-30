@@ -289,9 +289,12 @@ function handleSchemaCreation(schemaName) {
 }
 
 async function printSchemas() {
-    const allSchemas = await fetch('./controller/excelHeadersSchema/getSch.php',{
-        method: 'POST'
-    }).then(res => res.json());
+    const allSchemasData = await fetch('./controller/excelHeadersSchema/getSch.php',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    })
+
+    const allSchemas = await allSchemasData.json();
     console.log('allSchemas',allSchemas);
     console.log('allSchemas',allSchemas);
     console.log('allSchemas',allSchemas);
