@@ -293,6 +293,13 @@ async function printSchemas() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
     }).then(res => res.json());
+    console.log('allSchemas',allSchemas);
+    console.log('allSchemas',allSchemas);
+    console.log('allSchemas',allSchemas);
+    console.log('allSchemas',allSchemas);
+    console.log('allSchemas',allSchemas);
+    console.log('allSchemas',allSchemas);
+    console.log('allSchemas',allSchemas);
     schemaSelect.innerHTML = '';
     schemaSelect.appendChild(createOption('', 'Seleccione un esquema'));
 
