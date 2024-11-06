@@ -1,6 +1,6 @@
 <?php
-require_once './fileManager.php';
-require_once '../../session/sessionManager.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/finance/commonMovements/fileManager.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
 
 header('Content-Type: application/json');
 

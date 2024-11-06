@@ -1,5 +1,6 @@
 <?php 
-    require_once '../../session/sessionManager.php';
+
+    require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
