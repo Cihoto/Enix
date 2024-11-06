@@ -1,12 +1,12 @@
 const commonMovementsTable = document.getElementById('financesCardTableContainer');
 
-function renderCommonMovementsTable(sortFunction, hidePaid = true) {
+async function renderCommonMovementsTable(sortFunction, hidePaid = true) {
 
     if(!activePage.common){
         return;
     }
 
-    // rmeove all Existing Rows
+    // remove all Existing Rows
     $('#bankMovementsTableHorizontal tr').remove();
 
     document.getElementById('financeTableContainer').classList.add('verticalMode');
@@ -21,6 +21,7 @@ function renderCommonMovementsTable(sortFunction, hidePaid = true) {
             <th>Desde</th>
             <th>Hasta</th>
             <th>Valor </th>
+            <th>Borrar</th>
         </tr>`
     tr.innerHTML = theadTr;
     tr.classList.add('headerRow');
@@ -41,10 +42,12 @@ function renderCommonMovementsTable(sortFunction, hidePaid = true) {
         mainTr.id = id;
         mainTr.classList.add('globalCommonRow');
         mainTr.innerHTML=`<td>${name}</td>
-                          <td>${income ? 'Ingreso' : 'Egreso'}</td>
-                          <td>${dateFrom}</td> 
-                          <td>${dateTo}</td>
-                          <td>${getChileanCurrency(movements[0].total)}</td>`;
+                  <td>${income ? 'Ingreso' : 'Egreso'}</td>
+                  <td>${dateFrom}</td> 
+                  <td>${dateTo}</td>
+                  <td>${getChileanCurrency(movements[0].total)}</td>
+                  ${createDeleteButton()}`;
+
         tbody.appendChild(mainTr);
         // movements.forEach((movement) => {
         //     const {printDate, total,desc, index} = movement;
@@ -133,6 +136,18 @@ function renderCommonMovementsTable(sortFunction, hidePaid = true) {
     // trFoot.innerHTML = tfootTr;
     // trFoot.classList.add('headerRow');
     // tfoot.appendChild(trFoot);
+}
+
+
+function createDeleteButton() {
+    // Create the button element
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'deleteCommonMovement';
+    deleteButton.innerText = 'Borrar';
+    const tdElement = document.createElement('td');
+    tdElement.appendChild(deleteButton);
+    // return element 
+    return tdElement.innerHTML;
 }
 
             // <td><p class="paymentStatus ${paidClass}">${isPaid}</p></td>

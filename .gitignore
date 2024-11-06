@@ -5,3 +5,4 @@ vendor/
 /getSessionData.php
 /closeSession.php
 /webScrapper.php
+/react.jsx  

@@ -26,9 +26,13 @@ async function prepareDataForFinance(){
     getAllDaysOnMonth([1,2,3,4,5,6,7,8,9,10,11,12]);
     bankMovementsData = setAllDaysOnYear();
 
-    const tributarieDocuments = await readTributarieDocumentsFromExcel();
-    const bankMovements = await getBankMovements();
-    const commonMovements = await getCommonMovements();
+    
+
+    const [tributarieDocuments, bankMovements, commonMovements] = await Promise.all([
+        readTributarieDocumentsFromExcel(),
+        getBankMovements(),
+        getCommonMovements()
+    ]);
 }
 
 

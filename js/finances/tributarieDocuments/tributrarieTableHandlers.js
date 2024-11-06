@@ -297,10 +297,27 @@ folioFilter.addEventListener('input', () => {
     // hide all rows that don't match the folio
     const rows = document.querySelectorAll('.tributarierRow');
     rows.forEach((row) => {
-        const rowId = row.getAttribute('folio');
-        if(!rowId.includes(currentValue)){
+        // loop td and find any value to match input value
+        const tds = row.children;
+        let found = false;
+        tds.forEach((td) => {
+            if(td.textContent.toLowerCase().includes(currentValue.toLowerCase())){
+            found = true;
+            }
+        });
+
+        if(!found){
             row.style.display = 'none';
         }
+
+        
+
+
+
+        // const rowId = row.getAttribute('folio');
+        // if(!rowId.includes(currentValue)){
+        //     row.style.display = 'none';
+        // }
     });
     
 })

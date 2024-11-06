@@ -83,7 +83,7 @@ saveHeadersAssignment.addEventListener('click', async function () {
         body: JSON.stringify(newExcelData)
     });
     const response = await writeNewExcel.json();
-
+    document.getElementById('headersAssigmentModal').style.display = 'none';
     Toastify({
         text: response.success ? "Excel file created successfully!" : "Error creating Excel file!",
         duration: 3000,

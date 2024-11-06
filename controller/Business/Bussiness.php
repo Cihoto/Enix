@@ -1,6 +1,6 @@
 <?php
-require_once '../database/bd.php';
-require_once '../Bank/Bank.php';
+require_once  $_SERVER['DOCUMENT_ROOT'].'/controller/database/bd.php';
+require_once  $_SERVER['DOCUMENT_ROOT'].'/controller/Bank/Bank.php';
 
 class Business { 
     private $businessId,
@@ -153,6 +153,16 @@ class Business {
         $result = mysqli_stmt_get_result($query);
         $row = mysqli_fetch_assoc($result);
         return $row['id'];
+    }
+
+    public function getDatabaseBusinessId(){
+        require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
+        $sessionManager = new SessionManager();
+
+        $businessId = $sessionManager->getAllSessionData()['businessId'];
+        $bdBusinessId = $this->getBdBusinessId($businessId);
+
+        return $bdBusinessId;
     }
 
 }

@@ -2,254 +2,219 @@ const OPTION_BUTTONS = document.querySelectorAll('.btnOpt');
 const monthButton = document.querySelectorAll('.monthPicker');
 const months = document.querySelectorAll('.mnth');
 const monthName = document.getElementById('monthName');
-
 const yearButton = document.querySelectorAll('.yearPicker');
 const years = document.querySelectorAll('.yr');
 const yearname = document.getElementById('yearName');
+const btnRangeSelector = document.getElementsByClassName('btnRangeSelector');
 
 let activePage = {
-    cashFlow : false,
-    payments : false,
-    charges : false,
+    cashFlow: false,
+    payments: false,
+    charges: false,
     paid: false,
-    common : false
-}
-OPTION_BUTTONS.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        OPTION_BUTTONS.forEach((button) => {
-            button.classList.remove('active');
-        });
+    common: false
+};
 
-        let optbtn = e.target;
-        console.log(optbtn);
-        if(!optbtn.classList.contains('btnOpt')) {
-            // find the parent of the button
-            optbtn = e.target.parentElement;
-
-            while(!optbtn.classList.contains('btnOpt')) {
-                optbtn = optbtn.parentElement;
-            }
-        }
-        console.log(optbtn);
-        
-        let contentToPrint = optbtn.getAttribute('contentToPrint');
-        printContent(contentToPrint)
-        optbtn.classList.add('active');
-        // get name atttribute of the button
-        let opt = optbtn.getAttribute('menuName');
-        changeValueHeaderMenu(opt);
-        // get the content to print
-
-    });
-
-});
-
-function changeValueHeaderMenu(value) {
-    let header = document.getElementById('contentHeader');
-
-
-    header.innerHTML = value.replaceAll('_', ' ');
-}
-
-
-function removeActivePages() {
-    activePage.cashFlow = false;
-    activePage.payments = false;
-    activePage.charges = false;
-    activePage.paid = false;
-    activePage.common = false;
-}
-
-function removeAllTableClasses(){
-    table.classList = "";
-}
-
-monthButton.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        openMonthsPicker();
-    });
-});
-
-function openMonthsPicker() {
-    document.querySelectorAll('.months').forEach(month => {
-        month.classList.toggle('active');
-    });
+const selectedPeriod = ()=>{
+    const selected = document.querySelector('.btnRangeSelector.active');
+    return selected ? selected.getAttribute('period') : 'daily';
 }
 
 let selectedMonth = parseInt(moment().format('M'));
-months.forEach((month) => {
-    const currentMonthNumber = parseInt(moment().format('M'));
-    month.addEventListener('click', (e) => {
-        let month = e.target;
-        console.log(month);
-        const monthNumber = parseInt(month.getAttribute('monthnumber'));
-        if(monthNumber === currentMonthNumber) {
-            monthName.innerText = 'Mes en curso';
-            // return;
-        }
-        selectedMonth = monthNumber;
-        monthName.innerText = month.innerText;
-        console.log(monthNumber);
+let selectedYear = parseInt(moment().format('YYYY'));
 
-        renderMyChasFlowTable(selectedMonth,selectedYear)
-        // getandSetDatafromClay(monthNumber);
-    })
+OPTION_BUTTONS.forEach(button => {
+    button.addEventListener('click', handleOptionButtonClick);
 });
 
-yearButton.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        openYearPicker(e);
-    });
+monthButton.forEach(button => {
+    button.addEventListener('click', openMonthsPicker);
 });
+
+months.forEach(month => {
+    month.addEventListener('click', handleMonthClick);
+});
+
+yearButton.forEach(button => {
+    button.addEventListener('click', openYearPicker);
+});
+
+years.forEach(year => {
+    year.addEventListener('click', handleYearClick);
+});
+
+btnRangeSelector.forEach(button => {
+    button.addEventListener('click', handleRangeSelectorClick);
+});
+
+function handleOptionButtonClick(e) {
+    console.log("asdkasldkjl")
+    OPTION_BUTTONS.forEach(button => button.classList.remove('active'));
+    let optbtn = e.target.closest('.btnOpt');
+    optbtn.classList.add('active');
+    let contentToPrint = optbtn.getAttribute('contentToPrint');
+    printContent(contentToPrint);
+    let opt = optbtn.getAttribute('menuName');
+    changeValueHeaderMenu(opt);
+}
+
+function changeValueHeaderMenu(value) {
+    document.getElementById('contentHeader').innerHTML = value.replaceAll('_', ' ');
+}
+
+function removeActivePages() {
+    Object.keys(activePage).forEach(key => activePage[key] = false);
+}
+
+function removeAllTableClasses() {
+    table.className = "";
+}
+
+function openMonthsPicker() {
+    document.querySelectorAll('.months').forEach(month => month.classList.toggle('active'));
+}
+
+function handleMonthClick(e) {
+    let month = e.target;
+    const monthNumber = parseInt(month.getAttribute('monthnumber'));
+    selectedMonth = monthNumber;
+    monthName.innerText = monthNumber === parseInt(moment().format('M')) ? 'Mes en curso' : month.innerText;
+    renderMyChasFlowTable(selectedMonth, selectedYear);
+}
 
 function openYearPicker(e) {
-    document.querySelectorAll('.years').forEach((year) => {
-        // get the position of clicked element and get his position 
-        // to set the year picker on the same position
-        const {top,left} = e.target.closest('.yearPicker').getBoundingClientRect();
+    const { top, left } = e.target.closest('.yearPicker').getBoundingClientRect();
+    document.querySelectorAll('.years').forEach(year => {
         year.style.top = `${top + 20}px`;
         year.style.left = `${left}px`;
         year.classList.toggle('active');
     });
 }
 
-
-
-let selectedYear = parseInt(moment().format('YYYY'));
-years.forEach((yr) => {
-
-    yr.addEventListener('click', (e) => {
-        let year = e.target;
-        console.log(year);
-        const yearNumber = parseInt(year.getAttribute('yearNumber'));
-
-        selectedYear = yearNumber;
-        yearname.innerText = yr.innerText;
-        console.log(yearNumber);
-
-        renderMyChasFlowTable(selectedMonth,selectedYear);
-        // getandSetDatafromClay(monthNumber);
-    })
-});
+function handleYearClick(e) {
+    let year = e.target;
+    selectedYear = parseInt(year.getAttribute('yearNumber'));
+    yearname.innerText = year.innerText;
+    // renderMyChasFlowTable(selectedMonth, selectedYear);
+    const view = Object.keys(activePage).find(key => activePage[key]);
+    console.log('view', view);
+    console.log('view', view);
+    console.log('view', view);
+    console.log('view', view);
+    handleTableRendering(undefined, selectedYear);
+}
 
 async function printContent(content) {
-
-    // get dinamycFloatingButton and remove it 
-    const floatingButton = document.getElementsByClassName('dinamycFloatingButton');
-    if(floatingButton.length > 0) {
-        floatingButton.forEach((button) => {
-            button.remove();
-        })
-    }
-
-    // remove all active pages
+    document.querySelectorAll('.dinamycFloatingButton').forEach(button => button.remove());
     removeActivePages();
-    //remove all tr on thead
-
-    console.log('THEAD',thead);
-    console.log('THEAD ROWS',table.rows);
-
-    // CONST FROM tributrarieTableHandlers.js
-    // RESET VARIABLES
-    paymentsIsActive = false;
-    chargesIsActive = false;
     removeAllTableClasses();
+    showView(content)
     
-    // remove tr from table
-    $('#bankMovementsTableHorizontal tr').remove();
+}
 
-    // redirect to the correct content
-    if(content === 'dash') {
-        // printDash();
-    }   
-    if(content === 'flj') {
-        setCashFlowControls();
-        activePage.cashFlow = true;
-        table.classList.add('horizontal');
-        table.classList.add('cashFlowTable');
-        
-        renderMyChasFlowTable(selectedMonth,selectedYear);
-        return 
-        await getTotalOutCome();
-        renderMyHorizontalView([selectedMonth]);
-        printDailyBookTable(tbody,
-            allDaysOnYear,
-            getDocumentOutPaymentDate,
-            incomeAccountRows,
-            accountData_IncomeNoDocumentWithFolio, 
-            accountData_OutcomeNoDocumentWithFolio,
-            outRows,
-            futureDocuments,
-            totalDailyBalance);
+function handleTableRendering(month = moment().format("MM"), year = moment().format('YYYY')){
+    console.log('handleTableRendering');
+    let activePageName = Object.keys(activePage).find(key => activePage[key]);
 
-        setTimeout(() => {
+    // get activePage object and get the key that is true
+    activePageName = Object.keys(activePage).find(key => {
+        console.log('+++++activePage[key]+++++', activePage[key]);
+        return activePage[key]
+    });
+    
+    
+    console.log('activePageName', activePageName);
+    console.log('activePageName', activePageName);
+    console.log('activePageName', activePageName);
+    console.log('activePageName', activePageName);
+    console.log('activePageName', activePageName);
+    console.log('activePageName', activePageName);
+    console.log('activePageName', activePageName);
 
-            console.log(table.rows)
-        }, 3000);
-
-    }   
-    if(content === 'pag') {
-        setCharges_Payments_Controls();
-        activePage.payments = true;
-        resetHidePaidDocumentsButton();
-        paymentsIsActive = true;
-        table.classList.add('vertical');
-        // change value to msort futureDocuments by date 
-        // set on -1 to sort by date
-        // sortedByDate = -1;
-        sortedByDate = 0;
-        // renderPendingPayments();
-        renderPaymentsCards();
-        renderPaymentsTable(cardFilterAllPaymentsDocuments());
-    }   
-    if(content === 'cob') {
-        setCharges_Payments_Controls();
-        activePage.charges = true;
-        actualNotPaidFilter = false;
-
-        resetHidePaidDocumentsButton();
-        chargesIsActive = true;
-        table.classList.add('vertical');
-        // change value to msort futureDocuments by date 
-        // set on -1 to sort by date
-        // sortedByDate = -1;
-        sortedByDate = 0;
-        renderChargesCards();
-        renderChargesTable(cardFilterAllChargesDocuments());
-    }   
-    if(content === 'paid') {
-        setCharges_PaidControls()
-        activePage.paid = true; 
-        actualNotPaidFilter = false;
-
-        table.classList.add('vertical');
-        sortedByDate = 0;
-
-        renderPaidDocuments(getPaidDocuments(),false);
-
-        return
-        actualNotPaidFilter = false;
-        resetHidePaidDocumentsButton();
-        chargesIsActive = true;
-        // change value to msort futureDocuments by date 
-        // set on -1 to sort by date
-        // sortedByDate = -1;
-    }   
-    if(content === 'common') {
-        setCommonMovementsControls();
-        console.log('common');  
-        console.log('common');
-
-        activePage.common = true;
-        table.classList.add('vertical');
-        table.classList.add('commonMovementsTable');
-        renderCommonMovementsTable();
+    switch (activePageName) {
+        case 'cashFlow':
+            if(selectedPeriod() == 'daily') {
+                console.log('selectedPeriod() DAILY', selectedPeriod());
+                renderMyChasFlowTable(month, year);
+            }
+            if(selectedPeriod() == 'monthly') {
+                console.log('selectedPeriod() MONTHLY', selectedPeriod());
+                resumeCshFlowMonthly(year);
+            }
+            break;
+        case 'payments':
+            renderPaymentsCards();
+            renderPaymentsTable(cardFilterAllPaymentsDocuments());
+            // renderPaymentsTable(cardFilterAllPaymentsDocuments());
+            break;
+        case 'charges':
+            renderChargesCards();
+            renderChargesTable(cardFilterAllChargesDocuments());
+            break;
+        case 'paid':
+            renderPaidDocuments(getPaidDocuments(), false);
+            break;
+        case 'common':
+            renderCommonMovementsTable();
+            break;
     }
-};
+}
+
+function showView(view) {
+    // $('#bankMovementsTableHorizontal tr').remove();
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
+    tfoot.innerHTML = '';
+
+    switch (view) {
+        case 'flj':
+            setCashFlowControls();
+            activePage.cashFlow = true;
+            table.classList.add('horizontal', 'cashFlowTable');
+            handleTableRendering(selectedMonth, selectedYear)
+            break;
+        case 'pag':
+            // CONFIG PAGE
+            setCharges_Payments_Controls();
+            activePage.payments = true;
+            resetHidePaidDocumentsButton();
+            paymentsIsActive = true;
+            table.classList.add('vertical');
+            sortedByDate = 0;
+            // RENDER TABLE
+            handleTableRendering()
+            break;
+        case 'cob':
+            setCharges_Payments_Controls();
+            activePage.charges = true;
+            actualNotPaidFilter = false;
+            resetHidePaidDocumentsButton();
+            chargesIsActive = true;
+            table.classList.add('vertical');
+            sortedByDate = 0;
+            handleTableRendering()
+            break;
+        case 'paid':
+            setCharges_PaidControls();
+            activePage.paid = true;
+            actualNotPaidFilter = false;
+            table.classList.add('vertical');
+            sortedByDate = 0;
+            handleTableRendering()
+            break;
+        case 'common':
+            setCommonMovementsControls();
+            activePage.common = true;
+            table.classList.add('vertical', 'commonMovementsTable');
+            handleTableRendering()
+            break;
+    }
+}
 
 function hideDateSelectors() {
     document.getElementById('datePicker').style.display = 'none';
 }
+
 function showDateSelectors() {
     document.getElementById('datePicker').style.display = 'flex';
 }
@@ -257,39 +222,75 @@ function showDateSelectors() {
 function hideFolioFilter() {
     document.getElementById('filterByFolio').style.display = 'none';
 }
+
 function showFolioFilter() {
     document.getElementById('filterByFolio').style.display = 'flex';
 }
 
 function hideIssued_RecievedButtons() {
     document.getElementById('utilityBtns').style.display = 'none';
-} 
+}
+
 function showIssued_RecievedButtons() {
     document.getElementById('utilityBtns').style.display = 'flex';
 }
 
-function setCashFlowControls(){
+function showPeriodButtons() {
+    document.getElementById('periodSelectors').style.display = 'flex';
+}
+
+function hidePeriodButtons() {
+    document.getElementById('periodSelectors').style.display = 'none';
+}
+
+function setCashFlowControls() {
     showDateSelectors();
     hideFolioFilter();
     hideIssued_RecievedButtons();
+    showPeriodButtons();
 }
 
-function setCharges_Payments_Controls(){
+function setCharges_Payments_Controls() {
+    hidePeriodButtons();
     hideDateSelectors();
     showFolioFilter();
     hideIssued_RecievedButtons();
 }
-function setCharges_PaidControls(){
+
+function setCharges_PaidControls() {
+    hidePeriodButtons();
     hideDateSelectors();
     showFolioFilter();
     showIssued_RecievedButtons();
 }
 
-function setCommonMovementsControls(){
+function setCommonMovementsControls() {
+    hidePeriodButtons();
     hideDateSelectors();
     hideFolioFilter();
     hideIssued_RecievedButtons();
 }
+
+function handleRangeSelectorClick(e) {
+    btnRangeSelector.forEach(button => button.classList.remove('active'));
+    e.target.closest('.btnRangeSelector').classList.add('active');
+    const period = selectedPeriod();
+
+    if(period == 'monthly') {
+        monthButton[0].style.display = 'none';
+    }
+    if(period == 'daily') {
+        monthButton[0].style.display = 'flex';
+    }
+    
+    handleTableRendering(undefined, selectedYear);
+}
+
+
+
+
+
+
 
 
 

@@ -27,6 +27,9 @@ let bhe = [];
 // }
 
 window.addEventListener("load", async (event) => {
+
+
+    // return 
     prepareDataForFinance();
     // getBankMovements()
     return 

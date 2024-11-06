@@ -1,6 +1,6 @@
 <?php
 // include_once '../../session/sessionManager.php';
-include_once '../../session/sessionManager.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'\controller\session\sessionManager.php';
 class FileManager {
     private $filePath,$fullPath;
     

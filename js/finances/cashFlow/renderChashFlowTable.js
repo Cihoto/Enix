@@ -22,6 +22,7 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
     if (!activePage.cashFlow) {
         return;
     }
+    console.log("SELECTEDYEAR", selectedYear,"ACIVE PAGE CASHFLOW",activePage.cashFlow);
     await getInitialBankAccountBalance();
     const allDaysOnYear = getAllDaysBetweenYears([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], selectedYear);
     let previousAccountBalance = cashFlowTotals.initialBankAccount;
@@ -54,8 +55,10 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
 
     removeAllTableRows();
     renderMyHorizontalView([pickedMonth], selectedYear);
+
     const totalIncomeTr = setTotalIncomeResumeRow();
     tbody.appendChild(totalIncomeTr);
+
     const incomeTr = setNewincomeRow('Ingresos', 'ingresos');
     tbody.appendChild(incomeTr);
     const projectedDocumentsTr = setNewincomeRow('Ingresos futuros', 'projectedIncome');
@@ -64,9 +67,12 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
     tbody.appendChild(projectedOutDatedDocumentsTr);
     const frecuentIncomeRow = setNewincomeRow('Ingresos frecuentes', 'commonIncomeMovements');
     tbody.appendChild(frecuentIncomeRow);
+
     tbody.appendChild(setEmptyRow());
+
     const totalOutComeTr = setOutcomeResumeRow();
     tbody.appendChild(totalOutComeTr);
+
     const outcomTr = setNewincomeRow('Egresos', 'egresos');
     tbody.appendChild(outcomTr);
     const outComeProjectedDocumentsTr = setNewincomeRow('Egresos futuros', 'projectedOutcome');
@@ -76,6 +82,7 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
     const frecuentOutcomeRow = setNewincomeRow('Egresos recurrentes', 'commonOutcomeMovements');
     tbody.appendChild(frecuentOutcomeRow);
     tbody.appendChild(setEmptyRow());
+
     const totalTr = setTotalRow();
     tbody.appendChild(totalTr);
     createDailyBalance();
@@ -134,11 +141,11 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
             egresosTr.children[doty].innerHTML = getChileanCurrency(totalOutcome);
             outcomeRow.children[doty].innerHTML = getChileanCurrency(totalOutcome);
             projectedIncomeRow.children[doty].innerHTML = getChileanCurrency(projectedIncome);
-            projectedOutdatedIncomeRow.children[doty].innerHTML = getChileanCurrency(0);
-            commonIncomeMovements.children[doty].innerHTML = getChileanCurrency(0);
+            projectedOutdatedIncomeRow.children[doty].innerHTML = 0;
+            commonIncomeMovements.children[doty].innerHTML = 0;
             projectedOutcomeRow.children[doty].innerHTML = getChileanCurrency(projectedOutcome);
-            projectedOutdatedOutcomeRow.children[doty].innerHTML = getChileanCurrency(0);
-            commonOutcomeMovements.children[doty].innerHTML = getChileanCurrency(0);
+            projectedOutdatedOutcomeRow.children[doty].innerHTML = 0;
+            commonOutcomeMovements.children[doty].innerHTML = 0;
             continue;
         }
 
@@ -198,9 +205,9 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
         });
 
         ingresosTr.children[doty].innerHTML = getChileanCurrency(totals.income.total);
-        incomeRow.children[doty].innerHTML = getChileanCurrency(0);
+        incomeRow.children[doty].innerHTML = 0
         egresosTr.children[doty].innerHTML = getChileanCurrency(totals.outcome.total);
-        outcomeRow.children[doty].innerHTML = getChileanCurrency(0);
+        outcomeRow.children[doty].innerHTML = 0
         projectedIncomeRow.children[doty].innerHTML = getChileanCurrency(totals.income.projected);
         projectedOutdatedIncomeRow.children[doty].innerHTML = getChileanCurrency(totals.income.outdated);
         commonIncomeMovements.children[doty].innerHTML = getChileanCurrency(totals.income.common);

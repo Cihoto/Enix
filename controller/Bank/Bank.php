@@ -1,5 +1,5 @@
 <?php
-    require_once '../database/bd.php';
+    require_once  $_SERVER['DOCUMENT_ROOT'].'/controller/database/bd.php';
 
     class Bank extends Business {
         private $bankId;

@@ -213,20 +213,21 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                     </div>
                 </div>
                 <div class="card-body">
-                    <!-- <div class="body-header">
-                        <button class="btnRangeSelector active">
-                            <p>Diario</p>
-                        </button>
-                        <button class="btnRangeSelector">
-                            <p>Semanal</p>
-                        </button>
-                        <button class="btnRangeSelector">
-                            <p>Mensual</p>
-                        </button>
-                    </div> -->
+                    <div class="body-header">
+                        <div id="periodSelectors">
+                            <button period="daily" class="btnRangeSelector active">
+                                <p>Diario</p>
+                            </button>
+                            <!-- <button class="btnRangeSelector">
+                                <p>Semanal</p>
+                            </button> -->
+                            <button period="monthly" class="btnRangeSelector">
+                                <p>Mensual</p>
+                            </button>
+                        </div>
+                    </div>
                     <div class="body-content">
                         <div class="monthSelector">
-
                             <div id="datePicker" class="dateSelector">
                                 <div class="yearPicker">
                                     <p id="yearName"><?php echo date("Y") ?></p>
@@ -263,14 +264,9 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                         <p class="mnth" monthNumber="12">Diciembre</p>
                                     </div>
                                 </div>
-                                <button id="monthlyView">VISTA MENSUAL</button>
                             </div>
 
-                            <!-- <div clas="modified">
-
-                            </div> -->
-
-                            <input type="text" id="filterByFolio" placeholder="Buscar por folio">
+                            <input type="text" id="filterByFolio" placeholder="Buscar Documento">
                             <div id="utilityBtns" class="paidDocsFilters">
                                 <button class="utilityButtons" id="showIssued">Mostrar Emitidas</button>
                                 <button class="utilityButtons" id="showReceived">Mostrar Recibidas</button>
@@ -351,6 +347,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <script src="./js/finances/commonMovements/getCommonMovements.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/commonMovements/commonMovementsHandlers.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/commonMovements/commonMovementsListHandlers.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/commonMovements/update.js?v=<?php echo time(); ?>"></script> 
 
     <!-- CARGA MANUAL -->
     <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time(); ?>"></script>
@@ -370,16 +367,40 @@ $isSuperAdmin = $_SESSION['superAdmin'];
 
     <script src="./js/fileUploader/uploadNewFile.js?v=<?php echo time();?>"></script>
 
-
-
     <!-- test only -->
     <script src="./js/finances/cashFlow/renderMonthlycashFlow.js"></script>
-
-
-
-
     
     <script>
+
+        //  // // // // // // // // // // // iinsertCommonMovementsFromJson();
+
+        
+
+        // insertCommonMovementsFromJson();
+
+        // async function getCommonMovements(){
+        //     const commonMovsResponse = await getAllCommonMovements();
+        //     COMMON_MOVEMENTS = commonMovsResponse.data;
+        //     // const commonMovements = [];
+        //     // const commonMovements = commonMovsResponse.data;
+        //     // console.log('commonMovements',commonMovements);
+        //     setCommonMovementsInBankMovements();
+        //     console.log(bankMovementsData);
+        //     return true;
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
         // const createBusinessButton = document.getElementById('bussinessManager');
 
         // createBusinessButton.addEventListener('click', () => {

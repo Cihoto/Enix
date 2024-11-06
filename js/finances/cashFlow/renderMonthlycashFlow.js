@@ -1,33 +1,42 @@
-const monthlyCashFlow = document.getElementById('monthlyView');
-
-monthlyCashFlow.addEventListener('click', async  () => {
-    resumeCshFlowMonthly();
-});
-
-
+// Dependencies: js/finances/cashFlow/getInitialBankAccountBalance.js
 // const table = document.getElementById("bankMovementsTableHorizontal");
 // const thead = table.getElementsByTagName("thead")[0];
 // const tbody = table.getElementsByTagName("tbody")[0];
 // const tfoot = table.getElementsByTagName("tfoot")[0];
 
-async function resumeCshFlowMonthly() {
+async function resumeCshFlowMonthly(selectedYear = moment().format('YYYY')) {
     console.log('resumeCshFlowMonthly');
+    console.log('selectedYear',selectedYear);
     await getInitialBankAccountBalance();
     const allDaysOnYear = getAllDaysBetweenYears([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], selectedYear);
     let previousAccountBalance = cashFlowTotals.initialBankAccount;
-    const totalDailyBalance = allDaysOnYear.map((date, index) => {
+
+    console.log('selectedYear',selectedYear);
+    console.log('allDaysOnYear',allDaysOnYear);
+
+    const totalDailyBalance = allDaysOnYear.map((date) => {
+
         const indexOnAllMydates = allMyDates.findIndex((myDate) => myDate == date);
-        const totalIncome = bankMovementsData.ingresos[indexOnAllMydates].total;
-        const totalOutCome = bankMovementsData.egresos[indexOnAllMydates].total;
+
+        let totalIncome = bankMovementsData.ingresos[indexOnAllMydates].total;
+        let totalOutCome = bankMovementsData.egresos[indexOnAllMydates].total;
         const totalProjectedIncome = bankMovementsData.projectedIncome[indexOnAllMydates].total;
         const totalProjectedOutcome = bankMovementsData.projectedOutcome[indexOnAllMydates].total;
-        let totalProjected = 0;
-        if (moment(date, 'YYYY-MM-DD').dayOfYear() > moment().dayOfYear()) {
-            totalProjected = totalProjectedIncome - totalProjectedOutcome;
-        }
         const totalCommonIncomeMovements = bankMovementsData.commonIncomeMovements[indexOnAllMydates].total;
         const totalCommonOutcomeMovements = bankMovementsData.commonOutcomeMovements[indexOnAllMydates].total;
-        const total = totalIncome + totalCommonIncomeMovements - totalOutCome - totalCommonOutcomeMovements + totalProjected;
+
+        let totalProjected = 0;
+        if ((selectedYear == moment().format('YYYY')) && (moment(date).dayOfYear() > moment().dayOfYear())) {
+            totalProjected = totalProjectedIncome - totalProjectedOutcome;
+            totalIncome += totalCommonIncomeMovements;
+            totalOutCome += totalCommonOutcomeMovements;
+        }else if(selectedYear != moment().format('YYYY')){
+            totalProjected = totalProjectedIncome - totalProjectedOutcome;
+            totalIncome += totalCommonIncomeMovements;
+            totalOutCome += totalCommonOutcomeMovements;
+        }
+
+        const total = totalIncome  - totalOutCome  + totalProjected;
         previousAccountBalance += total;
         return {
             date,
@@ -39,115 +48,105 @@ async function resumeCshFlowMonthly() {
             previousAccountBalance,
         };
     });
+
     const monthlyBalance = totalDailyBalance.reduce((acc, day) => {
         const month = moment(day.date).format('MMMM');
-        if (!acc[month]) {
-            acc[month] = {
+        const year = moment(day.date).format('YYYY');
+        if (!acc[year]) {
+            acc[year] ={}
+        }
+
+        if(!acc[year][month]){
+            acc[year][month] = {
                 totalIncome: 0,
                 totalOutCome: 0,
                 total: 0,
                 previousAccountBalance: 0,
+                projectedIncome: 0,
+                projectedOutcome: 0,
             };
         }
-        acc[month].totalIncome += day.totalIncome;
-        acc[month].totalOutCome += day.totalOutCome;
-        acc[month].total += day.total;
-        acc[month].previousAccountBalance = day.previousAccountBalance;
+
+        acc[year][month].totalIncome += day.totalIncome;
+        acc[year][month].totalOutCome += day.totalOutCome;
+        acc[year][month].total += day.total;
+        acc[year][month].previousAccountBalance = day.previousAccountBalance;
 
         // if day greater than today, add to projectedIncome and projectedOutcome
         if (day.dayOfYear > moment().dayOfYear()) {
-            acc[month].projectedIncome = acc[month].projectedIncome ? acc[month].projectedIncome + day.totalIncome : day.totalIncome;
-            acc[month].projectedOutcome = acc[month].projectedOutcome ? acc[month].projectedOutcome + day.totalOutCome : day.totalOutCome;
+            acc[year][month].projectedIncome += bankMovementsData.projectedIncome[allMyDates.findIndex((myDate) => myDate == day.date)].total;
+            acc[year][month].projectedOutcome += bankMovementsData.projectedOutcome[allMyDates.findIndex((myDate) => myDate == day.date)].total;
         }
         return acc;
     }, {});
 
     console.log('monthlyBalance', monthlyBalance);
 
-    // get amount of objects in monthlyBalance
-    const length = Object.keys(monthlyBalance).length;
-
-    
-
+    // GET AMOUNT OF OBJECTS IN MONTHLYBALANCE (WILL BE THE AMOUNT OF COLUMNS IN THE TABLE)
+    const length = Object.keys(monthlyBalance[selectedYear]).length;
 
     removeAllTableRows();
-    renderMyHorizontalViewMonthly(monthlyBalance);
+    renderMyHorizontalViewMonthly(monthlyBalance[selectedYear]);
+
     const totalIncomeTr = setTotalIncomeResumeRowMonthly(length);
     tbody.appendChild(totalIncomeTr);
-    const incomeTr = setNewincomeRowMonthly(length,'Ingresos', 'ingresos');
-    tbody.appendChild(incomeTr);
-    const projectedDocumentsTr = setNewincomeRowMonthly(length,'Ingresos futuros', 'projectedIncome');
-    tbody.appendChild(projectedDocumentsTr);
-    const projectedOutDatedDocumentsTr = setNewincomeRowMonthly(length,'Ingresos atrasados', 'projectedOutdatedIncomeRow');
-    tbody.appendChild(projectedOutDatedDocumentsTr);
-    const frecuentIncomeRow = setNewincomeRowMonthly(length,'Ingresos frecuentes', 'commonIncomeMovements');
-    tbody.appendChild(frecuentIncomeRow);
+
+    // const incomeTr = setNewincomeRowMonthly(length,'Ingresos', 'ingresos');
+    // tbody.appendChild(incomeTr);
+    // const projectedDocumentsTr = setNewincomeRowMonthly(length,'Ingresos futuros', 'projectedIncome');
+    // tbody.appendChild(projectedDocumentsTr);
+    // const projectedOutDatedDocumentsTr = setNewincomeRowMonthly(length,'Ingresos atrasados', 'projectedOutdatedIncomeRow');
+    // tbody.appendChild(projectedOutDatedDocumentsTr);
+    // const frecuentIncomeRow = setNewincomeRowMonthly(length,'Ingresos frecuentes', 'commonIncomeMovements');
+    // tbody.appendChild(frecuentIncomeRow);
 
     tbody.appendChild(setEmptyRowMonthly(length));
 
     const totalOutComeTr = setOutcomeResumeRowMonthly(length);
     tbody.appendChild(totalOutComeTr);
-    const outcomTr = setNewincomeRowMonthly(length,'Egresos', 'egresos');
-    tbody.appendChild(outcomTr);
-    const outComeProjectedDocumentsTr = setNewincomeRowMonthly(length,'Egresos futuros', 'projectedOutcome');
-    tbody.appendChild(outComeProjectedDocumentsTr);
-    const projectedOutDatedDocumentsTrOut = setNewincomeRowMonthly(length,'Egresos atrasados', 'projectedOutdatedOutcomeRow');
-    tbody.appendChild(projectedOutDatedDocumentsTrOut);
-    const frecuentOutcomeRow = setNewincomeRowMonthly(length,'Egresos recurrentes', 'commonOutcomeMovements');
-    tbody.appendChild(frecuentOutcomeRow);
+
+    // const outcomTr = setNewincomeRowMonthly(length,'Egresos', 'egresos');
+    // tbody.appendChild(outcomTr);
+    // const outComeProjectedDocumentsTr = setNewincomeRowMonthly(length,'Egresos futuros', 'projectedOutcome');
+    // tbody.appendChild(outComeProjectedDocumentsTr);
+    // const projectedOutDatedDocumentsTrOut = setNewincomeRowMonthly(length,'Egresos atrasados', 'projectedOutdatedOutcomeRow');
+    // tbody.appendChild(projectedOutDatedDocumentsTrOut);
+    // const frecuentOutcomeRow = setNewincomeRowMonthly(length,'Egresos recurrentes', 'commonOutcomeMovements');
+    // tbody.appendChild(frecuentOutcomeRow);
 
     tbody.appendChild(setEmptyRowMonthly(length));
 
     const totalTr = setTotalRowMonthly(length);
     tbody.appendChild(totalTr);
+
     const balanceTr = setDailyBalanceRowMonthly(length);
     tbody.appendChild(balanceTr);
-
-
 
     // get .allDates row and find th[month=""] and locate totals in the same column
     const allDatesRow = document.querySelector('.allDates');
 
     // loop through monthlyBalance and set totals in the same column
-    Object.keys(monthlyBalance).forEach((month, index) => {
+    Object.keys(monthlyBalance[selectedYear]).forEach((month, index) => {
         const th = allDatesRow.querySelector(`th[month="${month}"]`);
         const columnIndex = th.cellIndex;
         
         // get totalIncomeTr and set totalIncome
         const totalIncomeTd = totalIncomeTr.children[columnIndex];
-        totalIncomeTd.innerHTML = monthlyBalance[month].totalIncome;
+        totalIncomeTd.innerHTML = getChileanCurrency(monthlyBalance[selectedYear][month].totalIncome + monthlyBalance[selectedYear][month].projectedIncome)
 
         // get totalOutComeTr and set totalOutCome
         const totalOutComeTd = totalOutComeTr.children[columnIndex];
-        totalOutComeTd.innerHTML = monthlyBalance[month].totalOutCome;
+        totalOutComeTd.innerHTML = getChileanCurrency(monthlyBalance[selectedYear][month].totalOutCome + monthlyBalance[selectedYear][month].projectedOutcome);
 
         // get totalTr and set total
         const totalTd = totalTr.children[columnIndex];
-        totalTd.innerHTML = monthlyBalance[month].total;
+        totalTd.innerHTML = getChileanCurrency(monthlyBalance[selectedYear][month].total);
 
         // get balanceTr and set balance
         const balanceTd = balanceTr.children[columnIndex];
-        balanceTd.innerHTML = monthlyBalance[month].previousAccountBalance;
-
-        // if month is greater than actual month, add projected income or outcome
-        if (moment(month, 'MMMM').month() > moment().month()) {
-            if (monthlyBalance[month].projectedIncome) {
-                totalIncomeTd.innerHTML += ` (Projected: ${monthlyBalance[month].projectedIncome})`;
-            }
-            if (monthlyBalance[month].projectedOutcome) {
-                totalOutComeTd.innerHTML += ` (Projected: ${monthlyBalance[month].projectedOutcome})`;
-            }
-        }
+        balanceTd.innerHTML = getChileanCurrency(monthlyBalance[selectedYear][month].previousAccountBalance);
     });
-    
-
-
-
-
-    
 }
-
-
 
 function setNewincomeRowMonthly(length, rowName, code) {
     const tr = document.createElement('tr');
@@ -161,8 +160,6 @@ function setNewincomeRowMonthly(length, rowName, code) {
     tr.innerHTML = `${firstTd}${contentTd}`;
     return tr;
 }
-
-
 
 const setTotalIncomeResumeRowMonthly = (length) => {
     const tr = document.createElement('tr');

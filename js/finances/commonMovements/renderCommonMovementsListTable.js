@@ -17,13 +17,15 @@ function renderCommonMovementsListTable(movementsToList){
     movements.forEach((movement) => {
         const {printDate,total,desc,index} = movement;
         const tr = document.createElement('tr');
+        tr.setAttribute("parentId",id);
+        tr.setAttribute("childId",movement.id);
         console.log('printDate',printDate);
         tr.innerHTML = `
-            <td>${name}</td>
-            <td>${printDate}</td>
-            <td class="cmmTotalChg">${getChileanCurrency(total)}</td>
-            <td class="cmmDescChg">${desc}</td>`;
-            tr.id = `${id}${index}`
+            <td name="name">${name}</td>
+            <td name="printDate" >${printDate}</td>
+            <td name="total" class="cmmTotalChg">${getChileanCurrency(total)}</td>
+            <td name="desc" class="cmmDescChg">${desc}</td>`;
+            tr.id = `${movement.id}`
         commonMovementsListTableTbody.append(tr);
     })
 }

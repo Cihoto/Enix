@@ -225,6 +225,7 @@ async function handleFileChange(fileInputId, schemaType) {
 
     headers = excelData;
     headersAssigmentModal.style.display = 'block';
+    closeUploadFinanceFiles();
     schema_type = schemaType;
     printSchemas();
     updateTableBody(headersTitles[schemaType]);
@@ -289,19 +290,12 @@ function handleSchemaCreation(schemaName) {
 }
 
 async function printSchemas() {
-    const allSchemasData = await fetch('./controller/excelHeadersSchema/getSch.php',{
+    const allSchemasData = await fetch('./controller/excelHeadersSchema/getSchemas.php',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     })
 
     const allSchemas = await allSchemasData.json();
-    console.log('allSchemas',allSchemas);
-    console.log('allSchemas',allSchemas);
-    console.log('allSchemas',allSchemas);
-    console.log('allSchemas',allSchemas);
-    console.log('allSchemas',allSchemas);
-    console.log('allSchemas',allSchemas);
-    console.log('allSchemas',allSchemas);
     schemaSelect.innerHTML = '';
     schemaSelect.appendChild(createOption('', 'Seleccione un esquema'));
 

@@ -242,7 +242,7 @@ head {
         align-items: center;
         position: sticky;
         left: 0;
-        z-index: 10000;
+        z-index: 100;
     }
     td,
     th {
@@ -524,7 +524,7 @@ head {
     flex-direction: row;
     justify-content: space-between;
     gap:12px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 .cards-container::-webkit-scrollbar {
     display: none;
@@ -914,7 +914,7 @@ head {
 .btnRangeSelector.active {
     display: flex;
     border-radius: 100px;
-    background: var(--Cyan-primario, #00C7D4);
+    background: var(--Cyan-primario, #326);
 
     p {
         color: var(--white, #FFF);
@@ -924,6 +924,12 @@ head {
         font-weight: 600;
         line-height: 24px;
     }
+}
+
+#periodSelectors{
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 
 
@@ -1346,7 +1352,6 @@ head {
             }
         }
     }
-
     .twCols{
         tr{
             td:nth-child(1),
@@ -1361,7 +1366,6 @@ head {
             }
         }
     }
-    
     thead{
         th{
             padding: 8px 16px;
@@ -1372,7 +1376,6 @@ head {
         }
     
     };
-
     tbody{
         td{
             padding: 8px 16px;
@@ -1382,8 +1385,32 @@ head {
     }
 }
 
+.commonMovementsTable{
+    tr{
+        margin-top:1px!important;
+    }
+}
 
-
+/* Define the delete button styles */
+.deleteCommonMovement {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+/* Add hover effects */
+.deleteCommonMovement:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+/* Add active effects */
+.deleteCommonMovement:active {
+    background-color: #b71c1c;
+    transform: scale(0.95);
+}
 
 
 

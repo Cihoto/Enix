@@ -4,13 +4,14 @@
 // cardsHnalders has all filter function for card button and default search
 
 function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
+    console.log('renderPaymentsTable');
 
     if(!activePage.payments){
         return;
     }
-
+    
     // rmeove all Existing Rows
-    $('#bankMovementsTableHorizontal tr').remove();
+    // $('#bankMovementsTableHorizontal tr').remove();
 
     tributarieDocumentsTable.classList.add('paymentsLayout');
     
@@ -37,6 +38,12 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     tr.innerHTML = theadTr;
     tr.classList.add('headerRow');
     thead.appendChild(tr);
+    console.log('thead',thead)
+    console.log('tbody',tbody)
+    console.log('tfoot',tfoot)
+    
+
+    
 
     let totales = {
         neto: 0,
@@ -136,6 +143,13 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
         tr.innerHTML = rowHTML;
         tbody.appendChild(tr);
     }) 
+    console.log('tbody',tbody)
+    console.log('tbody',tbody)
+    console.log('tbody',tbody)
+    console.log('tbody',tbody)
+    console.log('tbody',tbody)
+    console.log('tbody',tbody)
+    console.log('tbody',tbody)
 
 
     let trFoot = document.createElement('tr');
@@ -156,6 +170,9 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     trFoot.innerHTML = tfootTr;
     trFoot.classList.add('headerRow');
     tfoot.appendChild(trFoot);
+
+
+    console.log("end of this peace of shit");
 
 }
 

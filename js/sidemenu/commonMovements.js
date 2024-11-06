@@ -96,10 +96,7 @@ commonEventsForm.addEventListener('submit', async (e) => {
     }
 
     if(entries.movementType == 1){
-        console.log('ENTRIES',entries);
         const printDate = moment(entries.dateFrom, 'YYYY-MM-DD').format('DD-MM-YYYY');
-        console.log('printDate',printDate);
-        console.log('printDate',printDate);
         const uniqueId = btoa(`${new Date().getMilliseconds()}${printDate}${entries.movementTotal}${entries.name}`);
         // commonMovements.push({
         //     id: uniqueId,
@@ -129,6 +126,21 @@ commonEventsForm.addEventListener('submit', async (e) => {
         }
         commonMovements.push(commonObject);
     }
+
+    const insertCommonMovement = await fetch('controller/common_movements/insertCommonMovement.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            data: commonMovements
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+
+    });
+
+    const responseCommonMovements = await insertCommonMovement.json();
+    console.log(responseCommonMovements);
+    return 
 
     // FETCH SERVICE TO SAVE COMMON MOVEMENTS
     const saveCommonMovements = await fetch('controller/finance/commonMovements/writeNewCommonMovements.php', {
