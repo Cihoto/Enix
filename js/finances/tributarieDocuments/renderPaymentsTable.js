@@ -143,13 +143,6 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
         tr.innerHTML = rowHTML;
         tbody.appendChild(tr);
     }) 
-    console.log('tbody',tbody)
-    console.log('tbody',tbody)
-    console.log('tbody',tbody)
-    console.log('tbody',tbody)
-    console.log('tbody',tbody)
-    console.log('tbody',tbody)
-    console.log('tbody',tbody)
 
 
     let trFoot = document.createElement('tr');
@@ -171,8 +164,7 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     trFoot.classList.add('headerRow');
     tfoot.appendChild(trFoot);
 
-
-    console.log("end of this peace of shit");
+ 
 
 }
 
