@@ -136,14 +136,14 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
             if (!doty) {
                 continue;
             }
-            ingresosTr.children[doty].innerHTML = getChileanCurrency(totalIncome);
-            incomeRow.children[doty].innerHTML = getChileanCurrency(totalIncome);
-            egresosTr.children[doty].innerHTML = getChileanCurrency(totalOutcome);
-            outcomeRow.children[doty].innerHTML = getChileanCurrency(totalOutcome);
-            projectedIncomeRow.children[doty].innerHTML = getChileanCurrency(projectedIncome);
+            ingresosTr.children[doty].innerHTML = totalIncome > 0 ? getChileanCurrency(totalIncome) : 0;
+            incomeRow.children[doty].innerHTML = totalIncome > 0 ? getChileanCurrency(totalIncome) : 0;
+            egresosTr.children[doty].innerHTML = totalOutcome > 0 ? getChileanCurrency(totalOutcome) : 0;
+            outcomeRow.children[doty].innerHTML = totalOutcome > 0 ? getChileanCurrency(totalOutcome) : 0;
+            projectedIncomeRow.children[doty].innerHTML = projectedIncome > 0 ? getChileanCurrency(projectedIncome) : 0;
             projectedOutdatedIncomeRow.children[doty].innerHTML = 0;
             commonIncomeMovements.children[doty].innerHTML = 0;
-            projectedOutcomeRow.children[doty].innerHTML = getChileanCurrency(projectedOutcome);
+            projectedOutcomeRow.children[doty].innerHTML = projectedOutcome > 0 ? getChileanCurrency(projectedOutcome) : 0;
             projectedOutdatedOutcomeRow.children[doty].innerHTML = 0;
             commonOutcomeMovements.children[doty].innerHTML = 0;
             continue;
@@ -204,16 +204,16 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
             totals.outcome.common += total;
         });
 
-        ingresosTr.children[doty].innerHTML = getChileanCurrency(totals.income.total);
+        ingresosTr.children[doty].innerHTML = totals.income.total > 0 ?getChileanCurrency(totals.income.total) : 0;
         incomeRow.children[doty].innerHTML = 0
-        egresosTr.children[doty].innerHTML = getChileanCurrency(totals.outcome.total);
+        egresosTr.children[doty].innerHTML = totals.outcome.total > 0 ?getChileanCurrency(totals.outcome.total) : 0;
         outcomeRow.children[doty].innerHTML = 0
-        projectedIncomeRow.children[doty].innerHTML = getChileanCurrency(totals.income.projected);
-        projectedOutdatedIncomeRow.children[doty].innerHTML = getChileanCurrency(totals.income.outdated);
-        commonIncomeMovements.children[doty].innerHTML = getChileanCurrency(totals.income.common);
-        projectedOutcomeRow.children[doty].innerHTML = getChileanCurrency(totals.outcome.projected);
-        projectedOutdatedOutcomeRow.children[doty].innerHTML = getChileanCurrency(totals.outcome.outdated);
-        commonOutcomeMovements.children[doty].innerHTML = getChileanCurrency(totals.outcome.common);
+        projectedIncomeRow.children[doty].innerHTML = totals.income.projected > 0 ?getChileanCurrency(totals.income.projected) : 0;
+        projectedOutdatedIncomeRow.children[doty].innerHTML = totals.income.outdated > 0 ?getChileanCurrency(totals.income.outdated) : 0;
+        commonIncomeMovements.children[doty].innerHTML = totals.income.common > 0 ?getChileanCurrency(totals.income.common) : 0;
+        projectedOutcomeRow.children[doty].innerHTML = totals.outcome.projected > 0 ?getChileanCurrency(totals.outcome.projected) : 0;
+        projectedOutdatedOutcomeRow.children[doty].innerHTML = totals.outcome.outdated > 0 ?getChileanCurrency(totals.outcome.outdated) : 0;
+        commonOutcomeMovements.children[doty].innerHTML = totals.outcome.common > 0 ?getChileanCurrency(totals.outcome.common) : 0;
 
         if (totals.income.projected > 0 && index == todayIndex) {
             projectedIncomeRow.children[doty].classList.add('noContableTotal');

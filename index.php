@@ -352,7 +352,6 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <!-- CARGA MANUAL -->
     <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time(); ?>"></script>
     <!-- API CALLS -->
-    <script src="./js/finances/API/getBankMovements.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/API/getMatchesMovements.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/API/getDailyBookMovements.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/API/getAllTributarieDocuments.js?v=<?php echo time(); ?>"></script>

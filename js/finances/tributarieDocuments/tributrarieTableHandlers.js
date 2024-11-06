@@ -114,7 +114,57 @@ tributarieDocumentsTable.addEventListener('click', (e) => {
             renderChargesTable(cardFilterAllChargesDocuments());
         }
     }
-})
+
+    // if(e.target.closest('td').classList.contains('markAsUnPaid')){
+    //     const rowId = row.getAttribute('rowId');
+
+    //     // id:`${FOLIO}_${idRut}_${idRutDV}_${TOTAL}`
+
+    //     const dataFromId = {
+    //         folio: rowId.split('_')[0],
+    //         idRut: rowId.split('_')[1],
+    //         idRutDV: rowId.split('_')[2],
+    //         total: rowId.split('_')[3]
+    //     }
+
+    //     console.log('dataFromId',dataFromId);
+
+    //     const documentData = tributarieDocuments[inOut].find((document) => {
+    //         const {folio,rut,total} = document;
+    //         const documentRut = rut.split('-')[0];
+    //         const documentRutDV = rut.split('-')[1];
+    //         return folio == dataFromId.folio && documentRut == dataFromId.idRut && documentRutDV == dataFromId.idRutDV && total == dataFromId.total;
+    //     });
+
+    //     const documentDVRUT = documentData.rut.split('-')[1];
+    //     console.log('documentDVRUT',documentDVRUT);
+    //     console.log('documentData',documentData);
+    //     documentData.paid = false;
+    //     console.log('documentData',documentData);
+
+
+    //     // 
+
+    //     // setFutureDocumentsOnBankMovements();
+    //     discountDocument(documentData);
+    //     // 
+    //     modifiedDocuments.push(documentData);
+
+    //     // save document as paid on server
+    //     saveModifiedDocuments();
+
+    //     if(inOut === 'payments'){
+    //         renderPaymentsCards();
+    //         renderPaymentsTable(cardFilterAllPaymentsDocuments());
+    //     }
+    //     if(inOut === 'charges'){
+    //         renderChargesCards()
+    //         renderChargesTable(cardFilterAllChargesDocuments());
+    //     }
+    // }
+});
+
+
 
 
 function moveDocumentToFuture(documentId,emitida,newDateTimeStamp){
