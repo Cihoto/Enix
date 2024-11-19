@@ -6,6 +6,10 @@ function renderChargesTable(sortFunction, hidePaid = true) {
         return;
     }
 
+    tbody.innerHTML = '';
+    thead.innerHTML = '';
+    tfoot.innerHTML = '';
+
     // rmeove all Existing Rows
     $('#bankMovementsTableHorizontal tr').remove();
     tributarieDocumentsTable.classList.add('chargesLayout');

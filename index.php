@@ -10,6 +10,8 @@ if (!isset($_SESSION['loggedin'])) {
 $isSuperAdmin = $_SESSION['superAdmin'];
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,6 +76,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             <div class="navHead">
                 <h3>Finanzas</h3>
                 <?php
+                print_r($_SESSION);
                 if ($isSuperAdmin) {
                     echo '<select id="busSelector"></select>';
                     // echo '<button style="display:none;" id="bussinessManager">Crear empresa</button>';
@@ -293,7 +296,13 @@ $isSuperAdmin = $_SESSION['superAdmin'];
         </div>
     </div>
 
-
+    <!-- API CALLS -->
+    <script src="./js/finances/API/getMatchesMovements.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/getDailyBookMovements.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/getAllTributarieDocuments.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/getAllMyDocuments.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/bankMovements/bankMovements.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/API/tributarieDocuments/tributarieDocuments.js?v=<?php echo time(); ?>"></script>
     
     <!-- TOASTIFY -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -351,11 +360,8 @@ $isSuperAdmin = $_SESSION['superAdmin'];
 
     <!-- CARGA MANUAL -->
     <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time(); ?>"></script>
-    <!-- API CALLS -->
-    <script src="./js/finances/API/getMatchesMovements.js?v=<?php echo time(); ?>"></script>
-    <script src="./js/finances/API/getDailyBookMovements.js?v=<?php echo time(); ?>"></script>
-    <script src="./js/finances/API/getAllTributarieDocuments.js?v=<?php echo time(); ?>"></script>
-    <script src="./js/finances/API/getAllMyDocuments.js?v=<?php echo time(); ?>"></script>
+
+    
 
     <!-- handlers -->
     <script src="./js/finances/tributarieDocuments/tributrarieTableHandlers.js?v=<?php echo time(); ?>"> </script>

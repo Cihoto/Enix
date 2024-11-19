@@ -6,3 +6,8 @@ vendor/
 /closeSession.php
 /webScrapper.php
 /react.jsx  
+**.sql  
+/tests
+/update.txt
+/news.txt
+/updates.txt

@@ -39,7 +39,7 @@ function resetHidePaidDocumentsButton(){
     hidePaidDocumentsButton.innerText = 'Mostrar Pagadas';
 }
 
-tributarieDocumentsTable.addEventListener('click', (e) => {
+tributarieDocumentsTable.addEventListener('click', async (e) => {
     console.log("ASDasdasd")
     console.log(tributarieDocumentsTable.classList)
     let classToFind ;
@@ -49,12 +49,13 @@ tributarieDocumentsTable.addEventListener('click', (e) => {
     if(chargesIsActive){
         classToFind = 'chargesLayout';
     }
-
+    console.log("!1",tributarieDocumentsTable.classList.contains(classToFind))
     if(!tributarieDocumentsTable.classList.contains(classToFind)){
         return;
     }
+    console.log
     const row = e.target.closest('tr');
-
+    console.log("!2",row.classList.contains('tributarierRow'))
     if(!row.classList.contains('tributarierRow')){
         return;
     }
@@ -73,6 +74,7 @@ tributarieDocumentsTable.addEventListener('click', (e) => {
     }
 
     if(e.target.closest('td').classList.contains('markAsPaid')){
+        console.log("3",row)
         const rowId = row.getAttribute('rowId');
         console.log('rowId',rowId);
         // id:`${FOLIO}_${idRut}_${idRutDV}_${TOTAL}`
@@ -84,26 +86,45 @@ tributarieDocumentsTable.addEventListener('click', (e) => {
         }
         console.log('dataFromId',dataFromId);
 
-        const documentData = tributarieDocuments[inOut].find((document) => {
-            const {folio,rut,total} = document;
-            const documentRut = rut.split('-')[0];
-            const documentRutDV = rut.split('-')[1];
-            return folio == dataFromId.folio && documentRut == dataFromId.idRut && documentRutDV == dataFromId.idRutDV && total == dataFromId.total;
-        });
-        const documentDVRUT = documentData.rut.split('-')[1];
-        console.log('documentDVRUT',documentDVRUT);
-        console.log('documentData',documentData);
-        documentData.paid = true;
-        console.log('documentData',documentData);
 
-        // setFutureDocumentsOnBankMovements();
+        const documentData = tributarieDocuments[inOut].find(document => document.id == rowId);
         discountDocument(documentData);
 
-        // 
-        modifiedDocuments.push(documentData);
+
+        const responseMarkAsPaid = await markAsPaid(rowId);
+
+        if(!responseMarkAsPaid.success){
+            Toastify({
+                text: "Error al marcar como pagado",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#f44336",
+                stopOnFocus: true
+            }).showToast();
+            return;
+        }
+
+        // const documentData = tributarieDocuments[inOut].find((document) => {
+        //     const {folio,rut,total} = document;
+        //     const documentRut = rut.split('-')[0];
+        //     const documentRutDV = rut.split('-')[1];
+        //     return folio == dataFromId.folio && documentRut == dataFromId.idRut && documentRutDV == dataFromId.idRutDV && total == dataFromId.total;
+        // });
+        // const documentDVRUT = documentData.rut.split('-')[1];
+        // console.log('documentDVRUT',documentDVRUT);
+        // console.log('documentData',documentData);
+        // documentData.paid = true;
+        // console.log('documentData',documentData);
+
+        // // setFutureDocumentsOnBankMovements();
+        // discountDocument(documentData);
+
+        // // 
+        // modifiedDocuments.push(documentData);
 
         // save document as paid on server
-        saveModifiedDocuments();
+        // saveModifiedDocuments();
 
         if(inOut === 'payments'){
             renderPaymentsCards();
@@ -176,6 +197,7 @@ function moveDocumentToFuture(documentId,emitida,newDateTimeStamp){
     const tributarieDocument = tributarieDocuments[egresoIngreso].find((document) => {
         return document.id == documentId;
     });
+    console.log('tributarieDocument',tributarieDocument);
     // const tributarieDocumentModified = modifiedDocuments.find((document) => {
     //     return document.id == documentId;
     // });
@@ -185,20 +207,35 @@ function moveDocumentToFuture(documentId,emitida,newDateTimeStamp){
     }
     const tributarieDocumentCopy = {...tributarieDocument};
 
-    console.log('tributarieDocument',tributarieDocument.fecha_expiracion);
-    console.log('tributarieDocumentCopy',tributarieDocumentCopy);
+    // console.log('tributarieDocument',tributarieDocument.fecha_expiracion);
+    // console.log('tributarieDocumentCopy',tributarieDocumentCopy);
     
 
-    console.log('tributarieDocumentCopy.fecha_expiracion_timestamp',tributarieDocumentCopy.fecha_expiracion_timestamp);
+    // console.log('tributarieDocumentCopy.fecha_expiracion_timestamp',tributarieDocumentCopy.fecha_expiracion_timestamp);
+    // console.log("allMydates",allMyDates);
+
+    // get fechaexpiracion time format 
+
+    const dateFormat = getDateFormat(tributarieDocumentCopy.fecha_expiracion);
+    const formattedDate = moment(tributarieDocumentCopy.fecha_expiracion,dateFormat).format('YYYY-MM-DD');
+    const formattedDateTimestamp = moment(formattedDate).format('X');
     const bankMovementDateIndex = allMyDates.findIndex((date) => {
-        return moment(date).format('X') == tributarieDocumentCopy.fecha_expiracion_timestamp
+        // if(date == '2024-11-07'){
+        //     console.log('date',date);
+        //     console.log('formattedDate',formattedDate);
+        //     console.log('formattedDateTimestamp',formattedDateTimestamp);
+        //     console.log('moment(date).format(X)',moment(date).format('X'));
+
+        // }
+        return moment(date).format('X') == formattedDateTimestamp
     });
-    console.log('newDateTimeStamp',newDateTimeStamp);
+    // console.log('newDateTimeStamp',newDateTimeStamp);
     const newDateIndex = allMyDates.findIndex((date) => {
+        
         return moment(date).format('X') == newDateTimeStamp
     });
-    console.log('bankMovementDateIndex',bankMovementDateIndex);
-    console.log('newDateIndex',newDateIndex);
+    // console.log('bankMovementDateIndex',bankMovementDateIndex);
+    // console.log('newDateIndex',newDateIndex);
 
     if(bankMovementDateIndex == -1 || newDateIndex == -1){
         return false;
@@ -211,9 +248,9 @@ function moveDocumentToFuture(documentId,emitida,newDateTimeStamp){
 
     // const total = bankMovementsData[bankMovementEgresoIngreso][bankMovementDateIndex].total - tributarieDocumentCopy.saldo;
     bankMovementsData[bankMovementEgresoIngreso][bankMovementDateIndex].total -= tributarieDocumentCopy.saldo;
-    console.log('PREVIUS LVLCODES',bankMovementsData[bankMovementEgresoIngreso][bankMovementDateIndex]);
-    console.log('PREVIUS TOTAL',bankMovementsData[bankMovementEgresoIngreso][bankMovementDateIndex].total);
-    console.log('PREVIUS SALDO',tributarieDocumentCopy.saldo);
+    // console.log('PREVIUS LVLCODES',bankMovementsData[bankMovementEgresoIngreso][bankMovementDateIndex]);
+    // console.log('PREVIUS TOTAL',bankMovementsData[bankMovementEgresoIngreso][bankMovementDateIndex].total);
+    // console.log('PREVIUS SALDO',tributarieDocumentCopy.saldo);
     // add document to new date
     bankMovementsData[bankMovementEgresoIngreso][newDateIndex].lvlCodes.push(tributarieDocumentCopy);
     bankMovementsData[bankMovementEgresoIngreso][newDateIndex].total += tributarieDocumentCopy.saldo;
@@ -221,8 +258,19 @@ function moveDocumentToFuture(documentId,emitida,newDateTimeStamp){
 
     tributarieDocument.fecha_expiracion = moment(newDateTimeStamp,'X').format('DD-MM-YYYY');
     tributarieDocument.fecha_expiracion_timestamp = newDateTimeStamp;
-
+    // console.log("got it ")
     return true;
+}
+
+
+function getDateFormat(dateString) {
+    const formats = ['YYYY-MM-DD', 'DD-MM-YYYY'];
+    for (let format of formats) {
+        if (moment(dateString, format, true).isValid()) {
+            return format;
+        }
+    }
+    return null; // Return null if no valid format is found
 }
 
 
@@ -246,7 +294,7 @@ function modifyDocumentDate(row,inOut,e){
                 });
             });
         }
-    }).then((result) => {
+    }).then(async (result) => {
         if(result){
             const {value} = result;
             if(value.date){
@@ -255,6 +303,20 @@ function modifyDocumentDate(row,inOut,e){
                 const modDoc = modifiedDocuments.find((document) => {
                     return document.id == rowId;
                 });
+                
+                const responseChangeExpirationDate = await changeExpirationDate(rowId,date);
+                if(!responseChangeExpirationDate.success){
+                    Toastify({
+                        text: "Error al cambiar la fecha de expiración",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#f44336",
+                        stopOnFocus: true
+                    }).showToast();
+                    return;
+                }
+
                 let emitida;
                 if(!modDoc){
                     const documentData = tributarieDocuments[inOut].find((document) => {
@@ -272,23 +334,21 @@ function modifyDocumentDate(row,inOut,e){
                     modDoc.fecha_expiracion_timestamp = moment(date).format('X');
                 }
 
+
                 const newDateTimeStamp = moment(date).format('X');
+                console.log("send date TIMESTAMP",newDateTimeStamp);
+                console.log("send date",date);
+
                 const modifyDocument = moveDocumentToFuture(rowId,emitida,newDateTimeStamp);
                 if(!modifyDocument){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'No se pudo modificar el documento',
-                        background: '#f8d7da',
-                        confirmButtonColor: '#d33',
-                        customClass: {
-                            popup: 'swal-popup',
-                            title: 'swal-title',
-                            content: 'swal-content',
-                            confirmButton: 'swal-confirm-button'
-                        }
-                    });
-                    
+                    Toastify({
+                        text: "Error al mover el documento a la fecha seleccionada",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#f44336",
+                        stopOnFocus: true
+                    }).showToast();
                     return;
                 }
                 e.target.innerText = moment(date).format('DD-MM-YYYY');

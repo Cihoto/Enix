@@ -9,6 +9,10 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     if(!activePage.payments){
         return;
     }
+
+    tbody.innerHTML = '';
+    thead.innerHTML = '';
+    tfoot.innerHTML = '';
     
     // rmeove all Existing Rows
     // $('#bankMovementsTableHorizontal tr').remove();
@@ -18,7 +22,7 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     document.getElementById('financeTableContainer').classList.add('verticalMode');
     console.log('futureDocuments',futureDocuments);
     const futurePayments = sortFunction;
-    console.log('Future Payments',futurePayments);
+    console.log('Future Payments',  );
     let tr = document.createElement('tr');
    
     let theadTr = `
@@ -38,9 +42,6 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     tr.innerHTML = theadTr;
     tr.classList.add('headerRow');
     thead.appendChild(tr);
-    console.log('thead',thead)
-    console.log('tbody',tbody)
-    console.log('tfoot',tfoot)
     
 
     

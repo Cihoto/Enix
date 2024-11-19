@@ -3,7 +3,13 @@ const dateColumn = document.getElementsByClassName('dateColumn');
 
 
 function renderPendingPayments(){
-    console.log('futureDocuments',futureDocuments)
+    console.log('futureDocuments',futureDocuments);
+
+
+
+    console.log('thead', thead);
+    console.log('tbody', tbody);
+    console.log('tfoot', tfoot);
 
 
     const futurePayments = sortDocumentsByDate('charges');

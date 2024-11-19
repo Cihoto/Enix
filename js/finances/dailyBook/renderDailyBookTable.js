@@ -26,11 +26,21 @@ let bhe = [];
 //     'bankAcocuntId': 4449398
 // }
 
+
 window.addEventListener("load", async (event) => {
 
-
-    // return 
+    
     prepareDataForFinance();
+    // return
+
+    // let query = "";
+
+    // test.forEach((doc) => {
+    //     query += `UPDATE tributarie_documents SET is_paid = ${!doc.paid ? 0 : 1}, issue_date = '${moment(doc.fecha_expiracion,'DD-MM-YYYY').format('YYYY-MM-DD')}' where rut = '${doc.rut}' AND folio = ${doc.folio} AND total = ${doc.total} and business_id = 2;`
+    // });
+
+    // console.log('query',query);
+    // return 
     // getBankMovements()
     return 
 

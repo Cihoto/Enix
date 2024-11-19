@@ -1,5 +1,9 @@
 
 function renderPendingCharges(){
+    tbody.innerHTML = '';
+    thead.innerHTML = '';
+    tfoot.innerHTML = '';
+    
     let tr = document.createElement('tr');
     let theadTr = `
         <tr>

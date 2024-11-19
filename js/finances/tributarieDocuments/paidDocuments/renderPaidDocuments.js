@@ -34,6 +34,34 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
     thead.appendChild(tr);
 
     console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('futurePayments',futurePayments);
+    console.log('______________________________');
     
     let totales = {
         neto: 0,
@@ -81,7 +109,7 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
         totales.neto += parseInt(neto);
         totales.iva += parseInt(impuesto);
         totales.total += parseInt(total);
-        totales.saldo += saldo;
+        totales.saldo += saldo == "" ? 0 : parseInt(saldo);
 
 
         const paidPercentage = calculatePaidPercentage(total,saldo)
@@ -116,6 +144,8 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
             </td>`;
 
         }
+
+        
         let rowHTML = `
         <tr>
             <td>${fecha_emision}</td>
@@ -126,7 +156,7 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
             <td>${getChileanCurrency(parseInt(neto))}</td>
             <td>${getChileanCurrency(parseInt(impuesto))}</td>
             <td>${getChileanCurrency(parseInt(total))}</td>
-            <td>${getChileanCurrency(saldo)}</td>
+            <td>${saldo == "" ? 0 : getChileanCurrency(saldo)}</td>
             <td><div class="paidPercentage" ${percentageBarStyle}></div></td>
             ${reverseMarkAsPaidTd}
 

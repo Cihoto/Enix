@@ -70,7 +70,6 @@ function getChargesDocuments(){
     return sortTributarieDocumentsByDate('charges');
 }
 
-
 function cardFilterAllChargesDocuments(){
     const futurePayments = getChargesDocuments();
 

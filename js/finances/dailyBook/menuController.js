@@ -98,9 +98,6 @@ function handleYearClick(e) {
     // renderMyChasFlowTable(selectedMonth, selectedYear);
     const view = Object.keys(activePage).find(key => activePage[key]);
     console.log('view', view);
-    console.log('view', view);
-    console.log('view', view);
-    console.log('view', view);
     handleTableRendering(undefined, selectedYear);
 }
 
@@ -123,12 +120,6 @@ function handleTableRendering(month = moment().format("MM"), year = moment().for
     });
     
     
-    console.log('activePageName', activePageName);
-    console.log('activePageName', activePageName);
-    console.log('activePageName', activePageName);
-    console.log('activePageName', activePageName);
-    console.log('activePageName', activePageName);
-    console.log('activePageName', activePageName);
     console.log('activePageName', activePageName);
 
     switch (activePageName) {
@@ -162,6 +153,7 @@ function handleTableRendering(month = moment().format("MM"), year = moment().for
 
 function showView(view) {
     // $('#bankMovementsTableHorizontal tr').remove();
+
     thead.innerHTML = '';
     tbody.innerHTML = '';
     tfoot.innerHTML = '';

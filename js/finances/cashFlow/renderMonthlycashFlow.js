@@ -13,7 +13,7 @@ async function resumeCshFlowMonthly(selectedYear = moment().format('YYYY')) {
 
     console.log('selectedYear',selectedYear);
     console.log('allDaysOnYear',allDaysOnYear);
-
+    
     const totalDailyBalance = allDaysOnYear.map((date) => {
 
         const indexOnAllMydates = allMyDates.findIndex((myDate) => myDate == date);

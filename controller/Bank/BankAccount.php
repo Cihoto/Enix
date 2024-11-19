@@ -7,9 +7,17 @@
         private $bankAccountbusinessId;
         private $bankId;
         private $initialBalance;
+        private $firstUpdate;
+        private $lastUpdate;
 
-        public function __construct($bankAccountbusinessId) {
+        public function __construct($bankAccountId = null, $bankAccountNumber = null, $bankAccountbusinessId = null, $bankId = null, $initialBalance = null, $firstUpdate = null, $lastUpdate = null) {
+            $this->bankAccountId = $bankAccountId;
+            $this->bankAccountNumber = $bankAccountNumber;
             $this->bankAccountbusinessId = $bankAccountbusinessId;
+            $this->bankId = $bankId;
+            $this->initialBalance = $initialBalance;
+            $this->firstUpdate = $firstUpdate;
+            $this->lastUpdate = $lastUpdate;
         }
 
         public function getbankAccountBusinessId() {
@@ -52,6 +60,22 @@
             $this->initialBalance = $initialBalance;
         }
 
+        public function getFirstUpdate() {
+            return $this->firstUpdate;
+        }
+
+        public function setFirstUpdate($firstUpdate) {
+            $this->firstUpdate = $firstUpdate;
+        }
+
+        public function getLastUpdate() {
+            return $this->lastUpdate;
+        }
+
+        public function setLastUpdate($lastUpdate) {
+            $this->lastUpdate = $lastUpdate;
+        }
+
 
         public function getBankAccountData() {
             $conn = new bd();
@@ -78,6 +102,88 @@
             $conn->conectar();
         }
 
+        public function updateLastUpdate() {
+            $conn = new bd();
+            $conn->conectar();
+            $query = mysqli_prepare($conn->mysqli, "UPDATE bank_account SET last_register_date = ? WHERE account_number = ? AND business_id = ?");
+            $lastUpdate = $this->getLastUpdate();
+            $accountNumber = $this->getBankaccounts();
+            $businessId = $this->getbankAccountBusinessId();
+            mysqli_stmt_bind_param($query, 'ssi', $lastUpdate, $accountNumber,$businessId);
+            mysqli_stmt_execute($query);
+            $result = mysqli_stmt_get_result($query);
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
 
+        function getLastInsertion() {
+            try{
+                $conn = new bd();
+                $conn->conectar();
+                $query = mysqli_prepare($conn->mysqli, "SELECT * FROM bank_account WHERE account_number = ? and business_id = ?");
+                $accountNumber = $this->getBankaccounts();
+                $businessId = $this->getbankAccountBusinessId();
+                mysqli_stmt_bind_param($query, 'si', $accountNumber, $businessId);
+                mysqli_stmt_execute($query);
+                $result = mysqli_stmt_get_result($query);
+                $row = mysqli_fetch_assoc($result);
+                if($row){
+                    // return $row;
+                    if($row['last_register_date'] == null){
+                        return true;
+                    }
+
+                    $this->setLastUpdate($row['last_register_date']);
+
+                    // get diference in minutes between last update and now
+                    // if diference is greater than 15 minutes, return true to update
+
+                    $lastUpdate = new DateTime($this->getLastUpdate());
+                    
+                    $now = new DateTime(date('Y-m-d H:i:s'));
+                    $diff = $lastUpdate->diff($now);
+
+                    if($diff->i > 15){
+                        return true;
+                    }
+
+                    return false;
+                }else{
+                    return false;
+                }
+            }catch(Exception $e){
+                return false;
+            }
+        }
+
+        function setLastInsertion(){
+            // try{
+                $conn = new bd();
+                $conn->conectar();
+                $query = mysqli_prepare($conn->mysqli, "UPDATE bank_account SET last_register_date = ? WHERE account_number = ? and business_id = ?");
+                date_default_timezone_set('America/Santiago');
+                $lastUpdate = date('Y-m-d H:i:s');
+                $accountNumber = $this->getBankaccounts();
+                $businessId = $this->getbankAccountBusinessId();
+                mysqli_stmt_bind_param($query, 'ssi', $lastUpdate, $accountNumber, $businessId);
+                mysqli_stmt_execute($query);
+                 
+
+                // return $result;
+                if(mysqli_stmt_affected_rows($query) > 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            // }catch(Exception $e){
+            //     return false;
+
+            // }        
+        }
     }
+
+     
 ?>

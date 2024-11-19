@@ -80,31 +80,134 @@ let businessDocuments = [];
 let modifiedDocuments = [];
 let tributarieExcelData = [];
 
-async function readTributarieDocumentsFromExcel(){
-
-    const tributarieExcelMovements = await readExcelFile_tributarieDocuments();
-
-    tributarieExcelData = tributarieExcelMovements;
-
-    // getModifiedDocuments
-    const modifiedDocumentsR = await fetch('./controller/finance/commonMovements/readModifiedDocuments.php');
-    const modifiedDocumentsData = await modifiedDocumentsR.json();
-    console.log('modifiedDocumentsData',modifiedDocumentsData);
-    if(modifiedDocumentsData.data){
-        const {data} = modifiedDocumentsData;
-        modifiedDocuments = data;
-
-        // quitar elementos duplicados de modifiedDocuments
-        modifiedDocuments = modifiedDocuments.filter((document, index, self) =>
-            index === self.findIndex((t) => (
-                t.id === document.id
-            ))
-        )
-        console.log('modifiedDocuments',modifiedDocuments);
+async function readTributarieDocuments(){
+    console.log('readTributarieDocuments');
+    const responseTributarieDocuments = await getTributarieDocuments();
+    console.log('tributarieDocuments',responseTributarieDocuments);
+    if(!responseTributarieDocuments.success){
+        return [];
     }
-    await readAllDocumentsFromExcel();
+
+    const tributarieDocumentsData = tributarieDataDbMap(responseTributarieDocuments.data);
     setFutureDocumentsOnBankMovements();
+    // tributarieDocuments = tributarieDocumentsData;
     return true;
+
+    // const tributarieExcelMovements = await readExcelFile_tributarieDocuments();
+
+    // tributarieExcelData = tributarieExcelMovements;
+
+    // // getModifiedDocuments
+    // const modifiedDocumentsR = await fetch('./controller/finance/commonMovements/readModifiedDocuments.php');
+    // const modifiedDocumentsData = await modifiedDocumentsR.json();
+    // console.log('modifiedDocumentsData',modifiedDocumentsData);
+    // if(modifiedDocumentsData.data){
+    //     const {data} = modifiedDocumentsData;
+    //     modifiedDocuments = data;
+
+    //     // quitar elementos duplicados de modifiedDocuments
+    //     modifiedDocuments = modifiedDocuments.filter((document, index, self) =>
+    //         index === self.findIndex((t) => (
+    //             t.id === document.id
+    //         ))
+    //     )
+    //     console.log('modifiedDocuments',modifiedDocuments);
+    // }
+    // await readAllDocumentsFromExcel();
+    // setFutureDocumentsOnBankMovements();
+    // return true;
+}
+
+
+async function tributarieDataDbMap(tributarieDocuments){
+    let allMyDocuments = tributarieDocuments.map((movements) => {
+        const {
+            id,
+            issue_date,
+            expiration_date,
+            folio,
+            total,
+            balance,
+            paid,
+            type,
+            item: ITEM,
+            rut,
+            issued,
+            sii_code,
+            business_name,
+            tax,
+            exempt_amount,
+            taxable_amount,
+            net_amount,
+            business_id,
+            cancelled,
+            is_paid : isPaid
+        } = movements;
+
+        if(type === "Guía de Despacho" || type === "Guía de Despacho Electrónica"){
+            return false;
+        }
+        const documentType = DOCUMENT_TYPES.find(({name}) => {return name === type} );
+        if(!documentType) {
+            return false
+        }
+        // const expirationDate = moment(issue_date,"YYYY-MM-DD").add(30, 'days').format('DD-MM-YYYY');
+        // difference between today and expirationdate in days 
+        const diffOnDaysFromEmission = moment().diff(moment(expiration_date,"YYYY-MM-DD"), 'days');
+        const atrasado = diffOnDaysFromEmission >= 30 && diffOnDaysFromEmission <= 60 ? true : false;
+        const outdated = diffOnDaysFromEmission >= 60 ? true : false;
+        const item = ITEM.replaceAll("<br/>", ' ');
+
+        const paidComplete = isPaid === 1 ? true : false;
+
+        const idRut = rut != ''?rut.split('-')[0] : '000';
+        const idRutDV = rut != ''?rut.split('-')[1] : '111';
+
+        return {
+            'id': id,
+            'folio': folio,
+            'emitida' : issued === 1 ? true : false,
+            'paid': paidComplete,
+            'fecha_emision': moment(issue_date,"YYYY-MM-DD").format('DD-MM-YYYY'),
+            'fecha_emision_timestamp': moment(moment(issue_date,"YYYY-MM-DD").format('DD-MM-YYYY')).format('X'),
+            'fecha_expiracion': moment(expiration_date,"YYYY-MM-DD").format('DD-MM-YYYY'),
+            'fecha_expiracion_timestamp': moment(moment(expiration_date,"YYYY-MM-DD").format('DD-MM-YYYY')).format('X'),
+            'atrasado': paidComplete ? false : atrasado,
+            'vencido': paidComplete ? false : outdated,
+            'afecto': taxable_amount,
+            'exento': exempt_amount,
+            'neto': net_amount,
+            'impuesto': tax,
+            'total': total,
+            'saldo': balance,
+            'pagado': paid,
+            'tipo_documento': documentType ? documentType.type : 'unknown',
+            'contable': documentType ? documentType.contable : false,
+            'desc_tipo_documento': documentType ? documentType.name : 'unknown',
+            'item' : item.trim(),
+            'proveedor' : business_name,
+            'rut' : rut,
+            'vencida_por': diffOnDaysFromEmission,
+        }
+    }).filter((doc) => doc !== false);
+
+    // modifiedDocuments.forEach((modDoc) => {
+    //     const document = allMyDocuments.find((doc) => doc.id === modDoc.id);
+    //     if(document){
+    //         document.paid = modDoc.paid;
+    //         document.fecha_expiracion = modDoc.fecha_expiracion;
+    //         document.fecha_expiracion_timestamp = modDoc.fecha_expiracion_timestamp;
+    //     }
+    // });
+
+    businessDocuments = allMyDocuments;
+
+    console.log('allMyDocuments',allMyDocuments);
+
+
+    classifyTributarieDocuments(allMyDocuments,true);
+
+    // return allMyDocuments;
 }
 
 async function readAllDocumentsFromExcel() {
