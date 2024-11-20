@@ -131,9 +131,9 @@
                 $result = mysqli_stmt_get_result($query);
                 $row = mysqli_fetch_assoc($result);
                 if($row){
-                    // return $row;
+                    return $row;
                     if($row['last_register_date'] == null){
-                        return true;
+                        return ['success'=>true, 'message'=>'Update needed first time'];
                     }
 
                     $this->setLastUpdate($row['last_register_date']);
