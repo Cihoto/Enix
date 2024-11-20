@@ -26,8 +26,7 @@
         $bankAccount->setBankAccountNumber($accountNumber);
         $bankAccount->setbankAccountBusinessId($businessBdId);
         $needToUpdate = $bankAccount->getLastInsertion();
-        echo json_encode($needToUpdate);
-        exit();
+
         if(!$needToUpdate['success']){
             // echo json_encode([]);
             echo json_encode(["succcess" => true, "message" => "No need to update","error"=> $needToUpdate['message']]);
