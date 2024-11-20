@@ -1,4 +1,6 @@
 <?php
+    // echo json_encode(["success" => false, "message" => "No se encontraron movimientos bancarios", "error"=> "No se encontraron movimientos bancarios"]);
+    // exit();
     header('Content-Type: application/json');
     if($_SERVER['REQUEST_METHOD'] === 'GET'){
         require_once $_SERVER['DOCUMENT_ROOT'].'/controller/BankMovements/BankMovements.php';
@@ -26,7 +28,9 @@
         $bankAccount->setBankAccountNumber($accountNumber);
         $bankAccount->setbankAccountBusinessId($businessBdId);
         $needToUpdate = $bankAccount->getLastInsertion();
-
+        
+        // echo json_encode($needToUpdate);
+        // exit();
         if(!$needToUpdate['success']){
             // echo json_encode([]);
             echo json_encode(["succcess" => true, "message" => "No need to update","error"=> $needToUpdate['message']]);

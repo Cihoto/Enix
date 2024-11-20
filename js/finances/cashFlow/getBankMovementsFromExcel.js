@@ -168,22 +168,29 @@ function getBankDataFromAPI(bankMovements){
 
 async function getBankMovementsFromAPI(){
 
-    const clayBankMovements = await fetch ('./controller/BankMovements/getBankMovementsFromClay.php',{
-        request: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
+    try{
+        const clayBankMovements = await fetch ('./controller/BankMovements/getBankMovementsFromClay.php',{
+            request: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        const clayBankMovementsData = await clayBankMovements.json();
+    
+        console.log('clayBankMovementsData',clayBankMovementsData);
+    
+        if(!clayBankMovementsData.success){
+            return [];
         }
-    });
-
-    const clayBankMovementsData = await clayBankMovements.json();
-
-    console.log('clayBankMovementsData',clayBankMovementsData);
-
-    if(!clayBankMovementsData.success){
-        return [];
+        console.log('clayBankMovementsData',clayBankMovementsData);
+        return clayBankMovementsData;
+    }catch(error){
+        return true; 
+        console.log('error',error);
     }
-    console.log('clayBankMovementsData',clayBankMovementsData);
-    return clayBankMovementsData;
+
+
 }
 
 

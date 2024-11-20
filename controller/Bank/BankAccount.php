@@ -120,6 +120,7 @@
         }
 
         function getLastInsertion() {
+            date_default_timezone_set('America/Santiago');
             try{
                 $conn = new bd();
                 $conn->conectar();
@@ -142,15 +143,13 @@
                     // if diference is greater than 15 minutes, return true to update
 
                     $lastUpdate = new DateTime($this->getLastUpdate());
-                    
-                    $now = new DateTime(date('Y-m-d H:i:s'));
-                    $diff = $lastUpdate->diff($now);
+                    // get difference in minutes between two dates 
+                    $now = new DateTime();
+                    $interval = $now->diff($lastUpdate);
 
-                    if($diff->h > 0){
-                        return ['success'=>true, 'message'=>'Update needed'];
-                    }
+                    // return ["now"=>$now, "lastUpdate"=>$lastUpdate, "interval"=>$interval];
 
-                    if($diff->i > 15){
+                    if($interval->i > 15 || $interval->h > 0 ||$interval->d > 0 ||  $interval->y > 0){
                         return ['success'=>true, 'message'=>'Update needed'];
                     }
 
@@ -164,7 +163,7 @@
         }
 
         function setLastInsertion(){
-            // try{
+            try{
                 $conn = new bd();
                 $conn->conectar();
                 $query = mysqli_prepare($conn->mysqli, "UPDATE bank_account SET last_register_date = ? WHERE account_number = ? and business_id = ?");
@@ -182,10 +181,9 @@
                 }else{
                     return false;
                 }
-            // }catch(Exception $e){
-            //     return false;
-
-            // }        
+            }catch(Exception $e){
+                return false;
+            }        
         }
     }
 
