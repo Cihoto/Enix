@@ -131,7 +131,7 @@
                 $result = mysqli_stmt_get_result($query);
                 $row = mysqli_fetch_assoc($result);
                 if($row){
-                    return $row;
+                    // return $row;
                     if($row['last_register_date'] == null){
                         return ['success'=>true, 'message'=>'Update needed first time'];
                     }
@@ -145,6 +145,8 @@
                     
                     $now = new DateTime(date('Y-m-d H:i:s'));
                     $diff = $lastUpdate->diff($now);
+
+                    return $diff;
 
                     if($diff->i > 15){
                         return ['success'=>true, 'message'=>'Update needed'];
