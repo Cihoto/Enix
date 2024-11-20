@@ -510,6 +510,11 @@ class BankMovements
         }, $bankMovements);
 
         $response = $this->createBulkFromApi($bankMovements);
+
+        if(!$response['success']) {
+            return ['success' => false, 'data' => [], 'message' => $response['message']];
+        }
+        
         return ['success' => true, "data" => $response, 'message' => 'Movimientos bancarios obtenidos con éxito', "batchData" => $bankMovements];
 
         // } catch (Exception $e) {

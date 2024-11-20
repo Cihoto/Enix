@@ -37,7 +37,7 @@
         $bankMovements = $bankMovements->getClayApiMovements($business_rut, date('Y-m-d', strtotime($bankAccount->getLastUpdate())));
         
         if(!$bankMovements['success']){
-            echo json_encode(["succcess" => false, "message" => "No se encontraron movimientos bancarios"]);
+            echo json_encode(["succcess" => false, "message" => "No se encontraron movimientos bancarios", "error"=> $bankMovements['message']]);
             exit();
         }
         

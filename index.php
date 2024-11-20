@@ -76,7 +76,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             <div class="navHead">
                 <h3>Finanzas</h3>
                 <?php
-                print_r($_SESSION);
+                // print_r($_SESSION);
                 if ($isSuperAdmin) {
                     echo '<select id="busSelector"></select>';
                     // echo '<button style="display:none;" id="bussinessManager">Crear empresa</button>';
