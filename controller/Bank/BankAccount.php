@@ -147,15 +147,15 @@
                     $diff = $lastUpdate->diff($now);
 
                     if($diff->i > 15){
-                        return true;
+                        return ['success'=>true, 'message'=>'Update needed'];
                     }
 
-                    return false;
+                    return ['success'=>false, 'message'=>'No update needed'];
                 }else{
-                    return false;
+                    return ['success'=>false, 'message'=>'Error obtaining data'];
                 }
             }catch(Exception $e){
-                return false;
+                return ['success'=>false, 'message'=>'Not able to get last update'];
             }
         }
 
