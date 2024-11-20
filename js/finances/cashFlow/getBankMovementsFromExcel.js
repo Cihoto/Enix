@@ -182,7 +182,8 @@ async function getBankMovementsFromAPI(){
     if(!clayBankMovementsData.success){
         return [];
     }
-    return clayBankMovementsData.data.data.items;
+    console.log('clayBankMovementsData',clayBankMovementsData);
+    return clayBankMovementsData;
 }
 
 
