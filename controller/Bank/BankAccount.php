@@ -146,7 +146,9 @@
                     $now = new DateTime(date('Y-m-d H:i:s'));
                     $diff = $lastUpdate->diff($now);
 
-                    return $diff;
+                    if($diff->h > 0){
+                        return ['success'=>true, 'message'=>'Update needed'];
+                    }
 
                     if($diff->i > 15){
                         return ['success'=>true, 'message'=>'Update needed'];
