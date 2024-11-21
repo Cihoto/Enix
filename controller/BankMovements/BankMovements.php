@@ -1,8 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/controller/database/bd.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/controller/database/bd.php';
+    use Ramsey\Uuid\Uuid;
 
-use Ramsey\Uuid\Uuid;
 class BankMovements
 {
     private $id;
