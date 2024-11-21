@@ -87,6 +87,7 @@ class Business {
             return false;
         }
         $row = mysqli_fetch_assoc($result);
+        $conn->desconectar();
         $this->setBusinessId($row['id']);
         $this->setBusinessRut($row['rut']);
         $this->setBusinessDv($row['dv']);
@@ -104,6 +105,7 @@ class Business {
         while($row = mysqli_fetch_assoc($result)){
             $rows[] = $row;
         }
+        $conn->desconectar();
         return $rows;
     }
 
@@ -131,9 +133,11 @@ class Business {
                 $bankAccounts[] = $row;
             }
             $this->setBusinessBankAccounts($bankAccounts);
+            $conn->desconectar();
             return true;
 
         }else{
+            $conn->desconectar();
             return false;
         }
 
@@ -152,6 +156,7 @@ class Business {
         
         $result = mysqli_stmt_get_result($query);
         $row = mysqli_fetch_assoc($result);
+        $conn->desconectar();
         return $row['id'];
     }
 

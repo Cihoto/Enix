@@ -1,7 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/controller/database/bd.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-// require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Bank/Bank.php';
+
+use Ramsey\Uuid\Uuid;
 class BankMovements
 {
     private $id;
@@ -159,18 +160,14 @@ class BankMovements
 
     public function createBatch($bankMovements)
     {
-
+        $conn = new bd();
         try {
-
-
-
-            $conn = new bd();
             $conn->conectar();
 
             $query = "INSERT INTO bank_movement (id, folio, amount, date, income, comment, `desc`, bank, account_number, counterparty, rut_counterparty, business_id,external_id) VALUES ";
             $values = [];
             $types = '';
-            $params = []; // Initialize $params
+            $params = []; 
 
 
 
@@ -182,7 +179,7 @@ class BankMovements
                 // CHECK IF MOVEMENT HAS ID IF NOT CREATE A NEW ONE
                 if (empty($movement['id'])) {
                     // merge on first position
-                    $movement = array_merge(['id' => \Ramsey\Uuid\Uuid::uuid4()->toString()], $movement);
+                    $movement = array_merge(['id' => Uuid::uuid4()->toString()], $movement);
                     // $movement['id'] = \Ramsey\Uuid\Uuid::uuid4();
 
                 }
@@ -220,7 +217,9 @@ class BankMovements
             $conn->desconectar();
             return ["success" => true, "message" => "Batch bank movements created successfully"];
         } catch (Exception $e) {
+            $conn->desconectar();
             return ["success" => false, "message" => "Error creating bank movements"];
+
         }
     }
 
