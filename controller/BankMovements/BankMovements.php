@@ -182,7 +182,7 @@ class BankMovements
                 // CHECK IF MOVEMENT HAS ID IF NOT CREATE A NEW ONE
                 if (empty($movement['id'])) {
                     // merge on first position
-                    $movement = array_merge(['id' => \Ramsey\Uuid\Uuid::uuid4()], $movement);
+                    $movement = array_merge(['id' => \Ramsey\Uuid\Uuid::uuid4()->toString()], $movement);
                     // $movement['id'] = \Ramsey\Uuid\Uuid::uuid4();
 
                 }
@@ -475,6 +475,8 @@ class BankMovements
             ));
 
             $curl_response = curl_exec($curl);
+
+            return $curl_response;
             $newItems = json_decode($curl_response, true)['data']['items'];
             $newItems = json_decode($curl_response, true)['data']['items'];
             curl_close($curl); // Close curl before executing the next command
@@ -589,7 +591,7 @@ class BankMovements
 
             return ['success' => true, 'data' => [], 'message' => 'Bank movements created successfully'];
         } catch (Exception $e) {
-            return ["success" => false, "message" => "Error creating bank movements"];
+            return ["success" => false, "message" => "Error creating bank movements","error"=>$e];
         }
     }
 }

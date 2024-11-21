@@ -8,14 +8,10 @@
         require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Business/Bussiness.php';
         require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Bank/BankAccount.php';
 
-
-
         $business = new Business();
         $session = new SessionManager();
         $bankMovements = new BankMovements();
         $bankAccount = new BankAccount();
-
-        
 
         // $initDate = $_GET['initDate'];
         $initDate = '2024-01-01';
