@@ -1,6 +1,7 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/controller/database/bd.php';
+
     use Ramsey\Uuid\Uuid;
 
 class BankMovements
@@ -179,7 +180,8 @@ class BankMovements
                 // CHECK IF MOVEMENT HAS ID IF NOT CREATE A NEW ONE
                 if (empty($movement['id'])) {
                     // merge on first position
-                    $movement = array_merge(['id' => Uuid::uuid4()->toString()], $movement);
+                    $uuid = Uuid::uuid4();
+                    $movement = array_merge(['id' => $uuid], $movement);
                     // $movement['id'] = \Ramsey\Uuid\Uuid::uuid4();
 
                 }
@@ -475,9 +477,9 @@ class BankMovements
 
             $curl_response = curl_exec($curl);
 
-            return $curl_response;
             $newItems = json_decode($curl_response, true)['data']['items'];
             $newItems = json_decode($curl_response, true)['data']['items'];
+            
             curl_close($curl); // Close curl before executing the next command
             if ($loopCounter == 1) {
                 $response = json_decode($curl_response, true);
@@ -528,9 +530,9 @@ class BankMovements
 
     function createBulkFromApi($bankMovements){
 
+        $conn = new bd();
         try {
             // return $bankMovements;
-            $conn = new bd();
             $conn->conectar();
             $params = [];
 
@@ -590,6 +592,7 @@ class BankMovements
 
             return ['success' => true, 'data' => [], 'message' => 'Bank movements created successfully'];
         } catch (Exception $e) {
+            $conn->desconectar();
             return ["success" => false, "message" => "Error creating bank movements","error"=>$e];
         }
     }

@@ -121,8 +121,8 @@
 
         function getLastInsertion() {
             date_default_timezone_set('America/Santiago');
+            $conn = new bd();
             try{
-                $conn = new bd();
                 $conn->conectar();
                 $query = mysqli_prepare($conn->mysqli, "SELECT * FROM bank_account WHERE account_number = ? and business_id = ?");
                 $accountNumber = $this->getBankaccounts();
@@ -159,6 +159,7 @@
                     return ['success'=>false, 'message'=>'Error obtaining data'];
                 }
             }catch(Exception $e){
+                $conn->desconectar();
                 return ['success'=>false, 'message'=>'Not able to get last update'];
             }
         }
