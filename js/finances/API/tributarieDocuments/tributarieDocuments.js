@@ -50,3 +50,44 @@ async function changeExpirationDate(rowId,date) {
     const data = await response.json();
     return data;
 }
+
+
+async function updateTributarieDocument(document){
+    const response = await fetch('./controller/TributarieDocuments/updateTributarieDocument.php',{
+        method: 'PATCH',
+        body: JSON.stringify({
+            document : document
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+    return data;
+}
+
+async function getModifiedDocuments(){
+    const response = await fetch('./controller/TributarieDocuments/getModifiedDocuments.php',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+
+    if(!data.success){
+        return {data:[]}
+    }
+    return data.data;
+}
+
+async function getTributarieDocumentFromAPI(){
+    const response = await fetch('./controller/TributarieDocuments/getTributarieDocumentFromAPI.php',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+    return data;
+}

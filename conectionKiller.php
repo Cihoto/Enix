@@ -10,10 +10,16 @@
 //     $this->port ='3306';
 // }
 
-$servername = "srv994.hstgr.io";
-$username = "u136839350_EnixAdm";
-$password = "Enix2024.";
-$dbname = "u136839350_EnixProd";
+// $servername = "srv994.hstgr.io";
+// $username = "u136839350_EnixAdm";
+// $password = "Enix2024.";
+// $dbname = "u136839350_EnixProd";
+
+
+$servername = '154.49.142.103';
+$username = 'u136839350_intec_admin';
+$password = 'intecBd2023';
+$dbname = 'u136839350_intec';
 
 $conn = new mysqli($servername, $username, $password);
 

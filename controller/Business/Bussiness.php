@@ -161,6 +161,7 @@ class Business {
     }
 
     public function getDatabaseBusinessId(){
+        
         require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
         $sessionManager = new SessionManager();
 
@@ -169,6 +170,15 @@ class Business {
 
         return $bdBusinessId;
     }
+
+    public function getBusiness_Rut(){
+        require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
+        $sessionManager = new SessionManager();
+        $businessId = $sessionManager->getAllSessionData()['businessId'];
+        return $businessId;
+    }
+
+    
 
 }
 

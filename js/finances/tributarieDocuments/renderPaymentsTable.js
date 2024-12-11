@@ -14,7 +14,7 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     thead.innerHTML = '';
     tfoot.innerHTML = '';
     
-    // rmeove all Existing Rows
+    // remove all Existing Rows
     // $('#bankMovementsTableHorizontal tr').remove();
 
     tributarieDocumentsTable.classList.add('paymentsLayout');
@@ -42,9 +42,6 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     tr.innerHTML = theadTr;
     tr.classList.add('headerRow');
     thead.appendChild(tr);
-    
-
-    
 
     let totales = {
         neto: 0,
@@ -164,9 +161,6 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     trFoot.innerHTML = tfootTr;
     trFoot.classList.add('headerRow');
     tfoot.appendChild(trFoot);
-
- 
-
 }
 
 /* <td><p class="paymentStatus ${paidClass}">${isPaid}</p></td> */

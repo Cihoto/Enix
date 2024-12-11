@@ -7,17 +7,15 @@
         require_once $_SERVER['DOCUMENT_ROOT'] . '/controller/Business/Bussiness.php';
 
         $data = json_decode(file_get_contents('php://input'), true);
-        $id = $data['rowId'];
+        $document = $data['document'];
+        $id = $document['id'];
         $tributarieDocuments = new TributarieDocuments();
         $business = new Business();
         $businessId = $business->getDatabaseBusinessId();
 
         $tributarieDocuments->setBusinessId($businessId);
         $tributarieDocuments->setId($id);
-
-        $response = $tributarieDocuments->markAsPaid($id);
-
-
+        $response = $tributarieDocuments->insertModifiedDocument($document);
 
         if($response['success']) {
             echo json_encode(['success'=>true,'message' => 'Documentos tributarios marcados como pagados correctamente' ]);

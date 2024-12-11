@@ -13,6 +13,8 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
     console.log('futureDocuments',futureDocuments);
     const futurePayments = sortFunction;
 
+    document.getElementById('bankMovementsTableHorizontal').classList.add('paidDocumentsLayout');
+
     let tr = document.createElement('tr');
     
     let theadTr = `
@@ -34,33 +36,6 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
     thead.appendChild(tr);
 
     console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
-    console.log('futurePayments',futurePayments);
     console.log('______________________________');
     
     let totales = {
@@ -71,13 +46,18 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
     }
 
     futurePayments.forEach((futurePayment) => {
+      
         // ADD ONE MONTH TO FUTURE PAYMENT DATE
         let tr = document.createElement('tr');
         // add custom properties rowId  = futurePayment.id
         tr.setAttribute('rowId',futurePayment.id);
         tr.setAttribute('folio',futurePayment.folio);
 
-        const isModified = modifiedDocuments.filter((modDoc) => modDoc.id === futurePayment.id).length > 0;
+        const isModified = modifiedDocuments.filter((modDoc) => 
+        {
+            return modDoc.folio == futurePayment.folio && modDoc.rut == futurePayment.rut && modDoc.total == futurePayment.total;
+        }
+        ).length > 0;
         tr.classList.add('tributarierRow');
         if(hidePaid && futurePayment.paid){
             return;
@@ -105,6 +85,9 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
             neto,
             impuesto
         } = futurePayment;
+        const inOut = emitida == true ? 'charges' : 'payments';
+
+        tr.setAttribute('inOut',inOut);
 
         totales.neto += parseInt(neto);
         totales.iva += parseInt(impuesto);

@@ -79,16 +79,22 @@ const DOCUMENT_TYPES = [
 let businessDocuments = [];
 let modifiedDocuments = [];
 let tributarieExcelData = [];
+const initialTributarieDocuments = {
+    documents : []
+}
 
 async function readTributarieDocuments(){
-    console.log('readTributarieDocuments');
+    const renewDataFromAPI = await getTributarieDocumentFromAPI();
     const responseTributarieDocuments = await getTributarieDocuments();
     console.log('tributarieDocuments',responseTributarieDocuments);
     if(!responseTributarieDocuments.success){
         return [];
     }
 
+    modifiedDocuments = await getModifiedDocuments();
+
     const tributarieDocumentsData = tributarieDataDbMap(responseTributarieDocuments.data);
+    initialTributarieDocuments['documents'] = responseTributarieDocuments.data;
     setFutureDocumentsOnBankMovements();
     // tributarieDocuments = tributarieDocumentsData;
     return true;
@@ -191,6 +197,30 @@ async function tributarieDataDbMap(tributarieDocuments){
         }
     }).filter((doc) => doc !== false);
 
+    console.log('allMyDocuments',allMyDocuments);
+
+    modifiedDocuments.forEach((modDoc) => {
+
+        const document = allMyDocuments.find((doc) => { 
+            return doc.folio === modDoc.folio && doc.rut === modDoc.rut && doc.total === modDoc.total
+        });
+        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD',modDoc);
+        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD  ',document);
+        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD  ',document);
+        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD  ',document);
+        console.log('________________________________________________________________________________________________________')
+        if(document){
+            document.paid = modDoc.is_paid;
+            // document.paid = modDoc.is_paid == 1 ? true : false;
+            // document.fecha_expiracion = modDoc.expiration_date;
+            // document.fecha_expiracion_timestamp = moment(modDoc.fecha_expiracion_timestamp,"YYYY-MM-DD").format('X');
+        }
+    });
+
+    businessDocuments = allMyDocuments;
+
+
+
     // modifiedDocuments.forEach((modDoc) => {
     //     const document = allMyDocuments.find((doc) => doc.id === modDoc.id);
     //     if(document){
@@ -200,9 +230,8 @@ async function tributarieDataDbMap(tributarieDocuments){
     //     }
     // });
 
-    businessDocuments = allMyDocuments;
 
-    console.log('allMyDocuments',allMyDocuments);
+
 
 
     classifyTributarieDocuments(allMyDocuments,true);
@@ -291,14 +320,21 @@ async function readAllDocumentsFromExcel() {
     //         document.paid = true;
     //     }
     // });
-    modifiedDocuments.forEach((modDoc) => {
-        const document = allMyDocuments.find((doc) => doc.id === modDoc.id);
-        if(document){
-            document.paid = modDoc.paid;
-            document.fecha_expiracion = modDoc.fecha_expiracion;
-            document.fecha_expiracion_timestamp = modDoc.fecha_expiracion_timestamp;
-        }
-    });
+
+    // console.log('allMyDocuments',allMyDocuments)
+    // console.log('allMyDocuments',allMyDocuments)
+    // console.log('allMyDocuments',allMyDocuments)
+    // console.log('allMyDocuments',allMyDocuments)
+    // console.log('allMyDocuments',allMyDocuments)
+    // console.log('allMyDocuments',allMyDocuments)
+    // modifiedDocuments.forEach((modDoc) => {
+    //     const document = allMyDocuments.find((doc) => doc.id === modDoc.id);
+    //     if(document){
+    //         document.paid = modDoc.paid;
+    //         document.fecha_expiracion = modDoc.fecha_expiracion;
+    //         document.fecha_expiracion_timestamp = modDoc.fecha_expiracion_timestamp;
+    //     }
+    // });
 
     businessDocuments = allMyDocuments;
 
@@ -308,6 +344,7 @@ async function readAllDocumentsFromExcel() {
 };
 
 function setFutureDocumentsOnBankMovements(){
+
 
     tributarieDocumentsCategories.forEach((category) => {
         const documents = tributarieDocuments[category].filter(({contable,paid}) => contable && !paid);
@@ -338,4 +375,88 @@ function setFutureDocumentsOnBankMovements(){
             dayOnArray.total += saldo;
         });
     });
+}
+
+
+function removeFromFuture(documentToFind){
+
+
+    tributarieDocumentsCategories.forEach((category) => {
+        const documents = tributarieDocuments[category].filter(({contable,paid}) => contable && !paid);
+        documents.forEach((document) => {
+
+            const {emitida,fecha_expiracion,saldo} = document;
+            const egresoIngreso = emitida ? 'projectedIncome' : 'projectedOutcome';
+            // console.log('egresoIngreso',egresoIngreso);
+            const formatDate = moment(fecha_expiracion,"DD-MM-YYYY").format('X'); 
+            // const printDateTimeStamp = moment(formatDate,'YYYY-MM-DD').format('X');
+             
+            let printDate = formatDate;
+            //get difference in days between today and expiration date
+            const diffOnDaysFromEmission = moment().diff(moment(formatDate,"X"), 'days');
+            if(diffOnDaysFromEmission > 0){
+                // get amount of weeks between today and expiration date
+                const weeks = Math.ceil(diffOnDaysFromEmission / 7);
+                // add weeks to expiration date
+                printDate = moment(formatDate,"X").add(weeks * 7, 'days').format('X');
+            }
+            const dayOnArray = bankMovementsData[egresoIngreso].find(({timestamp}) => {
+                return moment(timestamp,'X').format('YYYY-MM-DD') == moment(printDate,'X').format('YYYY-MM-DD');
+            });
+            if(!dayOnArray){
+                return
+            }
+            dayOnArray.lvlCodes.forEach((lvlCode,index) => {
+                if(lvlCode.folio === documentToFind.folio && lvlCode.rut === documentToFind.rut && lvlCode.total === documentToFind.total){
+                    dayOnArray.lvlCodes.splice(index,1);
+                    dayOnArray.total -= saldo;
+                }
+            });
+            // dayOnArray.total += saldo;
+        });
+    });
+}
+function addFromFuture(documentToFind){
+
+    console.log('documentToFind',documentToFind);
+
+    let insert = false;
+    let dayOnArr = null;
+    tributarieDocumentsCategories.forEach((category) => {
+        const documents = tributarieDocuments[category].filter(({contable,paid}) => contable && !paid);
+        documents.forEach((document) => {
+
+            const {emitida,fecha_expiracion,saldo} = document;
+            const egresoIngreso = emitida ? 'projectedIncome' : 'projectedOutcome';
+            // console.log('egresoIngreso',egresoIngreso);
+            const formatDate = moment(fecha_expiracion,"DD-MM-YYYY").format('X'); 
+            // const printDateTimeStamp = moment(formatDate,'YYYY-MM-DD').format('X');
+             
+            let printDate = formatDate;
+            //get difference in days between today and expiration date
+            const diffOnDaysFromEmission = moment().diff(moment(formatDate,"X"), 'days');
+            if(diffOnDaysFromEmission > 0){
+                // get amount of weeks between today and expiration date
+                const weeks = Math.ceil(diffOnDaysFromEmission / 7);
+                // add weeks to expiration date
+                printDate = moment(formatDate,"X").add(weeks * 7, 'days').format('X');
+            }
+            const dayOnArray = bankMovementsData[egresoIngreso].find(({timestamp}) => {
+                return moment(timestamp,'X').format('YYYY-MM-DD') == moment(printDate,'X').format('YYYY-MM-DD');
+            });
+
+            if(!dayOnArray){
+                return
+            }else{
+                dayOnArr = dayOnArray;
+                insert = true;
+            }
+            // dayOnArray.total += saldo;
+        });
+    });
+
+    if(insert && dayOnArr != null){
+        dayOnArr.lvlCodes.push(documentToFind);
+        dayOnArr.total += documentToFind.total;
+    }
 }

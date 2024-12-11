@@ -40,22 +40,21 @@ function resetHidePaidDocumentsButton(){
 }
 
 tributarieDocumentsTable.addEventListener('click', async (e) => {
-    console.log("ASDasdasd")
     console.log(tributarieDocumentsTable.classList)
     let classToFind ;
-    if(paymentsIsActive){
+    if(activePage.payments){
         classToFind = 'paymentsLayout';
     }
-    if(chargesIsActive){
+    if(activePage.charges){
         classToFind = 'chargesLayout';
     }
     console.log("!1",tributarieDocumentsTable.classList.contains(classToFind))
+    console.log("classToFind",classToFind)
     if(!tributarieDocumentsTable.classList.contains(classToFind)){
         return;
     }
-    console.log
     const row = e.target.closest('tr');
-    console.log("!2",row.classList.contains('tributarierRow'))
+    console.log("!2!",row.classList.contains('tributarierRow'))
     if(!row.classList.contains('tributarierRow')){
         return;
     }
@@ -69,7 +68,6 @@ tributarieDocumentsTable.addEventListener('click', async (e) => {
     if(e.target.classList.contains('expDate')){
         
         modifyDocumentDate(row,inOut,e);
-
         return
     }
 
@@ -86,14 +84,62 @@ tributarieDocumentsTable.addEventListener('click', async (e) => {
         }
         console.log('dataFromId',dataFromId);
 
+        // get document data from tributarieDocuments
 
         const documentData = tributarieDocuments[inOut].find(document => document.id == rowId);
-        discountDocument(documentData);
+        const tributarieDocumentCopy = {...documentData};
+        tributarieDocumentCopy.paid = true;
+        
+        console.log('documentData',documentData);
+         
+        // discountDocument(documentData);
 
+        const updateTributarieDocumentResponse = await updateTributarieDocument(tributarieDocumentCopy);
 
-        const responseMarkAsPaid = await markAsPaid(rowId);
+        const isAlreadyModified = modifiedDocuments.find((document) => {
+            return document.folio == documentData.folio && document.rut == documentData.rut && document.total == documentData.total;
+        });
 
-        if(!responseMarkAsPaid.success){
+        if(!isAlreadyModified){
+            const transformedDocument = {
+                id: tributarieDocumentCopy.id,
+                issue_date: moment(tributarieDocumentCopy.fecha_emision, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                expiration_date: moment(tributarieDocumentCopy.fecha_expiracion, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                folio: tributarieDocumentCopy.folio,
+                total: tributarieDocumentCopy.total,
+                balance: tributarieDocumentCopy.saldo,
+                paid: tributarieDocumentCopy.pagado,
+                type: tributarieDocumentCopy.tipo_documento,
+                item: tributarieDocumentCopy.item,
+                rut: tributarieDocumentCopy.rut,
+                issued: tributarieDocumentCopy.emitida ? '1' : '0',
+                sii_code: '1', // Assuming this is a static value
+                business_name: tributarieDocumentCopy.proveedor,
+                tax: tributarieDocumentCopy.impuesto,
+                exempt_amount: tributarieDocumentCopy.exento,
+                taxable_amount: tributarieDocumentCopy.afecto,
+                net_amount: tributarieDocumentCopy.neto,
+                business_id: 1, // Assuming this is a static value
+                cancelled: tributarieDocumentCopy.cancelled ? 1 : 0,
+                is_paid: 1
+            };
+            modifiedDocuments.push(transformedDocument);
+        }else{
+            console.log('modifiedDocuments',modifiedDocuments);
+            isAlreadyModified.is_paid = 1;
+        }
+
+        console.log('initialTributarieDocuments',initialTributarieDocuments);   
+        const initialDocument = initialTributarieDocuments.documents.find((document) => {
+            return document.rut == documentData.rut && document.folio == documentData.folio && document.total == documentData.total;
+        });
+        console.log('initialDocument',initialDocument);
+        initialDocument.is_paid = 1;
+
+        tributarieDataDbMap(initialTributarieDocuments.documents);
+        removeFromFuture(documentData);
+
+        if(!updateTributarieDocumentResponse.success){
             Toastify({
                 text: "Error al marcar como pagado",
                 duration: 3000,
@@ -103,6 +149,28 @@ tributarieDocumentsTable.addEventListener('click', async (e) => {
                 stopOnFocus: true
             }).showToast();
             return;
+        }
+        
+        // documentData.paid = true;
+        // modifiedDocuments.push(documentData);
+
+        Toastify({
+            text: "Documento marcado como pagado",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#28a745",
+            stopOnFocus: true
+        }).showToast();
+
+
+        if(inOut === 'payments'){
+            renderPaymentsCards();
+            renderPaymentsTable(cardFilterAllPaymentsDocuments());
+        }
+        if(inOut === 'charges'){
+            renderChargesCards()
+            renderChargesTable(cardFilterAllChargesDocuments());
         }
 
         // const documentData = tributarieDocuments[inOut].find((document) => {
@@ -126,14 +194,6 @@ tributarieDocumentsTable.addEventListener('click', async (e) => {
         // save document as paid on server
         // saveModifiedDocuments();
 
-        if(inOut === 'payments'){
-            renderPaymentsCards();
-            renderPaymentsTable(cardFilterAllPaymentsDocuments());
-        }
-        if(inOut === 'charges'){
-            renderChargesCards()
-            renderChargesTable(cardFilterAllChargesDocuments());
-        }
     }
 
     // if(e.target.closest('td').classList.contains('markAsUnPaid')){
@@ -303,8 +363,16 @@ function modifyDocumentDate(row,inOut,e){
                 const modDoc = modifiedDocuments.find((document) => {
                     return document.id == rowId;
                 });
+
+                // const modCopy = {...modDoc};
+                // modCopy.fecha_expiracion = moment(date).format('DD-MM-YYYY');
+
+                const documentData = tributarieDocuments[inOut].find(document => document.id == rowId);
+                const tributarieDocumentCopy = {...documentData};
+                tributarieDocumentCopy.fecha_expiracion = moment(date).format('DD-MM-YYYY');
                 
-                const responseChangeExpirationDate = await changeExpirationDate(rowId,date);
+                // const responseChangeExpirationDate = await changeExpirationDate(rowId,date);
+                const responseChangeExpirationDate = await updateTributarieDocument(tributarieDocumentCopy);
                 if(!responseChangeExpirationDate.success){
                     Toastify({
                         text: "Error al cambiar la fecha de expiración",

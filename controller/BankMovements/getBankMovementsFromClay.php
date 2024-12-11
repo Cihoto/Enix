@@ -39,7 +39,7 @@
         }
         
         if($bankAccount->setLastInsertion()){
-            echo json_encode(["success" => true, "message" => "Movimientos bancarios actualizados correctamente"]);
+            echo json_encode(["success" => true, "message" => "Movimientos bancarios actualizados correctamente","batchData" => $bankMovements['batchData']]);
         }else{
             echo json_encode(["success" => false, "message" => "Error al actualizar movimientos bancarios"]);
         }

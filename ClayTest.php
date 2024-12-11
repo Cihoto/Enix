@@ -66,7 +66,7 @@ $curl = curl_init();
             'Token: 9NVElUwIrrQPXFU0VSVD9zfeP5i2PWAbrONlc0lQM-0TfHj0a6AQ2wbI-eg01mTj_ZnZLV6q4d2hLU86AXntfY'
         ),
     ));
-    $curl_response = curl_exec($curl);
+    $curl_response = curl_exec($curl);  
     $totalRecords = 0;
     $totalLoop = 0;
     if(isset(json_decode($curl_response, true)['data']['records'])){

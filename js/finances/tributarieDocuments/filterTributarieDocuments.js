@@ -283,7 +283,6 @@ function discountDocument(document) {
 
   console.log('document', document);
 
-
   const { folio: folioDocumentDiscount, rut: rutDocumentDiscount, total: totalDocumentDiscount } = document;
   const rutDiscount = rutDocumentDiscount.split('-')[0];
   const dvDiscount = rutDocumentDiscount.split('-')[1];
@@ -300,13 +299,19 @@ function discountDocument(document) {
     // boletasTotal.push(document);
     return;
   }
+
+  console.log('STEP 1', document);
   // true = charges, false = payments
   const needToPay = document.emitida ? true : false;
+
+  console.log('STEP 2', needToPay);
 
   // push document to its respective array
   const indexOfDocument = tributarieDocuments[document.emitida ? 'charges' : 'payments'].findIndex((doc) => {
     return doc.folio === document.folio && doc.rut === document.rut;
   });
+
+  console.log('STEP 3', indexOfDocument);
 
   const document1 = tributarieDocuments[document.emitida ? 'charges' : 'payments'][indexOfDocument];
 
@@ -359,6 +364,7 @@ function discountDocument(document) {
     console.log('category', category);
     console.log(folioDocumentDiscount);
     const documents = tributarieDocuments[category].filter(({ contable, paid }) => contable);
+    console.log("STEP 4", documents);
     const discountedDocument = documents.find((document) => {
       const { folio, rut, total } = document;
       const rutD = rut.split('-')[0];
@@ -366,9 +372,11 @@ function discountDocument(document) {
       // return folio == folioDocumentDiscount;
       return folio == folioDocumentDiscount && rutD == rutDiscount && dvD == dvDiscount && total == totalDocumentDiscount;
     });
+    console.log("STEP 5", discountedDocument);
     if (!discountedDocument) {
       return;
     }
+    console.log("STEP 6", discountedDocument);
     const { emitida, fecha_expiracion, saldo } = discountedDocument;
     const documentType = emitida ? 'projectedIncome' : 'projectedOutcome';
     const formatDate = moment(fecha_expiracion, "DD-MM-YYYY").format('X');
@@ -378,12 +386,14 @@ function discountDocument(document) {
       const weeks = Math.ceil(diffOnDaysFromEmission / 7);
       printDate = moment(formatDate, "X").add(weeks * 7, 'days').format('X');
     }
+    console.log('STEP 7', documentType, printDate);
     const dayOnArray = bankMovementsData[documentType].find(({ timestamp }) => {
       return moment(timestamp, 'X').format('YYYY-MM-DD') == moment(printDate, 'X').format('YYYY-MM-DD');
     });
     if (!dayOnArray) {
       return
     }
+    console.log('STEP 8', dayOnArray);
     dayOnArray.total -= saldo;
   });
 }

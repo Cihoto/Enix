@@ -26,8 +26,6 @@ async function prepareDataForFinance(){
     getAllDaysOnMonth([1,2,3,4,5,6,7,8,9,10,11,12]);
     bankMovementsData = setAllDaysOnYear();
 
-    
-
     const [tributarieDocuments, bankMovements, commonMovements] = await Promise.all([
         readTributarieDocuments(),
         getBankMovements(),
@@ -46,8 +44,19 @@ async function getBankMovements(){
     // const bankDataAPI = getBankDataFromAPI(newBankMovements);
     const apiData = await getBankMovementsFromAPI();
 
+
     // GET DATA FROM DATABASE
     const bankMovements = await getBankMovementsFromDB();
+    console.log('bankMovements',bankMovements);
+    let totales = {
+        ingresos:0,
+        egresos:0
+    }
+    bankMovements.forEach((movement) => {
+        const { income, amount } = movement;
+        totales[income == 1 ? 'ingresos' : 'egresos'] += Number(amount);
+    });
+    console.log('totales',totales);
     const bankData = getBankDataFromDB(bankMovements);
     setBankMovements_In_BankMovementsData(bankData);
 
@@ -139,8 +148,6 @@ function getBankDataFromDB(bankMovements){
         }
     }).filter((movement) => movement != undefined);
     console.log('bankData',bankData);
-    console.log('bankData',bankData);
-    console.log('bankData',bankData);
     return bankData;
 }
 
@@ -159,8 +166,6 @@ function getBankDataFromAPI(bankMovements){
             abono: abono,
         }
     }).filter((movement) => movement != undefined);
-    console.log('bankData',bankData);
-    console.log('bankData',bankData);
     console.log('bankData',bankData);
     return bankData;
 }

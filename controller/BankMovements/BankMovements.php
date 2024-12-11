@@ -298,154 +298,13 @@ class BankMovements
     }
 
 
-    // function getClayApiMovements($business_rut,$dateFrom) {
-
-
-    //     try{
-    //         //get first day if the month YYYY-MM-DD
-    //         $firstDayOfTheYear = date('Y-01-01');
-
-    //         // create a get fetch request to https://api.clay.cl/v1/cuentas_bancarias/movimientos/?numero_cuenta=63741369&rut_empresa=77604901&limit=200&offset=0&fecha_desde=2020-01-01
-    //         // to get the bank movements of the company
-    //         // USING PHP
-
-    //         $response = [];
-    //         $offset = 0;
-    //         $loopCounter = 0;
-    //         $responseNeedRepeat = true;
-
-    //         $accountNumber = $this->getAccountNumber();
-
-    //         while ($responseNeedRepeat) {
-    //             $loopCounter++;
-    //             $curl = curl_init();
-    //             curl_setopt_array($curl, array(
-    //                 CURLOPT_URL => "https://api.clay.cl/v1/cuentas_bancarias/movimientos/?numero_cuenta=$accountNumber&rut_empresa=$business_rut&limit=200&offset=$offset&fecha_desde=2024-11-01",
-    //                 CURLOPT_RETURNTRANSFER => true,
-    //                 CURLOPT_ENCODING => '',
-    //                 CURLOPT_MAXREDIRS => 10,
-    //                 CURLOPT_TIMEOUT => 0,
-    //                 CURLOPT_FOLLOWLOCATION => true,
-    //                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //                 CURLOPT_CUSTOMREQUEST => 'GET',
-    //                 CURLOPT_HTTPHEADER => array(
-    //                     'accept: application/json',
-    //                     'Token: 9NVElUwIrrQPXFU0VSVD9zfeP5i2PWAbrONlc0lQM-0TfHj0a6AQ2wbI-eg01mTj_ZnZLV6q4d2hLU86AXntfY'
-    //                 ),
-    //             ));
-
-    //             // echo "https://api.clay.cl/v1/cuentas_bancarias/movimientos/?numero_cuenta=$bankAcocuntId&rut_empresa=$busId&limit=200&offset=$offset&fecha_desde=2024-07-10";
-
-    //             $curl_response = curl_exec($curl);
-    //             // return $curl_response;
-    //             $newItems = json_decode($curl_response, true)['data']['items'];
-
-    //             if ($loopCounter == 1) {
-    //                 $response = json_decode($curl_response, true);
-    //             } else {
-    //                 $response['data']['items'] = array_merge($response['data']['items'], $newItems);
-    //             }
-
-    //             $currentItems = count($newItems);
-    //             $offset = $loopCounter * 200;
-    //             $responseNeedRepeat = $currentItems == 200;
-    //             curl_close($curl);
-    //         }
-    //         // return ['success' => true, "data"=>$response,'message' => 'Movimientos bancarios obtenidos con éxito'];
-
-    //         // return $response;
-
-
-    //         //GET THE BANK MOVEMENTS FROM THE RESPONSE
-    //         // MAP ARRAY FOR BATCH INSERT INTO DATABASE
-
-    //         // get business id
-
-
-    //         $bankMovements = $response['data']['items'];
-    //         $bankMovements = array_map(function($movement) {
-    //             return [
-    //                 'id' => $movement['id'],
-    //                 'folio' => $movement['numero_documento'],
-    //                 'amount' => $movement['monto'],
-    //                 'date' => $movement['fecha_humana'],
-    //                 'income' => $movement['abono'],
-    //                 'comment' => !empty($movement['mas_info']['mensaje']) ? $movement['mas_info']['mensaje'] : "",
-    //                 'desc' => $movement['descripcion'],
-    //                 'bank' => !empty($movement['mas_info']['banco']) ? $movement['mas_info']['banco'] : "",
-    //                 'account_number' => !empty($movement['mas_info']['numero_cuenta']) ? $movement['mas_info']['numero_cuenta'] : "",
-    //                 'counterparty' => !empty($movement['mas_info']['contraparte']) ? $movement['mas_info']['contraparte'] : "",
-    //                 'rut_counterparty' => !empty($movement['mas_info']['rut_contraparte']) ? $movement['mas_info']['rut_contraparte'] : "",
-    //                 'business_id' => $this->getBusinessId()
-    //             ];
-    //         }, $bankMovements);
-
-    //         $response = $this->createBulkFromApi($bankMovements);
-    //         // $response = $this->createBatch($bankMovements);
-    //         return ['success' => true, "data"=>$response,'message' => 'Movimientos bancarios obtenidos con éxito', "bathcData" => $bankMovements];
-
-    //         if(!$response['success']) {
-    //             return ['success' => true, "data"=>$response,'message' => 'Movimientos bancarios obtenidos con éxito', "bathcData" => $bankMovements];
-    //             return ['success' => false, 'data'=>[],'message' => 'Error al guardar los movimientos bancarios'];
-    //         }
-    //         // echo json_encode($response);
-    //     }catch (Exception $e) {
-
-    //         return ["error"=>$e->getMessage()];
-    //         // return ['success' => false, 'data'=>[],'message' => 'Error al obtener los movimientos bancarios'];
-    //     }
-    // }
-
-
-    // function createBulkFromApi($bankMovements) {
-    //     $conn = new bd();
-    //     $conn->conectar();
-    //     $params = [];
-
-    //     // Get the max date from the bankMovements array
-    //     $dates = array_column($bankMovements, 'date');
-    //     $maxDate = max($dates);
-
-
-    //     // Execute this only if incoming array contains id property
-
-    //     //getAll ids from the array
-    //     $ids = array_column($bankMovements, 'id');
-    //     $ids = array_filter($ids); // Remove null or empty IDs
-
-    //     $placeholders = implode(',', array_fill(0, count($ids), '?'));
-
-    //     $checkQuery = "SELECT * FROM bank_movement WHERE id IN ($placeholders) AND date = ?";
-    //     $checkStmt = mysqli_prepare($conn->mysqli, $checkQuery);
-
-    //     $params = array_merge($ids, [$maxDate]);
-    //     $checkStmt->bind_param(str_repeat('s', count($ids) + 1), ...$params);
-
-    //     // get results 
-    //     $checkStmt->bind_param(str_repeat('s', count($ids)) . 's', ...$params);
-    //     $checkStmt->store_result();
-    //     $checkStmt->bind_result($id);
-    //     $checkStmt->fetch();
-
-
-    //     return ["success"=>true,"Data"=>$ids, "MaxDate"=>$maxDate, "CheckQuery"=>$checkQuery, "CheckStmt"=>$checkStmt, "CheckStmtResult"=>$checkStmt->num_rows];
-
-    //     if ($checkStmt->num_rows > 0) {
-    //         return ['success' => true, 'data' => [], 'message' => 'Movimientos bancarios ya existen en la base de datos'];
-    //     }
-
-    //     return ['success' => true, 'data' => [], 'message' => 'Movimientos bancarios obtenidos con éxito'];
-    // }
+  
 
 
     function getClayApiMovements($business_rut, $dateFrom)
     {
-        // $ARR = [3,3,3,3];
-        // $placeholders = implode(',', array_fill(0, count($ARR), '?'));
-
-        // return $placeholders;
-        // return str_repeat('s', count($ARR));
-
+        
+       
         // try {
         // Removed unused variable $firstDayOfTheYear
 
@@ -512,7 +371,16 @@ class BankMovements
             ];
         }, $bankMovements);
 
-        $response = $this->createBulkFromApi($bankMovements);
+        // delete all movements from the last day
+        $deleteResponse = $this->deleteFromLastDay($dateFrom, $this->getBusinessId());
+
+        if($deleteResponse['success'] === false) {
+            return ['success' => false, 'data' => [], 'message' => $deleteResponse['message']];
+        }
+
+        $response = $this->createBatch($bankMovements);
+        // $response = $this->createBatchBankMovements($bankMovements);
+        // $response = $this->createBulkFromApi_DEPRECATED($bankMovements);
 
         if(!$response['success']) {
             return ['success' => false, 'data' => [], 'message' => $response['message']];
@@ -526,9 +394,24 @@ class BankMovements
         // }
     }
 
+    function deleteFromLastDay($date, $business_id){
+        $conn = new bd();
+        try {
+            $conn->conectar();
+            $stmt = mysqli_prepare($conn->mysqli, "DELETE FROM bank_movement WHERE date >= ? AND business_id = ?");
+            $stmt->bind_param("si", $date, $business_id);
+            $stmt->execute();
+            $stmt->close();
+            $conn->desconectar();
+            return ['success' => true, 'message' => 'Movimientos bancarios eliminados con éxito'];
+        } catch (Exception $e) {
+            return ['success' => false, 'error' => 'Error al eliminar los movimientos bancarios'];
+        }
+    }
 
 
-    function createBulkFromApi($bankMovements){
+
+    function createBulkFromApi_DEPRECATED($bankMovements){
 
         $conn = new bd();
         try {
