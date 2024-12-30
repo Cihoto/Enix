@@ -34,16 +34,18 @@ function renderDashboardChart(tributarieDocuments) {
             {
                 label: 'Ingresos',
                 data: ingreso,
-                borderColor: 'red',
+                borderColor: 'rgba(51, 34, 102, 1)',
                 fill: false,
                 cubicInterpolationMode: 'monotone',
-                tension: 0.1
+                tension: 0.1,
+                
             },
             {
                 label: 'Egresos',
                 data: egreso,
                 borderColor: "blue",
                 fill: false,
+                cubicInterpolationMode: 'monotone',
                 tension: 0.8
             },
             // {
@@ -72,17 +74,16 @@ function renderDashboardChart(tributarieDocuments) {
                 x: {
                     display: true,
                     title: {
-                        display: true
+                        display: true,
+                        text: 'Mes'
                     }
                 },
                 y: {
                     display: true,
                     title: {
                         display: true,
-                        text: 'Value'
-                    },
-                    suggestedMin: -10,
-                    suggestedMax: 200
+                        text: 'Total'
+                    }
                 }
             }
         },
@@ -131,6 +132,6 @@ let tributarieDocumentsChart = [];
 function prepareDataForDashBoard() {
     tributarieDocumentsChart = chartTributarieDocuments()
 
-    renderDashboardChart(tributarieDocumentsChart);
+    // renderDashboardChart(tributarieDocumentsChart);
 
 }

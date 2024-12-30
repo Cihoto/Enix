@@ -280,9 +280,9 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                 Mostrar documentos pagados
                             </button>
                         </div>
-                        <div>
+                        <!-- <div>
                             <canvas id="myChart"></canvas>
-                        </div>
+                        </div> -->
                         <section id="financeTableContainer" class="horizontalTableContainer">
                             <table id='bankMovementsTableHorizontal' class="">
                                 <thead>

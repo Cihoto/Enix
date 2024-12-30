@@ -35,8 +35,6 @@ function setCashFlowCards() {
     const todayAllDates = allMyDates[todayIndex];
     console.log('todayAllDates', totalDailyBalance);
     const selectedMonthDays = cashFlowTotals.totals.find((date)=>{
-        console.log('date', date);
-        console.log('todayAllDates', todayAllDates);
         return todayAllDates == date.date;
     });
 
