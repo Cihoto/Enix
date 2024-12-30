@@ -127,7 +127,7 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
             <td>${getChileanCurrency(parseInt(impuesto))}</td>
             <td>${getChileanCurrency(parseInt(total))}</td>
             <td>${getChileanCurrency(saldo)}</td>
-            <td><div class="paidPercentage" ${percentageBarStyle}></div></td>
+            <td class="pendingBalance"><div class="paidPercentage" ${percentageBarStyle}></div></td>
             <td class="markAsPaid">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 

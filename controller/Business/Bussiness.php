@@ -178,8 +178,16 @@ class Business {
         return $businessId;
     }
 
-    
-
+    public function getBusiness_Rut_DV(){
+        require_once $_SERVER['DOCUMENT_ROOT'].'/controller/session/sessionManager.php';
+        $sessionManager = new SessionManager();
+        $data = [
+            'rut' => $sessionManager->getAllSessionData()['businessId'],
+            'dv' => $sessionManager->getAllSessionData()['businessDV']
+        ];
+        // $businessId = $sessionManager->getAllSessionData()['businessId'];
+        return $data;
+    }
 }
 
 ?>

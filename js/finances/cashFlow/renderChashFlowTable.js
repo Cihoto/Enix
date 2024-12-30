@@ -34,7 +34,7 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
         const totalProjectedIncome = bankMovementsData.projectedIncome[indexOnAllMydates].total;
         const totalProjectedOutcome = bankMovementsData.projectedOutcome[indexOnAllMydates].total;
         let totalProjected = 0;
-        if (moment(date, 'YYYY-MM-DD').dayOfYear() > moment().dayOfYear()) {
+        if (moment(date, 'YYYY-MM-DD').dayOfYear() >= moment().dayOfYear()) {
             totalProjected = totalProjectedIncome - totalProjectedOutcome;
         }
         const totalCommonIncomeMovements = bankMovementsData.commonIncomeMovements[indexOnAllMydates].total;
@@ -97,8 +97,24 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
     const balanceRow = document.getElementsByClassName('resumeRowBalance')[0];
 
     selectedMonthDays.forEach((day) => {
+
         const { date, total, previousAccountBalance, dayOfYear } = day;
-        const dateIndex = getDateHeaderIndex(dayOfYear - 1, selectedYear);
+
+        const findIndexOnAllMyDates = allMyDates.findIndex((myDate) => myDate == date);
+        console.log('findIndexOnAllMyDates',findIndexOnAllMyDates);
+        const dateIndex = getDateHeaderIndex(findIndexOnAllMyDates, selectedYear);
+
+
+        if(date == '2024-12-31'){
+            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            console.log('dateIndex',selectedMonthDays);
+            console.log('dateIndex',dateIndex);
+            console.log('dateIndex',date);
+            console.log('dateIndex',previousAccountBalance);
+            console.log('dateIndex',dayOfYear);
+            console.log('dateIndex',total);
+            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        }
         if (!dateIndex) {
             return;
         }
@@ -124,27 +140,76 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
     for (let index = firstDayOfSelectedYearIndex; index <= lastDayOfYearIndex; index++) {
         const indexOnAllMydates = index;
         if (index <= todayIndex) {
+  
             const totalIncome = bankMovementsData.ingresos[indexOnAllMydates].total;
             const totalOutcome = bankMovementsData.egresos[indexOnAllMydates].total;
             let projectedIncome = 0;
             let projectedOutcome = 0;
+
+            let projectedIncomeOutDated = 0;
+            let projectedOutcomeOutDated = 0;
             if (todayIndex == index) {
-                projectedIncome = bankMovementsData.projectedIncome[indexOnAllMydates].total;
-                projectedOutcome = bankMovementsData.projectedOutcome[indexOnAllMydates].total;
+
+                const projectedIncomeDocuments = bankMovementsData.projectedIncome[indexOnAllMydates].lvlCodes;
+                const projectedOutcomeDocuments = bankMovementsData.projectedOutcome[indexOnAllMydates].lvlCodes;
+                console.log('projectedOutcomeDocuments',projectedOutcomeDocuments);
+                
+                const projectedIncomeTotals = projectedIncomeDocuments.reduce((acc, doc) => {
+                    if (doc.vencida_por <= 0) {
+                        acc.projectedIncomeTotal += doc.saldo;
+                    } else {
+                        acc.projectedOutdatedIncomeTotal += doc.saldo;
+                    }
+                    return acc;
+                }, { projectedIncomeTotal: 0, projectedOutdatedIncomeTotal: 0 });
+                const { projectedIncomeTotal, projectedOutdatedIncomeTotal } = projectedIncomeTotals;
+                console.log('projectedIncomeTotals',projectedIncomeTotals);
+
+                const projectedOutcomeTotals = projectedOutcomeDocuments.reduce((acc, doc) => {
+                    if (doc.vencida_por <= 0) {
+                        acc.projectedOutcomeTotal += doc.saldo;
+                    } else {
+                        acc.projectedOutdatedOutcomeTotal += doc.saldo;
+                    }
+                    return acc;
+                }, { projectedOutcomeTotal: 0, projectedOutdatedOutcomeTotal: 0 });
+
+                console.log('projectedOutcomeTotals',projectedOutcomeTotals);
+
+                const { projectedOutcomeTotal, projectedOutdatedOutcomeTotal } = projectedOutcomeTotals;
+
+
+                projectedIncome = projectedIncomeTotal;
+                projectedIncomeOutDated = projectedOutdatedIncomeTotal;
+
+                projectedOutcome = projectedOutcomeTotal;
+                projectedOutcomeOutDated = projectedOutdatedOutcomeTotal;
+
+                 
+                // projectedIncome = bankMovementsData.projectedIncome[indexOnAllMydates].total;
+                // projectedOutcome = bankMovementsData.projectedOutcome[indexOnAllMydates].total;
             }
+
             const doty = getDateHeaderIndex(index, selectedYear);
             if (!doty) {
                 continue;
+            }
+            if(index == todayIndex){
+                console.log('index: ',index, 'TodayIndex: ',todayIndex);
+                console.log('doty: ',doty);
+                console.log('bankMovementsData.projectedIncome[indexOnAllMydates]',bankMovementsData.projectedIncome[indexOnAllMydates])
+                console.log('bankMovementsData.projectedOutcome[indexOnAllMydates]',bankMovementsData.projectedOutcome[indexOnAllMydates])
+
             }
             ingresosTr.children[doty].innerHTML = totalIncome > 0 ? getChileanCurrency(totalIncome) : 0;
             incomeRow.children[doty].innerHTML = totalIncome > 0 ? getChileanCurrency(totalIncome) : 0;
             egresosTr.children[doty].innerHTML = totalOutcome > 0 ? getChileanCurrency(totalOutcome) : 0;
             outcomeRow.children[doty].innerHTML = totalOutcome > 0 ? getChileanCurrency(totalOutcome) : 0;
             projectedIncomeRow.children[doty].innerHTML = projectedIncome > 0 ? getChileanCurrency(projectedIncome) : 0;
-            projectedOutdatedIncomeRow.children[doty].innerHTML = 0;
+            projectedOutdatedIncomeRow.children[doty].innerHTML = projectedIncomeOutDated > 0 ? getChileanCurrency(projectedIncomeOutDated) : 0;
             commonIncomeMovements.children[doty].innerHTML = 0;
             projectedOutcomeRow.children[doty].innerHTML = projectedOutcome > 0 ? getChileanCurrency(projectedOutcome) : 0;
-            projectedOutdatedOutcomeRow.children[doty].innerHTML = 0;
+            projectedOutdatedOutcomeRow.children[doty].innerHTML = projectedOutcomeOutDated > 0 ? getChileanCurrency(projectedOutcomeOutDated) : 0;
             commonOutcomeMovements.children[doty].innerHTML = 0;
             continue;
         }
@@ -231,11 +296,21 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
 }
 
 function getDateHeaderIndex(date, selectedYear = 2024) {
+
     const dateHeaderRow = document.querySelectorAll('.allDates')[0];
     const theadData = dateHeaderRow.getElementsByClassName('dateHeader');
-
     const dotyOnAllMyDates = moment(allMyDates[date], 'YYYY-MM-DD').dayOfYear();
 
+    if(date == 365 || date == 366){
+        console.log('date', date);
+        console.log('allMyDates', allMyDates);
+        console.log('allMyDates', allMyDates[date]);
+        console.log('dotyOnAllMyDates', dotyOnAllMyDates);
+        console.log('theadData', theadData);
+        console.log('dotyOnAllMyDates', selectedYear);
+        console.log('dotyOnAllMyDates', dotyOnAllMyDates);
+        console.log('dotyOnAllMyDates', dotyOnAllMyDates);
+    }
     for (let index = 0; index < theadData.length; index++) {
         const dateIndex = theadData[index].getAttribute('doty');
         const year = theadData[index].getAttribute('yr');
@@ -243,6 +318,7 @@ function getDateHeaderIndex(date, selectedYear = 2024) {
             return index + 1;
         }
     }
+
 }
 function removeAllTableRows() {
     $('#bankMovementsTableHorizontal tr').remove();

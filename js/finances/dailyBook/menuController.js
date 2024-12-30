@@ -126,7 +126,9 @@ function handleTableRendering(month = moment().format("MM"), year = moment().for
         case 'cashFlow':
             if(selectedPeriod() == 'daily') {
                 console.log('selectedPeriod() DAILY', selectedPeriod());
-                renderMyChasFlowTable(month, year);
+                renderMyChasFlowTable(month, year).then(() => {
+                    renderCashFlowTable();
+                });
             }
             if(selectedPeriod() == 'monthly') {
                 console.log('selectedPeriod() MONTHLY', selectedPeriod());

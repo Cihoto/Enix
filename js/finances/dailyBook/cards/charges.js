@@ -38,7 +38,7 @@ function renderChargesCards(){
 function setChargesCards(){
     const charges = tributarieCardsData.charges;
     return `
-                <div class="card yellow"  onClick="renderChargesTable(cardFilterAllChargesDocuments())">
+                <div class="card yellow"  onClick="renderChargesTable(cardFilterAllChargesDocuments('yellow'))">
                     <div class="content">
                         <div class="titles">
                             <p>Facturación anual</p>

@@ -15,6 +15,10 @@ let tributarieCardsData = {
     outdatedDocuments: {//vencidas
       amount: 0,
       total: 0
+    },
+    totalUnpaid: {
+      amount: 0,
+      total: 0
     }
   },
   payments: {
@@ -31,6 +35,10 @@ let tributarieCardsData = {
       total: 0
     },
     pendingDocuments: {
+      amount: 0,
+      total: 0
+    },
+    totalUnpaid: {
       amount: 0,
       total: 0
     }
@@ -50,6 +58,8 @@ let tributarieDocuments = {
 }
 
 function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
+
+  setAllCardsToZero() 
 
   tributarieDocuments.charges = [];
   tributarieDocuments.payments = [];
@@ -72,77 +82,8 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
   trDocuments.forEach((document) => {
 
     sortDocumentOnDate(document);
-    return;
-    if (!document.contable) { return; };
-    if (document.tipo_documento === 'nota') {
-      // boletasTotal.push(document);
-      tributarieDocuments.notaCredito.push(document);
-      return;
-    }
-    if (document.tipo_documento === 'notaD') {
-      // boletasTotal.push(document);
-      tributarieDocuments.notaDebito.push(document);
-      return;
-    }
-    // true = charges, false = payments
-    const classy = document.emitida;
-    const documentType = document.emitida ? 'charges' : 'payments';
-    const needToPay = document.emitida ? true : false;
-
-    // push document to its respective array
-    tributarieDocuments[documentType].push(document);
-
-
-
-
-    if (!document.emitida) {
-
-      tributarieCardsData.payments.totalDocuments.amount++;
-      tributarieCardsData.payments.totalDocuments.total += document.total;
-
-      if (document.tipo_documento === 'bhe' && !document.paid) {
-        tributarieCardsData.payments.bhe.amount++;
-        tributarieCardsData.payments.bhe.total += document.saldo;
-      }
-      // checkIfBillHasCreditNote(bill);
-      if ((document.tipo_documento === 'factura' || document.tipo_documento === 'bev') && !document.paid) {
-        tributarieCardsData.payments.bills.amount++;
-        tributarieCardsData.payments.bills.total += document.saldo;
-      }
-      if (document.vencida_por > 30 && !document.paid) {
-        tributarieCardsData.payments.pendingDocuments.amount++;
-        tributarieCardsData.payments.pendingDocuments.total += document.saldo;
-      }
-      if (needToPay) {
-        tributarieCardsData.bankBalance.totalCharges += document.total;
-      } else {
-        tributarieCardsData.bankBalance.totalPayments += document.total;
-      }
-
-    } else {
-      totalDocumentos.push(document);
-      tributarieCardsData.charges.totalDocuments.amount++;
-      tributarieCardsData.charges.totalDocuments.total += document.total;
-
-      if (!document.paid) {
-        tributarieCardsData.charges.upToDateDocuments.amount++;
-        tributarieCardsData.charges.upToDateDocuments.total += document.saldo;
-        if (document.vencida_por > 60) {
-          tributarieCardsData.charges.outdatedDocuments.amount++;
-          tributarieCardsData.charges.outdatedDocuments.total += document.saldo;
-        }
-        if (document.vencida_por > 30 && document.vencida_por <= 60) {
-          tributarieCardsData.charges.dueDocuments.amount++;
-          tributarieCardsData.charges.dueDocuments.total += document.saldo;
-        }
-      }
-    }
 
   });
-
-
-
-
 
   const recuentoEmitidas = tributarieDocuments.charges.filter((document) => { return document.emitida });
   console.log('recuentoEmitidas', recuentoEmitidas);
@@ -209,6 +150,8 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
   console.log('boletasTotal', boletasTotal);
   // console.log('totalDocumentos',totalDocumentos)
 
+  // tributarieCardsData.payments.totalDocuments.amount = 1;
+
 
 }
 
@@ -237,7 +180,16 @@ function sortDocumentOnDate(document) {
   if (!document.emitida) {
 
     tributarieCardsData.payments.totalDocuments.amount++;
-    tributarieCardsData.payments.totalDocuments.total += document.total;
+    tributarieCardsData.payments.totalDocuments.total += document.saldo;
+
+    if(!document.paid){
+      console.log('document', document);
+      console.log(tributarieCardsData);
+      console.log(tributarieCardsData.payments);
+      console.log(tributarieCardsData.payments.totalUnpaid);
+      tributarieCardsData.payments.totalUnpaid.amount++;
+      tributarieCardsData.payments.totalUnpaid.total += document.saldo;
+    }
 
     if (document.tipo_documento === 'bhe' && !document.paid) {
       tributarieCardsData.payments.bhe.amount++;
@@ -261,7 +213,12 @@ function sortDocumentOnDate(document) {
   } else {
     // totalDocumentos.push(document);
     tributarieCardsData.charges.totalDocuments.amount++;
-    tributarieCardsData.charges.totalDocuments.total += document.total;
+    tributarieCardsData.charges.totalDocuments.total += document.saldo;
+
+    if(!document.paid){
+      tributarieCardsData.charges.totalUnpaid.amount++;
+      tributarieCardsData.charges.totalUnpaid.total += document.saldo;
+    }
 
     if (!document.paid) {
       tributarieCardsData.charges.upToDateDocuments.amount++;
@@ -319,8 +276,8 @@ function discountDocument(document) {
     // console.log("+++++");
     // console.log("DOCUMENTO", document);
     // console.log("+++++");
-    tributarieCardsData.payments.totalDocuments.amount--;
-    tributarieCardsData.payments.totalDocuments.total -= document.total;
+    // tributarieCardsData.payments.totalDocuments.amount--;
+    // tributarieCardsData.payments.totalDocuments.total -= document.total;
     if (document.tipo_documento === 'bhe' && document.paid) {
       tributarieCardsData.payments.bhe.amount--;
       tributarieCardsData.payments.bhe.total -= document.saldo;
@@ -342,8 +299,8 @@ function discountDocument(document) {
 
   } else {
     // totalDocumentos.push(document);
-    tributarieCardsData.charges.totalDocuments.amount--;
-    tributarieCardsData.charges.totalDocuments.total -= document.total;
+    // tributarieCardsData.charges.totalDocuments.amount--;
+    // tributarieCardsData.charges.totalDocuments.total -= document.total;
 
     if (document.paid) {
       tributarieCardsData.charges.upToDateDocuments.amount--;
@@ -406,4 +363,62 @@ function checkIfBillHasCreditNote(bill) {
   });
   
   return hasCreditNote;
+}
+
+
+
+// maed a funciton to set all the cardsmin 0 
+// set all the cards to 0
+function setAllCardsToZero() {
+  tributarieCardsData = {
+    charges: {
+      totalDocuments: {
+        amount: 0,
+        total: 0
+      },
+      upToDateDocuments: {
+        amount: 0,
+        total: 0
+      },
+      dueDocuments: {//atrasadas
+        amount: 0,
+        total: 0
+      },
+      outdatedDocuments: {//vencidas
+        amount: 0,
+        total: 0
+      },
+      totalUnpaid: {
+        amount: 0,
+        total: 0
+      }
+    },
+    payments: {
+      totalDocuments: {
+        amount: 0,
+        total: 0
+      },
+      bhe: {
+        amount: 0,
+        total: 0
+      },
+      bills: {
+        amount: 0,
+        total: 0
+      },
+      pendingDocuments: {
+        amount: 0,
+        total: 0
+      },
+      totalUnpaid: {
+        amount: 0,
+        total: 0
+      }
+    },
+    bankBalance: {
+      todayBankBalance: 0,
+      totalPayments: 0,
+      totalCharges: 0
+    }
+  }
 }

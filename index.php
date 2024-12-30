@@ -2,7 +2,7 @@
 require_once('./controller/session/sessionManager.php');
 require_once('./cacheBuster.php');
 $sessionManager = new sessionManager();
-if (!isset($_SESSION['loggedin'])) {
+if (!isset($_SESSION['loggedin']) || !isset($_SESSION['businessDV'])) {
     $sessionManager->destroy();
     header('Location: ./login.php');
     exit();
@@ -32,13 +32,13 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.2.6/dist/sweetalert2.all.min.js" integrity="sha256-Ry2q7Rf2s2TWPC2ddAg7eLmm7Am6S52743VTZRx9ENw=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./assets/css/finance.css?v=<?php echo getFileTime($_SERVER['DOCUMENT_ROOT'] . '/assets/css/finance.css'); ?>">
     <!-- DORPZONE -->
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <!-- TOASTIFY -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
 
 </head>
 
@@ -197,7 +197,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                         </div>
                     </div>
                     <div class="card-header-actions">
-                        <button class="filterButton">
+                        <button id="filterButton" class="filterButton">
                             <img src="./assets/svg/financessvg/filterBtn.svg" alt="">
                             <p>Filtros</p>
                         </button>
@@ -280,6 +280,9 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                 Mostrar documentos pagados
                             </button>
                         </div>
+                        <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
                         <section id="financeTableContainer" class="horizontalTableContainer">
                             <table id='bankMovementsTableHorizontal' class="">
                                 <thead>
@@ -361,7 +364,8 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <!-- CARGA MANUAL -->
     <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time(); ?>"></script>
 
-    
+    <!-- CHARTS -->
+    <script src="./js/finances/dashboard/chart.js?v=<?php echo time(); ?>"></script>
 
     <!-- handlers -->
     <script src="./js/finances/tributarieDocuments/tributrarieTableHandlers.js?v=<?php echo time(); ?>"> </script>
@@ -376,6 +380,9 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <script src="./js/finances/cashFlow/renderMonthlycashFlow.js"></script>
     
     <script>
+
+
+
 
         //  // // // // // // // // // // // iinsertCommonMovementsFromJson();
 

@@ -31,18 +31,25 @@ async function prepareDataForFinance(){
         getBankMovements(),
         getCommonMovements()
     ]);
+
+    Toastify({ 
+        text: "Datos actualizados correctamente",
+        duration: 3000,
+        close: true,
+        backgroundColor: "linear-gradient(to right, #4caf50, #4caf50)"
+    }).showToast();
 }
 
 
 async function getBankMovements(){
-    // bankExcelData = data;
-    // console.log('bankMovementsFromExcel_!@#+!_@#+!@_#+!_@#',bankMovementsFromExcel);
-    // bankExcelData = bankMovementsFromExcel;
 
     // GET NEW DATA FROM API
-    // const newBankMovements = await getBankMovementsFromAPI();
-    // const bankDataAPI = getBankDataFromAPI(newBankMovements);
-    const apiData = await getBankMovementsFromAPI();
+    const newBankMovements = await getBankMovementsFromAPI();
+    const bankDataAPI = getBankDataFromAPI(newBankMovements);
+
+
+
+    // const apiData = await getBankMovementsFromAPI();
 
 
     // GET DATA FROM DATABASE

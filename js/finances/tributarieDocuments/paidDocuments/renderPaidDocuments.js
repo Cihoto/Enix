@@ -125,7 +125,6 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
                     <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
                 </svg>
             </td>`;
-
         }
 
         
@@ -167,6 +166,7 @@ function renderPaidDocuments(sortFunction, hidePaid = true) {
     trFoot.innerHTML = tfootTr;
     trFoot.classList.add('headerRow');
     tfoot.appendChild(trFoot);
+    console.log("TERMINANDO EL RENDERIZADO DE ESTA ZONA")
 }
 
             // <td><p class="paymentStatus ${paidClass}">${isPaid}</p></td>

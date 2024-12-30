@@ -30,7 +30,9 @@ let bhe = [];
 window.addEventListener("load", async (event) => {
 
     
-    prepareDataForFinance();
+    await prepareDataForFinance();
+
+    prepareDataForDashBoard();
     // return
 
     // let query = "";

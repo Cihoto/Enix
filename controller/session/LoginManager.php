@@ -45,9 +45,11 @@ class LoginManager{
             $sessionManager->setUserId($user->getId());
             $sessionManager->setBdId($business->getBusinessId());
             $sessionManager->setBusinessId($business->getBusinessRut());
+            $sessionManager->setBusinessDV($business->getBusinessDv());
             $sessionManager->setBusinessName($business->getBusinessName());
             $sessionManager->setBusinessBankAccounts($business->getBusinessBankAccounts());
             $sessionManager->setSuperAdmin($user->isSuperAdmin());
+            
 
 
 

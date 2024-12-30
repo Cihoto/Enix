@@ -16,6 +16,8 @@
         $tributarieDocuments->setBusinessId($businessId);
         $tributarieDocuments->setId($id);
         $response = $tributarieDocuments->insertModifiedDocument($document);
+        // echo json_encode($response);
+        // exit ();
 
         if($response['success']) {
             echo json_encode(['success'=>true,'message' => 'Documentos tributarios marcados como pagados correctamente' ]);

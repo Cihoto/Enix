@@ -79,10 +79,10 @@ cashFlowTable.addEventListener('click', (e) => {
         // create table with movements
         data.lvlCodes.forEach((movement) => {
             const tr = document.createElement('tr');
-            const {folio, proveedor, total} = movement;
+            const {folio, proveedor, total,saldo} = movement;
             tr.innerHTML = `<td>${folio}</td>
                             <td>${proveedor}</td>
-                            <td>${getChileanCurrency(total)}</td>`;
+                            <td>${getChileanCurrency(saldo)}</td>`;
             infoMenuTableTbody.append(tr);
         })
     }
@@ -167,10 +167,19 @@ infoContent.addEventListener('click', (e) => {
 
 
 function getMovementsByCode(accCode, clickedDate,clickedYear){
+    console.log('accCode',accCode);
+    console.log('clickedDate',clickedDate);
+    console.log('clickedYear',clickedYear);
+
     const dateToSearch = moment(`${clickedYear}-${clickedDate}`,'YYYY-DDD').format('YYYY-MM-DD');
+
+    console.log('dateToSearch',dateToSearch);
+
     const indexToFind = allMyDates.findIndex((date) => {
        return moment(dateToSearch).isSame(date);
     });
+
+    console.log('indexToFind',indexToFind);
 
     const outdatedAccount = accCode === 'projectedOutdatedIncomeRow' ? 'projectedIncome' : 'projectedOutcome';
    
@@ -187,14 +196,21 @@ function getMovementsByCode(accCode, clickedDate,clickedYear){
 
         return {lvlCodes: outdatedMovements};
     }else if(accCode === 'projectedIncome' || accCode === 'projectedOutcome'){
+        console.log('accCode',accCode);
+        console.log('clickedDate',clickedDate);
+        console.log('bankMovementsData[accCode][clickedDate]',bankMovementsData[accCode][indexToFind]);
         // console.log('bankMovementsData[outdatedAccount][clickedDate]',bankMovementsData[outdatedAccount][clickedDate]);
         const dataOnDay = bankMovementsData[accCode][indexToFind];
         const projectedMovement = dataOnDay.lvlCodes.filter((movement) => {
             // console.log('movement____________',movement);
             const {vencida_por} = movement;
-            return vencida_por <= 0;
+            console.log('vencida_por',vencida_por);
+            return vencida_por <= 0 || vencida_por >= 0;
         });
 
+        // reduce to get total 
+
+        return {lvlCodes: dataOnDay.lvlCodes};
         return {lvlCodes: projectedMovement};
     }else if(accCode === 'ingresos' || accCode === 'egresos'){
 

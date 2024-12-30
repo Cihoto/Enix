@@ -560,21 +560,87 @@ class TributarieDocuments
             $response['data']['items'] = array_merge($response['data']['items'], $newItems);
             curl_close($curl);
         }
-    
-        
+
         // get all boletas de honorarios electronicas from docProd
         $filtered_bhe = array_filter($response['data']['items'], function($doc) {
             return $doc['tipo'] === 'Boleta de Honorarios';
         });
+
+        // $filtered_bhe = array_values($filtered_bhe);
+        // return $filtered_bhe;
     
         $BHEProduct = $this->mapBHEDocumentoProducto($filtered_bhe);
-    
-    
-        // $BHE = prepareArrayForDb($response['data']['items']);
         return $BHEProduct;
-        // return $response['data']['items'];
-        // exit();
     }
+    public function getBHE($business_rut,$dv,$dateFrom){
+
+        $url = "https://api.clay.cl/v1/obligaciones/boletas_honorarios/?rut_receptor=$business_rut&dv_receptor=$dv&fecha_desde=$dateFrom&initialize_until=true&limit=200&offset=0";
+    
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'accept: application/json',
+                'Token: 9NVElUwIrrQPXFU0VSVD9zfeP5i2PWAbrONlc0lQM-0TfHj0a6AQ2wbI-eg01mTj_ZnZLV6q4d2hLU86AXntfY'
+            ),
+        ));
+        $curl_response = curl_exec($curl);
+        $totalRecords = 0;
+        $totalLoop = 0;
+        if (isset(json_decode($curl_response, true)['data']['records'])) {
+            // echo "No hay datos";
+            $totalRecords = json_decode($curl_response, true)['data']['records']['total_records'];
+            $totalLoop = ceil($totalRecords / 200);
+            // PUSH CLAY API TO LOCAL RESPONSE 
+            $response = json_decode($curl_response, true);
+        } else {
+            return ["success" => false, "message" => "No data found"];
+            exit();
+        }
+        for ($i = 1; $i < $totalLoop; $i++) {
+            $offset = $i * 200;
+            $url = "https://api.clay.cl/v1/obligaciones/boletas_honorarios/?rut_receptor=$business_rut&dv_receptor=$dv&fecha_desde=$dateFrom&initialize_until=true&limit=200&offset=$offset";
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    'accept: application/json',
+                    'Token: 9NVElUwIrrQPXFU0VSVD9zfeP5i2PWAbrONlc0lQM-0TfHj0a6AQ2wbI-eg01mTj_ZnZLV6q4d2hLU86AXntfY'
+                ),
+            ));
+            $curl_response = curl_exec($curl);
+            // echo json_encode(json_decode($curl_response, true)['data']['items']);
+            if (!isset(json_decode($curl_response, true)['data']['items'])) {
+                // echo "No hay datos";
+                break;
+            }
+            $newItems = json_decode($curl_response, true)['data']['items'];
+            // ['data']['items'];
+            $response['data']['items'] = array_merge($response['data']['items'], $newItems);
+            curl_close($curl);
+        }
+
+    
+        // $BHEProduct = $this->mapBHEDocumentoProducto($response['data']['items']);
+        return $this->mapBHE($response['data']['items']);
+    }
+
+
+
 
 
     private function mapBHEDocumentoProducto($docProd){
@@ -731,6 +797,176 @@ class TributarieDocuments
         return $mappedDocumentoProducto;
     }
 
+    private function mapBHE($docProd){
+
+        $processedData = array_values($docProd);
+        
+        $mappedDocumentoProducto = array_map(function ($movement) {
+    
+            $DOCUMENT_TYPES = [
+                [
+                    'name' => 'Factura Electrónica de Venta',
+                    'type' => 'factura',
+                    'contable' => true
+                ],
+                [
+                    'name' => 'Factura de Venta',
+                    'type' => 'factura',
+                    'contable' => true
+                ],
+                [
+                    'name' => 'Factura Electrónica Exenta',
+                    'type' => 'factura',
+                    'contable' => true
+                ],
+                [
+                    'name' => 'Factura Exenta',
+                    'type' => 'factura',
+                    'contable' => true
+                ],
+                [
+                    'name' => "Retención Boleta Honorarios",
+                    'type' => "R_bhe",
+                    'contable' => false
+                ],
+                [
+                    'name' => "Boleta de Honorarios",
+                    'type' => "bhe",
+                    'contable' => true
+                ],
+                [
+                    'name' => "Boleta de Venta Electrónica",
+                    'type' => "bev",
+                    'contable' => true
+                ],
+                [
+                    'name' => "Boleta de Venta",
+                    'type' => "bev",
+                    'contable' => true
+                ],
+                [
+                    'name' => "Comprobante de Pago Electrónico",
+                    'type' => "bev",
+                    'contable' => true
+                ],
+                [
+                    'name' => "Guía de Despacho Electrónica",
+                    'type' => "despacho",
+                    'contable' => false
+                ],
+                [
+                    'name' => "Guía de Despacho",
+                    'type' => "despacho",
+                    'contable' => false
+                ],
+                [
+                    'name' => "Nota de Crédito Electrónica",
+                    'type' => "nota",
+                    'contable' => true
+                ],
+                [
+                    'name' => "Nota de Débito Electrónica",
+                    'type' => "notaD",
+                    'contable' => true
+                ],
+                [
+                    'name' => "Nota de Crédito",
+                    'type' => "nota",
+                    'contable' => true
+                ],
+                [
+                    'name' => "Retención Boleta Honorarios de Terceros",
+                    'type' => "R_bhe",
+                    'contable' => false
+                ],
+                [
+                    'name' => "Retención Boleta de Servicios de Terceros",
+                    'type' => "R_bhe",
+                    'contable' => false
+                ],
+                [
+                    'name' => "Boleta de Servicios de Terceros",
+                    'type' => "boleta",
+                    'contable' => true
+                ],
+            ];
+            $numero = $movement['numero'];
+            $tipo = $movement['tipo'];
+            $fecha_emision = $movement['fecha'];
+            $fecha_humana_emision = $movement['fecha_humana'];
+            $recibida = true;
+            $issued = $recibida ? false : true;
+            $pagado = $movement['pagada'];
+            $total = $movement['total'];
+            $emisor = $movement['emisor'];
+            $receptor = $movement['receptor'];
+            $descripcion = $movement['descripcion'];
+
+            
+            if (isset($movement['status']) && strtolower($movement['status']) == "nula") {
+                // echo "Documento nulo: "  . $numero;
+                // echo "<br>";
+
+
+                return null;
+            }
+    
+            $expirationDate = date('d-m-Y', strtotime($fecha_humana_emision . ' +1 month'));
+    
+            $diffOnDaysFromEmission = (new DateTime())->diff(new DateTime("@$fecha_emision"))->days;
+            $atrasado = !$pagado && $diffOnDaysFromEmission >= 30 && $diffOnDaysFromEmission <= 60;
+            $outdated = !$pagado && $diffOnDaysFromEmission > 60;
+    
+            $documentType = array_filter($DOCUMENT_TYPES, function ($docType) use ($tipo, $DOCUMENT_TYPES) {
+                return $docType['name'] === $tipo;
+            });
+            $documentType = reset($documentType);
+    
+            $itemDescription = $descripcion != null ? str_replace("<br/>", ' ', $descripcion) : 'No description';
+            
+            $provider = $recibida ? $emisor['razon_social'] : $receptor['razon_social'];
+            $provider_rut = $recibida ? $emisor['rut'] . '-' . $emisor['dv'] : $receptor['rut'] . '-' . $receptor['dv'];
+            // print_r($total);
+            return [
+                'folio' => $numero,
+                'emitida' => $issued,
+                'paid' => $pagado,
+                'fecha_emision' => date('d-m-Y', strtotime($fecha_humana_emision)),
+                'fecha_emision_timestamp' => $fecha_emision,
+                'fecha_expiracion' => $expirationDate,
+                'fecha_expiracion_timestamp' => strtotime($expirationDate),
+                'atrasado' => $atrasado,
+                'vencido' => $outdated,
+                'afecto' => $total['total_honorario'] + $total['impuesto'],
+                'exento' => $total['total_honorario'],
+                'neto' =>  $total['total_honorario'] + $total['impuesto'],
+                'impuesto' => $total['impuesto'],
+                'total' => $total['total_honorario'],
+                'saldo' => $total['total_honorario'],
+                'pagado' => 0,
+                'tipo_documento' => $documentType['type'],
+                'contable' => $documentType['contable'],
+                'desc_tipo_documento' => $documentType['name'],
+                'item' => trim($itemDescription),
+                'proveedor' => $provider,
+                'rut' => $provider_rut,
+                'vencida_por' => $diffOnDaysFromEmission
+            ];
+        }, $processedData);
+
+        // get array values 
+        $mappedDocumentoProducto = array_values($mappedDocumentoProducto);
+
+
+        // remove null values from mapped boject 
+        $mappedDocumentoProducto = array_filter($mappedDocumentoProducto, function($doc) {
+            return $doc != null;
+        });
+
+    
+        return $mappedDocumentoProducto;
+    }
+
     function getModifiedDocuments(){
 
         $conn = new bd();
@@ -816,6 +1052,7 @@ class TributarieDocuments
         $response['data']['items'] = array_merge($response['data']['items'], $newItems);
         curl_close($curl);
     }
+    // return  $response['data']['items'];
     $tributarieDocuments = $this->mapTributarieDocuments($response['data']['items']);
     return $tributarieDocuments;
     // exit();
@@ -920,7 +1157,7 @@ private function mapTributarieDocuments($tributarieDocs_items)
         $tipo = $item['tipo'];
         $fecha_emision = $item['fecha_emision'];
         $fecha_humana_emision = $item['fecha_humana_emision'];
-        $saldo_insoluto = $item['saldo_insoluto'];
+        $saldo = $item['saldo_insoluto'];
         $pagado = $item['pagado'];
         $recibida = $item['recibida'];
         $total = $item['total'];
@@ -964,9 +1201,11 @@ private function mapTributarieDocuments($tributarieDocs_items)
         $diffOnDaysFromEmission = (new DateTime())->diff(new DateTime("@$fecha_emision"))->days;
         $atrasado = !$pagado && $diffOnDaysFromEmission >= 30 && $diffOnDaysFromEmission <= 60;
         $outdated = !$pagado && $diffOnDaysFromEmission > 60;
-        $saldo = $saldo_insoluto ?? (!$pagado ? $total['total'] : 0);
+        // $saldo = $saldo_insoluto ?? (!$pagado ? $total['total'] : 0);
         $itemDescription = $descripcion != null ? str_replace("<br/>", ' ', $descripcion[0]['descripcion']) : 'No description';
-
+        
+        $saldo_insoluto = $saldo == null ? $total['total'] : $item['saldo_insoluto'];
+        $abonado = $total['total'] - $saldo_insoluto;
 
         $acc[] = [
             'folio' => $numero,
@@ -983,8 +1222,8 @@ private function mapTributarieDocuments($tributarieDocs_items)
             'neto' => $total['neto'],
             'impuesto' => $total['impuesto'],
             'total' => $total['total'],
-            'saldo' => $saldo,
-            'pagado' => $total['total'] - $saldo,
+            'saldo' => $saldo_insoluto,
+            'pagado' => $abonado,
             'tipo_documento' => $documentType['type'],
             'contable' => $documentType['contable'],
             'desc_tipo_documento' => $documentType['name'],

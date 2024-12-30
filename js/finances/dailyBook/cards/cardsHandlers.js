@@ -6,7 +6,6 @@ const cardBorderColor = {
     purple: '12px solid #326',
 }
 
-
 function setNewActiveCard(cardId){
     // remove active class from all cards
     const allcards = document.querySelectorAll('.card');
@@ -17,10 +16,7 @@ function setNewActiveCard(cardId){
     const card = document.getElementById(cardId);
     card.classList.add('active');
 }
-
-
 // HANDLE CARDS RENDERING
-
 
 // SECTION START - HANDLE PAYMENTS CARDS RENDERING
 function getPaymentsDocuments(){
@@ -35,6 +31,48 @@ function cardFilterAllPaymentsDocuments(color = 'yellow'){
 
     return futurePayments;
 }
+function cardFilterAllPaymentsDocuments_ascDate(color = 'yellow'){
+    const futurePayments = getPaymentsDocuments();
+
+    // roder by fecha_emision_timestamp asc
+
+    futurePayments.sort((a,b) => {
+        if(a.fecha_emision_timestamp < b.fecha_emision_timestamp){
+            return -1;
+        }
+        if(a.fecha_emision_timestamp > b.fecha_emision_timestamp){
+            return 1;
+        }
+        return 0;
+    });
+    
+
+    setNewActiveCard('payYellowCard')
+    document.getElementById('financesCardTableContainer').style.borderLeft = `${cardBorderColor[color]}`;
+
+    return futurePayments;
+}
+function cardFilterAllPaymentsDocuments_descDate(color = 'yellow'){
+    const futurePayments = getPaymentsDocuments();
+
+    // roder by fecha_emision_timestamp asc
+
+    futurePayments.sort((a,b) => {
+        if(a.fecha_emision_timestamp < b.fecha_emision_timestamp){
+            return 1;
+        }
+        if(a.fecha_emision_timestamp > b.fecha_emision_timestamp){
+            return -1;
+        }
+        return 0;
+    });
+
+    setNewActiveCard('payYellowCard')
+    document.getElementById('financesCardTableContainer').style.borderLeft = `${cardBorderColor[color]}`;
+
+    return futurePayments;
+}
+
 function cardFilterBhePaymentsDocuments(color = 'orange'){
     const futurePayments = getPaymentsDocuments();
     const bhePayments = futurePayments.filter(({tipo_documento}) => tipo_documento === 'bhe');
@@ -70,9 +108,46 @@ function getChargesDocuments(){
     return sortTributarieDocumentsByDate('charges');
 }
 
-function cardFilterAllChargesDocuments(){
+function cardFilterAllChargesDocuments(color = 'yellow'){
+    const futurePayments = getChargesDocuments();
+    document.getElementById('financesCardTableContainer').style.borderLeft = `${cardBorderColor[color]}`;
+    
+    return futurePayments;
+}
+
+function cardFilterAllChargesDocuments_ascDate(){
     const futurePayments = getChargesDocuments();
 
+    // roder by fecha_emision_timestamp asc
+
+
+    futurePayments.sort((a,b) => {
+        if(a.fecha_emision_timestamp < b.fecha_emision_timestamp){
+            return -1;
+        }
+        if(a.fecha_emision_timestamp > b.fecha_emision_timestamp){
+            return 1;
+        }
+        return 0;
+    });
+    
+    return futurePayments;
+}
+function cardFilterAllChargesDocuments_descDate(){
+    const futurePayments = getChargesDocuments();
+
+    // roder by fecha_emision_timestamp asc
+
+
+    futurePayments.sort((a,b) => {
+        if(a.fecha_emision_timestamp < b.fecha_emision_timestamp){
+            return 1;
+        }
+        if(a.fecha_emision_timestamp > b.fecha_emision_timestamp){
+            return -1;
+        }
+        return 0;
+    });
     
     return futurePayments;
 }
@@ -81,19 +156,25 @@ function cardFilterAllChargesDocuments(){
     const futureCharges = getChargesDocuments();
     return futureCharges;
 } 
-function cardFilterPendingChargesDocuments(){
+function cardFilterPendingChargesDocuments(color = 'orange'){
     const futureCharges = getChargesDocuments();
     const pendingCharges = futureCharges.filter(({paid}) =>{return !paid})   
+    document.getElementById('financesCardTableContainer').style.borderLeft = `${cardBorderColor[color]}`;
+
     return pendingCharges;
 }
-function cardFilterDueChargesDocuments(){
+function cardFilterDueChargesDocuments(color = 'cyan'){
     const futureCharges = getChargesDocuments();
     const dueCharges = futureCharges.filter(({paid,vencida_por}) =>{return !paid && vencida_por > 30 && vencida_por < 60})   
+    document.getElementById('financesCardTableContainer').style.borderLeft = `${cardBorderColor[color]}`;
+
     return dueCharges;
 }
-function cardFilterExpiredChargesDocuments(){
+function cardFilterExpiredChargesDocuments(color = 'purple'){
     const futureCharges = getChargesDocuments();
     const expiredCharges = futureCharges.filter(({paid,vencida_por}) =>{return !paid && vencida_por > 60})   
+    document.getElementById('financesCardTableContainer').style.borderLeft = `${cardBorderColor[color]}`;
+
     return expiredCharges;
 }
 

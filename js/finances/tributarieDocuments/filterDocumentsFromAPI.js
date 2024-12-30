@@ -123,8 +123,6 @@ async function filterDocumentsFromAPI() {
     }
   }).filter((document) => { return document });
 
-
-
   const uniqueTypeBills = [...new Set(allMyBills.map(item => item.desc_tipo_documento))];
   console.log('uniqueTypeBills', uniqueTypeBills);
 
@@ -151,10 +149,6 @@ async function filterDocumentsFromAPI() {
     ))
   );
   
-
-  
-
-
   const allOtherDocuments = DOCUMENTS_A.map(({
     fecha_emision,
     fecha_humana_emision,

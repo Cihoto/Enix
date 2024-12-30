@@ -1,22 +1,22 @@
-    let totalPaymentsObj = {
-        totalPayments : 0,
-        pendingBH:{
-            total:0,
-            totalDocuments:0
-        },
-        pendingBills : {
-            total:0,
-            totalDocuments:0
-        },
-        pendingDocuments : {
-            total:0,
-            totalDocuments:0
-        }
+let totalPaymentsObj = {
+    totalPayments : 0,
+    pendingBH:{
+        total:0,
+        totalDocuments:0
+    },
+    pendingBills : {
+        total:0,
+        totalDocuments:0
+    },
+    pendingDocuments : {
+        total:0,
+        totalDocuments:0
     }
+}
+
 function renderPaymentsCards(){ 
 
     cardsContainer.innerHTML = setMyPaymentsCards();
-
 
     return 
     const futurePayments = futureDocuments.filter(({recibida,}) => recibida);
@@ -51,8 +51,8 @@ function setMyPaymentsCards(){
                 <div class="titles">
                     <p>Total obligaciones</p>
                     <div class="sub-txt">
-                        <p id="currentBankBalance">${payments.totalDocuments.amount}</p>
-                        <p id="currentBankBalance">${getChileanCurrency(payments.totalDocuments.total)}</p>
+                        <p id="currentBankBalance">${payments.totalUnpaid.amount}</p>
+                        <p id="currentBankBalance">${getChileanCurrency(payments.totalUnpaid.total)}</p>
                     </div>
                 </div>
                 <div class="info">

@@ -14,13 +14,40 @@
         $businessId = $business->getDatabaseBusinessId();
         // echo json_encode($businessId);
         // exit();
-        $business_rut = $business->getBusiness_Rut();
-        $docProd_BHE = $tributarieDocuments->getDocumentoProductoBHE($business_rut, $dateFrom);
+        $business_rut_data = $business->getBusiness_Rut_DV();
+        // $docProd_BHE = $tributarieDocuments->getDocumentoProductoBHE($business_rut, $dateFrom);
+        $docProd_BHE = $tributarieDocuments->getBHE($business_rut_data['rut'], $business_rut_data['dv'] , $dateFrom);
 
-        $tributarieDocuments = $tributarieDocuments->getTributarieDocuments_API($business_rut,$dateFrom);
+        // echo json_encode($docProd_BHE);
+        // exit();
+
+        $tributarieDocuments = $tributarieDocuments->getTributarieDocuments_API($business_rut_data['rut'],$dateFrom);
+        
+        // echo json_encode($tributarieDocuments);
+        // exit();
+
         $merged = array_merge($docProd_BHE, $tributarieDocuments);
+        
+
+        
+        // $insoluto = array_filter($merged, function($item) {
+        //     return $item['saldo'] > 0;
+        // });
+        // echo json_encode($mmermerm);
+        // exit();
+        
+
+        // echo json_encode($merged);
+        // exit();
+
 
         $insertionData = prepareArrayForDb($merged);
+
+        // $paid = array_filter($insertionData, function($item) {
+        //     return $item['paid'] > 0 && $item['is_paid'] == 0;
+        // });
+        // echo json_encode($paid);
+        // exit();
         $insertionQuery = tributarieDocumentBatchInsert($insertionData, $businessId);
 
         echo json_encode($insertionQuery);
@@ -38,9 +65,9 @@
                 'issue_date' => $item['fecha_emision'],
                 'expiration_date' => $item['fecha_expiracion'],
                 'folio' => $item['folio'],
-                'total' => $item['total'],
-                'balance' => $item['total'],
-                'paid' => 0,
+                'total' => (int)$item['total'],
+                'balance' => (int)$item['saldo'],
+                'paid' => (int)$item['pagado'],
                 'type' => $item['desc_tipo_documento'],
                 'item' => $item['item'],
                 'rut' => $item['rut'],

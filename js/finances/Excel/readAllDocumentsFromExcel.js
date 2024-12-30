@@ -85,6 +85,9 @@ const initialTributarieDocuments = {
 
 async function readTributarieDocuments(){
     const renewDataFromAPI = await getTributarieDocumentFromAPI();
+
+    // console.log('renewDataFromAPI',renewDataFromAPI);
+    // return 
     const responseTributarieDocuments = await getTributarieDocuments();
     console.log('tributarieDocuments',responseTributarieDocuments);
     if(!responseTributarieDocuments.success){
@@ -95,6 +98,7 @@ async function readTributarieDocuments(){
 
     const tributarieDocumentsData = tributarieDataDbMap(responseTributarieDocuments.data);
     initialTributarieDocuments['documents'] = responseTributarieDocuments.data;
+    console.log('initialTributarieDocuments',initialTributarieDocuments);
     setFutureDocumentsOnBankMovements();
     // tributarieDocuments = tributarieDocumentsData;
     return true;
@@ -126,6 +130,9 @@ async function readTributarieDocuments(){
 
 
 async function tributarieDataDbMap(tributarieDocuments){
+    console.log('tributarieDocuments',tributarieDocuments);
+    console.log("2024-12-12",moment("2024-12-12","YYYY-MM-DD").format('X'));
+    console.log("12-12-2024",moment("12-12-2024","DD-MM-YYYY").format('X'));
     let allMyDocuments = tributarieDocuments.map((movements) => {
         const {
             id,
@@ -175,9 +182,9 @@ async function tributarieDataDbMap(tributarieDocuments){
             'emitida' : issued === 1 ? true : false,
             'paid': paidComplete,
             'fecha_emision': moment(issue_date,"YYYY-MM-DD").format('DD-MM-YYYY'),
-            'fecha_emision_timestamp': moment(moment(issue_date,"YYYY-MM-DD").format('DD-MM-YYYY')).format('X'),
+            'fecha_emision_timestamp': moment(issue_date,"YYYY-MM-DD").format('X'),
             'fecha_expiracion': moment(expiration_date,"YYYY-MM-DD").format('DD-MM-YYYY'),
-            'fecha_expiracion_timestamp': moment(moment(expiration_date,"YYYY-MM-DD").format('DD-MM-YYYY')).format('X'),
+            'fecha_expiracion_timestamp': moment(expiration_date,"YYYY-MM-DD").format('X'),
             'atrasado': paidComplete ? false : atrasado,
             'vencido': paidComplete ? false : outdated,
             'afecto': taxable_amount,
@@ -204,20 +211,27 @@ async function tributarieDataDbMap(tributarieDocuments){
         const document = allMyDocuments.find((doc) => { 
             return doc.folio === modDoc.folio && doc.rut === modDoc.rut && doc.total === modDoc.total
         });
-        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD',modDoc);
-        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD  ',document);
-        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD  ',document);
-        console.log('ALKSDJLAKSDJLAKSDJLAKSDJALSKDJLAKSDJLAKSDLAKSDJLAKSJDLAKSJDLAKSDJLAKSDJLAKSJDLAKSJDLAKSJD  ',document);
-        console.log('________________________________________________________________________________________________________')
         if(document){
             document.paid = modDoc.is_paid;
-            // document.paid = modDoc.is_paid == 1 ? true : false;
+            document.saldo = modDoc.balance;
+
+            if(modDoc.expiration_date != document.fecha_expiracion){
+                const expDate = moment(modDoc.expiration_date,getDateFormat(modDoc.expiration_date)).format('DD-MM-YYYY');
+                document.fecha_expiracion = expDate;
+                document.fecha_expiracion_timestamp = moment(expDate,getDateFormat(expDate)).format('X');
+                // Recalculate vencida_por
+                const diffOnDaysFromEmission = moment().diff(moment(document.fecha_expiracion,"X"), 'days');
+                document.vencida_por = diffOnDaysFromEmission;
+            }
+            
             // document.fecha_expiracion = modDoc.expiration_date;
             // document.fecha_expiracion_timestamp = moment(modDoc.fecha_expiracion_timestamp,"YYYY-MM-DD").format('X');
         }
     });
 
     businessDocuments = allMyDocuments;
+
+    console.log("019238019830918239182309182309810239" ,businessDocuments.filter(document => document.folio == "23616515"));
 
 
 

@@ -335,7 +335,11 @@ class BankMovements
             ));
 
             $curl_response = curl_exec($curl);
-
+            // echo $curl_response;
+            // echo "https://api.clay.cl/v1/cuentas_bancarias/movimientos/?numero_cuenta=$accountNumber&rut_empresa=$business_rut&limit=200&offset=$offset&fecha_desde=$dateFrom;";
+            if(isset(json_decode($curl_response, true)['detail']) && json_decode($curl_response, true)['detail'] == "No encontramos resultados para la consulta realizada.") {
+                return ['success' => false, 'data' => [], 'message' => 'Error al obtener los movimientos bancarios'];
+            }
             $newItems = json_decode($curl_response, true)['data']['items'];
             $newItems = json_decode($curl_response, true)['data']['items'];
             
