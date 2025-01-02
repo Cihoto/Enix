@@ -132,6 +132,6 @@ let tributarieDocumentsChart = [];
 function prepareDataForDashBoard() {
     tributarieDocumentsChart = chartTributarieDocuments()
 
-    // renderDashboardChart(tributarieDocumentsChart);
+    renderDashboardChart(tributarieDocumentsChart);
 
 }

@@ -64,7 +64,7 @@
                 <input type="text" class="new-chat-window-input" id="new-chat-window-input" placeholder="Rechercher" />
             </div> -->
         </div>
-        <button type="submit" class="btn btn-primary">Agregar ingreso frecuente</button>
+        <button type="submit" class="btn btn-primary">Agregar movimiento frecuente</button>
     </form>
     <!-- <button id="cerrarClienteModal">Cerrar</button> -->
 </div>

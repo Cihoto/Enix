@@ -53,7 +53,7 @@ function setCashFlowCards() {
     const accountBalance = selectedMonthDays.previousAccountBalance;
 
 
-    const abitDef = accountBalance + Number(charges.totalUnpaid.total) - Number(payments.totalUnpaid.amount);
+    const abitDef = accountBalance + Number(charges.totalUnpaid.total) - Number(payments.totalUnpaid.total);
     return `
                 <div class="card yellow"  onClick="renderChargesTable()">
                     <div class="content">

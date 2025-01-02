@@ -49,8 +49,16 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
         total: 0,
         saldo: 0
     }
-   
-    futurePayments.forEach((futurePayment) => {
+    let movements = [];
+    console.log('ESTADO PREVIO DEL FILTRO ',ascendentFilter);
+    if(ascendentFilter){
+        movements = futurePayments.sort((a,b) => b.fecha_emision_timestamp - a.fecha_emision_timestamp);
+
+    }else{
+        movements = futurePayments.sort((a,b) => a.fecha_emision_timestamp - b.fecha_emision_timestamp);
+    }
+
+    movements.forEach((futurePayment) => {
         // ADD ONE MONTH TO FUTURE PAYMENT DATE
         let tr = document.createElement('tr');
         // add custom properties rowId  = futurePayment.id 

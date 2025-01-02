@@ -213,7 +213,9 @@ async function tributarieDataDbMap(tributarieDocuments){
         });
         if(document){
             document.paid = modDoc.is_paid;
-            document.saldo = modDoc.balance;
+            if(document.saldo > modDoc.balance){
+                document.saldo = modDoc.balance;
+            }
 
             if(modDoc.expiration_date != document.fecha_expiracion){
                 const expDate = moment(modDoc.expiration_date,getDateFormat(modDoc.expiration_date)).format('DD-MM-YYYY');

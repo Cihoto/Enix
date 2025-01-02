@@ -140,6 +140,15 @@ commonEventsForm.addEventListener('submit', async (e) => {
 
     const responseCommonMovements = await insertCommonMovement.json();
     console.log(responseCommonMovements);
+    if(responseCommonMovements.status == 'success'){
+        closeSideMenuCommonMovements();
+        showDateSelectors.fire({
+            title: 'Movimientos comunes guardados',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
     return 
 
     // FETCH SERVICE TO SAVE COMMON MOVEMENTS
