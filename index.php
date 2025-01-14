@@ -31,7 +31,10 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.2.6/dist/sweetalert2.all.min.js" integrity="sha256-Ry2q7Rf2s2TWPC2ddAg7eLmm7Am6S52743VTZRx9ENw=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js" integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./assets/css/finance.css?v=<?php echo getFileTime($_SERVER['DOCUMENT_ROOT'] . '/assets/css/finance.css'); ?>">
     <!-- DORPZONE -->
@@ -92,7 +95,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                 <div class="header-content">
                     <p class="headerTitle"> Dashboard flujos</p>
                     <div class="header-options">
-                        <button class="btnOpt option active" menuName="Dashboard" contentToPrint="dash">
+                        <button class="btnOpt option active" menuName="dash" contentToPrint="dash">
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                                 <path d="M8.6617 2.5H2.82837V8.33333H8.6617V2.5Z" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M17.8284 2.5H11.995V8.33333H17.8284V2.5Z" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -188,114 +191,243 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                     </div>
                 </div> -->
             </div>
-            <div class="xl-card" id="financesCardTableContainer">
-                <div class="card-header">
-                    <div class="card-header-title">
-                        <p id="contentHeader">Flujo de caja</p>
-                        <div class="c-header-desc">
-                            <p>Detalles de movimiento</p>
-                        </div>
-                    </div>
-                    <div class="card-header-actions">
-                        <button id="filterButton" class="filterButton">
-                            <img src="./assets/svg/financessvg/filterBtn.svg" alt="">
-                            <p>Filtros</p>
-                        </button>
-                        <button class="act-btn">
-                            <img src="./assets/svg/financessvg/downlaodBtn.svg" alt="">
-                            <p>Exportar</p>
-                        </button>
-                        <button class="act-btn" id="uploadManualFiles" onclick="openUploadFinanceFiles()">
-                            <img src="./assets/svg/uploadCloud.svg" alt="">
-                            <p>Importar</p>
-                        </button>
-                        <button class="act-primary-btn" onclick="openCommonMovementsSideMenu()">
-                            <img src="./assets/svg/financessvg/addOnCircle.svg" alt="">
-                            <p>Ingresar movimientos frecuentes</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="body-header">
-                        <div id="periodSelectors">
-                            <button period="daily" class="btnRangeSelector active">
-                                <p>Diario</p>
-                            </button>
-                            <!-- <button class="btnRangeSelector">
-                                <p>Semanal</p>
-                            </button> -->
-                            <button period="monthly" class="btnRangeSelector">
-                                <p>Mensual</p>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="body-content">
-                        <div class="monthSelector">
-                            <div id="datePicker" class="dateSelector">
-                                <div class="yearPicker">
-                                    <p id="yearName"><?php echo date("Y") ?></p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1" />
-                                    </svg>
-                                    <div class="years">
-                                        <?php
-                                        $currentYear = date("Y");
-                                        $endYear = $currentYear + 6;
-                                        for ($year = $currentYear - 1; $year <= $endYear; $year++) {
-                                            echo '<p class="yr" yearNumber="' . $year . '">' . $year . '</p>';
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                                <div class="monthPicker">
-                                    <p id="monthName">Mes en curso</p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1" />
-                                    </svg>
-                                    <div class="months">
-                                        <p class="mnth" monthNumber="1">Enero</p>
-                                        <p class="mnth" monthNumber="2">Febrero</p>
-                                        <p class="mnth" monthNumber="3">Marzo</p>
-                                        <p class="mnth" monthNumber="4">Abril</p>
-                                        <p class="mnth" monthNumber="5">Mayo</p>
-                                        <p class="mnth" monthNumber="6">Junio</p>
-                                        <p class="mnth" monthNumber="7">Julio</p>
-                                        <p class="mnth" monthNumber="8">Agosto</p>
-                                        <p class="mnth" monthNumber="9">Septiembre</p>
-                                        <p class="mnth" monthNumber="10">Octubre</p>
-                                        <p class="mnth" monthNumber="11">Noviembre</p>
-                                        <p class="mnth" monthNumber="12">Diciembre</p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <input type="text" id="filterByFolio" placeholder="Buscar Documento">
-                            <div id="utilityBtns" class="paidDocsFilters">
-                                <button class="utilityButtons" id="showIssued">Mostrar Emitidas</button>
-                                <button class="utilityButtons" id="showReceived">Mostrar Recibidas</button>
-                                <button class="utilityButtons" id="showAll">Mostrar Todas</button>
+            <section id="mainContent-dash" class="main-content financialDash">
+                <div class="xl-card dash" id="financesCardTableContainer">
+                    <div id="cardHeaderTopMenu" class="card-header">
+                        <div class="card-header-title">
+                            <p id="contentHeader">Flujo de caja</p>
+                            <div class="c-header-desc">
+                                <p>Detalles de movimiento</p>
                             </div>
-                            <!-- <button onClick="cardFilterAllPaymentsDocuments()">asdasd</button> -->
-                            <button id="hidePaidDocuments" style="display: none;">
-                                Mostrar documentos pagados
+                        </div>
+                        <div class="card-header-actions">
+                            <button id="filterButton" class="filterButton">
+                                <img src="./assets/svg/financessvg/filterBtn.svg" alt="">
+                                <p>Filtros</p>
+                            </button>
+                            <button class="act-btn">
+                                <img src="./assets/svg/financessvg/downlaodBtn.svg" alt="">
+                                <p>Exportar</p>
+                            </button>
+                            <button class="act-btn" id="uploadManualFiles" onclick="openUploadFinanceFiles()">
+                                <img src="./assets/svg/uploadCloud.svg" alt="">
+                                <p>Importar</p>
+                            </button>
+                            <button class="act-primary-btn" onclick="openCommonMovementsSideMenu()">
+                                <img src="./assets/svg/financessvg/addOnCircle.svg" alt="">
+                                <p>Ingresar movimientos frecuentes</p>
                             </button>
                         </div>
-                        <div>
-                            <canvas id="myChart"></canvas>
+                    </div>
+                    <div class="card-body">
+                        <div class="body-header">
+                            <div id="periodSelectors">
+                                <button period="daily" class="btnRangeSelector active">
+                                    <p>Diario</p>
+                                </button>
+                                <!-- <button class="btnRangeSelector">
+                                    <p>Semanal</p>
+                                </button> -->
+                                <button period="monthly" class="btnRangeSelector">
+                                    <p>Mensual</p>
+                                </button>
+                            </div>
                         </div>
-                        <section id="financeTableContainer" class="horizontalTableContainer">
-                            <table id='bankMovementsTableHorizontal' class="">
+                        <div class="body-content">
+                            <div id="optionsMenu" class="monthSelector">
+                                <div id="datePicker" class="dateSelector">
+                                    <div class="yearPicker">
+                                        <p id="yearName"><?php echo date("Y") ?></p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1" />
+                                        </svg>
+                                        <div class="years">
+                                            <?php
+                                            $currentYear = date("Y");
+                                            $endYear = $currentYear + 6;
+                                            for ($year = $currentYear - 1; $year <= $endYear; $year++) {
+                                                echo '<p class="yr" yearNumber="' . $year . '">' . $year . '</p>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="monthPicker">
+                                        <p id="monthName">Mes en curso</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1" />
+                                        </svg>
+                                        <div class="months">
+                                            <p class="mnth" monthNumber="1">Enero</p>
+                                            <p class="mnth" monthNumber="2">Febrero</p>
+                                            <p class="mnth" monthNumber="3">Marzo</p>
+                                            <p class="mnth" monthNumber="4">Abril</p>
+                                            <p class="mnth" monthNumber="5">Mayo</p>
+                                            <p class="mnth" monthNumber="6">Junio</p>
+                                            <p class="mnth" monthNumber="7">Julio</p>
+                                            <p class="mnth" monthNumber="8">Agosto</p>
+                                            <p class="mnth" monthNumber="9">Septiembre</p>
+                                            <p class="mnth" monthNumber="10">Octubre</p>
+                                            <p class="mnth" monthNumber="11">Noviembre</p>
+                                            <p class="mnth" monthNumber="12">Diciembre</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="text" id="filterByFolio" placeholder="Buscar Documento">
+                                <div id="utilityBtns" class="paidDocsFilters">
+                                    <button class="utilityButtons" id="showIssued">Mostrar Emitidas</button>
+                                    <button class="utilityButtons" id="showReceived">Mostrar Recibidas</button>
+                                    <button class="utilityButtons" id="showAll">Mostrar Todas</button>
+                                </div>
+                                <!-- <button onClick="cardFilterAllPaymentsDocuments()">asdasd</button> -->
+                                <button id="hidePaidDocuments" style="display: none;">
+                                    Mostrar documentos pagados
+                                </button>
+                            </div>
+                            <div id="dashTableMenu" style="display: flex; width:100%;padding: 0px 16px; gap: 10px;">
+                                <div>
+                                    <input class="dashTableRange" type="radio" id="daily" name="range" value="daily" checked />
+                                    <label for="daily">Diario</label>
+                                </div>
+                                <div>
+                                    <input class="dashTableRange" type="radio" id="monthly" name="range" value="monthly" />
+                                    <label for="monthly">Mensual</label>
+                                </div>
+                                <input type="month" name="monthPicker" id="monthPickerDashBoard" value="<?php echo date('Y-m'); ?>" max="<?php echo date('Y-m')?>" />
+                            </div>
+                            <table id="financialDashBoardTable" class="financeTable">
                                 <thead>
+                                    <tr id="financialHeaderRow" class="headerRow">
+                                        <th>
+                                            <p>Fecha</p>
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
+                                    <tr id="financialIncomeRow" class="bodyRow">
+                                        <td class="rowTitle">
+                                            Ingresos
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr id="financialOutFlow" class="bodyRow">
+                                        <td class="rowTitle">
+                                            Egresos
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr id="financialAvit" class="bodyTotalRow">
+                                        <td class="avitTitle">
+                                            Total
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                                 <tfoot>
                                 </tfoot>
+
                             </table>
-                        </section>
+                            <div id="financialDashChart">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            <section id="financeTableContainer" class="horizontalTableContainer">
+                                <table id='bankMovementsTableHorizontal' class="">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                            </section>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <section id="sideTableContainer" class="sideTableContainer">
+
+                    <!-- <div id="doughtnutChart" class="xl-card">
+                        <div class="card-header">
+                            <div class="card-header-title">
+                                <p>Clientes y Proveedores</p>
+                            </div>
+                        </div>
+                        
+                            
+                        <p>Costos fijos</p>
+                        <canvas id="doughnutFinance"></canvas>
+                    </div> -->
+                    <div class="xl-card" style="height: 50%;">
+                        <div class="card-header">
+                            <div class="card-header-title" style="padding-left: 16px;">
+                                <p>Clientes</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="financeDashClients" class="secondaryTable">
+                                <thead>
+                                    <tr class="headerRow">
+                                        <th class="headerRowTitle">Razón Social</th>
+                                        <th class="headerRowTitle">Emitidas</th>
+                                        <th class="headerRowTitle">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bodyRow">
+                                        <td class="rz">Cliente A</td>
+                                        <td class="">12</td>
+                                        <td class="">$1200</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="xl-card" style="height: 50%;">
+                        <div class="card-header">
+                            <div class="card-header-title" style="padding-left: 16px;">
+                                <p>Proveedores</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="financeDashProviders" class="secondaryTable">
+                                <thead>
+                                    <tr class="headerRow">
+                                        <th class="headerRowTitle">Razón Social</th>
+                                        <th class="headerRowTitle">Emitidas</th>
+                                        <th class="headerRowTitle">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bodyRow">
+                                        <td class="rz">Cliente A</td>
+                                        <td class="">12</td>
+                                        <td class="">$1200</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
         </div>
     </div>
 
@@ -306,7 +438,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <script src="./js/finances/API/getAllMyDocuments.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/API/bankMovements/bankMovements.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/API/tributarieDocuments/tributarieDocuments.js?v=<?php echo time(); ?>"></script>
-    
+
     <!-- TOASTIFY -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- MODALS -->
@@ -359,13 +491,18 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <script src="./js/finances/commonMovements/getCommonMovements.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/commonMovements/commonMovementsHandlers.js?v=<?php echo time(); ?>"></script>
     <script src="./js/finances/commonMovements/commonMovementsListHandlers.js?v=<?php echo time(); ?>"></script>
-    <script src="./js/finances/API/commonMovements/update.js?v=<?php echo time(); ?>"></script> 
+    <script src="./js/finances/API/commonMovements/update.js?v=<?php echo time(); ?>"></script>
 
     <!-- CARGA MANUAL -->
     <script src="./js/finances/Excel/readAllDocumentsFromExcel.js?v=<?php echo time(); ?>"></script>
 
     <!-- CHARTS -->
+
     <script src="./js/finances/dashboard/chart.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/dashboard/table.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/finances/dashboard/sideTables.js?v=<?php echo time(); ?>"></script>
+    <!-- FINANCIAL STATUS -->
+    <script src="./js/finances/API/financialStatus/financialStatus.js?v=<?php echo time(); ?>"></script>
 
     <!-- handlers -->
     <script src="./js/finances/tributarieDocuments/tributrarieTableHandlers.js?v=<?php echo time(); ?>"> </script>
@@ -374,19 +511,15 @@ $isSuperAdmin = $_SESSION['superAdmin'];
     <!-- finances/API/getTributarieDocuments.js?v=<?php echo time(); ?> -->
     <script src="./js/finances/API/commonMovements/getAllCommonMovements.js?v=<?php echo time(); ?>"></script>
 
-    <script src="./js/fileUploader/uploadNewFile.js?v=<?php echo time();?>"></script>
+    <script src="./js/fileUploader/uploadNewFile.js?v=<?php echo time(); ?>"></script>
 
     <!-- test only -->
     <script src="./js/finances/cashFlow/renderMonthlycashFlow.js"></script>
-    
+
     <script>
-
-
-
-
         //  // // // // // // // // // // // iinsertCommonMovementsFromJson();
 
-        
+
 
         // insertCommonMovementsFromJson();
 
@@ -444,15 +577,15 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                 businessSelector.appendChild(option);
             });
 
-            
+
             const businessIdData = await fetch('./controller/session/getBdBusinessId.php', {
                 method: 'POST'
             });
             const bsResponse = await businessIdData.json();
-            if(!bsResponse.success){
+            if (!bsResponse.success) {
                 await closeSession();
             }
-            businessSelector.value =  bsResponse.business_db_id;
+            businessSelector.value = bsResponse.business_db_id;
 
         });
 
@@ -551,8 +684,6 @@ $isSuperAdmin = $_SESSION['superAdmin'];
             }
             console.log(data);
         }
-
-        
     </script>
 
 </html>

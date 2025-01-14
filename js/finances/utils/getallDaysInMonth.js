@@ -36,13 +36,25 @@ function getAllDaysOnMonth(monthsToSearch,selectedYear = moment().year()){
 
 function getAllDaysBetweenYears(monthsToSearch,selectedYear){
     let datesOnCurrentMonth = [];
+
     // GET ALL YEARS BETWEEN current year and selected year
     let years = [];
     let currentYear = moment().year();
-    for (let i = currentYear; i <= selectedYear; i++) {
-        years.push(i);
+
+    if(currentYear <= selectedYear){
+        for (let i = currentYear ; i <= selectedYear  ; i++) {
+            years.push(i);
+        } 
     }
-    // console.log('years',years);
+
+    if(currentYear > selectedYear){
+        for (let i = selectedYear; i <= currentYear ; i++) {
+            years.push(i);
+        }
+    }
+
+
+    console.log('years',years);
 
     years.forEach(year => {
         monthsToSearch.forEach(monthToSearch => {

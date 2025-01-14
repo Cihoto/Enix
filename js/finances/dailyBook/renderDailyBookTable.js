@@ -29,11 +29,12 @@ let bhe = [];
 
 window.addEventListener("load", async (event) => {
 
-    
+
+    showView('dash')
+
     await prepareDataForFinance();
 
-    prepareDataForDashBoard();
-    // return
+    return
 
     // let query = "";
 

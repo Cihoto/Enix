@@ -1,3 +1,15 @@
+:root{
+    
+    --Gris-50 : #E6E9EE;
+    --Blanco-1:  #FFF;
+    --Purple-1:  #DED8F1;;
+    --Gris-900: #373743;
+    --Gris-600: #5C5C70;
+    --greywhite: #f3f6f6;
+    --lightgrey_2: #E4EBED;
+    --darkgrey: #40677E;
+}
+
 body {
     border-radius: 32px;
     background: var(--Fondo, #E0DDE8) !important;
@@ -86,6 +98,8 @@ head {
     background: var(--Blanco-1, #FFF);
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
     gap: 24px;
+    /* overflow: scroll; */
+    scrollbar-width: none; /* Firefox */
 }
 
 .enixLogo {
@@ -101,6 +115,11 @@ head {
     margin-right: auto;
     max-width: 75%;
     overflow: scroll;
+    scrollbar-width: none; /* Firefox */
+}
+
+.header-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .header-options {
@@ -476,6 +495,299 @@ head {
         }
     }
 }
+.sideTableContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 40%;
+}
+#doughtnutChart{
+    height: 384px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#dashTableMenu{
+    display: flex;
+    width:100%;
+    padding: 0px 16px;
+    gap: 10px;
+}
+
+.financeTable {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    padding: 16px;
+
+    tr {
+        display: flex;
+        width: 100%;
+        gap: 60px;
+        th:nth-child(n+2) {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+        } 
+        .headerRowTitle{
+            color: var(--Gris-900); 
+            font-family: Nunito;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 16px; /* 114.286% */
+            letter-spacing: 0.28px;
+        }
+
+        .rowTitle{
+            color: var(--Gris-600);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px; /* 166.667% */
+        }
+
+        .avitTitle{
+            color: var(--Morado-primario, #326);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+        }
+
+        .bodyNumber{
+            color: var(--Gris-600);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+        }
+
+        .headerDate{
+            color: var(--Gris-900);
+            text-align: center;
+            font-family: Nunito;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 16px; /* 133.333% */
+            letter-spacing: 0.24px;
+        }
+
+        .avitNumber{
+            color: var(--Morado-primario, #326);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+        }
+    }
+
+    .headerRow {
+        background-color: var(--Gris-50);
+        padding: 14px 36px 14px 12px;
+
+
+    }
+    .bodyRow {
+        background: var(--Blanco-1);
+        padding: 14px 36px 14px 12px;
+    }
+    .bodyTotalRow {
+        background: var(--Purple-1);
+        padding: 14px 36px 14px 12px;
+    }
+
+    tr th:nth-child(1),
+    tr td:nth-child(1) {
+        display: flex;
+        justify-content: space-between;
+        width: 15%;
+    }
+    tr th,
+    tr td{
+        display: flex;
+        justify-content: space-between;
+        width: 17%
+    }
+
+}
+ 
+.secondaryTable {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    height: 100%;
+    overflow: hidden;
+
+    tr {
+        display: flex;
+        gap: 24px;
+        
+        th:nth-child(n+2) {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+        } 
+        .headerRowTitle{
+            color: var(--darkgrey); 
+            font-family: Nunito;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 16px; /* 114.286% */
+            letter-spacing: 0.28px;
+            text-transform: uppercase;
+        }
+
+        tbody td{
+            font-size: 24px;
+            font-family: Roboto;
+        }
+
+        .rowTitle{
+            color: var(--Gris-600);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px; /* 166.667% */
+        }
+
+        .avitTitle{
+            color: var(--Morado-primario, #326);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+        }
+
+        .bodyNumber{
+            color: var(--Gris-600);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+        }
+
+        .headerDate{
+            color: var(--Gris-900);
+            text-align: center;
+            font-family: Nunito;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 16px; /* 133.333% */
+            letter-spacing: 0.24px;
+        }
+
+        .avitNumber{
+            color: var(--Morado-primario, #326);
+            font-family: Roboto;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+        }
+    }
+
+    .headerRow {
+        background-color: var(--lightgrey_2);
+        color: var(--darkgray);
+        padding: 14px 36px 14px 12px;
+        border-radius: 10px;
+    }
+    .bodyRow {
+        background: var(--Blanco-1);
+        padding: 14px 36px 14px 12px;
+
+        td{
+            color: var(--Gris-600);
+            font-size: 12px;
+            font-family: Roboto;
+        }
+    }
+    .bodyTotalRow {
+        background: var(--Purple-1);
+        padding: 14px 36px 14px 12px;
+    }
+
+    tr th:nth-child(1),
+    tr td:nth-child(1) {
+        display: flex;
+        justify-content: space-between;
+        width: 33%
+    }
+    tr th,
+    tr td{
+        display: flex;
+        justify-content: space-between;
+        width: 33%
+    }
+
+    tr th:nth-child(1),
+    tr td:nth-child(1) {
+        text-align: start;
+        align-items: start;
+        justify-content: start;  
+
+    }
+    tr th:nth-child(2),
+    tr td:nth-child(2) {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    tr th:nth-child(3){
+        text-align: end;
+        align-items: end;
+        justify-content: end;
+    }
+    tr td:nth-child(3) {
+        align-items: center;
+        justify-content: end;
+    }
+
+    tbody {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        max-height: 210px;
+    }
+
+    tbody tr:nth-child(even){
+        background-color: var(--greywhite);
+    }
+
+    /* Custom scrollbar styles */
+    tbody::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    tbody::-webkit-scrollbar-track {
+        background: var(--lightgrey_2);
+        border-radius: 10px;
+    }
+
+    tbody::-webkit-scrollbar-thumb {
+        background-color: var(--darkgrey);
+        border-radius: 10px;
+        border: 2px solid var(--lightgrey_2);
+    }
+
+    tbody::-webkit-scrollbar-thumb:hover {
+        background-color: var(--Gris-600);
+    }
+}
 
 .paymentStatus{
     width: 60%;
@@ -533,6 +845,16 @@ head {
 .cards-container {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+.main-content.financialDash{
+    display: flex;
+    flex-direction: row;
+    gap: 34px;
+}
+
+.card.m-card{
+    width: 35%;
 }
 
 .card {
@@ -646,7 +968,12 @@ head {
     border-radius: 12px;
     background: #E5E0F4;
 }
-
+.xl-card.m-sz {
+    width: 35%!important;
+}
+.xl-card.dash {
+    width: 60%;
+}
 .xl-card {
     display: flex;
     padding: 12px 16px;

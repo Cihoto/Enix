@@ -35,6 +35,25 @@ async function getCommonMovementsFromDb() {
     
     return response;
 }
+async function getCommonMovementsFromDb_range(dateFrom,dateTo) {
+    const commonMovements = await fetch('controller/common_movements/getCommonMovements.php',
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                dateFrom,
+                dateTo
+            })
+        }
+    );
+    const response = await commonMovements.json();
+    console.log('response', response);
+
+    
+    return response;
+}
 
 async function insertCommonMovementsFromJson() {
     const commonMovements = await fetch('controller/common_movements/insertCommonMovementsFromJson.php',

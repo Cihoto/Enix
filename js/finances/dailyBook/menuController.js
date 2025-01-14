@@ -8,6 +8,7 @@ const yearname = document.getElementById('yearName');
 const btnRangeSelector = document.getElementsByClassName('btnRangeSelector');
 
 let activePage = {
+    dash: true,
     cashFlow: false,
     payments: false,
     charges: false,
@@ -123,6 +124,12 @@ function handleTableRendering(month = moment().format("MM"), year = moment().for
     console.log('activePageName', activePageName);
 
     switch (activePageName) {
+        case 'dash':
+
+
+            prepareDataForDashBoard();
+            break;
+
         case 'cashFlow':
             if(selectedPeriod() == 'daily') {
                 console.log('selectedPeriod() DAILY', selectedPeriod());
@@ -159,8 +166,44 @@ function showView(view) {
     thead.innerHTML = '';
     tbody.innerHTML = '';
     tfoot.innerHTML = '';
+    const dashTableMenu = document.getElementById('dashTableMenu');
+    const dashTable = document.getElementById('financialDashBoardTable');
+    const financialDashChart = document.getElementById('financialDashChart');
+    const mainContent = document.getElementById('mainContent-dash');
+
+    console.log('dashTable', dashTable);
+
+    if(view === 'dash') {
+        document.getElementById('optionsMenu').style.display = 'none';
+        document.getElementById('cardHeaderTopMenu').style.display = 'none';
+        document.getElementById('periodSelectors').style.display = 'none';
+        // document.getElementById('doughtnutChart').style.display = 'flex'; 
+        document.getElementById('sideTableContainer').style.display = 'flex'; 
+        document.getElementById('financesCardTableContainer').classList.add('dash');
+        mainContent.style.display = 'flex';
+        dashTableMenu.style.display = 'flex';
+        dashTable.style.display = 'flex';
+        financialDashChart.style.display = 'block';
+    }else{
+        document.getElementById('optionsMenu').style.display = 'flex';
+        // document.getElementById('cardHeaderTopMenu').style.display = 'flex';
+        document.getElementById('periodSelectors').style.display = 'flex';
+        document.getElementById('sideTableContainer').style.display = 'none';
+        document.getElementById('financesCardTableContainer').classList.remove('dash');
+        mainContent.style.display = 'block';
+
+        dashTableMenu.style.display = 'none';
+        dashTable.style.display = 'none';
+        financialDashChart.style.display = 'none';
+    }
+
+
 
     switch (view) {
+        case 'dash':
+            activePage.dash = true;
+            handleTableRendering();
+            break;
         case 'flj':
             setCashFlowControls();
             activePage.cashFlow = true;

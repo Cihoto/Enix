@@ -196,6 +196,49 @@
             }
             return array_values($rows);
         }
+        public function getCommonMovements_range($date_from, $date_to) {
+            $conn = new bd();
+            $conn->conectar();
+            $query = mysqli_prepare($conn->mysqli, "SELECT cm.*, mcm.id as movement_id, mcm.printDate, mcm.printDateTimestamp, mcm.total, mcm.name as movement_name, mcm.desc 
+                FROM common_movement cm 
+                LEFT JOIN movement_common_movement mcm ON cm.id = mcm.common_movement_id 
+                WHERE cm.active = 1 AND cm.business_id = ? 
+                AND (mcm.active = 1 OR mcm.active IS NULL)
+                AND cm.date_from >= ?
+                AND cm.date_to <= ?");
+            mysqli_stmt_bind_param($query, 'iss', $this->business_id, $date_from, $date_to);
+            mysqli_stmt_execute($query);
+            $result = mysqli_stmt_get_result($query);
+            $rows = [];
+            $movements = [];
+
+            while($row = mysqli_fetch_assoc($result)){
+                if (!isset($rows[$row['id']])) {
+                    $rows[$row['id']] = [
+                        'id' => $row['id'],
+                        'dateFrom' => $row['date_from'],
+                        'dateTo' => $row['date_to'],
+                        'name' => $row['name'],
+                        'income' => $row['income'],
+                        'amount' => $row['amount'],
+                        'active' => $row['active'],
+                        'business_id' => $row['business_id'],
+                        'movements' => []
+                    ];
+                }
+                if ($row['movement_id']) {
+                    $rows[$row['id']]['movements'][] = [
+                        'id' => $row['movement_id'],
+                        'printDate' => $row['printDate'],
+                        'printDateTimestamp' => $row['printDateTimestamp'],
+                        'total' => $row['total'],
+                        'name' => $row['movement_name'],
+                        'desc' => $row['desc']
+                    ];
+                }
+            }
+            return array_values($rows);
+        }
     }
 
     class movement_common_movement extends CommonMovements {

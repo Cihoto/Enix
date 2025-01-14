@@ -69,20 +69,6 @@ function setCashFlowCards() {
                         </div>
                     </div>
                 </div>
-                <div class="card orange" onClick="">
-                    <div class="content">
-                        <div class="titles">
-                            <p>Facturas por pagar</p>
-                            <div class="sub-txt">
-                                <p id="totalPendingCharges" class="sub-amount">${payments.totalUnpaid.amount}</p>
-                                <p id="pendingCharges">${getChileanCurrency(payments.totalUnpaid.total)}</p>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <img src="./assets/css/financessvg/cardInfo.svg" alt="">
-                        </div>
-                    </div>
-                </div>
                 <div class="card cyan" onClick="">
                     <div class="content">
                         <div class="titles">
@@ -91,6 +77,20 @@ function setCashFlowCards() {
                                 <p>${charges.totalUnpaid.amount}</p>
                                 <p id="pendingCharges">${getChileanCurrency(charges.totalUnpaid.total)}</p>
 
+                            </div>
+                        </div>
+                        <div class="info">
+                            <img src="./assets/css/financessvg/cardInfo.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="card orange" onClick="">
+                    <div class="content">
+                        <div class="titles">
+                            <p>Facturas por pagar</p>
+                            <div class="sub-txt">
+                                <p id="totalPendingCharges" class="sub-amount">${payments.totalUnpaid.amount}</p>
+                                <p id="pendingCharges">${getChileanCurrency(payments.totalUnpaid.total)}</p>
                             </div>
                         </div>
                         <div class="info">

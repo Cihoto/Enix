@@ -99,6 +99,12 @@ async function readTributarieDocuments(){
     const tributarieDocumentsData = tributarieDataDbMap(responseTributarieDocuments.data);
     initialTributarieDocuments['documents'] = responseTributarieDocuments.data;
     console.log('initialTributarieDocuments',initialTributarieDocuments);
+
+    // Example usage:
+    const totalByRut = getTotalByRut(initialTributarieDocuments['documents']);
+    renderFinancesSideTables(totalByRut);
+    console.log(totalByRut);
+
     setFutureDocumentsOnBankMovements();
     // tributarieDocuments = tributarieDocumentsData;
     return true;
@@ -476,3 +482,37 @@ function addFromFuture(documentToFind){
         dayOnArr.total += documentToFind.total;
     }
 }
+
+function getTotalByRut(documents) {
+    const result = {
+        clients: {},
+        providers: {}
+    };
+
+    documents.forEach(doc => {
+        const { rut, total, issued, business_name } = doc;
+        const category = issued ? 'clients' : 'providers';
+
+        if (!result[category][rut]) {
+            result[category][rut] = {
+                name: business_name,
+                bills_amount: 0,
+                total: 0
+            };
+        }
+
+        result[category][rut].bills_amount += 1;
+        result[category][rut].total += total;
+    });
+
+    // Convert objects to arrays and sort by total
+    result.clients = Object.values(result.clients).sort((a, b) => b.total - a.total);
+    result.providers = Object.values(result.providers).sort((a, b) => b.total - a.total);
+
+    return result;
+}
+
+
+
+
+

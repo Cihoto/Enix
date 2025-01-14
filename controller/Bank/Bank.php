@@ -7,7 +7,7 @@
         private $sbif_code;
         private $bankName;
 
-        public function __construct($bankId, $bankType, $sbif_code, $bankName) {
+        public function __construct($bankId = null, $bankType = null, $sbif_code = null, $bankName = null) {
             $this->bankId = $bankId;
             $this->bankType = $bankType;
             $this->sbif_code = $sbif_code;
