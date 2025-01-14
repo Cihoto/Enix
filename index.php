@@ -391,11 +391,11 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bodyRow">
+                                    <!-- <tr class="bodyRow">
                                         <td class="rz">Cliente A</td>
                                         <td class="">12</td>
                                         <td class="">$1200</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
@@ -416,11 +416,11 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bodyRow">
+                                    <!-- <tr class="bodyRow">
                                         <td class="rz">Cliente A</td>
                                         <td class="">12</td>
                                         <td class="">$1200</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
