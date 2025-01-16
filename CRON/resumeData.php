@@ -85,7 +85,7 @@
 
 
 
-            $today = date('Y-m-d');
+            $today = date('Y-m-d', strtotime('-1 day'));
 
             $unpaidBHE = getUnpaidBhe($business_rut,'2024-01-01',$business_dv);
             $financial_status = getUnpaidDocumentsOnDate($business_rut,'2024-01-01',$today);
