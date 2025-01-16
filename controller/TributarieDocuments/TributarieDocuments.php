@@ -906,8 +906,6 @@ class TributarieDocuments
             if (isset($movement['status']) && strtolower($movement['status']) == "nula") {
                 // echo "Documento nulo: "  . $numero;
                 // echo "<br>";
-
-
                 return null;
             }
     

@@ -18,15 +18,14 @@ let cashFlowTotals = {
 
 let bankMovementsCatergories = ['ingresos', 'egresos', 'projectedIncome', 'projectedOutcome', 'commonIncomeMovements', 'commonOutcomeMovements'];
 
-async function renderMyChasFlowTable(pickedMonth, selectedYear) {
-    if (!activePage.cashFlow) {
-        return;
-    }
+
+async function prepareCashFlowData(){
     console.log("SELECTEDYEAR", selectedYear,"ACIVE PAGE CASHFLOW",activePage.cashFlow);
     await getInitialBankAccountBalance();
     const allDaysOnYear = getAllDaysBetweenYears([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], selectedYear);
     console.log('allDaysOnYear', allDaysOnYear);
     let previousAccountBalance = cashFlowTotals.initialBankAccount;
+    console.log('previousAccountBalance', previousAccountBalance);
     console.log('allMyDates', allMyDates);  
     console.log('bankMovementsData',bankMovementsData);
     const totalDailyBalance = allDaysOnYear.map((date, index) => {
@@ -38,16 +37,13 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
         const totalOutCome = bankMovementsData.egresos[indexOnAllMydates].total;
         const totalProjectedIncome = bankMovementsData.projectedIncome[indexOnAllMydates].total;
         const totalProjectedOutcome = bankMovementsData.projectedOutcome[indexOnAllMydates].total;
+        const bankBalance = previousAccountBalance + totalIncome - totalOutCome;
 
         let totalProjected = 0;
 
         const todayIndex = allMyDates.findIndex((myDate) => myDate == moment().format('YYYY-MM-DD'));
 
         // verificar si la fecha es igual a la fecha actual
-        if (indexOnAllMydates == todayIndex) {
-            console.log('date', date);
-        }
-
         // verificar si la fecha es mayor o igual a la fecha actual
         if (indexOnAllMydates >= todayIndex) {
             totalProjected = totalProjectedIncome - totalProjectedOutcome;
@@ -57,9 +53,10 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
         const totalCommonOutcomeMovements = bankMovementsData.commonOutcomeMovements[indexOnAllMydates].total;
         const total = totalIncome + totalCommonIncomeMovements - totalOutCome - totalCommonOutcomeMovements + totalProjected;
         previousAccountBalance += total;
-
+        
         return {
             date,
+            bankBalance:bankBalance,
             timestamp: moment(date).format('X'),
             dayOfYear: moment(date).dayOfYear(),
             totalIncome,
@@ -69,12 +66,16 @@ async function renderMyChasFlowTable(pickedMonth, selectedYear) {
         };
     });
     cashFlowTotals.totals = totalDailyBalance;
+    return totalDailyBalance
+}
+async function renderMyChasFlowTable(pickedMonth, selectedYear) {
+    if (!activePage.cashFlow) {
+        return;
+    }
+
+    const totalDailyBalance = await prepareCashFlowData();
 
     console.log('31-12-24', totalDailyBalance.filter(({ date }) => date == '2024-12-31'));
-    console.log('31-12-24', totalDailyBalance.filter(({ date }) => date == '2024-12-31'));
-    console.log('31-12-24', totalDailyBalance.filter(({ date }) => date == '2024-12-31'));
-    console.log('31-12-24', totalDailyBalance.filter(({ date }) => date == '2024-12-31'));
-    console.log('31-12-24', totalDailyBalance.filter(({ date }) => date == '2024-12-31')); 
 
     removeAllTableRows();
     renderMyHorizontalView([pickedMonth], selectedYear);

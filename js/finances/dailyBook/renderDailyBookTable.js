@@ -29,11 +29,18 @@ let bhe = [];
 
 window.addEventListener("load", async (event) => {
 
+    document.getElementsByClassName('btnOpt').forEach((btn)=>{
+        btn.querySelectorAll('svg').forEach((svg)=>{
+            svg.style.display = 'none';
+        });
+        btn.querySelectorAll('img').forEach((img)=>{
+            img.style.display = 'none';
+        });
+    });
 
-    showView('dash')
-
+    showView('dash');
     await prepareDataForFinance();
-
+    
     return
 
     // let query = "";

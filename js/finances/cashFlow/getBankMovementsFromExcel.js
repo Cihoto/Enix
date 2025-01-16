@@ -21,7 +21,7 @@ async function getBankAndTributarieDataFromExcel(){
     getBankMovementsFromExcel();
 }
 
-
+let initialDataComplete = false;
 async function prepareDataForFinance(){
     getAllDaysOnMonth([1,2,3,4,5,6,7,8,9,10,11,12]);
     bankMovementsData = setAllDaysOnYear();
@@ -32,12 +32,28 @@ async function prepareDataForFinance(){
         getCommonMovements()
     ]);
 
+    initialDataComplete = true;
+
+    document.getElementsByClassName('btnOpt').forEach((btn)=>{
+        btn.querySelectorAll('.financeLoader').forEach((loader)=>loader.style.display = 'none');
+        btn.querySelectorAll('svg').forEach((svg)=>{
+            svg.style.display = 'block';
+        });
+        btn.querySelectorAll('img').forEach((img)=>{
+            img.style.display = 'block';
+        });
+    });
+
+    renderDashCards();
+
     Toastify({ 
         text: "Datos actualizados correctamente",
         duration: 3000,
         close: true,
         backgroundColor: "linear-gradient(to right, #4caf50, #4caf50)"
     }).showToast();
+
+    
 }
 
 
@@ -46,9 +62,6 @@ async function getBankMovements(){
     // GET NEW DATA FROM API
     const newBankMovements = await getBankMovementsFromAPI();
     const bankDataAPI = getBankDataFromAPI(newBankMovements);
-
-
-
     // const apiData = await getBankMovementsFromAPI();
 
 
@@ -159,22 +172,29 @@ function getBankDataFromDB(bankMovements){
 }
 
 function getBankDataFromAPI(bankMovements){
-    // const bankData = bankExcelData.bodyRows.map((movement) => {
-    const bankData = bankMovements.map((movement) => {
-        const {date: movementDate, income, amount, desc } = movement;
-        const fecha = moment(movementDate, 'YYYY-MM-DD').format('DD-MM-YYYY');
-        const abono = income == 1 ? true : false;
-        const fechaTimeStamp = moment(fecha,'DD-MM-YYYY').format('X');
-        return {
-            fecha: fecha,
-            fechaTimeStamp: fechaTimeStamp,
-            desc: desc,
-            monto: Number(amount) || 0,
-            abono: abono,
-        }
-    }).filter((movement) => movement != undefined);
-    console.log('bankData',bankData);
-    return bankData;
+
+    try{
+
+        console.log('bankMovements',bankMovements);
+        // const bankData = bankExcelData.bodyRows.map((movement) => {
+        const bankData = bankMovements.map((movement) => {
+            const {date: movementDate, income, amount, desc } = movement;
+            const fecha = moment(movementDate, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            const abono = income == 1 ? true : false;
+            const fechaTimeStamp = moment(fecha,'DD-MM-YYYY').format('X');
+            return {
+                fecha: fecha,
+                fechaTimeStamp: fechaTimeStamp,
+                desc: desc,
+                monto: Number(amount) || 0,
+                abono: abono,
+            }
+        }).filter((movement) => movement != undefined);
+        console.log('bankData',bankData);
+        return bankData;
+    }catch(error){
+        console.log('UPS');
+    }
 }
 
 

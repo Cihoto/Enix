@@ -96,6 +96,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                     <p class="headerTitle"> Dashboard flujos</p>
                     <div class="header-options">
                         <button class="btnOpt option active" menuName="dash" contentToPrint="dash">
+                            <div class="lds-ellipsis financeLoader"><div></div><div></div><div></div><div></div></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                                 <path d="M8.6617 2.5H2.82837V8.33333H8.6617V2.5Z" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M17.8284 2.5H11.995V8.33333H17.8284V2.5Z" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -105,6 +106,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                             <p>Dashboard</p>
                         </button>
                         <button class="btnOpt option" menuName="Flujo_de_caja" contentToPrint="flj">
+                            <div class="lds-ellipsis financeLoader"><div></div><div></div><div></div><div></div></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                                 <path d="M14.495 0.833252L17.8284 4.16659L14.495 7.49992" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M2.82837 9.16675V7.50008C2.82837 6.61603 3.17956 5.76818 3.80468 5.14306C4.4298 4.51794 5.27765 4.16675 6.1617 4.16675H17.8284" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -114,6 +116,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                             <p>Flujo de caja</p>
                         </button>
                         <button class="btnOpt option" menuName="Pagos" contentToPrint="pag">
+                            <div class="lds-ellipsis financeLoader"><div></div><div></div><div></div><div></div></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                                 <path d="M10.3284 0.833252V19.1666" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M14.495 4.16675H8.24504C7.47149 4.16675 6.72962 4.47404 6.18264 5.02102C5.63566 5.568 5.32837 6.30987 5.32837 7.08341C5.32837 7.85696 5.63566 8.59883 6.18264 9.14581C6.72962 9.69279 7.47149 10.0001 8.24504 10.0001H12.4117C13.1853 10.0001 13.9271 10.3074 14.4741 10.8544C15.0211 11.4013 15.3284 12.1432 15.3284 12.9167C15.3284 13.6903 15.0211 14.4322 14.4741 14.9791C13.9271 15.5261 13.1853 15.8334 12.4117 15.8334H5.32837" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -121,6 +124,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                             <p>Pagos</p>
                         </button>
                         <button class="btnOpt option" menuName="Cobros" contentToPrint="cob">
+                            <div class="lds-ellipsis financeLoader"><div></div><div></div><div></div><div></div></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                                 <path d="M10.3284 0.833252V19.1666" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M14.495 4.16675H8.24504C7.47149 4.16675 6.72962 4.47404 6.18264 5.02102C5.63566 5.568 5.32837 6.30987 5.32837 7.08341C5.32837 7.85696 5.63566 8.59883 6.18264 9.14581C6.72962 9.69279 7.47149 10.0001 8.24504 10.0001H12.4117C13.1853 10.0001 13.9271 10.3074 14.4741 10.8544C15.0211 11.4013 15.3284 12.1432 15.3284 12.9167C15.3284 13.6903 15.0211 14.4322 14.4741 14.9791C13.9271 15.5261 13.1853 15.8334 12.4117 15.8334H5.32837" stroke="#9393A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -128,10 +132,12 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                             <p>Cobros</p>
                         </button>
                         <button class="btnOpt option" menuName="Documentos_pagados" contentToPrint="paid">
+                            <div class="lds-ellipsis financeLoader"><div></div><div></div><div></div><div></div></div>
                             <img src="./assets/svg/check-circle.svg" alt="">
                             <p>Documentos pagados</p>
                         </button>
                         <button class="btnOpt option" menuName="Recurrentes" contentToPrint="common">
+                            <div class="lds-ellipsis financeLoader"><div></div><div></div><div></div><div></div></div>
                             <img src="./assets/svg/repeat.svg" alt="">
                             <p>Recurrentes</p>
                         </button>
@@ -292,7 +298,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                 </div>
                                 <div>
                                     <input class="dashTableRange" type="radio" id="monthly" name="range" value="monthly" />
-                                    <label for="monthly">Mensual</label>
+                                    <label for="monthly">Semanal</label>
                                 </div>
                                 <input type="month" name="monthPicker" id="monthPickerDashBoard" value="<?php echo date('Y-m'); ?>" max="<?php echo date('Y-m')?>" />
                             </div>
@@ -380,6 +386,20 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                             <div class="card-header-title" style="padding-left: 16px;">
                                 <p>Clientes</p>
                             </div>
+                            <div >
+                                <div class="yearPicker" style="display: flex; align-items: center; gap: 10px;padding: 10px 16px 10px 0px;">
+                                    <label for="clientSideYearSelector" style="font-weight: bold;">Año:</label>
+                                    <select id="clientSideYearSelector" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+                                        <?php
+                                        $currentYear = date("Y");
+                                        $endYear = $currentYear + 6;
+                                        for ($year = $currentYear - 1; $year <= $endYear; $year++) {
+                                            echo "<option value='$year'" . ($year == $currentYear ? " selected" : "") . ">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>  
                         </div>
                         <div class="card-body">
                             <table id="financeDashClients" class="secondaryTable">
@@ -405,6 +425,20 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                             <div class="card-header-title" style="padding-left: 16px;">
                                 <p>Proveedores</p>
                             </div>
+                            <div >
+                                <div class="yearPicker" style="display: flex; align-items: center; gap: 10px;padding: 10px 16px 10px 0px;">
+                                    <label for="providerSideYearSelector" style="font-weight: bold;">Año:</label>
+                                    <select id="providerSideYearSelector" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+                                        <?php
+                                        $currentYear = date("Y");
+                                        $endYear = $currentYear + 6;
+                                        for ($year = $currentYear - 1; $year <= $endYear; $year++) {
+                                            echo "<option value='$year'" . ($year == $currentYear ? " selected" : "") . ">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>  
                         </div>
                         <div class="card-body">
                             <table id="financeDashProviders" class="secondaryTable">

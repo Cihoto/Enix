@@ -218,7 +218,10 @@ async function tributarieDataDbMap(tributarieDocuments){
             return doc.folio === modDoc.folio && doc.rut === modDoc.rut && doc.total === modDoc.total
         });
         if(document){
-            document.paid = modDoc.is_paid;
+
+            if(!document.paid ){
+                document.paid = modDoc.is_paid;
+            }
             if(document.saldo > modDoc.balance){
                 document.saldo = modDoc.balance;
             }
@@ -483,34 +486,7 @@ function addFromFuture(documentToFind){
     }
 }
 
-function getTotalByRut(documents) {
-    const result = {
-        clients: {},
-        providers: {}
-    };
 
-    documents.forEach(doc => {
-        const { rut, total, issued, business_name } = doc;
-        const category = issued ? 'clients' : 'providers';
-
-        if (!result[category][rut]) {
-            result[category][rut] = {
-                name: business_name,
-                bills_amount: 0,
-                total: 0
-            };
-        }
-
-        result[category][rut].bills_amount += 1;
-        result[category][rut].total += total;
-    });
-
-    // Convert objects to arrays and sort by total
-    result.clients = Object.values(result.clients).sort((a, b) => b.total - a.total);
-    result.providers = Object.values(result.providers).sort((a, b) => b.total - a.total);
-
-    return result;
-}
 
 
 

@@ -95,7 +95,7 @@ function renderDashBoardTable(financialStatus){
         const dayName = moment(date).locale('es').format('dddd');
 
         headerRow.querySelectorAll('th')[index].innerHTML = `<p class="headerDate">${dayName}</p> <p class="headerDate">${moment(date).format('DD-MM-YYYY')}</p>`;
-        incomeRow.querySelectorAll('td')[index].innerHTML = `<p class="bodyNumber">${getChileanCurrency(Number(issued))}</p>`;
+        incomeRow.querySelectorAll('td')[index].innerHTML = `<p class="bodyNumber">${getChileanCurrency(Number(issued) + Number(bank_balance))}</p>`;
         outflowRow.querySelectorAll('td')[index].innerHTML = `<p class="bodyNumber">${getChileanCurrency(Number(received))}</p>`;
         avitRow.querySelectorAll('td')[index].innerHTML = `<p class="avitNumber">${getChileanCurrency(Number(avit))}</p>`;
         index ++;

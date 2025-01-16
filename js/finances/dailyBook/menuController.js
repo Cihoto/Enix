@@ -49,7 +49,9 @@ btnRangeSelector.forEach(button => {
 });
 
 function handleOptionButtonClick(e) {
-    console.log("asdkasldkjl")
+    if(!initialDataComplete){
+        return
+    }
     OPTION_BUTTONS.forEach(button => button.classList.remove('active'));
     let optbtn = e.target.closest('.btnOpt');
     optbtn.classList.add('active');
@@ -103,6 +105,10 @@ function handleYearClick(e) {
 }
 
 async function printContent(content) {
+
+    if(!initialDataComplete){
+        return
+    }
     document.querySelectorAll('.dinamycFloatingButton').forEach(button => button.remove());
     removeActivePages();
     removeAllTableClasses();
@@ -128,6 +134,9 @@ function handleTableRendering(month = moment().format("MM"), year = moment().for
 
 
             prepareDataForDashBoard();
+            if(initialDataComplete){
+                renderDashCards();
+            }
             break;
 
         case 'cashFlow':

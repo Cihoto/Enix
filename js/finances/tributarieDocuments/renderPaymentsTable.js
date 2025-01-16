@@ -57,6 +57,12 @@ function  renderPaymentsTable(sortFunction, hidePaidDocuments = true) {
     }else{
         movements = futurePayments.sort((a,b) => a.fecha_emision_timestamp - b.fecha_emision_timestamp);
     }
+    console.log('movements',movements);
+    console.log('movements',movements);
+    console.log('movements',movements);
+    console.log('movements',movements);
+    console.log('movements',movements);
+    console.log('movements',movements);
 
     movements.forEach((futurePayment) => {
         // ADD ONE MONTH TO FUTURE PAYMENT DATE
