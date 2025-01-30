@@ -37,6 +37,8 @@ async function getFinancialStatus_range(dateFrom, dateTo) {
   console.log('financialStatus', financialStatus);
   if (renderDaily) {
 
+    return financialStatus;
+
     // order by date asc and get last 5 elements
     financialStatus = financialStatus.sort((a, b) => {
       return moment(a.date).diff(moment(b.date));

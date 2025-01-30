@@ -140,28 +140,24 @@ async function getCommonMovementsChartData(){
     return commonMovementsData.data;
 }
 
-
-
-
-
 let tributarieDocumentsChart = [];
 let financialStatusData = [];
 // let commonMovements = [];
 
 async function prepareDataForDashBoard() {
     // tributarieDocumentsChart = chartTributarieDocuments();
-    financialStatusData = await financialStatusChartData_range();
+    const dateFrom = moment().subtract(5, 'days').format('YYYY-MM-DD');
+    financialStatusData = await financialStatusChartData_range(dateFrom,moment().format('YYYY-MM-DD'));
     // commonMovements = await getCommonMovementsChartData();
-    
     renderDashBoardTable(financialStatusData);
     renderDashboardChart(financialStatusData);
     // renderDoughtnutChart(commonMovements);
 
 }
 
-
 function renderDashboardChart(financialStatus) {
 
+    
     
     const ctx = document.getElementById('myChart');
 
@@ -233,7 +229,8 @@ function renderDashboardChart(financialStatus) {
         type: 'line',
         data: data,
         options: {
-            responsive: true,
+            // maintainAspectRatio: false,
+            
             plugins: {
                 title: {
                     display: true,

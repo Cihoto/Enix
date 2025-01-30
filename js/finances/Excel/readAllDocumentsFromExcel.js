@@ -101,9 +101,8 @@ async function readTributarieDocuments(){
     console.log('initialTributarieDocuments',initialTributarieDocuments);
 
     // Example usage:
-    const totalByRut = getTotalByRut(initialTributarieDocuments['documents']);
-    renderFinancesSideTables(totalByRut);
-    console.log(totalByRut);
+    console.log("step 1")
+    renderFinancesSideTables(getTotalByRut(dataForTotalByRut()));
 
     setFutureDocumentsOnBankMovements();
     // tributarieDocuments = tributarieDocumentsData;

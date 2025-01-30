@@ -8,44 +8,30 @@
 
     // $business_rut = '77604901';
     // $today = date('Y-m-d');
-
     // $financial_status = getUnpaidDocumentsOnDate($business_rut,'2024-01-01',$today);
     // // echo json_encode($financial_status);
     // $updatedDocuments =  updateDocuments($modifiedDocuments, $financial_status);
-
     // $issued = array_filter($updatedDocuments, function($item){
     //     return $item['recibida'] == false && $item['pagado'] == false;
     // });
-
     // $received = array_filter($updatedDocuments, function($item){
     //     return $item['recibida'] == true && $item['pagado'] == false;
     // });
-
     // // echo json_encode(array_values($issued));
-
     // // exit();
-    
     // $totalIssued = 0;
     // foreach ($issued as $key => $value) {
     //     $totalIssued += $value['saldo_insoluto'] == null? $value['total']['total']  : $value['saldo_insoluto'];
     // }
-
     // $totalReceived = 0;
     // foreach ($received as $key => $value) {
     //     $totalReceived += $value['saldo_insoluto'] == null? $value['total']['total']  : $value['saldo_insoluto'];
     // }
-
     // $unpaidBHE = getUnpaidBhe($business_rut,'2024-01-01',8);
-
     // echo $totalIssued + 2012023;
     // echo "<br>";
     // echo $totalReceived + $unpaidBHE['unpaidBHE'];
-
     // exit();
-
-
-
-
     // echo json_encode(['success'=>true,'message' => 'Conexión exitosa']);
     // try{
 

@@ -7,3 +7,4 @@ const getChileanCurrency = (value) => {
     }
     // return value.toLocaleString('es-CL');
 }
+

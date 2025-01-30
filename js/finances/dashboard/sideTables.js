@@ -1,21 +1,31 @@
 const clientSideYearSelector = document.getElementById('clientSideYearSelector');
 const providerSideYearSelector = document.getElementById('providerSideYearSelector');
 
+
+
+
 async function renderFinancesSideTables(totalByRut) {
 
-    const clientTable = document.getElementById('financeDashClients').querySelector('tbody');
-    const providersTable = document.getElementById('financeDashProviders').querySelector('tbody');
+    const clientTable = document.getElementById('financeDashClients');
+    const providersTable = document.getElementById('financeDashProviders');
 
     const {clients, providers} = totalByRut;
 
+    console.log('clients',clients);
+    console.log('providers',providers);
     
     renderSideTable(clientTable, clients);
     renderSideTable(providersTable, providers);
 }
 
 async function renderSideTable(tableElement, data) {
+
+    const tbody = tableElement.querySelector('tbody');
+    const tfoot = tableElement.querySelector('tfoot');
+
     // Clear existing table rows
-    tableElement.innerHTML = '';
+    tbody.innerHTML = '';
+    tfoot.innerHTML = '';
 
     // Create table rows based on data
     data.forEach(item => {
@@ -25,16 +35,27 @@ async function renderSideTable(tableElement, data) {
         row.innerHTML = `<td>${item.name}</td>
                         <td>${item.bills_amount}</td>
                         <td>${getChileanCurrency(Number(item.total))}</td>`;
-        tableElement.appendChild(row);
+        tbody.appendChild(row);
     });
+
+    tfoot.innerHTML = `<tr class="footerRow">
+        <td><strong>Total</strong></td>
+        <td><strong>${data.length}</strong></td>
+        <td><strong>${getChileanCurrency(data.reduce((acc, curr) => acc + curr.total, 0))}</strong></td>
+    </tr>`;
 }
 
 
-function getTotalByRut(documents, selectedClientYear = moment().year(), selectedProviderYear = moment().year()){
+function getTotalByRut(data){
     const result = {
         clients: {},
         providers: {}
-    };  
+    };
+
+    const {documents, selectedClientYear, selectedProviderYear} = data;
+    const {year: clientYear, month: clientMonth} = selectedClientYear;
+    const {year: providerYear, month: providerMonth} = selectedProviderYear;
+
     console.log('documents',documents);
     console.log('clientSideYearSelector',clientSideYearSelector);
     console.log('providerSideYearSelector',providerSideYearSelector);
@@ -44,11 +65,13 @@ function getTotalByRut(documents, selectedClientYear = moment().year(), selected
         const category = issued ? 'clients' : 'providers';
 
 
-        if(issued && moment(issue_date).year() != selectedClientYear){
+        if(issued && moment(issue_date).year() != clientYear
+        && moment(issue_date).month() != clientMonth){
             return;
         }
 
-        if(!issued && moment(issue_date).year() != selectedProviderYear){
+        if(!issued && moment(issue_date).year() != providerYear
+        && moment(issue_date).month() != providerMonth){
             return;
         }
 
@@ -73,18 +96,32 @@ function getTotalByRut(documents, selectedClientYear = moment().year(), selected
 
 
 clientSideYearSelector.addEventListener('change', async () => {
-    const selectedClientYear = clientSideYearSelector.value;
-    const selectedProviderYear = providerSideYearSelector.value;
 
-    const totalByRut = getTotalByRut(initialTributarieDocuments['documents'], selectedClientYear, selectedProviderYear);
+    const totalByRut = getTotalByRut(dataForTotalByRut());
     renderFinancesSideTables(totalByRut);
 });
 
 providerSideYearSelector.addEventListener('change', async () => {
-    const selectedClientYear = clientSideYearSelector.value;
-    const selectedProviderYear = providerSideYearSelector.value;
 
-    const totalByRut = getTotalByRut(initialTributarieDocuments['documents'], selectedClientYear, selectedProviderYear);
+    const totalByRut = getTotalByRut(dataForTotalByRut());
     renderFinancesSideTables(totalByRut);
 });
+
+
+function dataForTotalByRut(){
+    const clientDate = document.getElementById('clientSideYearSelector').value;
+    const providerDate = document.getElementById('providerSideYearSelector').value;
+
+    return {
+        documents: initialTributarieDocuments['documents'],
+        selectedClientYear: {
+            month: moment(clientDate).month(),
+            year: moment(clientDate).year()
+        },
+        selectedProviderYear: {
+            month: moment(providerDate).month(),
+            year: moment(providerDate).year()
+        }
+    }
+}
 
