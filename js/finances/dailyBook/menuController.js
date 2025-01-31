@@ -131,8 +131,6 @@ function handleTableRendering(month = moment().format("MM"), year = moment().for
 
     switch (activePageName) {
         case 'dash':
-
-
             prepareDataForDashBoard();
             if(initialDataComplete){
                 renderDashCards();
@@ -175,7 +173,9 @@ function showView(view) {
     thead.innerHTML = '';
     tbody.innerHTML = '';
     tfoot.innerHTML = '';
+
     const dashTableMenu = document.getElementById('dashTableMenu');
+    const monthSelectorSection = document.getElementById('monthSelectorSection');
     const dashTable = document.getElementById('financialDashBoardTable');
     const financialDashChart = document.getElementById('financialDashChart');
     const mainContent = document.getElementById('mainContent-dash');
@@ -186,11 +186,12 @@ function showView(view) {
         document.getElementById('optionsMenu').style.display = 'none';
         document.getElementById('cardHeaderTopMenu').style.display = 'none';
         document.getElementById('periodSelectors').style.display = 'none';
-        // document.getElementById('doughtnutChart').style.display = 'flex'; 
         document.getElementById('sideTableContainer').style.display = 'flex'; 
         document.getElementById('financesCardTableContainer').classList.add('dash');
+
         mainContent.style.display = 'flex';
         dashTableMenu.style.display = 'flex';
+        monthSelectorSection.style.display = 'flex';
         dashTable.style.display = 'flex';
         financialDashChart.style.display = 'block';
     }else{
@@ -199,14 +200,13 @@ function showView(view) {
         document.getElementById('periodSelectors').style.display = 'flex';
         document.getElementById('sideTableContainer').style.display = 'none';
         document.getElementById('financesCardTableContainer').classList.remove('dash');
-        mainContent.style.display = 'block';
 
+        mainContent.style.display = 'block';
         dashTableMenu.style.display = 'none';
+        monthSelectorSection.style.display = 'none';
         dashTable.style.display = 'none';
         financialDashChart.style.display = 'none';
     }
-
-
 
     switch (view) {
         case 'dash':

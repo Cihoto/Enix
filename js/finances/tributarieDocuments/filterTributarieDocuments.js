@@ -98,8 +98,11 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
     tributarieDocuments.notaCredito.forEach((nota) => {
       if (nota.emitida) {
         // boletasTotal.push(nota);
-        tributarieCardsData.charges.totalDocuments.total -= nota.total;
-        tributarieCardsData.charges.totalDocuments.amount--;
+        const isOnCurrentYear = moment(nota.fecha_emision, 'DD-MM-YYYY').format('YYYY') == moment().format('YYYY');
+        if (isOnCurrentYear) {
+          tributarieCardsData.charges.totalDocuments.total -= nota.total;
+          tributarieCardsData.charges.totalDocuments.amount--;
+        }
       } else {
         boletasTotal.push(nota);
 
@@ -124,8 +127,11 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
     console.log('totalNotasRecibidas', totalNotasRecibidas);
     tributarieDocuments.notaDebito.forEach((nota) => {
       if (nota.emitida) {
-        tributarieCardsData.charges.totalDocuments.total += nota.total;
-        tributarieCardsData.charges.totalDocuments.amount++;
+        const isOnCurrentYear = moment(nota.fecha_emision, 'DD-MM-YYYY').format('YYYY') == moment().format('YYYY');
+        if (isOnCurrentYear) {
+          tributarieCardsData.charges.totalDocuments.total += nota.total;
+          tributarieCardsData.charges.totalDocuments.amount++;
+        }
       } else {
         tributarieCardsData.payments.totalDocuments.total += nota.total;
         tributarieCardsData.payments.totalDocuments.amount++;
@@ -157,6 +163,13 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
 
 function sortDocumentOnDate(document) {
 
+  console.log("_______________________________________________________________", document);
+  console.log("_______________________________________________________________", document);
+  console.log("_______________________________________________________________", document);
+  console.log("_______________________________________________________________", document);
+  console.log("_______________________________________________________________", document);
+  console.log("_______________________________________________________________", document);
+
   if (!document.contable) { return; };
   if (document.tipo_documento === 'nota') {
     // boletasTotal.push(document);
@@ -183,10 +196,7 @@ function sortDocumentOnDate(document) {
     tributarieCardsData.payments.totalDocuments.total += document.saldo;
 
     if(!document.paid){
-      console.log('document', document);
-      console.log(tributarieCardsData);
-      console.log(tributarieCardsData.payments);
-      console.log(tributarieCardsData.payments.totalUnpaid);
+
       tributarieCardsData.payments.totalUnpaid.amount++;
       tributarieCardsData.payments.totalUnpaid.total += document.saldo;
     }
@@ -212,8 +222,21 @@ function sortDocumentOnDate(document) {
 
   } else {
     // totalDocumentos.push(document);
-    tributarieCardsData.charges.totalDocuments.amount++;
-    tributarieCardsData.charges.totalDocuments.total += document.saldo;
+    
+
+    // Set the total amount of documents and the total amount of money in current year
+
+    // fecha_emision: "13-05-2024"
+
+    const isOnCurrentDate = moment(document.fecha_emision, 'DD-MM-YYYY').format('YYYY') == moment().format('YYYY');
+    
+    if(isOnCurrentDate){
+      tributarieCardsData.charges.totalDocuments.amount++;
+      tributarieCardsData.charges.totalDocuments.total += document.saldo;
+    }
+
+    // if(document.tipo_documento === 'factura' || document.tipo_documento === 'bev'){
+    // }
 
     if(!document.paid){
       tributarieCardsData.charges.totalUnpaid.amount++;

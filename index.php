@@ -370,9 +370,9 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                             </div>
 
 
-                            <div class="mainDashTableContainer bordered br-10">
-                                <div class="monthSelectorSection">
-                                    <div id="dashTableMenu" class="tableDashOptions">
+                            <div id="dashTableMenu" class="mainDashTableContainer bordered br-10">
+                                <div id="monthSelectorSection" class="monthSelectorSection">
+                                    <div class="tableDashOptions">
                                         <div class="tableOptions">
                                             <button class="dashTableRangeBtn active" value="daily">Diario</button>
                                             <button class="dashTableRangeBtn" value="weekly">Semanal</button>
@@ -387,10 +387,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                                 </button>
                                             </div>
                                         </div>
-
-
                                     </div>
-
                                     <input type="month"
                                         class="monthInput"
                                         name="monthPicker"
