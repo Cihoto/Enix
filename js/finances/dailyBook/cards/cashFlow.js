@@ -161,63 +161,63 @@ async function setDashCards() {
 
     const abitDef = accountBalance + Number(charges.totalUnpaid.total) - Number(payments.totalUnpaid.total);
     return `
-                <div class="card yellow"  onClick="renderChargesTable()">
-                    <div class="content">
-                        <div class="titles">
-                            <p>Saldo en Cuenta</p>
-                            <div class="sub-txt">
-                                <p id="totalPendingPayments" class="sub-amount"></p>
-                                <p id="currentBankBalance">${getChileanCurrency(accountBalance)}</p>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <img src="./assets/css/financessvg/cardInfo.svg" alt="">
-                        </div>
-                    </div>
+    <div class="card yellow">
+        <div class="content">
+            <div class="titles">
+                <p>Saldo en Cuenta</p>
+                <div class="sub-txt">
+                    <p id="totalPendingPayments" class="sub-amount"></p>
+                    <p id="currentBankBalance">${getChileanCurrency(accountBalance)}</p>
                 </div>
-                <div class="card cyan" onClick="">
-                    <div class="content">
-                        <div class="titles">
-                            <p>Facturas por cobrar</p>
-                            <div class="sub-txt">
-                                <p>${charges.totalUnpaid.amount}</p>
-                                <p id="pendingCharges">${getChileanCurrency(charges.totalUnpaid.total)}</p>
+            </div>
+            <div class="info">
+                <img src="./assets/css/financessvg/cardInfo.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="card cyan" onClick="">
+        <div class="content">
+            <div class="titles">
+                <p>Facturas por cobrar</p>
+                <div class="sub-txt">
+                    <p>${charges.totalUnpaid.amount}</p>
+                    <p id="pendingCharges">${getChileanCurrency(charges.totalUnpaid.total)}</p>
 
-                            </div>
-                        </div>
-                        <div class="info">
-                            <img src="./assets/css/financessvg/cardInfo.svg" alt="">
-                        </div>
-                    </div>
                 </div>
-                <div class="card orange" onClick="">
-                    <div class="content">
-                        <div class="titles">
-                            <p>Facturas por pagar</p>
-                            <div class="sub-txt">
-                                <p id="totalPendingCharges" class="sub-amount">${payments.totalUnpaid.amount}</p>
-                                <p id="pendingCharges">${getChileanCurrency(payments.totalUnpaid.total)}</p>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <img src="./assets/css/financessvg/cardInfo.svg" alt="">
-                        </div>
-                    </div>
+            </div>
+            <div class="info">
+                <img src="./assets/css/financessvg/cardInfo.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="card orange" onClick="">
+        <div class="content">
+            <div class="titles">
+                <p>Facturas por pagar</p>
+                <div class="sub-txt">
+                    <p id="totalPendingCharges" class="sub-amount">${payments.totalUnpaid.amount}</p>
+                    <p id="pendingCharges">${getChileanCurrency(payments.totalUnpaid.total)}</p>
                 </div>
-                <div class="card purple" onClick="renderChargesTable()">
-                    <div class="content">
-                        <div class="titles">
-                            <p>Superávit / Déficit</p>
-                            <div class="sub-txt">
-                                <p id="totalPendingPayments" class="sub-amount"></p>
-                                <p id="pendingDocuments">${getChileanCurrency(abitDef)}</p>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <img src="./assets/css/financessvg/cardInfo.svg" alt="">
-                        </div>
-                    </div>
-                </div>`
+            </div>
+            <div class="info">
+                <img src="./assets/css/financessvg/cardInfo.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="card purple">
+        <div class="content">
+            <div class="titles">
+                <p>Superávit / Déficit</p>
+                <div class="sub-txt">
+                    <p id="totalPendingPayments" class="sub-amount"></p>
+                    <p id="pendingDocuments">${getChileanCurrency(abitDef)}</p>
+                </div>
+            </div>
+            <div class="info">
+                <img src="./assets/css/financessvg/cardInfo.svg" alt="">
+            </div>
+        </div>
+    </div>`
 }
 
 

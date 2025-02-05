@@ -103,9 +103,9 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
           tributarieCardsData.charges.totalDocuments.total -= nota.total;
           tributarieCardsData.charges.totalDocuments.amount--;
         }
+        
       } else {
         boletasTotal.push(nota);
-
         totalNotasRecibidas += nota.total;
         tributarieCardsData.payments.totalDocuments.total -= nota.total;
         tributarieCardsData.payments.totalDocuments.amount--;
@@ -117,12 +117,12 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
       if (!hasCreditNote) {
         return
       }
-      // console.log('hasCreditNote', "hasCreditNote");
-      // console.log('nota de credito', nota);
-      // console.log('factura', hasCreditNote);
-      // console.log('------------------------');
-      // console.log(' ');
-      // console.log(' ');
+      console.log('hasCreditNote', "hasCreditNote");
+      console.log('nota de credito', nota);
+      console.log('factura', hasCreditNote);
+      console.log('------------------------');
+      console.log(' ');
+      console.log(' ');
     });
     console.log('totalNotasRecibidas', totalNotasRecibidas);
     tributarieDocuments.notaDebito.forEach((nota) => {
@@ -163,12 +163,7 @@ function classifyTributarieDocuments(trDocuments, subtractCreditNote) {
 
 function sortDocumentOnDate(document) {
 
-  console.log("_______________________________________________________________", document);
-  console.log("_______________________________________________________________", document);
-  console.log("_______________________________________________________________", document);
-  console.log("_______________________________________________________________", document);
-  console.log("_______________________________________________________________", document);
-  console.log("_______________________________________________________________", document);
+
 
   if (!document.contable) { return; };
   if (document.tipo_documento === 'nota') {
@@ -211,6 +206,7 @@ function sortDocumentOnDate(document) {
       tributarieCardsData.payments.bills.total += document.saldo;
     }
     if (document.vencida_por > 0 && !document.paid) {
+      console.log('document', document);
       tributarieCardsData.payments.pendingDocuments.amount++;
       tributarieCardsData.payments.pendingDocuments.total += document.saldo;
     }

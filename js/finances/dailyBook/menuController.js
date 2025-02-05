@@ -58,7 +58,38 @@ function handleOptionButtonClick(e) {
     let contentToPrint = optbtn.getAttribute('contentToPrint');
     printContent(contentToPrint);
     let opt = optbtn.getAttribute('menuName');
+    let desc = optbtn.getAttribute('contentToPrint');
+    setDescriptionsHeader(desc)
+
+    // document.getElementById('descHeader').innerText = opt;
     changeValueHeaderMenu(opt);
+}
+
+function setDescriptionsHeader(desc) {
+
+    document.getElementsByClassName('c-header-desc')[0].style.display = 'block';
+
+    // if(desc == 'dash') {
+    //     document.getElementById('descHeader').innerHTML = 'Dashboard';
+    // }
+    if(desc == 'flj') {
+        document.getElementById('descHeader').innerHTML = 'Detalles de movimientos';
+    }
+    if(desc == 'pag') {
+        document.getElementById('descHeader').innerHTML = 'Detalles de obligaciones por pagar';
+    }
+    if(desc == 'cob') {
+        document.getElementById('descHeader').innerHTML = 'Detalles de obligaciones por cobrar';
+    }
+    if(desc == 'paid') {
+        document.getElementById('descHeader').innerHTML = 'Dashboard';
+        document.getElementsByClassName('c-header-desc')[0].style.display = 'none';
+    }
+    if(desc == 'common') {
+        document.getElementById('descHeader').innerHTML = 'Dashboard';
+        document.getElementsByClassName('c-header-desc')[0].style.display = 'none';
+    }
+    
 }
 
 function changeValueHeaderMenu(value) {
@@ -103,6 +134,15 @@ function handleYearClick(e) {
     console.log('view', view);
     handleTableRendering(undefined, selectedYear);
 }
+
+const cashFlowDate = document.getElementById('cashFlowDate');
+
+cashFlowDate.addEventListener('change', () => {
+    // let year = e.target;
+    selectedYear = moment(cashFlowDate.value).year();
+    selectedMonth = moment(cashFlowDate.value).month() + 1;
+    handleTableRendering(selectedMonth, selectedYear);
+});
 
 async function printContent(content) {
 
@@ -182,12 +222,16 @@ function showView(view) {
 
     console.log('dashTable', dashTable);
 
+    document.getElementById('optionsMenu').style.display = 'none';
+    document.getElementById('cashFlowDate').style.display = 'none';
+
     if(view === 'dash') {
-        document.getElementById('optionsMenu').style.display = 'none';
         document.getElementById('cardHeaderTopMenu').style.display = 'none';
         document.getElementById('periodSelectors').style.display = 'none';
+        document.getElementById('financeDashHeaderSection').style.display = 'flex';
         document.getElementById('sideTableContainer').style.display = 'flex'; 
         document.getElementById('financesCardTableContainer').classList.add('dash');
+        document.getElementById('mainBodyHeader').classList.add('w-100');
 
         mainContent.style.display = 'flex';
         dashTableMenu.style.display = 'flex';
@@ -195,11 +239,12 @@ function showView(view) {
         dashTable.style.display = 'flex';
         financialDashChart.style.display = 'block';
     }else{
-        document.getElementById('optionsMenu').style.display = 'flex';
-        // document.getElementById('cardHeaderTopMenu').style.display = 'flex';
+        document.getElementById('cardHeaderTopMenu').style.display = 'flex';
         document.getElementById('periodSelectors').style.display = 'flex';
+        document.getElementById('financeDashHeaderSection').style.display = 'none';
         document.getElementById('sideTableContainer').style.display = 'none';
         document.getElementById('financesCardTableContainer').classList.remove('dash');
+        document.getElementById('mainBodyHeader').style.justifyContent = 'space-between';
 
         mainContent.style.display = 'block';
         dashTableMenu.style.display = 'none';
@@ -263,6 +308,13 @@ function hideDateSelectors() {
 
 function showDateSelectors() {
     document.getElementById('datePicker').style.display = 'flex';
+    document.getElementById('optionsMenu').style.display = 'none';
+}
+function showOptionsMenu() {
+    document.getElementById('optionsMenu').style.display = 'flex';
+}
+function hideOptionsMenu() {
+    document.getElementById('optionsMenu').style.display = 'none';
 }
 
 function hideFolioFilter() {
@@ -290,7 +342,10 @@ function hidePeriodButtons() {
 }
 
 function setCashFlowControls() {
+    
+    document.getElementById('cashFlowDate').style.display = 'block';
     showDateSelectors();
+    hideOptionsMenu();
     hideFolioFilter();
     hideIssued_RecievedButtons();
     showPeriodButtons();
@@ -298,6 +353,7 @@ function setCashFlowControls() {
 
 function setCharges_Payments_Controls() {
     hidePeriodButtons();
+    showOptionsMenu();
     hideDateSelectors();
     showFolioFilter();
     hideIssued_RecievedButtons();
@@ -305,6 +361,7 @@ function setCharges_Payments_Controls() {
 
 function setCharges_PaidControls() {
     hidePeriodButtons();
+    showOptionsMenu();
     hideDateSelectors();
     showFolioFilter();
     showIssued_RecievedButtons();
@@ -313,6 +370,7 @@ function setCharges_PaidControls() {
 function setCommonMovementsControls() {
     hidePeriodButtons();
     hideDateSelectors();
+    hideOptionsMenu();
     hideFolioFilter();
     hideIssued_RecievedButtons();
 }

@@ -53,8 +53,8 @@ function getTotalByRut(data){
     };
 
     const {documents, selectedClientYear, selectedProviderYear} = data;
-    const {year: clientYear, month: clientMonth} = selectedClientYear;
-    const {year: providerYear, month: providerMonth} = selectedProviderYear;
+    const {year: clientYear, month: clientMonth, value: clientValue} = selectedClientYear;
+    const {year: providerYear, month: providerMonth, value: providerValue} = selectedProviderYear;
 
     console.log('documents',documents);
     console.log('clientSideYearSelector',clientSideYearSelector);
@@ -64,16 +64,12 @@ function getTotalByRut(data){
         const { rut, total, issued, business_name,issue_date } = doc;
         const category = issued ? 'clients' : 'providers';
 
+        // , selectedProviderYear
+        const clientDate= moment(issue_date).format('YYYY-MM') == moment(clientValue).format('YYYY-MM'); ;
+        const providerDate = moment(issue_date).format('YYYY-MM') == moment(providerValue).format('YYYY-MM'); ;
 
-        if(issued && moment(issue_date).year() != clientYear
-        && moment(issue_date).month() != clientMonth){
-            return;
-        }
-
-        if(!issued && moment(issue_date).year() != providerYear
-        && moment(issue_date).month() != providerMonth){
-            return;
-        }
+        if (issued && !clientDate) return;
+        if (!issued && !providerDate) return;
 
         if (!result[category][rut]) {
             result[category][rut] = {
@@ -91,22 +87,20 @@ function getTotalByRut(data){
     result.clients = Object.values(result.clients).sort((a, b) => b.total - a.total);
     result.providers = Object.values(result.providers).sort((a, b) => b.total - a.total);
 
+
+
     return result;
 }
 
-
 clientSideYearSelector.addEventListener('change', async () => {
-
     const totalByRut = getTotalByRut(dataForTotalByRut());
     renderFinancesSideTables(totalByRut);
 });
 
 providerSideYearSelector.addEventListener('change', async () => {
-
     const totalByRut = getTotalByRut(dataForTotalByRut());
     renderFinancesSideTables(totalByRut);
 });
-
 
 function dataForTotalByRut(){
     const clientDate = document.getElementById('clientSideYearSelector').value;
@@ -115,13 +109,14 @@ function dataForTotalByRut(){
     return {
         documents: initialTributarieDocuments['documents'],
         selectedClientYear: {
+            value: clientDate,
             month: moment(clientDate).month(),
             year: moment(clientDate).year()
         },
         selectedProviderYear: {
+            value: providerDate,
             month: moment(providerDate).month(),
             year: moment(providerDate).year()
         }
     }
 }
-

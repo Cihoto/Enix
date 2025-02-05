@@ -679,8 +679,52 @@ head {
 
 #dashTableMenu{
     display: flex;
-    width:100%;
+    /* width:100%; */
     gap: 10px;
+}
+#filterByFolio {
+    height: 24px;
+    padding: 0px 24px 0px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-left: 12px;
+
+    border-radius: 2px;
+    border: 1px solid var(--gray-200, #E2E8F0);
+    background: var(--white, #FFF);
+
+    color: var(--Gris-400, #9393A1);
+    font-family: Nunito;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#filterByFolio::after {
+    content: '\1F50E'; /* Unicode for magnifying glass */
+    font-size: 16px;
+    color: var(--Gris-400, #9393A1);
+    margin-left: 8px;
+}
+.tabTitle{
+    color: #000;
+    font-family: Nunito;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 100% */
+}
+.w-100{
+    width: 100%!important;
+}
+.financeDashHeaderSection{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .mainDashTableContainer{
@@ -1792,9 +1836,9 @@ head {
     font-style: normal;
   }
   
-  input:focus {
+  /* input:focus {
     outline-color: blue;
-  }
+  } */
   
   .new-chat-window-input {
     border: 1px solid #ccc;

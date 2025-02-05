@@ -281,7 +281,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                         <div class="card-header-title">
                             <p id="contentHeader">Flujo de caja</p>
                             <div class="c-header-desc">
-                                <p>Detalles de movimiento</p>
+                                <p id="descHeader">Detalles de movimiento</p>
                             </div>
                         </div>
                         <div class="card-header-actions">
@@ -289,10 +289,10 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                 <img src="./assets/svg/financessvg/filterBtn.svg" alt="">
                                 <p>Filtros</p>
                             </button>
-                            <button class="act-btn">
+                            <!-- <button class="act-btn">
                                 <img src="./assets/svg/financessvg/downlaodBtn.svg" alt="">
                                 <p>Exportar</p>
-                            </button>
+                            </button> -->
                             <button class="act-btn" id="uploadManualFiles" onclick="openUploadFinanceFiles()">
                                 <img src="./assets/svg/uploadCloud.svg" alt="">
                                 <p>Importar</p>
@@ -304,8 +304,8 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="body-header">
-                            <div id="periodSelectors">
+                        <div id="mainBodyHeader" class="body-header w-100">
+                            <div id="periodSelectors">  
                                 <button period="daily" class="btnRangeSelector active">
                                     <p>Diario</p>
                                 </button>
@@ -316,11 +316,31 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                     <p>Mensual</p>
                                 </button>
                             </div>
+                            <div id="financeDashHeaderSection" class="financeDashHeaderSection">
+                                <p class="tabTitle">Movimientos bancarios</p>
+                                <input type="month"
+                                    class="monthInput"
+                                    name="monthPicker"
+                                    id="monthPickerDashBoard"
+                                    value="<?php echo date('Y-m'); ?>"
+                                    max="<?php echo date('Y-m') ?>" 
+                                />
+                            </div>
+
+                            <input 
+                                type='month'
+                                class="monthInput"
+                                name="cashFlowDate"
+                                id="cashFlowDate"
+                                max='<?php echo date('Y-m'); ?>'
+                                value="<?php echo date('Y-m'); ?>" 
+                            />
                         </div>
                         <div class="body-content">
                             <div id="optionsMenu" class="monthSelector">
                                 <div id="datePicker" class="dateSelector">
-                                    <div class="yearPicker">
+
+                                    <!-- <div class="yearPicker">
                                         <p id="yearName"><?php echo date("Y") ?></p>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92993 5.63916L8.42993 10.1392L12.9299 5.63916L13.9906 6.69982L8.42993 12.2605L2.86927 6.69982L3.92993 5.63916Z" fill="#9393A1" />
@@ -354,7 +374,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                             <p class="mnth" monthNumber="11">Noviembre</p>
                                             <p class="mnth" monthNumber="12">Diciembre</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <input type="text" id="filterByFolio" placeholder="Buscar Documento">
@@ -377,23 +397,17 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                             <button class="dashTableRangeBtn active" value="daily">Diario</button>
                                             <button class="dashTableRangeBtn" value="weekly">Semanal</button>
                                         </div>
-                                        <div class="" style="display: flex; ">
-                                            <div style="display: flex;gap: 4px;">
-                                                <button class="arrowBtn" id="financeDashRangeBack">
-                                                    <img src="./assets/svg/purpleArrowLeft.svg" alt="">
-                                                </button>
-                                                <button class="arrowBtn" id="financeDashRangeForth">
-                                                    <img src="./assets/svg/purpleArrowRight.svg" alt="">
-                                                </button>
-                                            </div>
+                                    </div>
+                                    <div class="" style="display: flex; ">
+                                        <div style="display: flex;gap: 4px;">
+                                            <button class="arrowBtn" id="financeDashRangeBack">
+                                                <img src="./assets/svg/purpleArrowLeft.svg" alt="">
+                                            </button>
+                                            <button class="arrowBtn" id="financeDashRangeForth">
+                                                <img src="./assets/svg/purpleArrowRight.svg" alt="">
+                                            </button>
                                         </div>
                                     </div>
-                                    <input type="month"
-                                        class="monthInput"
-                                        name="monthPicker"
-                                        id="monthPickerDashBoard"
-                                        value="<?php echo date('Y-m'); ?>"
-                                        max="<?php echo date('Y-m') ?>" />
 
                                     <!-- <div class="monthSelector">
                                     </div>
@@ -551,6 +565,7 @@ $isSuperAdmin = $_SESSION['superAdmin'];
                                 <p class="sideTableTitle">Proveedores</p>
                             </div>
                             <div>
+
                                 <div class="yearPicker" style="display: flex; align-items: center; gap: 10px;padding: 10px 16px 10px 0px;">
                                     <input type='month'
                                         class="monthInput"

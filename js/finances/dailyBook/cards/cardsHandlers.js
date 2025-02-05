@@ -93,7 +93,8 @@ function cardFilterPendingBillsPaymentsDocuments(color = 'cyan'){
 }
 function cardFilterDuePaymentsDocuments(color = 'purple'){
     const futurePayments = getPaymentsDocuments();
-    const duePayments = futurePayments.filter(({vencido,paid,vencida_por}) => vencido && !paid && vencida_por > 30);
+    const duePayments = futurePayments.filter(({paid,vencida_por}) => !paid && vencida_por > 0);
+    console.log('futurePayments',futurePayments);
     setNewActiveCard('payPurpleCard')
     // document.getElementById('payPurpleCard').classList.add('active');
     document.getElementById('financesCardTableContainer').style.borderLeft = `${cardBorderColor[color]}`;
